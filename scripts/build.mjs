@@ -172,7 +172,7 @@ const epLabel = (n) => `EP ${String(n).padStart(2, '0')}`;
 
 // WhatsApp: YouTube link first, so the chat shows the YouTube preview and a tap opens the YouTube app.
 const shareMessage = (ep) =>
-  `${ep.clean}\n\nगैपिस्तान का नया एपिसोड देखिए: https://youtu.be/${ep.id}` + (siteUrl ? `\nसारे एपिसोड: ${siteUrl}` : '');
+  `${ep.clean}\n\nगैपिस्तान पर देखिए: https://youtu.be/${ep.id}` + (siteUrl ? `\nसारे एपिसोड: ${siteUrl}` : '');
 const waLink = (ep) => `https://wa.me/?text=${encodeURIComponent(shareMessage(ep))}`;
 
 function shareButtons(ep, { pageLink = false } = {}) {
