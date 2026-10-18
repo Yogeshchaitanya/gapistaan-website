@@ -1,0 +1,71 @@
+name: IFA import (one-off)
+on:
+  push:
+    branches: [ifa-import]
+    paths: [.github/workflows/ifa-import.yml]
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Export old indianfilmsacademy.com (WordPress) content, media and hosting info
+        run: |
+          set -u
+          B=https://indianfilmsacademy.com
+          mkdir -p ifa-import/html ifa-import/media
+          cd ifa-import
+          UA="Mozilla/5.0 (IFA site migration by owner)"
+          for t in pages posts media categories; do
+            : > $t.json
+            for p in 1 2 3 4 5; do
+              f=$(mktemp)
+              code=$(curl -sS -A "$UA" -o $f -w '%{http_code}' "$B/wp-json/wp/v2/$t?per_page=100&page=$p" || true)
+              if [ "$code" != "200" ]; then break; fi
+              jq -c '.[]' $f >> $t.jsonl 2>/dev/null || true
+              n=$(jq 'length' $f 2>/dev/null || echo 0); [ "$n" -lt 100 ] && break
+            done
+          done
+          rm -f pages.json posts.json media.json categories.json
+          curl -sS -A "$UA" "$B/" -o html/home.html
+          for u in $(jq -r '.link' pages.jsonl posts.jsonl 2>/dev/null); do
+            s=$(echo "$u" | sed -E 's#https?://[^/]+/##; s#/$##; s#/#_#g'); [ -z "$s" ] && s=home2
+            curl -sS -A "$UA" "$u" -o "html/$s.html" || true
+          done
+          curl -sS -A "$UA" "$B/contact-us/" -o html/contact-us.html || true
+          # Every image the pages reference, plus the media library
+          grep -hoE 'https?://indianfilmsacademy\.com/wp-content/uploads/[^"'"'"' )]+\.(jpe?g|png|webp|gif|svg|mp4)' html/*.html > urls.txt || true
+          jq -r '.source_url' media.jsonl >> urls.txt 2>/dev/null || true
+          sed -E 's/-[0-9]+x[0-9]+(\.[a-z0-9]+)$/\1/' urls.txt | sort -u > files.txt
+          : > videos.txt
+          while read -r u; do
+            name=$(echo "$u" | sed -E 's#.*/uploads/##; s#/#_#g')
+            case "$u" in
+              *.mp4) sz=$(curl -sSI -A "$UA" "$u" | awk 'tolower($1)=="content-length:"{print $2}' | tr -d '\r'); echo "$u $sz" >> videos.txt ;;
+              *.svg) ;;
+              *) curl -sS -A "$UA" -f "$u" -o "media/$name" || echo "MISS $u" >> missing.txt ;;
+            esac
+          done < files.txt
+          # Shrink photos so the repo stays small (max 1600px)
+          for f in media/*; do
+            case "$f" in *.jpg|*.jpeg|*.JPG|*.webp) mogrify -resize '1600x1600>' -quality 82 "$f" || true ;; *.png) mogrify -resize '1600x1600>' "$f" || true ;; esac
+          done
+          # Where is the old site hosted?
+          {
+            echo "== NS"; dig +short NS indianfilmsacademy.com
+            echo "== A"; dig +short A indianfilmsacademy.com
+            echo "== MX"; dig +short MX indianfilmsacademy.com
+            echo "== TXT"; dig +short TXT indianfilmsacademy.com
+            echo "== headers"; curl -sSI -A "$UA" "$B/" | grep -iE '^(server|x-powered-by|x-litespeed|x-cache|via|cf-ray|x-hostinger|platform|x-turbo)' || true
+            echo "== timing"; for i in 1 2 3; do curl -s -o /dev/null -A "$UA" -w 'ttfb=%{time_starttransfer}s total=%{time_total}s size=%{size_download}\n' "$B/"; done
+            for ip in $(dig +short A indianfilmsacademy.com); do echo "== whois $ip"; whois "$ip" 2>/dev/null | grep -iE '^(orgname|org-name|netname|descr|country|owner)' | head -8; done
+          } > hosting.txt 2>&1
+          du -sh media; ls media | wc -l
+      - name: Commit export to this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add ifa-import
+          git commit -m "IFA: पुरानी साइट का export (content, photos, hosting info)" || echo "nothing"
+          git push
