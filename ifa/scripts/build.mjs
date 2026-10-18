@@ -237,6 +237,7 @@ ${body}
     <span>${esc(F.partner)}: <a href="https://pichchrapa.com">PICHCHRAPA</a> · <a href="https://gapistaan.com">Gapistaan</a></span>
   </div>
 </footer>
+<script type="application/json" id="pay-i18n">${JSON.stringify({ ...L.pay, wa: site.whatsapp }).replace(/</g, '\\u003c')}</script>
 ${PAGE_JS}
 ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${esc(site.cfAnalyticsToken)}"}'></script>` : ''}
 </body>
@@ -312,15 +313,15 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
 </div></section>`;
   // UPI: the bank's own QR payload; amount and note added only for the phone link.
   const upi = site.upi || {};
-  const upiLink = (amt, note) => (upi.payload ? upi.payload + (amt ? `&am=${Number(amt).toFixed(2)}` : '') + (note ? `&tn=${encodeURIComponent(note)}` : '') : '');
-  const qrFig = (caption) => `<figure class="qr"><img src="/img/upi-qr.svg" alt="UPI QR, ${esc(upi.id)}" width="190" height="190" loading="lazy"><figcaption>${esc(caption)}<span class="upi-id">${esc(upi.id)} <button type="button" class="copy" data-copy="${esc(upi.id)}" data-done="${esc(AD.copied)}">${esc(AD.copy)}</button></span></figcaption></figure>`;
-  const donate = () => (upi.payload ? `<aside class="donate" id="support" aria-labelledby="dn-h">
+  const donate = () => `<aside class="donate" id="support" aria-labelledby="dn-h">
   <div class="donate-text"><p class="eyebrow">${esc(DN.eyebrow)}</p><h2 id="dn-h">${esc(DN.title)}</h2><p>${esc(DN.text)}</p>
-  <p class="tap">${esc(DN.tap)}</p><p class="amts">${(upi.donate || []).map((a) => `<a class="amt" href="${esc(upiLink(a, 'IFA student support'))}">${money(a)}</a>`).join('')}<a class="amt" href="${esc(upiLink(0, 'IFA student support'))}">${esc(DN.any)}</a></p>
-  <p class="fine">${esc(fmt(DN.fine, { upi: upi.id }))}</p></div>
-  ${qrFig(DN.scan)}
-</aside>` : '');
-  const donateLine = () => (upi.payload ? `<p class="donate-line"><a href="${u('/videos/')}#support">${esc(DN.short)}</a></p>` : '');
+  <p class="amts">${(upi.donate || [101, 251, 501, 1100]).map((a) => `<button type="button" class="amt" data-amt="${a}">${money(a)}</button>`).join('')}</p>
+  <p class="donate-own"><label>${esc(DN.other)} <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" placeholder="2100" aria-label="${esc(DN.other)}"></span></label><button type="button" class="btn btn-gold donate-go">${esc(DN.btn)}</button></p>
+  <p class="pay-status" role="status" aria-live="polite"></p>
+  <p class="fine">${esc(DN.payInfo)} ${esc(DN.fine)}</p>
+  ${upi.id ? `<p class="donate-upi fine" hidden>${esc(DN.fallbackUpi)} <strong>${esc(upi.id)}</strong> <button type="button" class="copy" data-copy="${esc(upi.id)}" data-done="${esc(AD.copied)}">${esc(AD.copy)}</button></p>` : ''}</div>
+</aside>`;
+  const donateLine = () => `<p class="donate-line"><a href="${u('/videos/')}#support">${esc(DN.short)}</a></p>`;
   const feeCard = (key) => `<div class="fee-card">
   <p class="fee-k">${esc(L.fee.label)}</p>
   <p class="fee-v">${money(site.fee)}</p>
@@ -564,6 +565,7 @@ ${reelBox}
 </main>`,
   });
 
+  const regFee = upi.registrationFee || 500;
   const courseVal = (t) => (lang === 'hi' ? `${t.name} (${t.local})` : t.name);
   pages['/admission/'] = layout({
     title: AD.title,
@@ -576,7 +578,7 @@ ${crumbs([[L.home, u('/')], [AD.h1, u('/admission/')]])}
 <h1 class="page-h1">${esc(AD.h1)}</h1>
 <p class="lede">${esc(AD.lede)}</p>
 </div>
-<div class="wrap"><form class="admit js-wa" id="admit" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(AD.msgIntro)}"${upi.payload ? ` data-tail="${esc(fmt(AD.paidLine, { amount: money(upi.registrationFee) }))}"` : ''}>
+<div class="wrap"><form class="admit js-pay" id="admit" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(AD.msgIntro)}" novalidate>
   <fieldset class="astep"><legend><span class="astep-n">1</span>${esc(AD.step1)}</legend>
     <div class="pick">${tracks.map((t, i) => `<label class="pick-card"><input type="radio" name="course" value="${esc(courseVal(t))}" data-k="${esc(AD.course)}" data-key="${t.key}"${i === 0 ? ' checked' : ''}><span class="pick-en">${esc(t.name)}</span>${lang === 'hi' ? `<span class="pick-hi">${esc(t.local)}</span>` : ''}<span class="pick-meta">${esc(TP.chips[0])} · ${money(site.fee)}</span></label>`).join('')}</div>
     <p class="muted">${esc(fmt(AD.feeLine, { fee: money(site.fee), i1: feeVars.i1, i2: feeVars.i2 }))} · ${esc(fmt(L.fee.schV, feeVars))}</p>
@@ -585,19 +587,25 @@ ${crumbs([[L.home, u('/')], [AD.h1, u('/admission/')]])}
     <div class="fields">
       <label>${esc(AD.name)}<input name="name" autocomplete="name" required data-k="${esc(AD.name)}"></label>
       <label>${esc(AD.phone)}<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required data-k="${esc(AD.phone)}"></label>
+      <label class="wide">${esc(AD.email)}<input name="email" type="email" autocomplete="email" inputmode="email" data-k="Email"></label>
       <label>${esc(AD.age)}<input name="age" inputmode="numeric" data-k="${esc(AD.age)}"></label>
       <label>${esc(AD.city)}<input name="city" autocomplete="address-level2" data-k="${esc(AD.city)}"></label>
       <label class="wide">${esc(AD.note)}<textarea name="note" rows="2" data-k="${esc(AD.note)}"></textarea></label>
     </div>
   </fieldset>
   <fieldset class="astep"><legend><span class="astep-n">3</span>${esc(AD.step3)}</legend>
-    ${upi.payload ? `<div class="pay">
-      <div class="pay-main"><p class="pay-amt">${money(upi.registrationFee)}</p><a class="btn btn-gold pay-btn" href="${esc(upiLink(upi.registrationFee, 'IFA Registration'))}">${esc(fmt(AD.payBtn, { amount: money(upi.registrationFee) }))}</a><p class="muted">${esc(AD.payNote)}</p></div>
-      ${qrFig(fmt(AD.scan, { amount: money(upi.registrationFee) }))}
-    </div>` : `<p>${esc(AD.payLater)}</p>`}
+    <div class="pay"><p class="pay-amt">${money(regFee)}</p><div><p class="muted">${esc(AD.payInfo)}</p><p class="muted">${esc(AD.after)}</p></div></div>
   </fieldset>
-  <div class="admit-send"><button class="btn btn-primary btn-lg" type="submit">${esc(AD.send)}</button><p class="muted">${esc(L.contact.formNote)} ${esc(AD.help)}: <a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></p></div>
-</form></div>
+  <div class="admit-send"><button class="btn btn-gold btn-lg" type="submit">${esc(fmt(AD.send, { amount: money(regFee) }))}</button><p class="pay-status" role="status" aria-live="polite"></p><p class="muted">${esc(AD.note2)} ${esc(AD.help)}: <a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></p></div>
+</form>
+<section class="paid" id="paid" hidden tabindex="-1" aria-labelledby="paid-h">
+  <p class="paid-tick" aria-hidden="true">✓</p>
+  <h2 id="paid-h">${esc(AD.okTitle)}</h2>
+  <p class="paid-k">${esc(AD.okReg)}</p>
+  <p class="paid-reg reg-no"></p>
+  <p>${esc(AD.okText)}</p>
+  <div class="actions"><a class="btn btn-gold paid-wa" href="https://wa.me/${site.whatsapp}">${esc(AD.okWa)}</a><a class="btn btn-ghost" href="${u('/')}">${esc(L.home)}</a></div>
+</section></div>
 </main>`,
   });
 
@@ -824,14 +832,66 @@ const PAGE_JS = `<script>
       el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
     });
   }
-  document.querySelectorAll('form.js-wa').forEach(function(form){
-    form.addEventListener('submit',function(e){
+  var T={}; try{ T=JSON.parse((document.getElementById('pay-i18n')||{}).textContent||'{}'); }catch(e){}
+  function waSend(form){
+    var lines=[form.getAttribute('data-intro')];
+    form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+    window.location.href='https://wa.me/'+T.wa+'?text='+encodeURIComponent(lines.join('\\n'));
+  }
+  document.querySelectorAll('form.js-wa').forEach(function(form){ form.addEventListener('submit',function(e){ e.preventDefault(); waSend(form); }); });
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+  // Opens Razorpay Checkout for an order made by our server; cb.say(text), cb.done(result), cb.fail('off'|'cancel'|'err')
+  function pay(body, desc, prefill, cb){
+    cb.say(T.opening);
+    post('/api/order', body).then(function(o){
+      if(!o.order_id){ cb.fail(o._status===503||o._status===404?'off':'err'); return; }
+      return loadRzp().then(function(){
+        var paid=false;
+        var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'Indian Films Academy', description:desc, image:location.origin+'/img/logo-emblem-192.webp', prefill:prefill, notes:{ source:'website' }, theme:{ color:'#023E41' },
+          handler:function(r){ paid=true; cb.say(T.verifying); post('/api/verify', r).then(function(v){ if(v.ok) cb.done(v); else cb.fail('err'); }, function(){ cb.fail('err'); }); },
+          modal:{ ondismiss:function(){ if(!paid) cb.fail('cancel'); } } });
+        rz.open();
+      }, function(){ cb.fail('off'); });
+    }, function(){ cb.fail('off'); });
+  }
+  var adm=document.getElementById('admit');
+  if(adm){
+    var st=adm.querySelector('.pay-status'), btn=adm.querySelector('button[type=submit]');
+    var say=function(m){ st.textContent=m||''; };
+    adm.addEventListener('submit',function(e){
       e.preventDefault();
-      var lines=[form.getAttribute('data-intro')];
-      form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
-      if(form.getAttribute('data-tail')) lines.push(form.getAttribute('data-tail'));
-      window.location.href='https://wa.me/${site.whatsapp}?text='+encodeURIComponent(lines.join('\\n'));
+      var f=function(n){ var el=adm.querySelector('[name="'+n+'"]'); return el?(el.value||'').trim():''; };
+      var c=adm.querySelector('input[name=course]:checked');
+      var phone=f('phone').replace(/[^\\d]/g,'').replace(/^(91|0)(?=\\d{10}$)/,'');
+      if(!f('name')){ say(T.name); adm.querySelector('[name=name]').focus(); return; }
+      if(phone.length!==10){ say(T.phone); adm.querySelector('[name=phone]').focus(); return; }
+      btn.disabled=true;
+      var body={ kind:'registration', course:c?c.getAttribute('data-key'):'', name:f('name'), phone:phone, email:f('email'), age:f('age'), city:f('city'), note:f('note'), lang:document.documentElement.lang };
+      pay(body, T.desc+' · '+(c?c.value:''), { name:body.name, email:body.email, contact:'+91'+phone }, { say:say,
+        done:function(v){
+          var box=document.getElementById('paid');
+          box.querySelector('.reg-no').textContent=v.reg;
+          box.querySelector('.paid-wa').href='https://wa.me/'+T.wa+'?text='+encodeURIComponent(T.waReg.replace('{reg}',v.reg).replace('{course}',c?c.value:''));
+          adm.hidden=true; box.hidden=false; box.focus(); window.scrollTo(0, box.getBoundingClientRect().top+window.scrollY-90);
+        },
+        fail:function(why){ btn.disabled=false; if(why==='off'){ say(T.offline); setTimeout(function(){ waSend(adm); },900); } else say(why==='cancel'?T.cancelled:T.failed); }
+      });
     });
+  }
+  document.querySelectorAll('.donate').forEach(function(box){
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.donate-go');
+    var say=function(m){ st.textContent=m||''; };
+    function start(a){
+      a=Math.round(+a); if(!(a>=10)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true;
+      pay({ kind:'support', amount:a, lang:document.documentElement.lang }, T.supportDesc, {}, { say:say,
+        done:function(){ go.disabled=false; say(T.thanks); },
+        fail:function(why){ go.disabled=false; if(why==='off'){ say(''); var up=box.querySelector('.donate-upi'); if(up) up.hidden=false; } else say(why==='cancel'?'':T.failed); }
+      });
+    }
+    box.querySelectorAll('[data-amt]').forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); start(input.value); }); });
+    go.addEventListener('click',function(){ start(input.value); });
   });
   var pre=new URLSearchParams(location.search).get('c');
   if(pre){ var r=document.querySelector('input[data-key="'+pre.replace(/[^a-z]/g,'')+'"]'); if(r) r.checked=true; }

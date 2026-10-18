@@ -808,10 +808,11 @@
       "title": "प्राइवेसी नीति | Indian Films Academy",
       "h1": "प्राइवेसी नीति",
       "body": [
-        "indianfilmsacademy.com पर हम कोई निजी जानकारी जमा नहीं करते। आवेदन फ़ॉर्म की जानकारी सीधे आपके फ़ोन से WhatsApp पर भेजी जाती है; यह वेबसाइट उसे सहेजती नहीं।",
-        "साइट पर आने वालों की कुल संख्या समझने के लिए हम Cloudflare Web Analytics का उपयोग कर सकते हैं, जो कुकी नहीं लगाता और किसी व्यक्ति की पहचान नहीं करता।",
+        "ऑनलाइन एडमिशन में दी गई जानकारी (नाम, फ़ोन, ईमेल, उम्र, शहर, कोर्स) हम सिर्फ़ एडमिशन और आपसे संपर्क के लिए सुरक्षित रखते हैं। यह किसी और को बेची या दी नहीं जाती।",
+        "भुगतान Razorpay के सुरक्षित पेज पर होता है। आपके कार्ड, UPI या बैंक की जानकारी Razorpay के पास रहती है; हमारी वेबसाइट उसे नहीं देखती और न सहेजती है।",
+        "संपर्क फ़ॉर्म की जानकारी सीधे आपके फ़ोन से WhatsApp पर भेजी जाती है; वह इस वेबसाइट पर जमा नहीं होती।",
         "वीडियो YouTube प्लेयर में चलते हैं और नक्शा Google Maps से आता है; ये सेवाएँ अपनी नीतियों के अनुसार कुकी का उपयोग कर सकती हैं।",
-        "भविष्य में ऑनलाइन भुगतान किसी मान्यता प्राप्त पेमेंट गेटवे से होगा; आपके कार्ड या बैंक की जानकारी उसी गेटवे के पास रहती है, हमारी वेबसाइट उसे नहीं देखती।"
+        "अपनी जानकारी हटवाने के लिए info@indianfilmsacademy.com पर लिखें।"
       ]
     },
     "notFound": {
@@ -1006,7 +1007,7 @@
       "lede": "तीन कदम: कोर्स चुनें, अपनी जानकारी भरें और रजिस्ट्रेशन करें। फ़ॉर्म WhatsApp पर सीधे एकेडमी तक पहुँचता है।",
       "step1": "कोर्स चुनें",
       "step2": "आपकी जानकारी",
-      "step3": "रजिस्ट्रेशन शुल्क",
+      "step3": "रजिस्ट्रेशन शुल्क भरकर सीट बुक करें",
       "age": "उम्र",
       "amount": "राशि चुनें",
       "payBtn": "Google Pay / UPI से {amount} भरें",
@@ -1016,7 +1017,7 @@
       "copied": "कॉपी हो गया",
       "payNote": "भुगतान के बाद नीचे का बटन दबाएँ। WhatsApp खुलेगा; वहाँ भुगतान का स्क्रीनशॉट भी भेज दें।",
       "payLater": "फ़ॉर्म भेजते ही हम WhatsApp पर रजिस्ट्रेशन राशि और भुगतान का QR भेज देंगे।",
-      "send": "फ़ॉर्म WhatsApp पर भेजें",
+      "send": "{amount} भरकर सीट बुक करें",
       "msgIntro": "नमस्ते, मैं Indian Films Academy में ऑनलाइन एडमिशन लेना चाहता/चाहती हूँ।",
       "paidLine": "रजिस्ट्रेशन शुल्क {amount}: भुगतान का स्क्रीनशॉट साथ भेज रहा/रही हूँ।",
       "feeLine": "शुल्क {fee} · दो किस्तों में {i1} + {i2}",
@@ -1025,7 +1026,15 @@
       "name": "आपका नाम",
       "phone": "फ़ोन नंबर",
       "city": "शहर",
-      "note": "कुछ पूछना हो तो"
+      "note": "कुछ पूछना हो तो",
+      "email": "ईमेल (पुष्टि इसी पर आएगी)",
+      "payInfo": "Google Pay, PhonePe या कोई भी UPI ऐप, डेबिट/क्रेडिट कार्ड या नेटबैंकिंग: जो आसान लगे। पेमेंट Razorpay के सुरक्षित पेज पर होता है।",
+      "after": "पेमेंट होते ही यहीं स्क्रीन पर आपका रजिस्ट्रेशन नंबर आ जाएगा, और ईमेल दिया हो तो पुष्टि ईमेल पर भी।",
+      "okTitle": "आपकी सीट बुक हो गई",
+      "okReg": "रजिस्ट्रेशन नंबर",
+      "okText": "यह नंबर सँभालकर रखें। चयन ऑडिशन का दिन और समय हम 24 घंटे के भीतर फ़ोन या WhatsApp पर बताएँगे।",
+      "okWa": "WhatsApp पर पुष्टि भेजें",
+      "note2": "आपकी जानकारी सिर्फ़ एडमिशन के लिए एकेडमी के पास सुरक्षित रहती है।"
     },
     "donate": {
       "eyebrow": "मुफ़्त कक्षाएँ, सबके लिए",
@@ -1034,8 +1043,12 @@
       "scan": "किसी भी UPI ऐप से स्कैन करें",
       "any": "अपनी मर्ज़ी से",
       "tap": "फ़ोन पर राशि पर टैप करें, UPI ऐप खुल जाएगा:",
-      "fine": "सहयोग राशि Indian Films Academy के खाते (UPI: {upi}) में जाती है। यह आयकर छूट (80G) के दायरे में नहीं आती।",
-      "short": "कक्षा अच्छी लगी? ज़रूरतमंद छात्रों की पढ़ाई में सहयोग करें"
+      "fine": "सहयोग राशि Indian Films Academy को जाती है और ज़रूरतमंद छात्रों की पढ़ाई में लगती है। यह आयकर छूट (80G) के दायरे में नहीं आती।",
+      "short": "कक्षा अच्छी लगी? ज़रूरतमंद छात्रों की पढ़ाई में सहयोग करें",
+      "btn": "सहयोग करें",
+      "other": "या अपनी राशि",
+      "payInfo": "UPI, कार्ड या नेटबैंकिंग से, Razorpay के सुरक्षित पेज पर।",
+      "fallbackUpi": "या UPI ID पर सीधे भेजें:"
     },
     "ninety": {
       "n": "90",
@@ -1104,7 +1117,21 @@
       "by": "योगेश मिश्रा",
       "related": "इससे जुड़ा कोर्स"
     },
-    "policyUpdated": "अंतिम अपडेट: 18 अक्टूबर 2026"
+    "policyUpdated": "अंतिम अपडेट: 18 अक्टूबर 2026",
+    "pay": {
+      "opening": "पेमेंट का पेज खुल रहा है…",
+      "verifying": "पेमेंट की पुष्टि हो रही है…",
+      "failed": "पुष्टि नहीं हो पाई। अगर पैसा कट गया है तो चिंता न करें, वह दर्ज हो जाएगा; WhatsApp +91 77540 00121 पर पेमेंट का स्क्रीनशॉट भेज दें।",
+      "cancelled": "पेमेंट पूरा नहीं हुआ। सीट बुक करने के लिए बटन फिर दबाएँ।",
+      "phone": "कृपया 10 अंकों का सही फ़ोन नंबर लिखें।",
+      "name": "कृपया अपना नाम लिखें।",
+      "desc": "रजिस्ट्रेशन शुल्क",
+      "supportDesc": "छात्रों की पढ़ाई के लिए सहयोग",
+      "thanks": "धन्यवाद! आपका सहयोग मिल गया। यह किसी छात्र की कक्षा बनेगा।",
+      "amountErr": "कम से कम ₹10 की राशि लिखें।",
+      "offline": "ऑनलाइन पेमेंट अभी चालू नहीं है। आपका फ़ॉर्म WhatsApp पर भेजा जा रहा है।",
+      "waReg": "नमस्ते, मेरा रजिस्ट्रेशन नंबर {reg} है। मैंने Indian Films Academy में {course} के लिए रजिस्ट्रेशन किया है।"
+    }
   },
   "en": {
     "langName": "English",
@@ -1710,10 +1737,11 @@
       "title": "Privacy Policy | Indian Films Academy",
       "h1": "Privacy policy",
       "body": [
-        "indianfilmsacademy.com does not collect personal information. The admission form sends your details from your own phone to our WhatsApp; this website does not store them.",
-        "We may use Cloudflare Web Analytics to count visits. It sets no cookies and does not identify individuals.",
+        "Details given in the online admission form (name, phone, email, age, city, course) are kept only for admission and to contact you. They are never sold or shared.",
+        "Payments happen on Razorpay's secure page. Your card, UPI or bank details stay with Razorpay; this website neither sees nor stores them.",
+        "The contact form is sent straight from your phone to WhatsApp and is not stored on this website.",
         "Videos play in the YouTube player and the map comes from Google Maps; these services may use cookies under their own policies.",
-        "Online payments, when enabled, are handled by a licensed payment gateway; your card or bank details stay with that gateway and never reach this website."
+        "To have your details deleted, write to info@indianfilmsacademy.com."
       ]
     },
     "notFound": {
@@ -1908,7 +1936,7 @@
       "lede": "Three steps: choose a course, fill in your details and register. The form reaches the academy directly on WhatsApp.",
       "step1": "Choose a course",
       "step2": "Your details",
-      "step3": "Registration fee",
+      "step3": "Pay the registration fee and book your seat",
       "age": "Age",
       "amount": "Choose the amount",
       "payBtn": "Pay {amount} with Google Pay / UPI",
@@ -1918,7 +1946,7 @@
       "copied": "Copied",
       "payNote": "After paying, press the button below. WhatsApp will open; send the payment screenshot there too.",
       "payLater": "As soon as you send the form, we will send the registration amount and payment QR on WhatsApp.",
-      "send": "Send the form on WhatsApp",
+      "send": "Pay {amount} and book your seat",
       "msgIntro": "Hello, I would like to apply online to Indian Films Academy.",
       "paidLine": "Registration fee {amount}: sending the payment screenshot.",
       "feeLine": "Fee {fee} · or {i1} + {i2} in two instalments",
@@ -1927,7 +1955,15 @@
       "name": "Your name",
       "phone": "Phone number",
       "city": "City",
-      "note": "Any questions?"
+      "note": "Any questions?",
+      "email": "Email (confirmation comes here)",
+      "payInfo": "Google Pay, PhonePe or any UPI app, a debit or credit card, or netbanking: whichever is easiest. Payment happens on Razorpay's secure page.",
+      "after": "As soon as you pay, your registration number appears right here, and the confirmation also goes to your email if you gave one.",
+      "okTitle": "Your seat is booked",
+      "okReg": "Registration number",
+      "okText": "Keep this number safe. We will tell you the day and time of your selection audition by phone or WhatsApp within 24 hours.",
+      "okWa": "Send confirmation on WhatsApp",
+      "note2": "Your details stay with the academy, only for admission."
     },
     "donate": {
       "eyebrow": "Free classes, for everyone",
@@ -1936,8 +1972,12 @@
       "scan": "Scan with any UPI app",
       "any": "Any amount",
       "tap": "On a phone, tap an amount and your UPI app opens:",
-      "fine": "Support goes to Indian Films Academy's account (UPI: {upi}). It is not eligible for income-tax exemption under 80G.",
-      "short": "Liked the class? Support students who can't afford the fees"
+      "fine": "Support goes to Indian Films Academy and is used for students who cannot afford fees. It is not eligible for income-tax exemption under 80G.",
+      "short": "Liked the class? Support students who can't afford the fees",
+      "btn": "Support",
+      "other": "or your own amount",
+      "payInfo": "By UPI, card or netbanking, on Razorpay's secure page.",
+      "fallbackUpi": "Or send directly to the UPI ID:"
     },
     "ninety": {
       "n": "90",
@@ -2006,7 +2046,21 @@
       "by": "Yogesh Mishrra",
       "related": "Related course"
     },
-    "policyUpdated": "Last updated: 18 October 2026"
+    "policyUpdated": "Last updated: 18 October 2026",
+    "pay": {
+      "opening": "Opening the payment page…",
+      "verifying": "Confirming your payment…",
+      "failed": "We could not confirm it. If money was deducted, don't worry, it will be recorded; send the payment screenshot on WhatsApp +91 77540 00121.",
+      "cancelled": "The payment was not completed. Press the button again to book your seat.",
+      "phone": "Please enter a valid 10-digit phone number.",
+      "name": "Please enter your name.",
+      "desc": "Registration fee",
+      "supportDesc": "Support for students' training",
+      "thanks": "Thank you! Your support has arrived. It will become a student's class.",
+      "amountErr": "Please enter at least ₹10.",
+      "offline": "Online payment is not switched on yet. Sending your form on WhatsApp.",
+      "waReg": "Hello, my registration number is {reg}. I have registered for {course} at Indian Films Academy."
+    }
   },
   "founderMeta": [
     {

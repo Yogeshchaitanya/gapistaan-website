@@ -1,6 +1,6 @@
 {
-  // Indian Films Academy: site served from ifa/dist. src/worker.js runs only for pages listed below
-  // and sends www (or any other host) to https://indianfilmsacademy.com.
+  // Indian Films Academy: site served from ifa/dist. src/worker.js runs for the pages listed below
+  // (sends www or any other host to https://indianfilmsacademy.com) and for /api/* (Razorpay payments).
   "name": "ifa-website",
   "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
@@ -9,6 +9,12 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash",
-    "run_worker_first": ["/", "/en/*", "/courses/*", "/admission/*", "/cinematic-acting-course/*", "/film-direction-course/*", "/film-editing-course/*", "/yogesh-cineact/*"]
-  }
+    "run_worker_first": ["/", "/api/*", "/en/*", "/courses/*", "/admission/*", "/cinematic-acting-course/*", "/film-direction-course/*", "/film-editing-course/*", "/yogesh-cineact/*"]
+  },
+  // One SQLite Durable Object keeps registrations and hands out IFA-2026-0001 style numbers.
+  "durable_objects": {
+    "bindings": [{ "name": "REGISTRY", "class_name": "Registry" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Registry"] }],
+  "observability": { "enabled": true }
 }

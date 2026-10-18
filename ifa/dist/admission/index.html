@@ -259,7 +259,8 @@ a:hover{color:var(--indigo)}
 .donate p{margin:.45rem 0;color:#D3E0DE}
 .donate .tap{color:#fff;font-weight:800;font-size:.95rem}
 .amts{display:flex;flex-wrap:wrap;gap:.5rem}
-.amt{display:inline-flex;align-items:center;min-height:44px;padding:.3rem 1.05rem;border-radius:999px;background:var(--marigold);color:var(--deep);font-weight:800;text-decoration:none}
+.amt{display:inline-flex;align-items:center;min-height:44px;padding:.3rem 1.05rem;border-radius:999px;border:0;background:var(--marigold);color:var(--deep);font:800 1rem/1.2 var(--body);cursor:pointer;transition:transform .2s cubic-bezier(.34,1.45,.64,1)}
+.amt:active{transform:scale(.96)}
 .amt:hover{background:var(--marigold-2);color:var(--deep)}
 .donate .fine{font-size:.85rem;color:#9FB6B3}
 .qr{justify-self:center;width:max-content;max-width:100%;margin:0;padding:1rem;border-radius:14px;background:#fff;color:var(--slate);text-align:center}
@@ -267,7 +268,6 @@ a:hover{color:var(--indigo)}
 .qr figcaption{max-width:200px;margin-top:.5rem;font-size:.85rem;line-height:1.4}
 .upi-id{display:block;margin-top:.35rem;color:var(--ink);font-weight:800;word-break:break-all}
 .copy{margin-left:.25rem;padding:.1rem .5rem;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--indigo);font:800 .8rem/1.5 var(--body);cursor:pointer}
-@media (hover:hover) and (pointer:fine){.donate .tap,.donate .amts,.pay-btn{display:none}}
 .donate-line{margin:.7rem 0 0}
 .donate-line a{color:var(--marigold-ink);font-weight:800}
 .vid-layout{display:grid;gap:1.4rem}
@@ -461,6 +461,25 @@ a:hover{color:var(--indigo)}
 .guide-cta .actions{margin-top:1rem}
 .fees-table{min-width:560px}
 .fees-table td:first-child a{font-weight:800}
+.donate-own{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-top:.8rem}
+.donate-own label{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:#fff;font-weight:800}
+.rs{display:inline-flex;align-items:center;gap:.2rem;padding:0 .7rem;min-height:44px;border-radius:10px;background:#fff;color:var(--deep)}
+.rs input{width:6.5rem;min-height:40px;border:0;background:transparent;color:var(--deep);font:800 1.05rem/1 var(--body)}
+.rs input:focus{outline:none}
+.pay-status{min-height:1.4em;margin:.6rem 0 0;font-weight:800}
+.donate .pay-status{color:var(--marigold-2)}
+.admit .pay-status{color:var(--marigold-ink)}
+.pay{grid-template-columns:auto 1fr}
+.pay .muted{margin:.2rem 0}
+.paid{max-width:40rem;margin:0 0 4rem;padding:2rem;border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff;text-align:center}
+.paid:focus{outline:none}
+.paid-tick{display:grid;place-items:center;width:64px;height:64px;margin:0 auto .6rem;border-radius:50%;background:var(--marigold);color:var(--deep);font-size:2rem;font-weight:800;animation:lift .6s cubic-bezier(.34,1.45,.64,1) both}
+.paid h2{margin:0;font-size:1.6rem}
+.paid-k{margin:1rem 0 0;color:var(--marigold-2);font-weight:800}
+.paid-reg{margin:.1rem 0 .8rem;font:700 clamp(1.8rem,5vw,2.6rem)/1.1 var(--title);letter-spacing:.04em;color:var(--marigold)}
+.paid p{color:#D3E0DE}
+.paid .actions{justify-content:center}
+.paid .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"होम","item":"https://indianfilmsacademy.com/"},{"@type":"ListItem","position":2,"name":"ऑनलाइन एडमिशन","item":"https://indianfilmsacademy.com/admission/"}]}</script>
 </head>
@@ -482,7 +501,7 @@ a:hover{color:var(--indigo)}
 <h1 class="page-h1">ऑनलाइन एडमिशन</h1>
 <p class="lede">तीन कदम: कोर्स चुनें, अपनी जानकारी भरें और रजिस्ट्रेशन करें। फ़ॉर्म WhatsApp पर सीधे एकेडमी तक पहुँचता है।</p>
 </div>
-<div class="wrap"><form class="admit js-wa" id="admit" action="https://wa.me/917754000121" method="get" data-intro="नमस्ते, मैं Indian Films Academy में ऑनलाइन एडमिशन लेना चाहता/चाहती हूँ।" data-tail="रजिस्ट्रेशन शुल्क ₹500: भुगतान का स्क्रीनशॉट साथ भेज रहा/रही हूँ।">
+<div class="wrap"><form class="admit js-pay" id="admit" action="https://wa.me/917754000121" method="get" data-intro="नमस्ते, मैं Indian Films Academy में ऑनलाइन एडमिशन लेना चाहता/चाहती हूँ।" novalidate>
   <fieldset class="astep"><legend><span class="astep-n">1</span>कोर्स चुनें</legend>
     <div class="pick"><label class="pick-card"><input type="radio" name="course" value="Cinematic Acting (सिनेमैटिक एक्टिंग)" data-k="कोर्स" data-key="actor" checked><span class="pick-en">Cinematic Acting</span><span class="pick-hi">सिनेमैटिक एक्टिंग</span><span class="pick-meta">90 दिन · ₹50,000</span></label><label class="pick-card"><input type="radio" name="course" value="Film Direction (फ़िल्म डायरेक्शन)" data-k="कोर्स" data-key="director"><span class="pick-en">Film Direction</span><span class="pick-hi">फ़िल्म डायरेक्शन</span><span class="pick-meta">90 दिन · ₹50,000</span></label><label class="pick-card"><input type="radio" name="course" value="Film Editing (फ़िल्म एडिटिंग)" data-k="कोर्स" data-key="editor"><span class="pick-en">Film Editing</span><span class="pick-hi">फ़िल्म एडिटिंग</span><span class="pick-meta">90 दिन · ₹50,000</span></label></div>
     <p class="muted">शुल्क ₹50,000 · दो किस्तों में ₹27,500 + ₹27,500 · चयन ऑडिशन के आधार पर 20% तक</p>
@@ -491,19 +510,25 @@ a:hover{color:var(--indigo)}
     <div class="fields">
       <label>आपका नाम<input name="name" autocomplete="name" required data-k="आपका नाम"></label>
       <label>फ़ोन नंबर<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required data-k="फ़ोन नंबर"></label>
+      <label class="wide">ईमेल (पुष्टि इसी पर आएगी)<input name="email" type="email" autocomplete="email" inputmode="email" data-k="Email"></label>
       <label>उम्र<input name="age" inputmode="numeric" data-k="उम्र"></label>
       <label>शहर<input name="city" autocomplete="address-level2" data-k="शहर"></label>
       <label class="wide">कुछ पूछना हो तो<textarea name="note" rows="2" data-k="कुछ पूछना हो तो"></textarea></label>
     </div>
   </fieldset>
-  <fieldset class="astep"><legend><span class="astep-n">3</span>रजिस्ट्रेशन शुल्क</legend>
-    <div class="pay">
-      <div class="pay-main"><p class="pay-amt">₹500</p><a class="btn btn-gold pay-btn" href="upi://pay?pa=eazypay.569996786@icici&amp;pn=INDIANFILMACADEMY&amp;tr=EZYS7897777710&amp;cu=INR&amp;mc=5999&amp;am=500.00&amp;tn=IFA%20Registration">Google Pay / UPI से ₹500 भरें</a><p class="muted">भुगतान के बाद नीचे का बटन दबाएँ। WhatsApp खुलेगा; वहाँ भुगतान का स्क्रीनशॉट भी भेज दें।</p></div>
-      <figure class="qr"><img src="/img/upi-qr.svg" alt="UPI QR, eazypay.569996786@icici" width="190" height="190" loading="lazy"><figcaption>कंप्यूटर पर हैं? फ़ोन के किसी भी UPI ऐप से यह QR स्कैन करें और ₹500 डालें।<span class="upi-id">eazypay.569996786@icici <button type="button" class="copy" data-copy="eazypay.569996786@icici" data-done="कॉपी हो गया">कॉपी करें</button></span></figcaption></figure>
-    </div>
+  <fieldset class="astep"><legend><span class="astep-n">3</span>रजिस्ट्रेशन शुल्क भरकर सीट बुक करें</legend>
+    <div class="pay"><p class="pay-amt">₹500</p><div><p class="muted">Google Pay, PhonePe या कोई भी UPI ऐप, डेबिट/क्रेडिट कार्ड या नेटबैंकिंग: जो आसान लगे। पेमेंट Razorpay के सुरक्षित पेज पर होता है।</p><p class="muted">पेमेंट होते ही यहीं स्क्रीन पर आपका रजिस्ट्रेशन नंबर आ जाएगा, और ईमेल दिया हो तो पुष्टि ईमेल पर भी।</p></div></div>
   </fieldset>
-  <div class="admit-send"><button class="btn btn-primary btn-lg" type="submit">फ़ॉर्म WhatsApp पर भेजें</button><p class="muted">आपका आवेदन सीधे हमारे WhatsApp पर पहुँचता है। यह वेबसाइट आपकी कोई जानकारी सहेजती नहीं। कोई सवाल? सीधे फ़ोन करें: <a href="tel:+917754000121">+91 77540 00121</a></p></div>
-</form></div>
+  <div class="admit-send"><button class="btn btn-gold btn-lg" type="submit">₹500 भरकर सीट बुक करें</button><p class="pay-status" role="status" aria-live="polite"></p><p class="muted">आपकी जानकारी सिर्फ़ एडमिशन के लिए एकेडमी के पास सुरक्षित रहती है। कोई सवाल? सीधे फ़ोन करें: <a href="tel:+917754000121">+91 77540 00121</a></p></div>
+</form>
+<section class="paid" id="paid" hidden tabindex="-1" aria-labelledby="paid-h">
+  <p class="paid-tick" aria-hidden="true">✓</p>
+  <h2 id="paid-h">आपकी सीट बुक हो गई</h2>
+  <p class="paid-k">रजिस्ट्रेशन नंबर</p>
+  <p class="paid-reg reg-no"></p>
+  <p>यह नंबर सँभालकर रखें। चयन ऑडिशन का दिन और समय हम 24 घंटे के भीतर फ़ोन या WhatsApp पर बताएँगे।</p>
+  <div class="actions"><a class="btn btn-gold paid-wa" href="https://wa.me/917754000121">WhatsApp पर पुष्टि भेजें</a><a class="btn btn-ghost" href="/">होम</a></div>
+</section></div>
 </main>
 <footer class="foot">
   <div class="wrap foot-grid">
@@ -552,6 +577,7 @@ a:hover{color:var(--indigo)}
     <span>प्रोडक्शन सहयोगी: <a href="https://pichchrapa.com">PICHCHRAPA</a> · <a href="https://gapistaan.com">Gapistaan</a></span>
   </div>
 </footer>
+<script type="application/json" id="pay-i18n">{"opening":"पेमेंट का पेज खुल रहा है…","verifying":"पेमेंट की पुष्टि हो रही है…","failed":"पुष्टि नहीं हो पाई। अगर पैसा कट गया है तो चिंता न करें, वह दर्ज हो जाएगा; WhatsApp +91 77540 00121 पर पेमेंट का स्क्रीनशॉट भेज दें।","cancelled":"पेमेंट पूरा नहीं हुआ। सीट बुक करने के लिए बटन फिर दबाएँ।","phone":"कृपया 10 अंकों का सही फ़ोन नंबर लिखें।","name":"कृपया अपना नाम लिखें।","desc":"रजिस्ट्रेशन शुल्क","supportDesc":"छात्रों की पढ़ाई के लिए सहयोग","thanks":"धन्यवाद! आपका सहयोग मिल गया। यह किसी छात्र की कक्षा बनेगा।","amountErr":"कम से कम ₹10 की राशि लिखें।","offline":"ऑनलाइन पेमेंट अभी चालू नहीं है। आपका फ़ॉर्म WhatsApp पर भेजा जा रहा है।","waReg":"नमस्ते, मेरा रजिस्ट्रेशन नंबर {reg} है। मैंने Indian Films Academy में {course} के लिए रजिस्ट्रेशन किया है।","wa":"917754000121"}</script>
 <script>
 (function(){
   var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -621,14 +647,66 @@ a:hover{color:var(--indigo)}
       el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
     });
   }
-  document.querySelectorAll('form.js-wa').forEach(function(form){
-    form.addEventListener('submit',function(e){
+  var T={}; try{ T=JSON.parse((document.getElementById('pay-i18n')||{}).textContent||'{}'); }catch(e){}
+  function waSend(form){
+    var lines=[form.getAttribute('data-intro')];
+    form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+    window.location.href='https://wa.me/'+T.wa+'?text='+encodeURIComponent(lines.join('\n'));
+  }
+  document.querySelectorAll('form.js-wa').forEach(function(form){ form.addEventListener('submit',function(e){ e.preventDefault(); waSend(form); }); });
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+  // Opens Razorpay Checkout for an order made by our server; cb.say(text), cb.done(result), cb.fail('off'|'cancel'|'err')
+  function pay(body, desc, prefill, cb){
+    cb.say(T.opening);
+    post('/api/order', body).then(function(o){
+      if(!o.order_id){ cb.fail(o._status===503||o._status===404?'off':'err'); return; }
+      return loadRzp().then(function(){
+        var paid=false;
+        var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'Indian Films Academy', description:desc, image:location.origin+'/img/logo-emblem-192.webp', prefill:prefill, notes:{ source:'website' }, theme:{ color:'#023E41' },
+          handler:function(r){ paid=true; cb.say(T.verifying); post('/api/verify', r).then(function(v){ if(v.ok) cb.done(v); else cb.fail('err'); }, function(){ cb.fail('err'); }); },
+          modal:{ ondismiss:function(){ if(!paid) cb.fail('cancel'); } } });
+        rz.open();
+      }, function(){ cb.fail('off'); });
+    }, function(){ cb.fail('off'); });
+  }
+  var adm=document.getElementById('admit');
+  if(adm){
+    var st=adm.querySelector('.pay-status'), btn=adm.querySelector('button[type=submit]');
+    var say=function(m){ st.textContent=m||''; };
+    adm.addEventListener('submit',function(e){
       e.preventDefault();
-      var lines=[form.getAttribute('data-intro')];
-      form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
-      if(form.getAttribute('data-tail')) lines.push(form.getAttribute('data-tail'));
-      window.location.href='https://wa.me/917754000121?text='+encodeURIComponent(lines.join('\n'));
+      var f=function(n){ var el=adm.querySelector('[name="'+n+'"]'); return el?(el.value||'').trim():''; };
+      var c=adm.querySelector('input[name=course]:checked');
+      var phone=f('phone').replace(/[^\d]/g,'').replace(/^(91|0)(?=\d{10}$)/,'');
+      if(!f('name')){ say(T.name); adm.querySelector('[name=name]').focus(); return; }
+      if(phone.length!==10){ say(T.phone); adm.querySelector('[name=phone]').focus(); return; }
+      btn.disabled=true;
+      var body={ kind:'registration', course:c?c.getAttribute('data-key'):'', name:f('name'), phone:phone, email:f('email'), age:f('age'), city:f('city'), note:f('note'), lang:document.documentElement.lang };
+      pay(body, T.desc+' · '+(c?c.value:''), { name:body.name, email:body.email, contact:'+91'+phone }, { say:say,
+        done:function(v){
+          var box=document.getElementById('paid');
+          box.querySelector('.reg-no').textContent=v.reg;
+          box.querySelector('.paid-wa').href='https://wa.me/'+T.wa+'?text='+encodeURIComponent(T.waReg.replace('{reg}',v.reg).replace('{course}',c?c.value:''));
+          adm.hidden=true; box.hidden=false; box.focus(); window.scrollTo(0, box.getBoundingClientRect().top+window.scrollY-90);
+        },
+        fail:function(why){ btn.disabled=false; if(why==='off'){ say(T.offline); setTimeout(function(){ waSend(adm); },900); } else say(why==='cancel'?T.cancelled:T.failed); }
+      });
     });
+  }
+  document.querySelectorAll('.donate').forEach(function(box){
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.donate-go');
+    var say=function(m){ st.textContent=m||''; };
+    function start(a){
+      a=Math.round(+a); if(!(a>=10)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true;
+      pay({ kind:'support', amount:a, lang:document.documentElement.lang }, T.supportDesc, {}, { say:say,
+        done:function(){ go.disabled=false; say(T.thanks); },
+        fail:function(why){ go.disabled=false; if(why==='off'){ say(''); var up=box.querySelector('.donate-upi'); if(up) up.hidden=false; } else say(why==='cancel'?'':T.failed); }
+      });
+    }
+    box.querySelectorAll('[data-amt]').forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); start(input.value); }); });
+    go.addEventListener('click',function(){ start(input.value); });
   });
   var pre=new URLSearchParams(location.search).get('c');
   if(pre){ var r=document.querySelector('input[data-key="'+pre.replace(/[^a-z]/g,'')+'"]'); if(r) r.checked=true; }

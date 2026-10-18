@@ -268,7 +268,8 @@ a:hover{color:var(--indigo)}
 .donate p{margin:.45rem 0;color:#D3E0DE}
 .donate .tap{color:#fff;font-weight:800;font-size:.95rem}
 .amts{display:flex;flex-wrap:wrap;gap:.5rem}
-.amt{display:inline-flex;align-items:center;min-height:44px;padding:.3rem 1.05rem;border-radius:999px;background:var(--marigold);color:var(--deep);font-weight:800;text-decoration:none}
+.amt{display:inline-flex;align-items:center;min-height:44px;padding:.3rem 1.05rem;border-radius:999px;border:0;background:var(--marigold);color:var(--deep);font:800 1rem/1.2 var(--body);cursor:pointer;transition:transform .2s cubic-bezier(.34,1.45,.64,1)}
+.amt:active{transform:scale(.96)}
 .amt:hover{background:var(--marigold-2);color:var(--deep)}
 .donate .fine{font-size:.85rem;color:#9FB6B3}
 .qr{justify-self:center;width:max-content;max-width:100%;margin:0;padding:1rem;border-radius:14px;background:#fff;color:var(--slate);text-align:center}
@@ -276,7 +277,6 @@ a:hover{color:var(--indigo)}
 .qr figcaption{max-width:200px;margin-top:.5rem;font-size:.85rem;line-height:1.4}
 .upi-id{display:block;margin-top:.35rem;color:var(--ink);font-weight:800;word-break:break-all}
 .copy{margin-left:.25rem;padding:.1rem .5rem;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--indigo);font:800 .8rem/1.5 var(--body);cursor:pointer}
-@media (hover:hover) and (pointer:fine){.donate .tap,.donate .amts,.pay-btn{display:none}}
 .donate-line{margin:.7rem 0 0}
 .donate-line a{color:var(--marigold-ink);font-weight:800}
 .vid-layout{display:grid;gap:1.4rem}
@@ -498,3 +498,24 @@ a:hover{color:var(--indigo)}
 .guide-cta .actions{margin-top:1rem}
 .fees-table{min-width:560px}
 .fees-table td:first-child a{font-weight:800}
+
+/* Payments */
+.donate-own{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;margin-top:.8rem}
+.donate-own label{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;color:#fff;font-weight:800}
+.rs{display:inline-flex;align-items:center;gap:.2rem;padding:0 .7rem;min-height:44px;border-radius:10px;background:#fff;color:var(--deep)}
+.rs input{width:6.5rem;min-height:40px;border:0;background:transparent;color:var(--deep);font:800 1.05rem/1 var(--body)}
+.rs input:focus{outline:none}
+.pay-status{min-height:1.4em;margin:.6rem 0 0;font-weight:800}
+.donate .pay-status{color:var(--marigold-2)}
+.admit .pay-status{color:var(--marigold-ink)}
+.pay{grid-template-columns:auto 1fr}
+.pay .muted{margin:.2rem 0}
+.paid{max-width:40rem;margin:0 0 4rem;padding:2rem;border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff;text-align:center}
+.paid:focus{outline:none}
+.paid-tick{display:grid;place-items:center;width:64px;height:64px;margin:0 auto .6rem;border-radius:50%;background:var(--marigold);color:var(--deep);font-size:2rem;font-weight:800;animation:lift .6s cubic-bezier(.34,1.45,.64,1) both}
+.paid h2{margin:0;font-size:1.6rem}
+.paid-k{margin:1rem 0 0;color:var(--marigold-2);font-weight:800}
+.paid-reg{margin:.1rem 0 .8rem;font:700 clamp(1.8rem,5vw,2.6rem)/1.1 var(--title);letter-spacing:.04em;color:var(--marigold)}
+.paid p{color:#D3E0DE}
+.paid .actions{justify-content:center}
+.paid .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
