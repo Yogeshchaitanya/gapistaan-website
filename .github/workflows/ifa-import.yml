@@ -6,27 +6,20 @@ on:
 permissions:
   contents: write
 jobs:
-  dns:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Full DNS picture before moving the domain to Cloudflare
+      - name: Check the live preview after the payment deploy
         run: |
-          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y dnsutils whois >/dev/null || true
-          mkdir -p ifa-import && out=ifa-import/dns.txt; : > $out
-          for d in indianfilmsacademy.com ymatsystem.com; do
-            echo "########## $d" >> $out
-            whois $d 2>/dev/null | grep -iE "registrar:|registrar url|name server|creation date|expiry|registry expiry" | sort -u >> $out
-            for t in NS SOA A AAAA MX TXT CAA; do echo "== $t $d" >> $out; dig +short $t $d @1.1.1.1 >> $out; done
-            for n in www mail webmail ftp autodiscover autoconfig _dmarc hostingermail-a._domainkey hostingermail-b._domainkey hostingermail-c._domainkey default._domainkey _domainkey google._domainkey email smtp imap pop cpanel; do
-              r=$(dig +short ANY $n.$d @1.1.1.1; dig +short CNAME $n.$d @1.1.1.1; dig +short TXT $n.$d @1.1.1.1; dig +short A $n.$d @1.1.1.1)
-              [ -n "$r" ] && { echo "== $n.$d" >> $out; echo "$r" | sort -u >> $out; }
-            done
-            for s in _imaps._tcp _submission._tcp _autodiscover._tcp _pop3s._tcp; do r=$(dig +short SRV $s.$d @1.1.1.1); [ -n "$r" ] && echo "== SRV $s.$d: $r" >> $out; done
-          done
+          B=https://ifa-website.itsyogeshkumarmishra.workers.dev
+          mkdir -p ifa-import; out=ifa-import/live-check.txt; : > $out
+          echo "home: $(curl -s -o /dev/null -w '%{http_code}' $B/)" >> $out
+          echo "admission: $(curl -s -o /dev/null -w '%{http_code}' $B/admission/)" >> $out
+          echo "guides: $(curl -s -o /dev/null -w '%{http_code}' $B/guides/bhojpuri-film-acting/)" >> $out
+          echo "order (expect 503 until keys): $(curl -s -X POST -H 'content-type: application/json' -d '{"kind":"registration"}' -w ' %{http_code}' $B/api/order)" >> $out
+          echo "admin (expect 404): $(curl -s -o /dev/null -w '%{http_code}' "$B/api/admin?key=x")" >> $out
+          echo "old cinekar redirect: $(curl -s -o /dev/null -w '%{http_code} %{redirect_url}' $B/cinekar/actor/)" >> $out
           cat $out
-      - name: Save
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add ifa-import/dns.txt && git commit -m "DNS snapshot before moving to Cloudflare" && git push || true
+          git config user.name "github-actions[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add $out && git commit -m "live check" && git push || true
