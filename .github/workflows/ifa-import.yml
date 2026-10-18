@@ -6,66 +6,36 @@ on:
 permissions:
   contents: write
 jobs:
-  export:
+  reels:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Export old indianfilmsacademy.com (WordPress) content, media and hosting info
+      - name: Old site's testimonial reels -> short silent loops, posters and light full versions
         run: |
           set -u
-          B=https://indianfilmsacademy.com
-          mkdir -p ifa-import/html ifa-import/media
-          cd ifa-import
+          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null || true
+          mkdir -p ifa-import/reels && cd ifa-import/reels
           UA="Mozilla/5.0 (IFA site migration by owner)"
-          for t in pages posts media categories; do
-            : > $t.json
-            for p in 1 2 3 4 5; do
-              f=$(mktemp)
-              code=$(curl -sS -A "$UA" -o $f -w '%{http_code}' "$B/wp-json/wp/v2/$t?per_page=100&page=$p" || true)
-              if [ "$code" != "200" ]; then break; fi
-              jq -c '.[]' $f >> $t.jsonl 2>/dev/null || true
-              n=$(jq 'length' $f 2>/dev/null || echo 0); [ "$n" -lt 100 ] && break
-            done
+          : > info.txt
+          for u in $(awk '{print $1}' ../videos.txt); do
+            name=$(basename "$u" .mp4); slug=$(echo "$name" | tr 'A-Z' 'a-z' | sed 's/[^a-z0-9]\+/-/g; s/-$//')
+            curl -sS -A "$UA" -f "$u" -o src.mp4 || { echo "MISS $u" >> info.txt; continue; }
+            dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 src.mp4 | cut -d. -f1)
+            wh=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 src.mp4)
+            # 8-second silent loop for the page (starts at 1s), 360px wide
+            ffmpeg -v error -y -ss 1 -t 8 -i src.mp4 -an -vf "scale=360:-2,fps=24" -c:v libx264 -preset slow -crf 30 -pix_fmt yuv420p -movflags +faststart "loop-$slug.mp4"
+            ffmpeg -v error -y -ss 1.5 -i src.mp4 -frames:v 1 -vf "scale=540:-2" -q:v 4 "poster-$slug.jpg"
+            # full version with sound, 540px wide, kept under ~22 MB
+            kbps=$(( 22000*8/ (dur>0?dur:60) - 96 )); [ $kbps -gt 1100 ] && kbps=1100; [ $kbps -lt 300 ] && kbps=300
+            ffmpeg -v error -y -i src.mp4 -vf "scale=540:-2" -c:v libx264 -preset slow -b:v ${kbps}k -maxrate ${kbps}k -bufsize $((kbps*2))k -pix_fmt yuv420p -c:a aac -b:a 96k -ac 2 -movflags +faststart "full-$slug.mp4"
+            echo "$slug dur=${dur}s src=${wh} loop=$(stat -c%s loop-$slug.mp4) full=$(stat -c%s full-$slug.mp4) kbps=$kbps" >> info.txt
+            rm -f src.mp4
           done
-          rm -f pages.json posts.json media.json categories.json
-          curl -sS -A "$UA" "$B/" -o html/home.html
-          for u in $(jq -r '.link' pages.jsonl posts.jsonl 2>/dev/null); do
-            s=$(echo "$u" | sed -E 's#https?://[^/]+/##; s#/$##; s#/#_#g'); [ -z "$s" ] && s=home2
-            curl -sS -A "$UA" "$u" -o "html/$s.html" || true
-          done
-          curl -sS -A "$UA" "$B/contact-us/" -o html/contact-us.html || true
-          # Every image the pages reference, plus the media library
-          grep -hoE 'https?://indianfilmsacademy\.com/wp-content/uploads/[^"'"'"' )]+\.(jpe?g|png|webp|gif|svg|mp4)' html/*.html > urls.txt || true
-          jq -r '.source_url' media.jsonl >> urls.txt 2>/dev/null || true
-          sed -E 's/-[0-9]+x[0-9]+(\.[a-z0-9]+)$/\1/' urls.txt | sort -u > files.txt
-          : > videos.txt
-          while read -r u; do
-            name=$(echo "$u" | sed -E 's#.*/uploads/##; s#/#_#g')
-            case "$u" in
-              *.mp4) sz=$(curl -sSI -A "$UA" "$u" | awk 'tolower($1)=="content-length:"{print $2}' | tr -d '\r'); echo "$u $sz" >> videos.txt ;;
-              *.svg) ;;
-              *) curl -sS -A "$UA" -f "$u" -o "media/$name" || echo "MISS $u" >> missing.txt ;;
-            esac
-          done < files.txt
-          # Shrink photos so the repo stays small (max 1600px)
-          for f in media/*; do
-            case "$f" in *.jpg|*.jpeg|*.JPG|*.webp) mogrify -resize '1600x1600>' -quality 82 "$f" || true ;; *.png) mogrify -resize '1600x1600>' "$f" || true ;; esac
-          done
-          # Where is the old site hosted?
-          {
-            echo "== NS"; dig +short NS indianfilmsacademy.com
-            echo "== A"; dig +short A indianfilmsacademy.com
-            echo "== MX"; dig +short MX indianfilmsacademy.com
-            echo "== TXT"; dig +short TXT indianfilmsacademy.com
-            echo "== headers"; curl -sSI -A "$UA" "$B/" | grep -iE '^(server|x-powered-by|x-litespeed|x-cache|via|cf-ray|x-hostinger|platform|x-turbo)' || true
-            echo "== timing"; for i in 1 2 3; do curl -s -o /dev/null -A "$UA" -w 'ttfb=%{time_starttransfer}s total=%{time_total}s size=%{size_download}\n' "$B/"; done
-            for ip in $(dig +short A indianfilmsacademy.com); do echo "== whois $ip"; whois "$ip" 2>/dev/null | grep -iE '^(orgname|org-name|netname|descr|country|owner)' | head -8; done
-          } > hosting.txt 2>&1
-          du -sh media; ls media | wc -l
-      - name: Commit export to this branch
+          cat info.txt; du -sh .
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add ifa-import
-          git commit -m "IFA: पुरानी साइट का export (content, photos, hosting info)" || echo "nothing"
+          git add ifa-import/reels
+          git commit -m "IFA: testimonial reels compressed for the new site" || echo nothing
           git push
