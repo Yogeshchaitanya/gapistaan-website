@@ -71,7 +71,7 @@ a{color:var(--sona)}
 .topnav a:hover{color:var(--sona)}
 .topbar .btn{margin-left:auto}
 @media (min-width:44rem){.topnav{display:flex}.topbar .btn{margin-left:0}}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:2.9rem;padding:.55rem 1.25rem;border-radius:999px;border:2px solid transparent;font:800 1.0625rem/1.2 var(--hindi);text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn{font-family:inherit;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:2.9rem;padding:.55rem 1.25rem;border-radius:999px;border:2px solid transparent;font:800 1.0625rem/1.2 var(--hindi);text-decoration:none;cursor:pointer;white-space:nowrap}
 .btn-primary{background:var(--narangi-gaadha);color:#fff}
 .btn-primary:hover{background:var(--narangi-aur-gaadha)}
 .btn-ghost{background:transparent;color:var(--safed);border-color:rgba(255,246,238,.55)}
@@ -88,35 +88,43 @@ a{color:var(--sona)}
   background:linear-gradient(180deg,rgba(255,233,190,.17),rgba(255,233,190,0) 85%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
 .hero::before{left:6%;transform:rotate(-8deg)}
 .hero::after{right:6%;transform:rotate(8deg)}
-.hero-in{position:relative;display:grid;gap:2rem;justify-items:center;text-align:center}
-.hero-logo{width:min(62vw,260px);height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.55))}
+.hero-in{position:relative;display:grid;gap:2rem;align-items:center}
+.hero-brand{display:grid;justify-items:center;text-align:center}
+.hero-logo{width:min(40vw,150px);height:auto;margin-bottom:.9rem;filter:drop-shadow(0 10px 30px rgba(0,0,0,.55))}
 .hero-name{margin:0;line-height:1}
-.hero-name .latin{display:block;font-size:clamp(3.4rem,10vw,5.8rem);line-height:.95;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.45)}
-.hero-name .hi{display:block;margin-top:.35rem;font:800 clamp(2.1rem,5.4vw,3.3rem)/1.25 var(--hindi);color:var(--sona)}
-.hero-line{margin:.9rem auto .2rem;max-width:30ch;font-weight:800;font-size:clamp(1.15rem,2.6vw,1.4rem);line-height:1.5}
+.hero-name .latin{display:block;font-size:clamp(3.2rem,9vw,5.4rem);line-height:.95;color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.45)}
+.hero-name .hi{display:block;margin-top:.35rem;font:800 clamp(2rem,5vw,3.1rem)/1.25 var(--hindi);color:var(--sona)}
+.hero-line{margin:.9rem auto .2rem;max-width:30ch;font-weight:800;font-size:clamp(1.12rem,2.4vw,1.35rem);line-height:1.5}
 .hero-sub{margin:0 auto;max-width:40ch;color:var(--dhundh)}
 .schedule{display:inline-block;margin:1rem 0 0;padding:.3rem 1rem;border-radius:999px;background:rgba(246,196,83,.14);color:var(--sona);font-weight:800}
-.hero .actions{justify-content:center;margin-top:1.4rem}
 @media (min-width:64rem){
-  .hero-in{grid-template-columns:auto 1fr minmax(0,30rem);align-items:center;justify-items:start;text-align:left;gap:2.5rem}
+  .hero-in{grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:3rem}
+  .hero-brand{justify-items:start;text-align:left}
+  .hero-logo{width:190px}
   .hero-line,.hero-sub{margin-inline:0}
-  .hero .actions{justify-content:flex-start}
 }
-.marquee{position:relative;display:block;width:100%;max-width:30rem;text-decoration:none;color:inherit}
-.marquee-frame{position:relative;display:block;padding:18px;border-radius:16px;background:#2A0F08;box-shadow:0 0 0 3px var(--narangi),0 18px 50px rgba(0,0,0,.55),0 0 40px rgba(248,69,26,.35)}
-.marquee-frame::before{content:"";position:absolute;inset:0;border-radius:16px;padding:18px;
+.marquee{position:relative;width:100%;max-width:46rem;justify-self:center}
+.marquee-frame{position:relative;padding:18px;border-radius:16px;background:#2A0F08;box-shadow:0 0 0 3px var(--narangi),0 18px 50px rgba(0,0,0,.55),0 0 40px rgba(248,69,26,.35)}
+.marquee-frame::before{content:"";position:absolute;inset:0;border-radius:16px;padding:18px;pointer-events:none;
   background:radial-gradient(circle,var(--bulb) 0 3.2px,rgba(255,233,163,.25) 3.6px,transparent 5px) 0 0/18px 18px;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 @media (prefers-reduced-motion:no-preference){
   .marquee-frame::before{animation:jhilmil 1.4s steps(2,jump-none) infinite}
 }
 @keyframes jhilmil{0%{opacity:1}50%{opacity:.55}100%{opacity:1}}
-.marquee-frame img{position:relative;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:6px;background:#3a1a10}
+.play{position:relative;display:block;border-radius:6px;overflow:hidden;background:#3a1a10}
+.play img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.play-btn{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:var(--narangi-gaadha);box-shadow:0 0 0 6px rgba(255,255,255,.9),0 10px 30px rgba(0,0,0,.5);transition:transform .15s ease}
+.play-btn::after{content:"";position:absolute;left:33px;top:24px;border-style:solid;border-width:18px 0 18px 28px;border-color:transparent transparent transparent #fff}
+.play:hover .play-btn{transform:scale(1.08)}
+@media (prefers-reduced-motion:reduce){.play-btn{transition:none}}
+.inline-player{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:6px;background:#000}
 .ribbon{position:absolute;z-index:2;top:-14px;left:-10px;transform:rotate(-6deg);background:var(--sona);color:var(--kaala);border:2px solid var(--kaala);border-radius:5px;padding:.15rem .6rem;font:400 1.05rem/1.2 var(--latin);letter-spacing:.04em;box-shadow:0 4px 10px rgba(0,0,0,.4)}
-.marquee-cap{display:block;margin-top:1rem;text-align:left}
-.marquee-title{display:block;margin-top:.45rem;font-weight:800;font-size:1.15rem;line-height:1.45}
-.marquee:hover .marquee-title{color:var(--sona)}
-.dur{position:absolute;right:26px;bottom:26px;z-index:1;background:rgba(0,0,0,.82);color:#fff;font:800 .8125rem/1 var(--hindi);padding:.32rem .45rem;border-radius:4px;font-variant-numeric:tabular-nums}
+.marquee-cap{display:block;margin-top:1.1rem}
+.marquee-title{display:block;margin-top:.45rem;font-weight:800;font-size:clamp(1.15rem,2.4vw,1.4rem);line-height:1.45;color:var(--safed);text-decoration:none}
+.marquee-title:hover{color:var(--sona)}
+.marquee .actions{margin-top:1rem}
+.dur{position:absolute;right:10px;bottom:10px;z-index:1;background:rgba(0,0,0,.82);color:#fff;font:800 .8125rem/1 var(--hindi);padding:.32rem .45rem;border-radius:4px;font-variant-numeric:tabular-nums}
 .sec{padding-block:3rem}
 .h2{margin:0 0 1.1rem;font:800 clamp(1.75rem,4.2vw,2.35rem)/1.3 var(--hindi)}
 .count{margin:-.7rem 0 1.5rem;color:var(--dhundh)}
@@ -136,6 +144,7 @@ a{color:var(--sona)}
 .about .h2{color:var(--kaala)}
 .gengap{width:min(100%,440px);height:auto;margin:0 0 1.2rem}
 .about p{max-width:56ch;margin:0 0 1rem;font-size:1.125rem}
+.about .about-en{font-size:1rem;font-style:italic}
 .about a{color:var(--kaala)}
 .chacha{width:100%;max-width:520px;height:auto;justify-self:center;border-radius:20px 20px 0 0}
 @media (min-width:56rem){.chacha{margin-bottom:-3rem}}
@@ -201,9 +210,14 @@ a.board:hover .board-naam{color:var(--sona)}
 <p class="meta"><span class="plate">EP 01</span><span>6 अक्टूबर 2026</span><span>6 मिनट</span></p>
 <div class="player"><iframe id="player" src="https://www.youtube.com/embed/PrSjBCuwvy8?rel=0" data-src="https://www.youtube.com/embed/PrSjBCuwvy8?rel=0" title="YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <div class="actions">
-  <a class="btn btn-primary" href="https://www.youtube.com/watch?v=PrSjBCuwvy8">YouTube पर देखें</a>
-  <a class="btn btn-wa" href="https://wa.me/?text=YouTube%20%E0%A4%A8%E0%A5%87%20%E0%A4%AB%E0%A4%81%E0%A4%B8%E0%A4%BE%E0%A4%AF%E0%A4%BE%20%E0%A4%AF%E0%A4%BE%20Cinema%20%E0%A4%A8%E0%A5%87%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20vs%20Gen%20Z%3A%20%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%95%E0%A4%BE%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%20https%3A%2F%2Fgapistaan.com%2Fvideo%2FPrSjBCuwvy8%2F">WhatsApp पर भेजें</a>
-</div>
+        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=PrSjBCuwvy8">YouTube पर देखें</a>
+        <a class="btn btn-wa" href="https://wa.me/?text=YouTube%20%E0%A4%A8%E0%A5%87%20%E0%A4%AB%E0%A4%81%E0%A4%B8%E0%A4%BE%E0%A4%AF%E0%A4%BE%20%E0%A4%AF%E0%A4%BE%20Cinema%20%E0%A4%A8%E0%A5%87%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20vs%20Gen%20Z%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%95%E0%A4%BE%20%E0%A4%A8%E0%A4%AF%E0%A4%BE%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FPrSjBCuwvy8%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com">WhatsApp पर भेजें</a>
+        <button class="btn btn-ghost js-share" type="button" hidden data-title="YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z" data-text="YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z
+
+गैपिस्तान का नया एपिसोड देखिए: https://youtu.be/PrSjBCuwvy8
+सारे एपिसोड: https://gapistaan.com" data-url="https://youtu.be/PrSjBCuwvy8">और जगह शेयर करें</button>
+        
+      </div>
 
 
 <section class="block prose" aria-labelledby="desc-h"><h2 class="h2" id="desc-h">एपिसोड के बारे में</h2><p>YouTube ने फँसाया <br>एक्टिंग इंस्टीट्यूट में आज छिड़ी सबसे बड़ी बहस — YouTube बड़ा या Cinema? एक तरफ़ चाचा, दूसरी तरफ़ Gen Z! 😂</p>
@@ -260,5 +274,27 @@ a.board:hover .board-naam{color:var(--sona)}
     </ul>
   </div>
 </footer>
+<script>
+(function(){
+  document.querySelectorAll('.js-play').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube.com/embed/'+a.getAttribute('data-id')+'?autoplay=1&rel=0&playsinline=1';
+      f.title=a.getAttribute('data-title')||'YouTube';
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen=true;
+      f.className='inline-player';
+      a.replaceWith(f);
+    });
+  });
+  if(navigator.share){
+    document.querySelectorAll('.js-share').forEach(function(b){
+      b.hidden=false;
+      b.addEventListener('click',function(){ navigator.share({title:b.dataset.title,text:b.dataset.text}).catch(function(){}); });
+    });
+  }
+})();
+</script>
 </body>
 </html>

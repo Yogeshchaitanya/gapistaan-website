@@ -162,12 +162,51 @@ ${body}
     </ul>
   </div>
 </footer>
+${PAGE_JS}
 </body>
 </html>
 `;
 }
 
 const epLabel = (n) => `EP ${String(n).padStart(2, '0')}`;
+
+// WhatsApp: YouTube link first, so the chat shows the YouTube preview and a tap opens the YouTube app.
+const shareMessage = (ep) =>
+  `${ep.clean}\n\nगैपिस्तान का नया एपिसोड देखिए: https://youtu.be/${ep.id}` + (siteUrl ? `\nसारे एपिसोड: ${siteUrl}` : '');
+const waLink = (ep) => `https://wa.me/?text=${encodeURIComponent(shareMessage(ep))}`;
+
+function shareButtons(ep, { pageLink = false } = {}) {
+  return `<div class="actions">
+        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=${ep.id}">YouTube पर देखें</a>
+        <a class="btn btn-wa" href="${waLink(ep)}">WhatsApp पर भेजें</a>
+        <button class="btn btn-ghost js-share" type="button" hidden data-title="${esc(ep.clean)}" data-text="${esc(shareMessage(ep))}" data-url="https://youtu.be/${ep.id}">और जगह शेयर करें</button>
+        ${pageLink ? `<a class="btn btn-ghost" href="${ep.path}">पूरा एपिसोड पेज</a>` : ''}
+      </div>`;
+}
+
+// Shared behaviour: click-to-play thumbnails and the phone's own share sheet.
+const PAGE_JS = `<script>
+(function(){
+  document.querySelectorAll('.js-play').forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube.com/embed/'+a.getAttribute('data-id')+'?autoplay=1&rel=0&playsinline=1';
+      f.title=a.getAttribute('data-title')||'YouTube';
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      f.allowFullscreen=true;
+      f.className='inline-player';
+      a.replaceWith(f);
+    });
+  });
+  if(navigator.share){
+    document.querySelectorAll('.js-share').forEach(function(b){
+      b.hidden=false;
+      b.addEventListener('click',function(){ navigator.share({title:b.dataset.title,text:b.dataset.text}).catch(function(){}); });
+    });
+  }
+})();
+</script>`;
 
 function card(ep, { eager = false } = {}) {
   return `<li><a class="ep" href="${ep.path}">
@@ -183,29 +222,34 @@ function homePage() {
   const latest = newestFirst[0];
 
   const marquee = latest
-    ? `<a class="marquee" href="${latest.path}">
-        <span class="marquee-frame">
+    ? `<div class="marquee">
+        <div class="marquee-frame">
           <span class="ribbon">NEW EPISODE</span>
-          <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 28rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
-          <span class="dur">${clock(latest.sec)}</span>
-        </span>
-        <span class="marquee-cap">
+          <a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
+            <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 40rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
+            <span class="play-btn" aria-hidden="true"></span>
+            <span class="dur">${clock(latest.sec)}</span>
+          </a>
+        </div>
+        <div class="marquee-cap">
           <span class="plate">${epLabel(latest.n)}</span>
-          <span class="marquee-title">${esc(latest.clean)}</span>
-          <span class="date">${hiDate(latest.publishedAt)}</span>
-        </span>
-      </a>`
+          <a class="marquee-title" href="${latest.path}">${esc(latest.clean)}</a>
+          <span class="date">${hiDate(latest.publishedAt)}, ${minutes(latest.sec)}</span>
+        </div>
+        ${shareButtons(latest)}
+      </div>`
     : '';
 
-  const listHtml = newestFirst.length
+  const older = newestFirst.slice(1);
+  const listHtml = older.length
     ? `<section class="sec wrap" id="episodes" aria-labelledby="eps-h">
-  <h2 class="h2" id="eps-h">सारे एपिसोड</h2>
-  <p class="count">अब तक ${newestFirst.length} एपिसोड</p>
+  <h2 class="h2" id="eps-h">पिछले एपिसोड</h2>
+  <p class="count">अब तक कुल ${newestFirst.length} एपिसोड</p>
   <ul class="grid">
-${newestFirst.map((ep) => card(ep)).join('\n')}
+${older.map((ep) => card(ep)).join('\n')}
   </ul>
 </section>`
-    : `<section class="sec wrap" id="episodes"><h2 class="h2">एपिसोड जल्द आ रहे हैं</h2><p>पहला एपिसोड आते ही यहाँ दिखेगा। तब तक <a href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>।</p></section>`;
+    : `<section class="sec wrap" id="episodes"><h2 class="h2">और एपिसोड जल्द आ रहे हैं</h2><p>नए एपिसोड के लिए <a href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>।</p></section>`;
 
   const shortsHtml = shorts.length
     ? `<section class="sec wrap" aria-labelledby="shorts-h">
@@ -230,16 +274,12 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
   const body = `<main id="main">
 <section class="hero">
   <div class="wrap hero-in">
-    <img class="hero-logo" src="/img/logo-520.webp" alt="Gapistaan का लोगो: चाचा" width="260" height="260">
-    <div>
+    <div class="hero-brand">
+      <img class="hero-logo" src="/img/logo-520.webp" alt="Gapistaan का लोगो: चाचा" width="200" height="200">
       <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
       <p class="hero-line">${esc(site.heroLine)}</p>
       <p class="hero-sub">${esc(site.heroSub)}</p>
       <p class="schedule">${esc(site.schedule)}</p>
-      <div class="actions">
-        ${latest ? `<a class="btn btn-primary" href="${latest.path}">ताज़ा एपिसोड देखें</a>` : ''}
-        <a class="btn btn-ghost" href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>
-      </div>
     </div>
     ${marquee}
   </div>
@@ -252,6 +292,7 @@ ${shortsHtml}
       <img class="gengap" src="/img/gengap-440.webp" srcset="/img/gengap-440.webp 440w, /img/gengap-880.webp 880w" sizes="(min-width: 30rem) 440px, 92vw" alt="Gen Gap" width="440" height="148" loading="lazy">
       <h2 class="h2" id="about-h">गैपिस्तान क्या है?</h2>
       ${site.about.map((p) => `<p>${esc(p)}</p>`).join('\n      ')}
+      ${site.aboutEn ? `<p class="about-en" lang="en">${esc(site.aboutEn)}</p>` : ''}
       <h3 class="cast-h">कलाकार</h3>
       <ul class="cast">
 ${castHtml}
@@ -295,7 +336,6 @@ function episodePage(ep) {
   const pageUrl = abs(ep.path);
   const watchUrl = `https://www.youtube.com/watch?v=${ep.id}`;
   const embed = `https://www.youtube.com/embed/${ep.id}?rel=0`;
-  const shareText = `${ep.clean}: गैपिस्तान का एपिसोड देखिए ${pageUrl || watchUrl}`;
   const more = newestFirst.filter((e) => e !== ep).slice(0, 3);
 
   const chaptersHtml = ep.chapters.length
@@ -327,10 +367,7 @@ ${ep.chapters.map((c) => `<li><a href="${watchUrl}&amp;t=${c.t}s" data-t="${c.t}
 <h1 class="ep-h1">${esc(ep.clean)}</h1>
 <p class="meta"><span class="plate">${epLabel(ep.n)}</span><span>${hiDate(ep.publishedAt)}</span><span>${minutes(ep.sec)}</span></p>
 <div class="player"><iframe id="player" src="${embed}" data-src="${embed}" title="${esc(ep.clean)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
-<div class="actions">
-  <a class="btn btn-primary" href="${watchUrl}">YouTube पर देखें</a>
-  <a class="btn btn-wa" href="https://wa.me/?text=${encodeURIComponent(shareText)}">WhatsApp पर भेजें</a>
-</div>
+${shareButtons(ep)}
 ${customHtml}
 ${chaptersHtml}
 ${descHtml}
