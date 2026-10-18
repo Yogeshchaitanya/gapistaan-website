@@ -435,6 +435,32 @@ a:hover{color:var(--indigo)}
 .reel-cap small{display:block;margin-top:.15rem;color:var(--marigold-2);font-weight:600;font-size:.78rem;line-height:1.3}
 @media (max-width:59.99rem){.hero .reel-cap small{display:none}}
 @media (max-width:59.99rem){.door-en{font-size:clamp(1.35rem,7.4vw,2.6rem)}}
+.quote-hi{margin:.6rem 0 0;color:#C7D6D4;font-weight:600;font-size:1.02rem;line-height:1.6}
+.quote-pair{display:grid;gap:1.4rem;margin-top:1rem}
+@media (min-width:52rem){.quote-pair{grid-template-columns:1fr 1fr}}
+.sec-quote{padding-block:clamp(2.4rem,5vw,3.4rem)}
+.quote-lg{max-width:52rem;margin-inline:auto}
+.quote-lg blockquote{font-size:clamp(1.4rem,3vw,2rem)}
+.ladder-note{margin:1rem 0 0;color:#9FB6B3;font-size:.85rem;line-height:1.5}
+.foot-pol{display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.guide-list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
+@media (min-width:46rem){.guide-list{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:64rem){.guide-list{grid-template-columns:repeat(3,1fr)}}
+.guide-card{display:flex;flex-direction:column;height:100%;padding:1.3rem 1.4rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);color:var(--ink);text-decoration:none;transition:transform .3s cubic-bezier(.34,1.45,.64,1),border-color .2s}
+.guide-card:hover{transform:translateY(-4px);border-color:var(--indigo);color:var(--ink)}
+.guide-card strong{font-size:1.12rem;line-height:1.4;color:var(--indigo)}
+.guide-card span{margin-top:.35rem;color:var(--slate);line-height:1.6}
+.guide-card .more{margin-top:auto;padding-top:.9rem;color:var(--indigo-3);font-weight:800;text-decoration:underline;text-underline-offset:.25em}
+.article{max-width:46rem}
+.article h2{margin:2rem 0 .5rem;font-size:clamp(1.25rem,2.4vw,1.5rem);line-height:1.4;color:var(--indigo)}
+.article p{font-size:1.08rem;line-height:1.85}
+.byline{margin:0 0 1rem;color:var(--marigold-ink);font-weight:800;font-size:.95rem}
+.guide-cta{margin:2.4rem 0 1rem;padding:1.5rem 1.6rem;border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff}
+.guide-cta .eyebrow{color:var(--marigold-2)}
+.guide-cta-t{margin:.1rem 0 0;font-size:1.3rem;font-weight:800}
+.guide-cta .actions{margin-top:1rem}
+.fees-table{min-width:560px}
+.fees-table td:first-child a{font-weight:800}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indianfilmsacademy.com/en/"},{"@type":"ListItem","position":2,"name":"Online acting course (in Hindi)","item":"https://indianfilmsacademy.com/en/online/"}]}</script>
 </head>
@@ -484,6 +510,7 @@ a:hover{color:var(--indigo)}
         <li><a href="/en/about/">About the academy</a></li>
         <li><a href="/en/yogesh-cineact/">Yogesh CineAct</a></li>
         <li><a href="/en/bytes/">Bytes from the stars</a></li>
+        <li><a href="/en/guides/">Acting guides</a></li>
         <li><a href="/en/gallery/">Gallery</a></li>
         <li><a href="/en/videos/">Classes</a></li>
         <li><a href="/en/privacy/">Privacy</a></li>
@@ -502,6 +529,7 @@ a:hover{color:var(--indigo)}
   </div>
   <div class="wrap foot-bottom">
     <span>© 2026 Indian Films Academy, Lucknow</span>
+    <span class="foot-pol"><a href="/en/fees/">Course fees</a><a href="/en/terms/">Terms and conditions</a><a href="/en/refund-policy/">Refund policy</a><a href="/en/shipping-policy/">Delivery policy</a><a href="/en/privacy/">Privacy</a></span>
     <span>Production partner: <a href="https://pichchrapa.com">PICHCHRAPA</a> · <a href="https://gapistaan.com">Gapistaan</a></span>
   </div>
 </footer>

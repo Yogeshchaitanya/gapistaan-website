@@ -435,6 +435,32 @@ a:hover{color:var(--indigo)}
 .reel-cap small{display:block;margin-top:.15rem;color:var(--marigold-2);font-weight:600;font-size:.78rem;line-height:1.3}
 @media (max-width:59.99rem){.hero .reel-cap small{display:none}}
 @media (max-width:59.99rem){.door-en{font-size:clamp(1.35rem,7.4vw,2.6rem)}}
+.quote-hi{margin:.6rem 0 0;color:#C7D6D4;font-weight:600;font-size:1.02rem;line-height:1.6}
+.quote-pair{display:grid;gap:1.4rem;margin-top:1rem}
+@media (min-width:52rem){.quote-pair{grid-template-columns:1fr 1fr}}
+.sec-quote{padding-block:clamp(2.4rem,5vw,3.4rem)}
+.quote-lg{max-width:52rem;margin-inline:auto}
+.quote-lg blockquote{font-size:clamp(1.4rem,3vw,2rem)}
+.ladder-note{margin:1rem 0 0;color:#9FB6B3;font-size:.85rem;line-height:1.5}
+.foot-pol{display:flex;flex-wrap:wrap;gap:.3rem 1rem}
+.guide-list{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
+@media (min-width:46rem){.guide-list{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:64rem){.guide-list{grid-template-columns:repeat(3,1fr)}}
+.guide-card{display:flex;flex-direction:column;height:100%;padding:1.3rem 1.4rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);color:var(--ink);text-decoration:none;transition:transform .3s cubic-bezier(.34,1.45,.64,1),border-color .2s}
+.guide-card:hover{transform:translateY(-4px);border-color:var(--indigo);color:var(--ink)}
+.guide-card strong{font-size:1.12rem;line-height:1.4;color:var(--indigo)}
+.guide-card span{margin-top:.35rem;color:var(--slate);line-height:1.6}
+.guide-card .more{margin-top:auto;padding-top:.9rem;color:var(--indigo-3);font-weight:800;text-decoration:underline;text-underline-offset:.25em}
+.article{max-width:46rem}
+.article h2{margin:2rem 0 .5rem;font-size:clamp(1.25rem,2.4vw,1.5rem);line-height:1.4;color:var(--indigo)}
+.article p{font-size:1.08rem;line-height:1.85}
+.byline{margin:0 0 1rem;color:var(--marigold-ink);font-weight:800;font-size:.95rem}
+.guide-cta{margin:2.4rem 0 1rem;padding:1.5rem 1.6rem;border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff}
+.guide-cta .eyebrow{color:var(--marigold-2)}
+.guide-cta-t{margin:.1rem 0 0;font-size:1.3rem;font-weight:800}
+.guide-cta .actions{margin-top:1rem}
+.fees-table{min-width:560px}
+.fees-table td:first-child a{font-weight:800}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"Film Editing: Film Editing Course in Lucknow","description":"A 90-day film editing course in Lucknow: DaVinci Resolve from scratch, multicam sync, the rhythm of the cut, sound, colour grading and DI, Reels and Shorts, and real episodes.","inLanguage":"hi","provider":{"@type":"EducationalOrganization","@id":"https://indianfilmsacademy.com/#academy","name":"Indian Films Academy","sameAs":"https://indianfilmsacademy.com/"},"offers":{"@type":"Offer","category":"Paid","price":50000,"priceCurrency":"INR","url":"https://indianfilmsacademy.com/en/film-editing-course/"},"hasCourseInstance":{"@type":"CourseInstance","courseMode":"Onsite","location":{"@type":"Place","name":"Indian Films Academy","address":"C1/192, Vardan Khand, Sector 1, Gomti Nagar, Lucknow, Uttar Pradesh 226010"},"courseWorkload":"P3M"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indianfilmsacademy.com/en/"},{"@type":"ListItem","position":2,"name":"Three courses, three paths","item":"https://indianfilmsacademy.com/en/courses/"},{"@type":"ListItem","position":3,"name":"Film Editing","item":"https://indianfilmsacademy.com/en/film-editing-course/"}]}</script>
@@ -461,6 +487,7 @@ a:hover{color:var(--indigo)}
 <div class="actions"><a class="btn btn-gold" href="/en/admission/?c=editor">Apply online</a><a class="btn btn-ghost-light" href="#syllabus">Full curriculum</a></div>
 </div></section>
 <section class="sec" aria-labelledby="hl-h"><div class="wrap"><h2 class="h2" id="hl-h">What this course teaches that most courses don&#39;t</h2><ul class="hl"><li><h3>DaVinci Resolve, from scratch to DI</h3><p>The same software feature films are edited and graded on.</p></li><li><h3>Multicam sync</h3><p>Joining four or five cameras by their sound and cutting them on one timeline.</p></li><li><h3>Colour grading and DI</h3><p>Waveform and vectorscope, nodes, skin tones and a filmic look.</p></li><li><h3>The rhythm of the cut</h3><p>Where to cut and where to hold in comedy and drama; J-cuts, L-cuts and match cuts.</p></li><li><h3>Clean sound</h3><p>Cleaning dialogue in Fairlight, placing music, and loudness for each platform.</p></li><li><h3>Reels and Shorts</h3><p>Editing in 9:16, holding the first three seconds, captions and thumbnails.</p></li></ul></div></section>
+
 <section class="sec sec-alt" id="syllabus" aria-labelledby="syl-h"><div class="wrap"><h2 class="h2" id="syl-h">The 90-day curriculum</h2><ol class="syl">
 <li class="syl-m shared"><p class="syl-top"><span class="month-n">Month 1</span><span class="tag">Shared by all three courses</span></p><h3>Shared foundation: in front of the camera</h3><p class="muted">Every film craft is expression. An actor expresses with body and voice, a director draws it out of others, and an editor shapes it for the audience. So in the first month students of all three courses learn the camera together, through an actor&#39;s eyes.</p><ul class="ticks cols"><li>Observation, Emotion, Expression: the three steps of acting</li><li>The four pillars of Yogesh CineAct: Believing, Respect, Seriousness, Enjoying</li><li>The Observation System: Live, Imaginary, Micro, Nano and Combination Observation</li><li>Foundations of the Natyashastra, the nine rasas and sattvika bhava</li><li>Body, breath, voice and diction</li><li>Camera look and camera language: scaling a performance to the shot size</li><li>Improvisation: building scenes without a script</li><li>Shooting on a phone and starting your own channel</li></ul></li>
 <li class="syl-m"><p class="syl-top"><span class="month-n">Month 2</span><span class="tag gold">Only in this course</span></p><h3>Depth in your course</h3><p class="muted">From the second month the three courses separate. Each student trains in detail, and technically, in the course they joined.</p><dl class="mods"><div><dt>DaVinci Resolve basics</dt><dd>Project and media management, proxies, the timeline; ripple, roll, slip and slide trims.</dd></div><div><dt>The grammar of editing</dt><dd>Continuity, cutting on action, match cuts, reaction shots and the Kuleshov effect.</dd></div><div><dt>Multicam</dt><dd>Syncing by audio waveform, multicam clips and cutting between angles.</dd></div><div><dt>Rhythm and story</dt><dd>Comic timing, dramatic pauses, and tightening a story by reordering scenes.</dd></div><div><dt>Sound</dt><dd>Dialogue cleanup, noise removal, music, foley and loudness standards.</dd></div><div><dt>Colour and DI</dt><dd>Correction versus grading, nodes, scopes, LUTs and log footage.</dd></div><div><dt>A look at Fusion</dt><dd>Titles, tracking and small VFX.</dd></div><div><dt>Delivery</dt><dd>Exports for YouTube, Instagram and OTT, 16:9 and 9:16, subtitles.</dd></div></dl></li>
@@ -476,7 +503,7 @@ a:hover{color:var(--indigo)}
   <div><h2 class="h3">What you leave with</h2><ul class="ticks big"><li>A portfolio of published episodes</li><li>Full command of DaVinci Resolve</li><li>Ready to start freelancing</li><li>A channel of your own</li></ul></div>
   <div><h2 class="h3">Where it leads</h2><ul class="ticks big"><li>Editor or assistant on films and web series</li><li>Colourist (DI)</li><li>Freelance for YouTubers and brands</li><li>Your own channel</li></ul></div>
 </div></section>
-<div class="ladder-band"><div class="wrap"><p class="ladder-title">What comes after the course</p><ol class="ladder"><li><p class="ladder-num"><span class="ladder-big">90</span><span class="ladder-unit">days</span></p><strong>The course</strong><span>Classes, live shoots and a channel of your own.</span></li><li><p class="ladder-num"><span class="ladder-big">10</span><span class="ladder-unit">selected students</span></p><strong>A 3-month internship</strong><span>After the course, ten selected students from each batch intern at PICHCHRAPA production house, with travel allowance.</span></li><li><p class="ladder-num"><span class="ladder-big">2–5</span><span class="ladder-unit">best students</span></p><strong>A real job</strong><span>After six months, the best two to five students get a salaried job at PICHCHRAPA as an actor, director or editor.</span></li></ol></div></div>
+<div class="ladder-band"><div class="wrap"><p class="ladder-title">What comes after the course</p><ol class="ladder"><li><p class="ladder-num"><span class="ladder-big">90</span><span class="ladder-unit">days</span></p><strong>The course</strong><span>Classes, live shoots and a channel of your own.</span></li><li><p class="ladder-num"><span class="ladder-big">10</span><span class="ladder-unit">selected students</span></p><strong>A 3-month internship</strong><span>After the course, ten selected students from each batch intern at PICHCHRAPA production house, with travel allowance.</span></li><li><p class="ladder-num"><span class="ladder-big">6</span><span class="ladder-unit">months on</span></p><strong>Job opportunities</strong><span>We also offer job opportunities to our best students, at our production house PICHCHRAPA or elsewhere in the industry, as actors, directors or editors.</span></li></ol><p class="ladder-note">Internships and job opportunities depend on the student&#39;s performance, selection and the projects available at the time. They are not a guarantee of employment or income.</p></div></div>
 <section class="sec sec-dark" aria-labelledby="tb-h"><div class="wrap">
   <div class="sec-head"><div><h2 class="h2" id="tb-h">People who have seen the academy</h2><p class="lede">Artists and officials from the film world who visited the academy, in their own words. Click any video to hear the full byte with sound.</p></div><a class="chip-link" href="/en/bytes/">See all bytes</a></div>
   <div class="rail-wrap">
@@ -524,6 +551,7 @@ a:hover{color:var(--indigo)}
         <li><a href="/en/about/">About the academy</a></li>
         <li><a href="/en/yogesh-cineact/">Yogesh CineAct</a></li>
         <li><a href="/en/bytes/">Bytes from the stars</a></li>
+        <li><a href="/en/guides/">Acting guides</a></li>
         <li><a href="/en/gallery/">Gallery</a></li>
         <li><a href="/en/videos/">Classes</a></li>
         <li><a href="/en/privacy/">Privacy</a></li>
@@ -542,6 +570,7 @@ a:hover{color:var(--indigo)}
   </div>
   <div class="wrap foot-bottom">
     <span>© 2026 Indian Films Academy, Lucknow</span>
+    <span class="foot-pol"><a href="/en/fees/">Course fees</a><a href="/en/terms/">Terms and conditions</a><a href="/en/refund-policy/">Refund policy</a><a href="/en/shipping-policy/">Delivery policy</a><a href="/en/privacy/">Privacy</a></span>
     <span>Production partner: <a href="https://pichchrapa.com">PICHCHRAPA</a> · <a href="https://gapistaan.com">Gapistaan</a></span>
   </div>
 </footer>

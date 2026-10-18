@@ -263,10 +263,10 @@
         "कोर्स पूरा होने पर हर बैच के 10 चुने हुए छात्रों को PICHCHRAPA प्रोडक्शन हाउस में इंटर्नशिप, ट्रैवल अलाउंस के साथ।"
       ],
       [
-        "2–5",
-        "सबसे अच्छे छात्र",
-        "असली नौकरी",
-        "6 महीने बाद सबसे अच्छे 2 से 5 छात्रों को PICHCHRAPA में वेतन वाली नौकरी: एक्टर, डायरेक्टर या एडिटर के रूप में।"
+        "6",
+        "महीने बाद",
+        "नौकरी के अवसर",
+        "सबसे अच्छे छात्रों को हम नौकरी के अवसर भी देते हैं: अपने प्रोडक्शन हाउस PICHCHRAPA में या इंडस्ट्री में बाहर, एक्टर, डायरेक्टर या एडिटर के रूप में।"
       ]
     ],
     "tracksEyebrow": "तीन विधाएँ, एक कार्यक्रम",
@@ -667,7 +667,7 @@
       ],
       [
         "कोर्स के बाद क्या अवसर हैं?",
-        "हर बैच के शीर्ष 10 छात्रों को PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप ट्रैवल अलाउंस के साथ मिलती है, और 6 महीने बाद सबसे अच्छे 2 से 5 छात्रों को PICHCHRAPA में वेतन वाली नौकरी, एक्टर, डायरेक्टर या एडिटर के रूप में। बाकी छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"
+        "हर बैच के 10 चुने हुए छात्रों को PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप ट्रैवल अलाउंस के साथ मिलती है। सबसे अच्छे छात्रों को हम नौकरी के अवसर भी देते हैं, PICHCHRAPA में या इंडस्ट्री में बाहर। ये अवसर प्रदर्शन और चयन पर निर्भर हैं, गारंटी नहीं। बाकी छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"
       ],
       [
         "क्या YouTube और Instagram की ट्रेनिंग भी मिलती है?",
@@ -810,7 +810,8 @@
       "body": [
         "indianfilmsacademy.com पर हम कोई निजी जानकारी जमा नहीं करते। आवेदन फ़ॉर्म की जानकारी सीधे आपके फ़ोन से WhatsApp पर भेजी जाती है; यह वेबसाइट उसे सहेजती नहीं।",
         "साइट पर आने वालों की कुल संख्या समझने के लिए हम Cloudflare Web Analytics का उपयोग कर सकते हैं, जो कुकी नहीं लगाता और किसी व्यक्ति की पहचान नहीं करता।",
-        "वीडियो YouTube प्लेयर में चलते हैं और नक्शा Google Maps से आता है; ये सेवाएँ अपनी नीतियों के अनुसार कुकी का उपयोग कर सकती हैं।"
+        "वीडियो YouTube प्लेयर में चलते हैं और नक्शा Google Maps से आता है; ये सेवाएँ अपनी नीतियों के अनुसार कुकी का उपयोग कर सकती हैं।",
+        "भविष्य में ऑनलाइन भुगतान किसी मान्यता प्राप्त पेमेंट गेटवे से होगा; आपके कार्ड या बैंक की जानकारी उसी गेटवे के पास रहती है, हमारी वेबसाइट उसे नहीं देखती।"
       ]
     },
     "notFound": {
@@ -833,7 +834,12 @@
       "copy": "Indian Films Academy, लखनऊ",
       "bytes": "सितारों की बाइट",
       "admission": "ऑनलाइन एडमिशन",
-      "cineact": "Yogesh CineAct"
+      "cineact": "Yogesh CineAct",
+      "terms": "नियम और शर्तें",
+      "refund": "रिफ़ंड नीति",
+      "shipping": "डिलीवरी नीति",
+      "fees": "कोर्स शुल्क",
+      "guides": "एक्टिंग गाइड"
     },
     "founders": [
       {
@@ -1035,7 +1041,70 @@
       "n": "90",
       "l1": "दिन में",
       "l2": "सीखिए"
-    }
+    },
+    "quotesTitle": "योगेश मिश्रा के शब्दों में",
+    "ladderNote": "इंटर्नशिप और नौकरी के अवसर छात्र के प्रदर्शन, चयन और उस समय उपलब्ध प्रोजेक्ट्स पर निर्भर हैं। इन्हें नौकरी या कमाई की गारंटी न समझें।",
+    "policies": {
+      "terms": {
+        "title": "नियम और शर्तें | Indian Films Academy, लखनऊ",
+        "h1": "नियम और शर्तें",
+        "body": [
+          "ये नियम Indian Films Academy, लखनऊ (indianfilmsacademy.com) के सभी कोर्स, रजिस्ट्रेशन और भुगतानों पर लागू होते हैं। एडमिशन लेकर या भुगतान करके आप इन नियमों को स्वीकार करते हैं।",
+          "कोर्स: सिनेमैटिक एक्टिंग, फ़िल्म डायरेक्शन और फ़िल्म एडिटिंग, तीनों 90 दिन के कक्षा-आधारित कोर्स हैं, जो एकेडमी के पते पर चलते हैं। बैच की तारीख़ और समय एडमिशन के समय बताए जाते हैं। ज़रूरत पड़ने पर एकेडमी पाठ्यक्रम का क्रम, शिक्षक या समय बदल सकती है।",
+          "चयन: एडमिशन और मेरिट छात्रवृत्ति चयन ऑडिशन के आधार पर दी जाती है। एकेडमी किसी भी आवेदन को बिना कारण बताए अस्वीकार कर सकती है; ऐसे में भरी गई पूरी राशि लौटा दी जाती है।",
+          "आचरण: छात्रों से अनुशासन, समय की पाबंदी और सबके प्रति सम्मान की अपेक्षा है। गंभीर दुर्व्यवहार पर एकेडमी प्रवेश रद्द कर सकती है; ऐसे में शुल्क वापस नहीं होगा।",
+          "शूटिंग और प्रचार: कक्षा और लाइव प्रोजेक्ट्स की शूटिंग एकेडमी और PICHCHRAPA के प्रोजेक्ट्स व प्रचार में उपयोग की जा सकती है। अगर आप अपनी तस्वीर या वीडियो के उपयोग पर सहमत नहीं हैं, तो एडमिशन के समय लिखित में बताएँ।",
+          "इंटर्नशिप और नौकरी: इंटर्नशिप और नौकरी के अवसर छात्र के प्रदर्शन, चयन और उपलब्ध प्रोजेक्ट्स पर निर्भर हैं। एकेडमी किसी नौकरी, रोल या कमाई की गारंटी नहीं देती।",
+          "भुगतान और रिफ़ंड: शुल्क, किस्तें और रिफ़ंड \"रिफ़ंड और कैंसलेशन नीति\" के अनुसार होंगे।",
+          "विवाद: इन नियमों से जुड़े किसी भी विवाद पर लखनऊ, उत्तर प्रदेश की अदालतों का क्षेत्राधिकार होगा।"
+        ]
+      },
+      "refund": {
+        "title": "रिफ़ंड और कैंसलेशन नीति | Indian Films Academy, लखनऊ",
+        "h1": "रिफ़ंड और कैंसलेशन नीति",
+        "body": [
+          "रजिस्ट्रेशन शुल्क (₹500): यह चयन ऑडिशन और प्रक्रिया का शुल्क है और वापस नहीं होता। अगर एकेडमी ख़ुद ऑडिशन या बैच रद्द करे, तो यह पूरा लौटाया जाएगा।",
+          "कोर्स शुल्क: बैच शुरू होने से कम से कम 7 दिन पहले लिखित (ईमेल या WhatsApp) अनुरोध पर कोर्स शुल्क पूरा लौटाया जाएगा, रजिस्ट्रेशन शुल्क को छोड़कर। बैच शुरू होने के बाद कोर्स शुल्क वापस नहीं होता।",
+          "एकेडमी की ओर से बदलाव: अगर एकेडमी बैच रद्द करती है या 15 दिन से ज़्यादा आगे बढ़ाती है और आप नई तारीख़ पर नहीं जुड़ना चाहते, तो भरी गई पूरी राशि लौटाई जाएगी।",
+          "छात्रवृत्ति: छात्रवृत्ति शुल्क में छूट है; इसे नकद में नहीं बदला जा सकता।",
+          "सहयोग राशि: मुफ़्त कक्षाओं के लिए दी गई स्वैच्छिक सहयोग राशि वापस नहीं होती।",
+          "रिफ़ंड का तरीका: स्वीकृत रिफ़ंड 7 से 10 कार्यदिवसों में उसी माध्यम (UPI, कार्ड या बैंक) में भेजा जाता है जिससे भुगतान हुआ था।",
+          "रिफ़ंड के अनुरोध के लिए लिखें: info@indianfilmsacademy.com या WhatsApp +91 77540 00121।"
+        ]
+      },
+      "shipping": {
+        "title": "डिलीवरी नीति | Indian Films Academy, लखनऊ",
+        "h1": "कोर्स की डिलीवरी",
+        "body": [
+          "Indian Films Academy कोई भौतिक सामान नहीं भेजती, इसलिए किसी तरह की शिपिंग नहीं होती।",
+          "कक्षा वाले कोर्स एकेडमी के पते (C1/192, वरदान खंड, सेक्टर 1, गोमती नगर, लखनऊ) पर बैच की तय तारीख़ से शुरू होते हैं। भुगतान के बाद बैच की तारीख़, समय और रजिस्ट्रेशन की पुष्टि ईमेल या WhatsApp पर 24 घंटे के भीतर भेजी जाती है।",
+          "ऑनलाइन कोर्स का एक्सेस भुगतान के बाद ईमेल पर भेजे गए लिंक से मिलता है।"
+        ]
+      },
+      "fees": {
+        "title": "कोर्स शुल्क | Indian Films Academy, लखनऊ",
+        "h1": "कोर्स शुल्क"
+      }
+    },
+    "feesTable": {
+      "course": "कोर्स",
+      "duration": "अवधि",
+      "fee": "शुल्क",
+      "inst": "दो किस्तों में",
+      "reg": "रजिस्ट्रेशन शुल्क (ऑडिशन के लिए)",
+      "note": "सभी राशि भारतीय रुपये में। चयन ऑडिशन के आधार पर 20% तक मेरिट छात्रवृत्ति।",
+      "days": "90 दिन"
+    },
+    "guidesHome": {
+      "eyebrow": "मुफ़्त गाइड",
+      "title": "एक्टिंग और फ़िल्म करियर गाइड",
+      "lede": "एक्टर, डायरेक्टर या एडिटर बनने से जुड़े सबसे आम सवालों के सीधे जवाब, योगेश मिश्रा के अनुभव से।",
+      "all": "सभी गाइड",
+      "read": "पढ़ें",
+      "by": "योगेश मिश्रा",
+      "related": "इससे जुड़ा कोर्स"
+    },
+    "policyUpdated": "अंतिम अपडेट: 18 अक्टूबर 2026"
   },
   "en": {
     "langName": "English",
@@ -1096,10 +1165,10 @@
         "After the course, ten selected students from each batch intern at PICHCHRAPA production house, with travel allowance."
       ],
       [
-        "2–5",
-        "best students",
-        "A real job",
-        "After six months, the best two to five students get a salaried job at PICHCHRAPA as an actor, director or editor."
+        "6",
+        "months on",
+        "Job opportunities",
+        "We also offer job opportunities to our best students, at our production house PICHCHRAPA or elsewhere in the industry, as actors, directors or editors."
       ]
     ],
     "tracksEyebrow": "Three crafts, one programme",
@@ -1500,7 +1569,7 @@
       ],
       [
         "What opportunities follow the course?",
-        "The top ten students of each batch get a three-month internship at PICHCHRAPA production house with travel allowance, and after six months the best two to five get a salaried job at PICHCHRAPA as an actor, director or editor. Other students get guidance on auditions and projects."
+        "Ten selected students from each batch get a three-month internship at PICHCHRAPA production house with travel allowance. We also offer job opportunities to our best students, at PICHCHRAPA or elsewhere in the industry. These depend on performance and selection; they are not guaranteed. Other students get guidance on auditions and projects."
       ],
       [
         "Is there YouTube and Instagram training?",
@@ -1643,7 +1712,8 @@
       "body": [
         "indianfilmsacademy.com does not collect personal information. The admission form sends your details from your own phone to our WhatsApp; this website does not store them.",
         "We may use Cloudflare Web Analytics to count visits. It sets no cookies and does not identify individuals.",
-        "Videos play in the YouTube player and the map comes from Google Maps; these services may use cookies under their own policies."
+        "Videos play in the YouTube player and the map comes from Google Maps; these services may use cookies under their own policies.",
+        "Online payments, when enabled, are handled by a licensed payment gateway; your card or bank details stay with that gateway and never reach this website."
       ]
     },
     "notFound": {
@@ -1666,7 +1736,12 @@
       "copy": "Indian Films Academy, Lucknow",
       "bytes": "Bytes from the stars",
       "admission": "Apply online",
-      "cineact": "Yogesh CineAct"
+      "cineact": "Yogesh CineAct",
+      "terms": "Terms and conditions",
+      "refund": "Refund policy",
+      "shipping": "Delivery policy",
+      "fees": "Course fees",
+      "guides": "Acting guides"
     },
     "founders": [
       {
@@ -1868,7 +1943,70 @@
       "n": "90",
       "l1": "days to",
       "l2": "learn"
-    }
+    },
+    "quotesTitle": "In Yogesh Mishrra's words",
+    "ladderNote": "Internships and job opportunities depend on the student's performance, selection and the projects available at the time. They are not a guarantee of employment or income.",
+    "policies": {
+      "terms": {
+        "title": "Terms and Conditions | Indian Films Academy, Lucknow",
+        "h1": "Terms and conditions",
+        "body": [
+          "These terms apply to all courses, registrations and payments at Indian Films Academy, Lucknow (indianfilmsacademy.com). By taking admission or making a payment you accept them.",
+          "Courses: Cinematic Acting, Film Direction and Film Editing are 90-day classroom courses held at the academy's address. Batch dates and timings are given at admission. The academy may change the order of the curriculum, teachers or timings when needed.",
+          "Selection: Admission and merit scholarships are based on the selection audition. The academy may decline any application without giving a reason; the full amount paid is then refunded.",
+          "Conduct: Students are expected to be disciplined, punctual and respectful to everyone. The academy may cancel the admission of a student for serious misconduct; fees are not refunded in that case.",
+          "Shoots and promotion: Footage from classes and live projects may be used in projects and promotion by the academy and PICHCHRAPA. If you do not agree to the use of your image or video, tell us in writing at admission.",
+          "Internships and jobs: Internships and job opportunities depend on the student's performance, selection and the projects available. The academy does not guarantee any job, role or income.",
+          "Payments and refunds: Fees, instalments and refunds follow the Refund and Cancellation Policy.",
+          "Disputes: Courts in Lucknow, Uttar Pradesh have jurisdiction over any dispute about these terms."
+        ]
+      },
+      "refund": {
+        "title": "Refund and Cancellation Policy | Indian Films Academy, Lucknow",
+        "h1": "Refund and cancellation policy",
+        "body": [
+          "Registration fee (₹500): This covers the selection audition and processing and is not refundable. If the academy itself cancels the audition or batch, it is refunded in full.",
+          "Course fee: The course fee is refunded in full, excluding the registration fee, on a written request (email or WhatsApp) made at least 7 days before the batch starts. After the batch starts the course fee is not refundable.",
+          "Changes by the academy: If the academy cancels a batch or postpones it by more than 15 days and you do not wish to join on the new dates, the full amount paid is refunded.",
+          "Scholarships: A scholarship is a fee concession and cannot be converted to cash.",
+          "Support contributions: Voluntary contributions for the free classes are not refundable.",
+          "How refunds are paid: Approved refunds are sent within 7 to 10 working days to the same method (UPI, card or bank) used for payment.",
+          "To request a refund, write to info@indianfilmsacademy.com or WhatsApp +91 77540 00121."
+        ]
+      },
+      "shipping": {
+        "title": "Delivery Policy | Indian Films Academy, Lucknow",
+        "h1": "Course delivery",
+        "body": [
+          "Indian Films Academy does not sell physical goods, so nothing is shipped.",
+          "Classroom courses start on the scheduled batch date at the academy (C1/192, Vardan Khand, Sector 1, Gomti Nagar, Lucknow). After payment, the batch date, timing and registration confirmation are sent by email or WhatsApp within 24 hours.",
+          "Access to the online course is given through a link sent by email after payment."
+        ]
+      },
+      "fees": {
+        "title": "Course Fees | Indian Films Academy, Lucknow",
+        "h1": "Course fees"
+      }
+    },
+    "feesTable": {
+      "course": "Course",
+      "duration": "Duration",
+      "fee": "Fee",
+      "inst": "In two instalments",
+      "reg": "Registration fee (for the audition)",
+      "note": "All amounts in Indian rupees. Merit scholarship of up to 20% based on the selection audition.",
+      "days": "90 days"
+    },
+    "guidesHome": {
+      "eyebrow": "Free guides",
+      "title": "Acting and film career guides",
+      "lede": "Straight answers to the most common questions about becoming an actor, director or editor, from Yogesh Mishrra's experience.",
+      "all": "All guides",
+      "read": "Read",
+      "by": "Yogesh Mishrra",
+      "related": "Related course"
+    },
+    "policyUpdated": "Last updated: 18 October 2026"
   },
   "founderMeta": [
     {
@@ -2090,5 +2228,15 @@
     "actor": "Become an actor",
     "director": "Become a director",
     "editor": "Become an editor"
+  },
+  "quotes": {
+    "behave": {
+      "en": "If you want to become an actor, behave like an actor and feel like an actor.",
+      "hi": "अगर आप एक्टर बनना चाहते हैं, तो एक्टर की तरह व्यवहार कीजिए और एक्टर की तरह महसूस कीजिए।"
+    },
+    "transform": {
+      "en": "Observation is common, but transformation is rare. An actor is defined by that transformation.",
+      "hi": "देखते तो सब हैं, पर बदल पाना दुर्लभ है। एक्टर की पहचान उसी बदलाव से होती है।"
+    }
   }
 }
