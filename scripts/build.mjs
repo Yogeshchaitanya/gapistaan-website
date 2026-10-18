@@ -122,10 +122,13 @@ function layout({ title, description, pathName, image, type = 'website', ld = []
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 ${url ? `<link rel="canonical" href="${esc(url)}">` : ''}
-<meta name="theme-color" content="#1C2B7E">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="preload" href="/fonts/rozha-one-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#170705">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/img/favicon-64.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/fonts/mukta-devanagari-800-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/mukta-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${preloadImage ? `<link rel="preload" as="image" href="${esc(preloadImage)}">` : ''}
 <meta property="og:site_name" content="${esc(site.siteName)}">
 <meta property="og:locale" content="hi_IN">
@@ -140,15 +143,17 @@ ${ld.map(jsonLd).join('\n')}
 </head>
 <body>
 <a class="skip" href="#main">सीधे मुख्य हिस्से पर जाएँ</a>
+<div class="filmstrip" aria-hidden="true"></div>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="/"><img src="${esc(site.avatar)}" alt="" width="40" height="40"><span>${esc(site.shortName)}</span></a>
+    <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="48" height="48"><span>Gapistaan</span></a>
     <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/#episodes">एपिसोड</a><a href="/#about">कलाकार</a></nav>
-    <a class="btn btn-sub" href="${esc(site.subscribeUrl)}">सब्सक्राइब करें</a>
+    <a class="btn btn-primary" href="${esc(site.subscribeUrl)}">सब्सक्राइब करें</a>
   </div>
 </header>
 ${body}
 <footer class="foot">
+  <div class="filmstrip" aria-hidden="true"></div>
   <div class="wrap foot-in">
     <p>© ${new Date().getFullYear()} ${esc(site.production)}. गैपिस्तान एक ${esc(site.production)} प्रोडक्शन है।</p>
     <ul>
@@ -162,10 +167,12 @@ ${body}
 `;
 }
 
+const epLabel = (n) => `EP ${String(n).padStart(2, '0')}`;
+
 function card(ep, { eager = false } = {}) {
   return `<li><a class="ep" href="${ep.path}">
-  <span class="frame"><img src="${esc(thumb(ep, 'standard'))}" srcset="${esc(srcset(ep))}" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" ${eager ? '' : 'loading="lazy" '}decoding="async"><span class="dur">${clock(ep.sec)}</span></span>
-  <span class="plate plate-sm">एपिसोड ${ep.n}</span>
+  <span class="thumb"><img src="${esc(thumb(ep, 'standard'))}" srcset="${esc(srcset(ep))}" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" ${eager ? '' : 'loading="lazy" '}decoding="async"><span class="dur">${clock(ep.sec)}</span></span>
+  <span class="plate">${epLabel(ep.n)}</span>
   <span class="ep-title">${esc(ep.clean)}</span>
   <span class="date">${hiDate(ep.publishedAt)}</span>
 </a></li>`;
@@ -174,29 +181,28 @@ function card(ep, { eager = false } = {}) {
 // ---------- home ----------
 function homePage() {
   const latest = newestFirst[0];
-  const rest = newestFirst;
-  const latestHtml = latest
-    ? `<section class="sec wrap" aria-labelledby="latest-h">
-  <h2 class="h2" id="latest-h">ताज़ा एपिसोड</h2>
-  <a class="latest-card" href="${latest.path}">
-    <span class="frame"><img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 56rem) 40rem, 92vw" alt="" width="1280" height="720" fetchpriority="high"><span class="dur">${clock(latest.sec)}</span></span>
-    <span>
-      <span class="plate plate-sm">एपिसोड ${latest.n}</span>
-      <span class="latest-title">${esc(latest.clean)}</span>
-      <span class="date">${hiDate(latest.publishedAt)}</span>
-      <span class="latest-desc">${esc(latest.summary)}</span>
-      <span class="btn btn-primary">पूरा एपिसोड देखें</span>
-    </span>
-  </a>
-</section>`
+
+  const marquee = latest
+    ? `<a class="marquee" href="${latest.path}">
+        <span class="marquee-frame">
+          <span class="ribbon">NEW EPISODE</span>
+          <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 28rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
+          <span class="dur">${clock(latest.sec)}</span>
+        </span>
+        <span class="marquee-cap">
+          <span class="plate">${epLabel(latest.n)}</span>
+          <span class="marquee-title">${esc(latest.clean)}</span>
+          <span class="date">${hiDate(latest.publishedAt)}</span>
+        </span>
+      </a>`
     : '';
 
-  const listHtml = rest.length
+  const listHtml = newestFirst.length
     ? `<section class="sec wrap" id="episodes" aria-labelledby="eps-h">
   <h2 class="h2" id="eps-h">सारे एपिसोड</h2>
-  <p class="count">अब तक ${rest.length} एपिसोड</p>
+  <p class="count">अब तक ${newestFirst.length} एपिसोड</p>
   <ul class="grid">
-${rest.map((ep) => card(ep)).join('\n')}
+${newestFirst.map((ep) => card(ep)).join('\n')}
   </ul>
 </section>`
     : `<section class="sec wrap" id="episodes"><h2 class="h2">एपिसोड जल्द आ रहे हैं</h2><p>पहला एपिसोड आते ही यहाँ दिखेगा। तब तक <a href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>।</p></section>`;
@@ -205,7 +211,7 @@ ${rest.map((ep) => card(ep)).join('\n')}
     ? `<section class="sec wrap" aria-labelledby="shorts-h">
   <h2 class="h2" id="shorts-h">Shorts</h2>
   <ul class="grid">
-${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com/shorts/${s.id}"><span class="frame"><img src="${esc(thumb(s, 'high'))}" alt="" width="480" height="360" loading="lazy" decoding="async"></span><span class="ep-title">${esc(cleanTitle(s.title))}</span></a></li>`).join('\n')}
+${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com/shorts/${s.id}"><span class="thumb"><img src="${esc(thumb(s, 'high'))}" alt="" width="480" height="360" loading="lazy" decoding="async"></span><span class="ep-title">${esc(cleanTitle(s.title))}</span></a></li>`).join('\n')}
   </ul>
 </section>`
     : '';
@@ -223,33 +229,35 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
 
   const body = `<main id="main">
 <section class="hero">
-  <div class="wrap">
-    <h1 class="sr-only">${esc(site.siteName)}: चाचा बनाम Gen Z, हिंदी कॉमेडी-सटायर सीरीज़</h1>
-    <div class="wordmark" aria-hidden="true"><span class="wm wm-a">गैपिस्तान</span><span class="wm wm-b">गैपिस्तान</span></div>
-    <p class="hero-line">${esc(site.heroLine)}</p>
-    <p class="hero-sub">${esc(site.heroSub)}</p>
-    <p class="plate">${esc(site.schedule)}</p>
-    <div class="actions">
-      ${latest ? `<a class="btn btn-primary" href="${latest.path}">ताज़ा एपिसोड देखें</a>` : ''}
-      <a class="btn btn-ghost" href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>
+  <div class="wrap hero-in">
+    <img class="hero-logo" src="/img/logo-520.webp" alt="Gapistaan का लोगो: चाचा" width="260" height="260">
+    <div>
+      <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
+      <p class="hero-line">${esc(site.heroLine)}</p>
+      <p class="hero-sub">${esc(site.heroSub)}</p>
+      <p class="schedule">${esc(site.schedule)}</p>
+      <div class="actions">
+        ${latest ? `<a class="btn btn-primary" href="${latest.path}">ताज़ा एपिसोड देखें</a>` : ''}
+        <a class="btn btn-ghost" href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>
+      </div>
     </div>
+    ${marquee}
   </div>
 </section>
-${latestHtml}
 ${listHtml}
 ${shortsHtml}
 <section class="sec about" id="about" aria-labelledby="about-h">
-  <div class="wrap two">
+  <div class="wrap about-in">
     <div>
+      <img class="gengap" src="/img/gengap-440.webp" srcset="/img/gengap-440.webp 440w, /img/gengap-880.webp 880w" sizes="(min-width: 30rem) 440px, 92vw" alt="Gen Gap" width="440" height="148" loading="lazy">
       <h2 class="h2" id="about-h">गैपिस्तान क्या है?</h2>
       ${site.about.map((p) => `<p>${esc(p)}</p>`).join('\n      ')}
-    </div>
-    <div>
-      <h2 class="h2">कलाकार</h2>
+      <h3 class="cast-h">कलाकार</h3>
       <ul class="cast">
 ${castHtml}
       </ul>
     </div>
+    <img class="chacha" src="/img/chacha-560.webp" srcset="/img/chacha-560.webp 560w, /img/chacha-1040.webp 1040w" sizes="(min-width: 56rem) 520px, 92vw" alt="चाचा, हाथ में चार्जर का प्लग और केबल लिए" width="520" height="520" loading="lazy">
   </div>
 </section>
 ${boards ? `<section class="sec wrap" aria-labelledby="brands-h">
@@ -264,7 +272,7 @@ ${boards}
   const ld = siteUrl
     ? [
         { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: ['Gapistaan', 'गैपिस्तान'], url: abs('/'), inLanguage: 'hi' },
-        { '@context': 'https://schema.org', '@type': 'Organization', name: 'Gapistaan', alternateName: 'गैपिस्तान', url: abs('/'), logo: site.avatar, sameAs },
+        { '@context': 'https://schema.org', '@type': 'Organization', name: 'Gapistaan', alternateName: 'गैपिस्तान', url: abs('/'), logo: abs('/img/logo-520.webp'), sameAs },
       ]
     : [];
 
@@ -272,7 +280,7 @@ ${boards}
     title: site.homeTitle,
     description: site.homeDescription,
     pathName: '/',
-    image: latest ? thumb(latest, 'maxres') : site.avatar,
+    image: siteUrl ? abs('/img/og-home.jpg') : latest ? thumb(latest, 'maxres') : null,
     ld,
     body,
     preloadImage: latest ? thumb(latest, 'maxres') : null,
@@ -317,8 +325,8 @@ ${ep.chapters.map((c) => `<li><a href="${watchUrl}&amp;t=${c.t}s" data-t="${c.t}
   const body = `<main id="main" class="wrap episode">
 <nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / <a href="/#episodes">एपिसोड</a> / एपिसोड ${ep.n}</nav>
 <h1 class="ep-h1">${esc(ep.clean)}</h1>
-<p class="meta"><span class="plate plate-sm">एपिसोड ${ep.n}</span><span>${hiDate(ep.publishedAt)}</span><span>${minutes(ep.sec)}</span></p>
-<div class="player frame"><iframe id="player" src="${embed}" data-src="${embed}" title="${esc(ep.clean)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<p class="meta"><span class="plate">${epLabel(ep.n)}</span><span>${hiDate(ep.publishedAt)}</span><span>${minutes(ep.sec)}</span></p>
+<div class="player"><iframe id="player" src="${embed}" data-src="${embed}" title="${esc(ep.clean)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
 <div class="actions">
   <a class="btn btn-primary" href="${watchUrl}">YouTube पर देखें</a>
   <a class="btn btn-wa" href="https://wa.me/?text=${encodeURIComponent(shareText)}">WhatsApp पर भेजें</a>
@@ -393,7 +401,7 @@ function notFoundPage() {
     title: 'यह पन्ना नहीं मिला | गैपिस्तान',
     description: 'यह पन्ना गैपिस्तान की साइट पर नहीं है।',
     pathName: '/404',
-    body: `<main id="main" class="wrap lost"><h1 class="ep-h1">यह पन्ना यहाँ नहीं है</h1><p>हो सकता है लिंक पुराना हो। सारे एपिसोड होम पेज पर हैं।</p><p><a class="btn btn-primary" href="/">होम पेज पर जाएँ</a></p></main>`,
+    body: `<main id="main" class="wrap lost"><img src="/img/logo-520.webp" alt="" width="180" height="180"><h1 class="ep-h1">यह पन्ना यहाँ नहीं है</h1><p>हो सकता है लिंक पुराना हो। सारे एपिसोड होम पेज पर हैं।</p><p><a class="btn btn-primary" href="/">होम पेज पर जाएँ</a></p></main>`,
   });
 }
 

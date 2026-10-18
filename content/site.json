@@ -1,12 +1,11 @@
 {
   "siteName": "Gapistaan | गैपिस्तान",
   "shortName": "गैपिस्तान",
-  "siteUrl": "",
+  "siteUrl": "https://gapistaan.com",
   "channelId": "UC8JRt1GaGuMKWyS75JrgVbw",
   "channelUrl": "https://www.youtube.com/@gapistaan",
   "subscribeUrl": "https://www.youtube.com/@gapistaan?sub_confirmation=1",
   "instagramUrl": "https://www.instagram.com/gapistaan/",
-  "avatar": "https://yt3.ggpht.com/fFsEWXIYaDR_pR-hSP22Z9Vr8-yAVQRdcNN_-V8CqzijKbMiN0ycoh8QWza4ECBRyo2jCQi1gQ=s240-c-k-c0x00ffffff-no-rj",
   "homeTitle": "Gapistaan | गैपिस्तान: चाचा बनाम Gen Z, हिंदी कॉमेडी-सटायर सीरीज़",
   "homeDescription": "एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज की Gen Z की रोज़ नई बहस। बिना स्क्रिप्ट की, पूरी तरह improvised हिंदी कॉमेडी। सारे एपिसोड यहाँ देखें।",
   "heroLine": "एक एक्टिंग इंस्टीट्यूट। एक तरफ़ चाचा, दूसरी तरफ़ Gen Z।",
@@ -17,16 +16,46 @@
     "यहाँ कोई स्क्रिप्ट नहीं होती। बस सिचुएशन तय होती है, कैमरे चलते रहते हैं और बाकी सब कलाकारों का कमाल होता है।"
   ],
   "cast": [
-    { "name": "योगेश चैतन्य", "nameEn": "Yogesh Chaitanya", "role": "चाचा का किरदार, क्रिएटर और डायरेक्टर" },
-    { "name": "रवि यादव", "nameEn": "Ravi Yadav" },
-    { "name": "शुभम सिंह", "nameEn": "Shubham Singh" },
-    { "name": "दीपक मंडल", "nameEn": "Deepak Mandal" },
-    { "name": "रोहित दास", "nameEn": "Rohit Das" },
-    { "name": "आयुषी दत्त तिवारी", "nameEn": "Aayushi Dutt Tiwari" }
+    {
+      "name": "योगेश चैतन्य",
+      "nameEn": "Yogesh Chaitanya",
+      "role": "चाचा का किरदार, क्रिएटर और डायरेक्टर"
+    },
+    {
+      "name": "रवि यादव",
+      "nameEn": "Ravi Yadav"
+    },
+    {
+      "name": "शुभम सिंह",
+      "nameEn": "Shubham Singh"
+    },
+    {
+      "name": "दीपक मंडल",
+      "nameEn": "Deepak Mandal"
+    },
+    {
+      "name": "रोहित दास",
+      "nameEn": "Rohit Das"
+    },
+    {
+      "name": "आयुषी दत्त तिवारी",
+      "nameEn": "Aayushi Dutt Tiwari"
+    }
   ],
   "brands": [
-    { "name": "PICHCHRAPA", "label": "प्रोडक्शन हाउस", "url": "", "logo": "" },
-    { "name": "Indian Films Academy", "label": "एक्टिंग इंस्टीट्यूट, लखनऊ", "url": "", "logo": "" }
+    {
+      "name": "PICHCHRAPA",
+      "label": "प्रोडक्शन हाउस",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "name": "Indian Films Academy",
+      "label": "एक्टिंग इंस्टीट्यूट, लखनऊ",
+      "url": "",
+      "logo": ""
+    }
   ],
-  "production": "PICHCHRAPA"
+  "production": "PICHCHRAPA",
+  "canonicalHost": "gapistaan.com"
 }
