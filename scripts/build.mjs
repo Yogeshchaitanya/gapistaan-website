@@ -34,9 +34,11 @@ function clock(sec) {
 const minutes = (sec) => `${Math.max(1, Math.round(sec / 60))} मिनट`;
 
 const BRAND = /^(gapistaan|gapistan|गैपिस्तान|गपिस्तान)$/i;
+// "Gen Gap Comedy" / "Gen Gap Full Comedy" tags from YouTube titles: the site adds "Gen Gap EP 0x" itself.
+const SERIES_TAG = /\s*[-–—|]?\s*gen\s*gap\s*(full\s*)?comedy\s*$/i;
 function cleanTitle(title) {
   const parts = title.split('|').map((p) => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
-  const kept = parts.filter((p) => !BRAND.test(p));
+  const kept = parts.filter((p) => !BRAND.test(p)).map((p) => p.replace(SERIES_TAG, '').trim()).filter(Boolean);
   return (kept.length ? kept : parts).join(' | ');
 }
 
@@ -58,7 +60,13 @@ function parseDescription(v) {
   }
   while (body.length && !body[0].trim()) body.shift();
   if (body.length && norm(body[0]) === norm(v.title)) body.shift();
-  const paragraphs = body.join('\n').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+  const paragraphs = body
+    .join('\n')
+    .split(/\n\s*\n/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    // On the website, drop YouTube-only clutter: hashtag lines and "a | b | c | d" keyword lists.
+    .filter((p) => !/^(#\S+\s*)+$/.test(p) && !(p.split('|').length >= 4 && /^[\x00-\x7F\s]+$/.test(p)));
   const validChapters = chapters.length >= 2 && chapters[0].t === 0 ? chapters : [];
   return { paragraphs, chapters: validChapters };
 }
@@ -107,8 +115,8 @@ for (const ep of episodes) {
   ep.clean = cleanTitle(ep.title);
   ep.path = `/video/${ep.id}/`;
   Object.assign(ep, parseDescription(ep));
-  ep.summary = summary(ep, ep.paragraphs);
   ep.custom = await customText(ep.id);
+  ep.summary = summary(ep, [...ep.custom, ...ep.paragraphs]);
 }
 
 // People: the creator plays Chacha in every episode; the rest are matched by name in the episode credits.
@@ -154,6 +162,11 @@ const seriesLd = () => ({
   ...(siteUrl ? { image: abs('/img/og-home.jpg') } : {}),
 });
 
+const crumbsLd = (items) =>
+  siteUrl
+    ? [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: abs(p) })) }]
+    : [];
+
 // ---------- layout ----------
 const NAV = [
   ['/episodes/', 'एपिसोड'],
@@ -164,6 +177,7 @@ const NAV = [
 
 function layout({ title, description, pathName, image, type = 'website', ld = [], body, preloadImage, noindex = false }) {
   const url = abs(pathName);
+  image = image || (siteUrl ? abs('/img/og-home.jpg') : null);
   const nav = NAV.map(([href, label]) => `<a href="${href}"${href === pathName ? ' aria-current="page"' : ''}>${label}</a>`).join('');
   const b = site.business || {};
   return `<!doctype html>
@@ -337,9 +351,13 @@ function card(ep, { pick = null } = {}) {
 }
 
 function personCard(p, { lead = false } = {}) {
-  const pic = p.photo ? `<img src="${esc(p.photo)}" alt="" width="84" height="84" loading="lazy">` : esc(initials(p));
+  const pic = p.photo
+    ? `<img src="${esc(p.photo)}" alt="" width="84" height="84" loading="lazy">`
+    : p.slug === creator.slug
+      ? '<img src="/img/logo-160.webp" alt="" width="84" height="84" loading="lazy">'
+      : esc(initials(p));
   return `<li><a class="person${lead ? ' lead' : ''}" href="${p.path}">
-  <span class="avatar">${lead && !p.photo ? '<img src="/img/logo-160.webp" alt="" width="84" height="84" loading="lazy">' : pic}</span>
+  <span class="avatar">${pic}</span>
   <span><span class="person-name">${esc(p.name)}</span><span class="person-en" lang="en">${esc(p.nameEn)}</span><span class="person-role">${esc(p.role)}</span></span>
 </a></li>`;
 }
@@ -361,7 +379,7 @@ function homePage() {
           <div id="stage-media"><a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
             <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 44rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
             <span class="play-btn" aria-hidden="true"></span>
-            <span class="dur">${clock(latest.sec)}</span>
+            <span class="dur" aria-hidden="true">${clock(latest.sec)}</span>
           </a></div>
         </div>
         <div class="stage-cap">
@@ -433,7 +451,7 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
 <section class="hero">
   <div class="wrap hero-in">
     <div class="hero-text">
-      <img class="hero-logo" src="/img/logo-520.webp" alt="Gapistaan का लोगो: चाचा" width="190" height="190">
+      <img class="hero-logo" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="170px" alt="Gapistaan का लोगो: चाचा" width="190" height="190" fetchpriority="high">
       <p class="presents"><a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> प्रस्तुत करता है</p>
       <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
       <p class="hero-line">${esc(site.heroLine)}</p>
@@ -625,7 +643,12 @@ ${newestFirst.map((ep) => card(ep)).join('\n')}
     description: `Gen Gap के सारे ${newestFirst.length} एपिसोड एक जगह: चाचा बनाम Gen Z की improvised हिंदी कॉमेडी, ${site.presents} की पेशकश।`,
     pathName: '/episodes/',
     image: siteUrl ? abs('/img/og-home.jpg') : null,
-    ld: siteUrl ? [{ ...seriesLd(), episode: newestFirst.map((ep) => ({ '@type': 'TVEpisode', name: ep.clean, episodeNumber: ep.n, url: abs(ep.path), datePublished: ep.publishedAt })) }] : [],
+    ld: siteUrl
+      ? [
+          { ...seriesLd(), episode: newestFirst.map((ep) => ({ '@type': 'TVEpisode', name: ep.clean, episodeNumber: ep.n, url: abs(ep.path), datePublished: ep.publishedAt })) },
+          ...crumbsLd([['गैपिस्तान', '/'], ['सारे एपिसोड', '/episodes/']]),
+        ]
+      : [],
     body,
   });
 }
@@ -677,6 +700,7 @@ function creatorPage() {
           image: siteUrl ? abs('/img/chacha-1040.webp') : undefined,
         }),
       },
+      ...crumbsLd([['गैपिस्तान', '/'], ['क्रिएटर', '/creator/']]),
     ],
     body,
   });
@@ -694,6 +718,7 @@ ${peopleList()}
     description: `गैपिस्तान (Gen Gap) के कलाकार: ${[creator, ...cast].map((c) => c.name).join(', ')}।`,
     pathName: '/cast/',
     image: siteUrl ? abs('/img/og-home.jpg') : null,
+    ld: crumbsLd([['गैपिस्तान', '/'], ['कलाकार', '/cast/']]),
     body,
   });
 }
@@ -724,7 +749,10 @@ function castPage(c) {
     pathName: c.path,
     image: c.photo || (siteUrl ? abs('/img/og-home.jpg') : null),
     type: 'profile',
-    ld: [{ '@context': 'https://schema.org', ...personLd(c, { jobTitle: 'Actor', ...(c.instagram ? { sameAs: [c.instagram] } : {}), ...(c.photo ? { image: c.photo } : {}) }) }],
+    ld: [
+      { '@context': 'https://schema.org', ...personLd(c, { jobTitle: 'Actor', ...(c.instagram ? { sameAs: [c.instagram] } : {}), ...(c.photo ? { image: c.photo } : {}) }) },
+      ...crumbsLd([['गैपिस्तान', '/'], ['कलाकार', '/cast/'], [c.name, c.path]]),
+    ],
     body,
   });
 }
@@ -744,7 +772,13 @@ ${email ? `<p>किसी भी सवाल के लिए लिखें:
 <p class="muted">आख़िरी बदलाव: ${hiDate(new Date().toISOString())}</p>
 </section>
 </main>`;
-  return layout({ title: 'प्राइवेसी नीति | Gapistaan गैपिस्तान', description: 'gapistaan.com की प्राइवेसी नीति।', pathName: '/privacy/', body });
+  return layout({
+    title: 'प्राइवेसी नीति | Gapistaan गैपिस्तान',
+    description: 'gapistaan.com की प्राइवेसी नीति: हम कौन-सी जानकारी लेते हैं (कोई निजी जानकारी नहीं), analytics और YouTube प्लेयर के बारे में।',
+    pathName: '/privacy/',
+    ld: crumbsLd([['गैपिस्तान', '/'], ['प्राइवेसी', '/privacy/']]),
+    body,
+  });
 }
 
 function notFoundPage() {

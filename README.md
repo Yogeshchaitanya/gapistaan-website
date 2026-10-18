@@ -18,6 +18,7 @@ YouTube चैनल [@gapistaan](https://www.youtube.com/@gapistaan) की ऑ
 - साइट का टेक्स्ट, कलाकार, ब्रांड और लिंक: `content/site.json`
 - किसी एपिसोड पर अपना लिखा टेक्स्ट: `content/episodes/<videoId>.md` (सादे पैराग्राफ़, बीच में खाली लाइन)
 - डिज़ाइन: `src/styles.css`
+- कैश और सुरक्षा headers: `public/_headers` (fonts/images के लिए) और `src/worker.js` (पेजों के लिए)
 - लोगो, चाचा की तस्वीर, Gen Gap लोगो और शेयर इमेज: `public/img/`
 
 लोकल पर बनाना हो तो: `node scripts/build.mjs` (Node 18+ चाहिए, कोई और पैकेज नहीं)।

@@ -1,7 +1,13 @@
-// Sends every other address (www.gapistaan.com, gapistaan.in, gapistan.in and their www) to
-// https://gapistaan.com with a permanent redirect, so Google sees one site. Only page requests
-// reach this code (see run_worker_first in wrangler.jsonc); fonts and images are served directly.
+// Runs only for page requests listed in wrangler.jsonc (run_worker_first).
+// 1) Any other host (www.gapistaan.com, gapistaan.in, gapistan.in ...) gets a 301 to https://gapistaan.com.
+// 2) Pages get the same security headers that public/_headers gives to directly served files.
 const CANONICAL = 'gapistaan.com';
+const SECURITY = {
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Frame-Options': 'SAMEORIGIN',
+  'Strict-Transport-Security': 'max-age=31536000',
+};
 
 export default {
   async fetch(request, env) {
@@ -14,6 +20,9 @@ export default {
       url.port = '';
       return Response.redirect(url.toString(), 301);
     }
-    return env.ASSETS.fetch(request);
+    const res = await env.ASSETS.fetch(request);
+    const out = new Response(res.body, res);
+    for (const [k, v] of Object.entries(SECURITY)) out.headers.set(k, v);
+    return out;
   },
 };
