@@ -18,6 +18,8 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      YT_API_KEY: ${{ secrets.YT_API_KEY }}
     steps:
       - uses: actions/checkout@v5
 
@@ -25,9 +27,12 @@ jobs:
         with:
           node-version: 22
 
+      - name: API key अभी नहीं डाली गई
+        if: env.YT_API_KEY == ''
+        run: echo "::notice::YT_API_KEY secret नहीं मिला, इसलिए YouTube सिंक छोड़ा गया। Key डालते ही अपने-आप चलने लगेगा।"
+
       - name: YouTube से वीडियो लाओ
-        env:
-          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+        if: env.YT_API_KEY != ''
         run: node scripts/fetch-videos.mjs
 
       - name: साइट बनाओ
