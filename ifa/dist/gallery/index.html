@@ -9,7 +9,7 @@
 <link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/gallery/">
 <link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/gallery/">
 <link rel="alternate" hreflang="x-default" href="https://indianfilmsacademy.com/gallery/">
-<meta name="theme-color" content="#13203B">
+<meta name="theme-color" content="#023E41">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/cinzel-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -31,11 +31,11 @@
 @font-face{font-family:Cinzel;font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/cinzel-latin-600-normal.woff2) format("woff2")}
 @font-face{font-family:Cinzel;font-style:normal;font-weight:700;font-display:swap;src:url(/fonts/cinzel-latin-700-normal.woff2) format("woff2")}
 :root{
-  --indigo:#13203B; --indigo-2:#1C2C4E; --indigo-3:#2A3B63;
-  --paper:#F5F6FA; --white:#FFFFFF; --mist:#E7EAF2;
-  --ink:#16192A; --slate:#4C546D;
-  --marigold:#E8A33D; --marigold-2:#F4C46E; --marigold-ink:#8A5A0C;
-  --line:#DCE0EA;
+  --indigo:#023E41; --indigo-2:#0A4C4F; --indigo-3:#156A6C; --deep:#012A2C;
+  --paper:#F3F6F5; --white:#FFFFFF; --mist:#E3EAE8;
+  --ink:#14211F; --slate:#4A5A57;
+  --marigold:#D4A64A; --marigold-2:#E9C779; --marigold-ink:#866418;
+  --line:#D6DFDC;
   --body:Mukta,"Noto Sans Devanagari",system-ui,sans-serif; --title:Cinzel,"Trajan Pro",Georgia,serif;
   --r:14px;
 }
@@ -95,17 +95,54 @@ a:hover{color:var(--indigo)}
 .topnav a:hover{color:var(--indigo)}
 .topnav a[aria-current]{color:var(--indigo);border-bottom-color:var(--marigold)}
 @media (min-width:66rem){.topbar-in{grid-template-columns:auto 1fr auto}.topnav{grid-column:2;grid-row:1;justify-content:center;gap:1.7rem}.top-actions{grid-column:3}}
-.hero{position:relative;overflow:hidden;isolation:isolate;background:var(--indigo);color:#fff;padding-block:clamp(4rem,11vw,7.5rem)}
-.hero-bg{position:absolute;inset:0;z-index:-2}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:.42;filter:saturate(.75)}
-.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 80% at 82% 18%,rgba(232,163,61,.22),rgba(232,163,61,0) 70%),linear-gradient(90deg,rgba(19,32,59,.96) 0%,rgba(19,32,59,.82) 48%,rgba(19,32,59,.45) 100%)}
-@media (max-width:44rem){.hero::after{background:radial-gradient(90% 50% at 70% 10%,rgba(232,163,61,.2),rgba(232,163,61,0) 70%),linear-gradient(0deg,rgba(19,32,59,.97) 30%,rgba(19,32,59,.78) 100%)}}
+.hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(50% 70% at 76% 45%,rgba(212,166,74,.22),rgba(212,166,74,0) 70%),radial-gradient(40% 50% at 8% 0%,rgba(21,106,108,.55),rgba(21,106,108,0) 70%),linear-gradient(165deg,var(--indigo) 0%,var(--deep) 75%)}
+.hero-grid{display:grid;gap:2rem;padding-block:clamp(2.4rem,7vw,4rem) clamp(2.4rem,6vw,3.5rem)}
+@media (min-width:60rem){.hero-grid{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:3rem;align-items:center;min-height:min(88vh,780px);padding-block:1.5rem}}
 .kicker{margin:0 0 1.1rem;color:var(--marigold-2);font-weight:800;font-size:.98rem}
 .hero-h1{margin:0;max-width:24ch}
-.brandword{display:block;font:700 clamp(3.2rem,11vw,6.6rem)/1 var(--title);letter-spacing:.08em;color:var(--marigold)}
+.brandword{display:block;font:700 clamp(3.2rem,11vw,6.2rem)/1 var(--title);letter-spacing:.08em;color:var(--marigold)}
+.hero .brandword{display:inline-block;padding-right:.1em;background:linear-gradient(100deg,var(--marigold) 0 40%,#FFF1C9 50%,var(--marigold) 60% 100%) 100% 0/250% 100% no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.4s ease-out .5s both}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
 .brandword.sm{display:inline;font-size:.9em;letter-spacing:.06em;color:var(--marigold-ink)}
-.hero-line{display:block;margin-top:.9rem;font:800 clamp(1.5rem,4vw,2.35rem)/1.3 var(--body);color:#fff}
-.hero-sub{margin:1.1rem 0 0;max-width:54ch;color:#D9DEEA;font-size:1.12rem}
+.hero-line{display:block;margin-top:.9rem;font:800 clamp(1.5rem,4vw,2.3rem)/1.3 var(--body);color:#fff}
+.hero-sub{margin:1.1rem 0 0;max-width:50ch;color:#D3E0DE;font-size:1.12rem}
+.hero-copy > *{animation:lift .8s cubic-bezier(.34,1.45,.64,1) both}
+.hero-copy > :nth-child(2){animation-delay:.08s}.hero-copy > :nth-child(3){animation-delay:.16s}.hero-copy > :nth-child(4){animation-delay:.24s}
+@keyframes lift{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.reel{position:relative;display:block;width:100%;font:inherit;aspect-ratio:9/16;padding:0;border:0;border-radius:16px;overflow:hidden;background:var(--indigo-2);color:#fff;cursor:pointer;box-shadow:0 22px 44px -20px rgba(0,0,0,.7),0 0 0 1px rgba(212,166,74,.4);transition:transform .35s cubic-bezier(.34,1.45,.64,1),box-shadow .2s ease}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel::after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(0deg,rgba(1,42,44,.94),rgba(1,42,44,0))}
+.reel:hover,.reel:focus-visible{transform:translateY(-6px) scale(1.02);box-shadow:0 28px 50px -20px rgba(0,0,0,.75),0 0 0 2px var(--marigold)}
+.reel-cap{position:absolute;left:.75rem;right:2.9rem;bottom:.7rem;z-index:1;font-weight:800;font-size:.95rem;line-height:1.25;text-align:left;text-wrap:balance}
+.reel-sound{position:absolute;right:.6rem;bottom:.6rem;z-index:1;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--marigold);color:var(--deep)}
+.reel-wall{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.reel-col{list-style:none;margin:0;padding:0;display:grid;gap:1rem;align-content:start}
+.hero .reel-card{animation:rise .95s cubic-bezier(.34,1.45,.64,1) both;animation-delay:var(--d,0s)}
+@keyframes rise{from{opacity:0;transform:translateY(70px) scale(.92)}to{opacity:1;transform:none}}
+@keyframes float{from{transform:translateY(-12px)}to{transform:translateY(12px)}}
+@media (max-width:59.99rem){.reel-col li+li{display:none}.reel-cap{font-size:.8rem;left:.5rem;right:.5rem;bottom:.5rem}.hero .reel-sound{display:none}.reel{border-radius:12px}}
+@media (min-width:60rem){
+  .reel-wall{gap:1.1rem;height:min(84vh,720px);overflow:hidden;padding-inline:4px;-webkit-mask:linear-gradient(180deg,transparent 0,#000 8%,#000 90%,transparent 100%);mask:linear-gradient(180deg,transparent 0,#000 8%,#000 90%,transparent 100%)}
+  .reel-col{animation:float 8s ease-in-out infinite alternate}
+  .reel-col:nth-child(1){padding-top:5rem;animation-delay:-2s}
+  .reel-col:nth-child(2){padding-top:1rem;animation-duration:9.5s;animation-delay:-6s}
+  .reel-col:nth-child(3){padding-top:7.5rem;animation-duration:7s;animation-delay:-4s}
+}
+@media (prefers-reduced-motion:reduce){.hero .brandword{animation:none;background-position:0 0}.hero-copy > *,.hero .reel-card,.reel-col{animation:none}.reel{transition:none}}
+.rail.reelrail{grid-auto-columns:min(44%,13.5rem)}
+.sec-dark{background:radial-gradient(60% 80% at 50% 0%,rgba(212,166,74,.14),rgba(212,166,74,0) 70%),var(--deep);color:#fff}
+.sec-dark .eyebrow{color:var(--marigold-2)}
+.sec-dark .h2{color:#fff}
+.sec-dark .lede{color:#C7D6D4}
+.sec-dark .rail{scrollbar-color:var(--indigo-3) transparent}
+.sec-dark .rail-btn{border-color:transparent;background:var(--marigold);color:var(--deep)}
+.reelbox{width:min(92vw,430px);max-height:94vh;padding:0;border:0;border-radius:18px;background:#000;color:#fff;overflow:hidden}
+.reelbox::backdrop{background:rgba(1,24,26,.86)}
+.reelbox video,.reelbox iframe{display:block;width:100%;max-height:calc(94vh - 3.2rem);aspect-ratio:9/16;border:0;background:#000}
+.reelbox-bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3.2rem;padding:.4rem .5rem .4rem 1rem;background:var(--deep)}
+.reelbox-cap{margin:0;font-weight:800}
+.reelbox-x{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#fff;font:400 1.9rem/1 var(--body);cursor:pointer}
+.reelbox-x:hover{background:rgba(255,255,255,.1)}
 .ladder-band{background:var(--indigo-2);color:#fff;padding-block:2rem}
 .ladder-title{margin:0 0 1rem;font-weight:800;color:var(--marigold-2)}
 .ladder{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
@@ -144,7 +181,7 @@ a:hover{color:var(--indigo)}
 .rail{list-style:none;margin:0;padding:.3rem .1rem 1rem;display:grid;grid-auto-flow:column;grid-auto-columns:min(82%,21rem);gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--mist) transparent}
 .rail > li{scroll-snap-align:start}
 .igrail{grid-auto-columns:min(60%,15rem)}
-.rail-btn{position:absolute;top:calc(50% - 2.2rem);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--indigo);font:800 1.5rem/1 var(--body);cursor:pointer;box-shadow:0 6px 18px rgba(19,32,59,.14)}
+.rail-btn{position:absolute;top:calc(50% - 2.2rem);z-index:3;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--white);color:var(--indigo);font:800 1.5rem/1 var(--body);cursor:pointer;box-shadow:0 6px 18px rgba(2,62,65,.14)}
 .rail-btn.prev{left:-14px}.rail-btn.next{right:-14px}
 @media (max-width:52rem){.rail-btn{display:none}}
 .vcard{display:block;color:var(--ink);text-decoration:none}
@@ -154,7 +191,7 @@ a:hover{color:var(--indigo)}
 .thumb .preview{pointer-events:none}
 .play-dot{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(0,0,0,.3)}
 .play-dot::after{content:"";position:absolute;left:21px;top:16px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent var(--indigo)}
-.dur{position:absolute;right:8px;bottom:8px;padding:.18rem .4rem;border-radius:4px;background:rgba(19,32,59,.85);color:#fff;font:800 .8rem/1 var(--body)}
+.dur{position:absolute;right:8px;bottom:8px;padding:.18rem .4rem;border-radius:4px;background:rgba(2,62,65,.85);color:#fff;font:800 .8rem/1 var(--body)}
 .vtitle{display:block;margin-top:.65rem;font-weight:800;line-height:1.45}
 .vcard:hover .vtitle{color:var(--indigo-3)}
 .vgrid{list-style:none;margin:1rem 0 3rem;padding:0;display:grid;gap:1.4rem}
@@ -163,7 +200,7 @@ a:hover{color:var(--indigo)}
 .igcard{position:relative;display:block;border-radius:12px;overflow:hidden}
 .igcard img{width:100%;aspect-ratio:1;object-fit:cover}
 .ig-reel{position:absolute;right:.5rem;top:.4rem;color:#fff;text-shadow:0 1px 4px #000}
-.marquee{position:relative;display:flex;overflow:hidden;margin-top:.4rem;padding-block:22px;background:#0F1830}
+.marquee{position:relative;display:flex;overflow:hidden;margin-top:.4rem;padding-block:22px;background:var(--deep)}
 .marquee::before,.marquee::after{content:"";position:absolute;left:0;right:0;height:10px;z-index:2;background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(245,246,250,.85) 10px 22px,transparent 22px 32px)}
 .marquee::before{top:6px}.marquee::after{bottom:6px}
 .marquee-track{list-style:none;display:flex;gap:10px;margin:0;padding:0 5px;flex-shrink:0;animation:strip 90s linear infinite}
@@ -173,14 +210,14 @@ a:hover{color:var(--indigo)}
 .marquee-track img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 22%}
 @keyframes strip{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @media (prefers-reduced-motion:reduce){.marquee{overflow-x:auto}.marquee-track{animation:none}.marquee-track[aria-hidden]{display:none}}
-.gcap{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .7rem .5rem;background:linear-gradient(0deg,rgba(15,24,48,.88),rgba(15,24,48,0));color:#fff;font-weight:800;font-size:.92rem;line-height:1.3}
+.gcap{position:absolute;left:0;right:0;bottom:0;padding:1.6rem .7rem .5rem;background:linear-gradient(0deg,rgba(1,42,44,.88),rgba(1,42,44,0));color:#fff;font-weight:800;font-size:.92rem;line-height:1.3}
 .gallery{list-style:none;margin:1rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}
 @media (min-width:40rem){.gallery{grid-template-columns:repeat(3,1fr)}}
 @media (min-width:64rem){.gallery{grid-template-columns:repeat(4,1fr)}}
 .gallery a{position:relative;display:block;border-radius:10px;overflow:hidden;background:var(--mist)}
 .gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 22%}
 .viewer{max-width:min(96vw,1200px);padding:0;border:0;background:transparent;color:#fff}
-.viewer::backdrop{background:rgba(15,24,48,.9)}
+.viewer::backdrop{background:rgba(1,42,44,.9)}
 .viewer figure{margin:0}
 .viewer img{max-height:84vh;width:auto;margin:auto;border-radius:8px}
 .viewer figcaption{margin-top:.6rem;text-align:center;font-weight:800}
@@ -272,6 +309,11 @@ a:hover{color:var(--indigo)}
   .lang-switch{padding:.25rem .55rem;font-size:.88rem}
   .top-actions .btn-sm{min-height:38px;padding:.35rem .8rem;font-size:.9rem}
 }
+.reveal{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .6s ease,transform .75s cubic-bezier(.34,1.45,.64,1);transition-delay:var(--d,0s)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+.reel-cap small{display:block;margin-top:.15rem;color:var(--marigold-2);font-weight:600;font-size:.78rem;line-height:1.3}
+@media (max-width:59.99rem){.hero .reel-cap small{display:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"होम","item":"https://indianfilmsacademy.com/"},{"@type":"ListItem","position":2,"name":"गैलरी","item":"https://indianfilmsacademy.com/gallery/"}]}</script>
 </head>
@@ -309,13 +351,13 @@ a:hover{color:var(--indigo)}
 <li><a class="js-view" href="/img/g/L-kailash-kher-1200.webp" data-cap="कैलाश खेर के साथ"><img src="/img/g/L-kailash-kher-480.webp" alt="कैलाश खेर के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">कैलाश खेर</span></a></li>
 <li><a class="js-view" href="/img/g/L-kangna-1200.webp" data-cap="कंगना रनौत के साथ"><img src="/img/g/L-kangna-480.webp" alt="कंगना रनौत के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">कंगना रनौत</span></a></li>
 <li><a class="js-view" href="/img/g/L-khesari-1200.webp" data-cap="खेसारी लाल यादव के साथ"><img src="/img/g/L-khesari-480.webp" alt="खेसारी लाल यादव के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">खेसारी लाल यादव</span></a></li>
-<li><a class="js-view" href="/img/g/L-gulshan-1200.webp" data-cap="गुलशन ग्रोवर के साथ"><img src="/img/g/L-gulshan-480.webp" alt="गुलशन ग्रोवर के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">गुलशन ग्रोवर</span></a></li>
 <li><a class="js-view" href="/img/g/L-manoj-joshi-ji-1200.webp" data-cap="मनोज जोशी के साथ"><img src="/img/g/L-manoj-joshi-ji-480.webp" alt="मनोज जोशी के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">मनोज जोशी</span></a></li>
 <li><a class="js-view" href="/img/g/L-radeep-hudda-1200.webp" data-cap="रणदीप हुड्डा के साथ"><img src="/img/g/L-radeep-hudda-480.webp" alt="रणदीप हुड्डा के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">रणदीप हुड्डा</span></a></li>
 <li><a class="js-view" href="/img/g/L-akshay-1200.webp" data-cap="अक्षय कुमार के साथ"><img src="/img/g/L-akshay-480.webp" alt="अक्षय कुमार के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">अक्षय कुमार</span></a></li>
 <li><a class="js-view" href="/img/g/L-anurag-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-anurag-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-award-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-award-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-award-2-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-award-2-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
+<li><a class="js-view" href="/img/g/L-gulshan-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-gulshan-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-kallu-3-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-kallu-3-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-kallu2-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-kallu2-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-kiran-ji-1200.webp" data-cap="फ़िल्म जगत के दिग्गजों के साथ"><img src="/img/g/L-kiran-ji-480.webp" alt="फ़िल्म जगत के दिग्गजों के साथ: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
@@ -425,6 +467,36 @@ a:hover{color:var(--indigo)}
     var big=dlg.querySelector('img'), cap=dlg.querySelector('figcaption');
     document.querySelectorAll('.js-view').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); big.src=a.getAttribute('href'); big.alt=a.getAttribute('data-cap')||''; cap.textContent=a.getAttribute('data-cap')||''; dlg.showModal(); }); });
     dlg.addEventListener('click',function(){ dlg.close(); });
+  }
+  // Reels: silent loops start as soon as they are on screen and pause when they leave.
+  var lite=calm || (navigator.connection && navigator.connection.saveData);
+  var vids=document.querySelectorAll('video[data-src]');
+  function go(v){ if(!v.getAttribute('src')) v.setAttribute('src',v.getAttribute('data-src')); var p=v.play(); if(p && p.catch) p.catch(function(){}); }
+  if(!lite && 'IntersectionObserver' in window){
+    var vo=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) go(e.target); else if(e.target.getAttribute('src')) e.target.pause(); }); },{rootMargin:'80px 0px'});
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+  var box=document.getElementById('reelbox');
+  if(box && box.showModal){
+    var media=box.querySelector('.reelbox-media'), bcap=box.querySelector('.reelbox-cap');
+    document.querySelectorAll('.reel').forEach(function(b){ b.addEventListener('click',function(){
+      var full=b.getAttribute('data-full'), yt=b.getAttribute('data-yt'), el;
+      if(full){ el=document.createElement('video'); el.src=full; el.controls=true; el.autoplay=true; el.playsInline=true; el.poster=b.querySelector('video').getAttribute('poster'); }
+      else if(yt){ el=frame(yt,b.getAttribute('data-cap'),false); }
+      else return;
+      media.innerHTML=''; media.appendChild(el); bcap.textContent=b.getAttribute('data-cap'); box.showModal();
+    }); });
+    function shut(){ media.innerHTML=''; }
+    box.addEventListener('close',shut);
+    box.querySelector('.reelbox-x').addEventListener('click',function(){ box.close(); });
+    box.addEventListener('click',function(e){ if(e.target===box) box.close(); });
+  }
+  if('IntersectionObserver' in window && !calm){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card').forEach(function(el){
+      var sib=el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+      el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
+    });
   }
   var form=document.getElementById('apply');
   if(form){

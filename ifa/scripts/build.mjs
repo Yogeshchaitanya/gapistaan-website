@@ -76,6 +76,20 @@ const rank = (g) => (g.names ? nameOrder.indexOf(g.base.slice(2)) : 999);
 const byRank = (a, b) => rank(a) - rank(b) || a.base.localeCompare(b.base);
 const legends = gallery.filter((g) => g.group === 'L').sort(byRank);
 const visitors = gallery.filter((g) => g.group === 'V').sort(byRank);
+// Film-strip: one photo with Yogesh, then one with Dinesh, alternately (lists in site.json "strip").
+const byKey = Object.fromEntries(gallery.map((g) => [g.base.slice(2), g]));
+const pick = (keys) => (keys || []).map((k) => byKey[k]).filter(Boolean);
+const sy = pick(site.strip?.yogesh), sd = pick(site.strip?.dinesh);
+const stripPhotos = [];
+for (let i = 0; i < Math.max(sy.length, sd.length); i++) { if (sy[i]) stripPhotos.push(sy[i]); if (sd[i]) stripPhotos.push(sd[i]); }
+if (!stripPhotos.length) stripPhotos.push(...legends.filter((g) => g.names).slice(0, 16));
+
+// ---------- reels: the stars' video blessings from the old site, compressed into public/media ----------
+const mediaDir = path.join(root, 'public/media');
+const reels = (site.reels || [])
+  .filter((r) => existsSync(path.join(mediaDir, `loop-${r.slug}.mp4`)) && existsSync(path.join(mediaDir, `poster-${r.slug}.jpg`)))
+  .map((r) => ({ ...r, full: existsSync(path.join(mediaDir, `full-${r.slug}.mp4`)) ? `/media/full-${r.slug}.mp4` : '' }));
+const heroReels = reels.filter((r) => r.hero).slice(0, 6);
 
 // ---------- structured data ----------
 const orgId = abs('/#academy');
@@ -143,7 +157,7 @@ function buildLang(lang) {
 ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="alternate" hreflang="hi" href="${esc(altHi)}">
 <link rel="alternate" hreflang="en" href="${esc(altEn)}">
 <link rel="alternate" hreflang="x-default" href="${esc(altHi)}">`}
-<meta name="theme-color" content="#13203B">
+<meta name="theme-color" content="#023E41">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/cinzel-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -239,6 +253,19 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
   const grid = (items) => `<ul class="gallery">${items.map((g) => photo(g)).join('\n')}</ul>`;
   const viewer = `<dialog id="viewer" class="viewer"><figure><img alt=""><figcaption></figcaption></figure></dialog>`;
 
+  const reelName = (r) => (lang === 'hi' ? r.hi : r.en);
+  const reelRole = (r) => (lang === 'hi' ? r.roleHi : r.roleEn) || '';
+  const SPEAKER = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.6a4.4 4.4 0 0 1 0 6.8M18.6 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  const reelCard = (r, d = 0) => `<li class="reel-card"${d ? ` style="--d:${d}s"` : ''}><button class="reel" type="button" data-full="${esc(r.full)}" data-yt="${esc(r.yt || '')}" data-cap="${esc(reelName(r) + (reelRole(r) ? ', ' + reelRole(r) : ''))}" aria-label="${esc(fmt(L.reelPlay, { name: reelName(r) }))}"><video muted loop playsinline preload="none" poster="/media/poster-${r.slug}.jpg" data-src="/media/loop-${r.slug}.mp4" aria-hidden="true"></video><span class="reel-cap">${esc(reelName(r))}${reelRole(r) ? `<small>${esc(reelRole(r))}</small>` : ''}</span><span class="reel-sound">${SPEAKER}</span></button></li>`;
+  // Hero wall: 3 columns of 2 (mobile shows the first of each column).
+  const reelWall = () => {
+    if (heroReels.length < 3) return '';
+    const cols = [[], [], []];
+    heroReels.forEach((r, i) => cols[i % 3].push(reelCard(r, +(0.15 + (i % 3) * 0.12 + Math.floor(i / 3) * 0.2).toFixed(2))));
+    return `<div class="reel-wall" role="group" aria-label="${esc(L.wallLabel)}">${cols.map((c) => `<ul class="reel-col">${c.join('')}</ul>`).join('')}</div>`;
+  };
+  const reelBox = `<dialog id="reelbox" class="reelbox" aria-label="${esc(L.blessingsTitle)}"><div class="reelbox-media"></div><div class="reelbox-bar"><p class="reelbox-cap"></p><button class="reelbox-x" type="button" aria-label="${lang === 'hi' ? 'बंद करें' : 'Close'}">×</button></div></dialog>`;
+
   const ladder = () => `<div class="ladder-band"><div class="wrap"><p class="ladder-title">${esc(L.ladderTitle)}</p><ol class="ladder">${L.ladder.map(([k, v], i) => `<li><span class="ladder-step">${i + 1}</span><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol></div></div>`;
 
   const months = (track) => `<ol class="months">${L.months
@@ -310,15 +337,17 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
     ld: [orgLd(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Indian Films Academy', url: abs(u('/')), inLanguage: lang }, faqLd(L.faq)],
     body: `<main id="main">
 <section class="hero">
-  <div class="hero-bg">${img('hero-group', 800, '', { widths: [800, 1600], sizes: '100vw', lazy: false, high: true, width: 1600, height: 1069 })}</div>
-  <div class="wrap hero-in">
-    <p class="kicker">${esc(L.hero.kicker)}</p>
-    <h1 class="hero-h1"><span class="brandword">CINEKAR</span><span class="hero-line">${esc(L.hero.line)}</span></h1>
-    <p class="hero-sub">${esc(L.hero.sub)}</p>
-    <div class="actions">
-      <a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a>
-      <a class="btn btn-ghost-light" href="${u('/cinekar/')}">${esc(L.hero.cta2)}</a>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker">${esc(L.hero.kicker)}</p>
+      <h1 class="hero-h1"><span class="brandword">CINEKAR</span><span class="hero-line">${esc(L.hero.line)}</span></h1>
+      <p class="hero-sub">${esc(L.hero.sub)}</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a>
+        <a class="btn btn-ghost-light" href="${u('/cinekar/')}">${esc(L.hero.cta2)}</a>
+      </div>
     </div>
+    ${reelWall()}
   </div>
 </section>
 ${ladder()}
@@ -330,6 +359,13 @@ ${ladder()}
     .map((t) => `<li><a class="track" href="${u(`/cinekar/${t.slug}/`)}"><span class="track-name">${esc(t.name)}</span><span class="track-local">${esc(t.nameLocal)}</span><span class="track-pitch">${esc(t.pitch)}</span><ul class="ticks">${t.month2.slice(0, 4).map((p) => `<li>${esc(p)}</li>`).join('')}</ul><span class="more">${esc(L.trackMore)}</span></a></li>`)
     .join('')}</ul>
 </div></section>
+${reels.length ? `<section class="sec sec-dark" aria-labelledby="bless-h"><div class="wrap">
+  <p class="eyebrow">${esc(L.blessingsEyebrow)}</p>
+  <h2 class="h2" id="bless-h">${esc(L.blessingsTitle)}</h2>
+  <p class="lede">${esc(L.blessingsLede)}</p>
+  ${rail(reels.map((r) => reelCard(r)).join(''), 'reelrail', L.blessingsTitle)}
+</div></section>
+${reelBox}` : ''}
 <section class="sec sec-alt" aria-labelledby="months-h"><div class="wrap">
   <p class="eyebrow">${esc(L.monthsEyebrow)}</p>
   <h2 class="h2" id="months-h">${esc(L.monthsTitle)}</h2>
@@ -351,7 +387,7 @@ ${videos.length ? `<section class="sec" aria-labelledby="yt-h"><div class="wrap"
 </div></section>
 <section class="sec" aria-labelledby="legends-h">
   <div class="wrap"><p class="eyebrow">${esc(L.legendsEyebrow)}</p><h2 class="h2" id="legends-h">${esc(L.legendsTitle)}</h2><p class="lede">${esc(L.legendsLede)}</p></div>
-  ${marquee(legends.filter((g) => g.names).slice(0, 18))}
+  ${marquee(stripPhotos)}
   <div class="wrap"><p class="more-link"><a href="${u('/gallery/')}">${esc(L.allPhotos)}</a></p></div>
 </section>
 <section class="sec sec-alt" aria-labelledby="fees-h"><div class="wrap split">
@@ -572,6 +608,36 @@ const PAGE_JS = `<script>
     var big=dlg.querySelector('img'), cap=dlg.querySelector('figcaption');
     document.querySelectorAll('.js-view').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); big.src=a.getAttribute('href'); big.alt=a.getAttribute('data-cap')||''; cap.textContent=a.getAttribute('data-cap')||''; dlg.showModal(); }); });
     dlg.addEventListener('click',function(){ dlg.close(); });
+  }
+  // Reels: silent loops start as soon as they are on screen and pause when they leave.
+  var lite=calm || (navigator.connection && navigator.connection.saveData);
+  var vids=document.querySelectorAll('video[data-src]');
+  function go(v){ if(!v.getAttribute('src')) v.setAttribute('src',v.getAttribute('data-src')); var p=v.play(); if(p && p.catch) p.catch(function(){}); }
+  if(!lite && 'IntersectionObserver' in window){
+    var vo=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) go(e.target); else if(e.target.getAttribute('src')) e.target.pause(); }); },{rootMargin:'80px 0px'});
+    vids.forEach(function(v){ vo.observe(v); });
+  }
+  var box=document.getElementById('reelbox');
+  if(box && box.showModal){
+    var media=box.querySelector('.reelbox-media'), bcap=box.querySelector('.reelbox-cap');
+    document.querySelectorAll('.reel').forEach(function(b){ b.addEventListener('click',function(){
+      var full=b.getAttribute('data-full'), yt=b.getAttribute('data-yt'), el;
+      if(full){ el=document.createElement('video'); el.src=full; el.controls=true; el.autoplay=true; el.playsInline=true; el.poster=b.querySelector('video').getAttribute('poster'); }
+      else if(yt){ el=frame(yt,b.getAttribute('data-cap'),false); }
+      else return;
+      media.innerHTML=''; media.appendChild(el); bcap.textContent=b.getAttribute('data-cap'); box.showModal();
+    }); });
+    function shut(){ media.innerHTML=''; }
+    box.addEventListener('close',shut);
+    box.querySelector('.reelbox-x').addEventListener('click',function(){ box.close(); });
+    box.addEventListener('click',function(e){ if(e.target===box) box.close(); });
+  }
+  if('IntersectionObserver' in window && !calm){
+    var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card').forEach(function(el){
+      var sib=el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+      el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
+    });
   }
   var form=document.getElementById('apply');
   if(form){

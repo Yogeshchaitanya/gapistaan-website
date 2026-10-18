@@ -171,10 +171,6 @@
       "खेसारी लाल यादव",
       "Khesari Lal Yadav"
     ],
-    "gulshan": [
-      "गुलशन ग्रोवर",
-      "Gulshan Grover"
-    ],
     "manoj-joshi-ji": [
       "मनोज जोशी",
       "Manoj Joshi"
@@ -642,7 +638,12 @@
           "M.Sc. (गणित), B.Ed. और कंप्यूटर साइंस में स्नातकोत्तर डिप्लोमा, साथ में मल्टीमीडिया और रंगमंच का प्रशिक्षण। 2026 में सह-संस्थापक के रूप में एकेडमी से जुड़े।"
         ]
       }
-    ]
+    ],
+    "wallLabel": "IFA आए कलाकारों के वीडियो संदेश",
+    "reelPlay": "{name} का वीडियो आवाज़ के साथ देखें",
+    "blessingsEyebrow": "आशीर्वाद",
+    "blessingsTitle": "सितारों के शब्द, IFA के लिए",
+    "blessingsLede": "फ़िल्म जगत के जो कलाकार एकेडमी आए, उन्होंने छात्रों से क्या कहा। किसी भी वीडियो पर क्लिक करें, वो आवाज़ के साथ खुलेगा।"
   },
   "en": {
     "langName": "English",
@@ -1082,7 +1083,12 @@
           "He holds an M.Sc. in Mathematics, a B.Ed. and a postgraduate diploma in computer science, with further training in multimedia and theatre. He joined the academy as co-founder in 2026."
         ]
       }
-    ]
+    ],
+    "wallLabel": "Video messages from artists who visited IFA",
+    "reelPlay": "Watch {name} with sound",
+    "blessingsEyebrow": "Words of blessing",
+    "blessingsTitle": "What the stars said to our students",
+    "blessingsLede": "Artists from Indian cinema who visited the academy, in their own words. Click any video to watch it with sound."
   },
   "founderMeta": [
     {
@@ -1118,5 +1124,134 @@
     "actor": "Actor",
     "director": "Director",
     "editor": "Editor"
-  }
+  },
+  "strip": {
+    "note": "Film-strip on the home page alternates one photo from 'yogesh' with one from 'dinesh'. Values are photo keys from public/img/g (without L-/V- and size).",
+    "yogesh": [
+      "khesari",
+      "kallu-3",
+      "om-puri-ji",
+      "sudheer-sir",
+      "kallu2",
+      "y2",
+      "sudhir-ji-and-anurag-ji",
+      "gulshan"
+    ],
+    "dinesh": [
+      "amitabh-ji",
+      "sanju-baba",
+      "nana-ji",
+      "anupam-ji",
+      "hema-ji",
+      "bony-kapoor",
+      "ashutosh-rana",
+      "rajkumar-rao"
+    ]
+  },
+  "reels": [
+    {
+      "slug": "ifa-reel-khesari-ji-1",
+      "hi": "खेसारी लाल यादव",
+      "en": "Khesari Lal Yadav",
+      "roleHi": "अभिनेता और गायक",
+      "roleEn": "Actor and singer",
+      "hero": true
+    },
+    {
+      "slug": "raj-pal-ji",
+      "hi": "राजपाल यादव",
+      "en": "Rajpal Yadav",
+      "roleHi": "अभिनेता",
+      "roleEn": "Actor",
+      "hero": true
+    },
+    {
+      "slug": "madhu-short",
+      "hi": "मधुर भंडारकर",
+      "en": "Madhur Bhandarkar",
+      "roleHi": "फ़िल्म निर्देशक",
+      "roleEn": "Film director",
+      "hero": true
+    },
+    {
+      "slug": "mita-ji-final",
+      "hi": "मीता वशिष्ठ",
+      "en": "Mita Vashisht",
+      "roleHi": "अभिनेत्री",
+      "roleEn": "Actor",
+      "hero": true
+    },
+    {
+      "slug": "rahul-miktra-ji-final",
+      "hi": "राहुल मित्रा",
+      "en": "Rahul Mitra",
+      "roleHi": "निर्माता और अभिनेता",
+      "roleEn": "Producer and actor",
+      "hero": true
+    },
+    {
+      "slug": "rajeev-nigam-final",
+      "hi": "राजीव निगम",
+      "en": "Rajeev Nigam",
+      "roleHi": "हास्य कलाकार और अभिनेता",
+      "roleEn": "Comedian and actor",
+      "hero": true
+    },
+    {
+      "slug": "vimal-panday-ji",
+      "hi": "विमल पांडे",
+      "en": "Vimal Pandey",
+      "roleHi": "भोजपुरी अभिनेता",
+      "roleEn": "Bhojpuri actor",
+      "hero": false
+    },
+    {
+      "slug": "ifa-reel-khesari-ji-2",
+      "hi": "खेसारी लाल यादव",
+      "en": "Khesari Lal Yadav",
+      "roleHi": "अभिनेता और गायक",
+      "roleEn": "Actor and singer",
+      "hero": false
+    },
+    {
+      "slug": "final-reel-madhur-sir",
+      "hi": "मधुर भंडारकर",
+      "en": "Madhur Bhandarkar",
+      "roleHi": "फ़िल्म निर्देशक",
+      "roleEn": "Film director",
+      "hero": false
+    },
+    {
+      "slug": "gaurav-ji-new",
+      "hi": "गौरव द्विवेदी",
+      "en": "Gaurav Dwivedi",
+      "roleHi": "पूर्व उपाध्यक्ष, उ.प्र. फ़िल्म विकास परिषद",
+      "roleEn": "Former Vice Chairman, UP Film Development Council",
+      "hero": false
+    },
+    {
+      "slug": "dr-dilpeep-sir",
+      "hi": "डॉ. दिलीप कुमार अग्निहोत्री",
+      "en": "Dr. Dilip Kumar Agnihotri",
+      "roleHi": "राज्य सूचना आयुक्त, उत्तर प्रदेश",
+      "roleEn": "State Information Commissioner, UP",
+      "hero": false
+    },
+    {
+      "slug": "new-information",
+      "hi": "वीरेंद्र प्रताप सिंह",
+      "en": "Virendra Pratap Singh",
+      "roleHi": "राज्य सूचना आयुक्त, उत्तर प्रदेश",
+      "roleEn": "State Information Commissioner, UP",
+      "hero": false
+    },
+    {
+      "slug": "final-raeesh-ji",
+      "hi": "डॉ. रहीस सिंह",
+      "en": "Dr. Rahees Singh",
+      "roleHi": "",
+      "roleEn": "",
+      "hero": false
+    }
+  ]
 }
