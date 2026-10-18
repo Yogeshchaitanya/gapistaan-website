@@ -6,36 +6,27 @@ on:
 permissions:
   contents: write
 jobs:
-  reels:
+  dns:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Old site's testimonial reels -> short silent loops, posters and light full versions
+      - name: Full DNS picture before moving the domain to Cloudflare
         run: |
-          set -u
-          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y ffmpeg >/dev/null || true
-          mkdir -p ifa-import/reels && cd ifa-import/reels
-          UA="Mozilla/5.0 (IFA site migration by owner)"
-          : > info.txt
-          for u in $(awk '{print $1}' ../videos.txt); do
-            name=$(basename "$u" .mp4); slug=$(echo "$name" | tr 'A-Z' 'a-z' | sed 's/[^a-z0-9]\+/-/g; s/-$//')
-            curl -sS -A "$UA" -f "$u" -o src.mp4 || { echo "MISS $u" >> info.txt; continue; }
-            dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 src.mp4 | cut -d. -f1)
-            wh=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=p=0 src.mp4)
-            # 8-second silent loop for the page (starts at 1s), 360px wide
-            ffmpeg -v error -y -ss 1 -t 8 -i src.mp4 -an -vf "scale=360:-2,fps=24" -c:v libx264 -preset slow -crf 30 -pix_fmt yuv420p -movflags +faststart "loop-$slug.mp4"
-            ffmpeg -v error -y -ss 1.5 -i src.mp4 -frames:v 1 -vf "scale=540:-2" -q:v 4 "poster-$slug.jpg"
-            # full version with sound, 540px wide, kept under ~22 MB
-            kbps=$(( 22000*8/ (dur>0?dur:60) - 96 )); [ $kbps -gt 1100 ] && kbps=1100; [ $kbps -lt 300 ] && kbps=300
-            ffmpeg -v error -y -i src.mp4 -vf "scale=540:-2" -c:v libx264 -preset slow -b:v ${kbps}k -maxrate ${kbps}k -bufsize $((kbps*2))k -pix_fmt yuv420p -c:a aac -b:a 96k -ac 2 -movflags +faststart "full-$slug.mp4"
-            echo "$slug dur=${dur}s src=${wh} loop=$(stat -c%s loop-$slug.mp4) full=$(stat -c%s full-$slug.mp4) kbps=$kbps" >> info.txt
-            rm -f src.mp4
+          sudo apt-get -qq update >/dev/null && sudo apt-get -qq install -y dnsutils whois >/dev/null || true
+          mkdir -p ifa-import && out=ifa-import/dns.txt; : > $out
+          for d in indianfilmsacademy.com ymatsystem.com; do
+            echo "########## $d" >> $out
+            whois $d 2>/dev/null | grep -iE "registrar:|registrar url|name server|creation date|expiry|registry expiry" | sort -u >> $out
+            for t in NS SOA A AAAA MX TXT CAA; do echo "== $t $d" >> $out; dig +short $t $d @1.1.1.1 >> $out; done
+            for n in www mail webmail ftp autodiscover autoconfig _dmarc hostingermail-a._domainkey hostingermail-b._domainkey hostingermail-c._domainkey default._domainkey _domainkey google._domainkey email smtp imap pop cpanel; do
+              r=$(dig +short ANY $n.$d @1.1.1.1; dig +short CNAME $n.$d @1.1.1.1; dig +short TXT $n.$d @1.1.1.1; dig +short A $n.$d @1.1.1.1)
+              [ -n "$r" ] && { echo "== $n.$d" >> $out; echo "$r" | sort -u >> $out; }
+            done
+            for s in _imaps._tcp _submission._tcp _autodiscover._tcp _pop3s._tcp; do r=$(dig +short SRV $s.$d @1.1.1.1); [ -n "$r" ] && echo "== SRV $s.$d: $r" >> $out; done
           done
-          cat info.txt; du -sh .
-      - name: Commit
+          cat $out
+      - name: Save
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add ifa-import/reels
-          git commit -m "IFA: testimonial reels compressed for the new site" || echo nothing
-          git push
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ifa-import/dns.txt && git commit -m "DNS snapshot before moving to Cloudflare" && git push || true
