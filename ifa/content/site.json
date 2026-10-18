@@ -171,6 +171,10 @@
       "खेसारी लाल यादव",
       "Khesari Lal Yadav"
     ],
+    "kallu-3": [
+      "अरविंद अकेला कल्लू",
+      "Arvind Akela Kallu"
+    ],
     "manoj-joshi-ji": [
       "मनोज जोशी",
       "Manoj Joshi"
@@ -237,26 +241,32 @@
     "skip": "सीधे मुख्य हिस्से पर जाएँ",
     "home": "होम",
     "hero": {
-      "kicker": "Indian Films Academy, लखनऊ · CINEKAR 90-दिन कोर्स",
-      "h1Hidden": "Indian Films Academy, लखनऊ के तीन कोर्स:",
+      "kicker": "Indian Films Academy, लखनऊ · CINEKAR कोर्स",
+      "h1Hidden": "Indian Films Academy, लखनऊ:",
       "sub": "तीनों अलग और पूरे कोर्स हैं। पहला महीना तीनों का साझा है, दूसरे महीने से हर कोर्स अपने रास्ते चलता है, और तीसरा महीना असली सेट पर। हर कोर्स के साथ आपका अपना YouTube और Instagram चैनल भी।",
       "cta": "ऑनलाइन एडमिशन",
       "cta2": "तीनों कोर्स की तुलना",
       "line": "सिनेमैटिक एक्टिंग, फ़िल्म डायरेक्शन और फ़िल्म एडिटिंग के तीन अलग कोर्स"
     },
-    "ladderTitle": "कक्षा से करियर तक",
+    "ladderTitle": "कोर्स के बाद का रास्ता",
     "ladder": [
       [
-        "90 दिन",
-        "प्रशिक्षण, लाइव प्रोजेक्ट और आपका अपना चैनल"
+        "90",
+        "दिन",
+        "कोर्स",
+        "कक्षा, लाइव शूट और आपका अपना चैनल।"
       ],
       [
-        "शीर्ष 10 छात्र",
-        "PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप, यात्रा भत्ते के साथ"
+        "10",
+        "चुने हुए छात्र",
+        "3 महीने की इंटर्नशिप",
+        "कोर्स पूरा होने पर हर बैच के 10 चुने हुए छात्रों को PICHCHRAPA प्रोडक्शन हाउस में इंटर्नशिप, ट्रैवल अलाउंस के साथ।"
       ],
       [
-        "शीर्ष 2–3 छात्र",
-        "छह महीने बाद PICHCHRAPA में वेतन सहित नियुक्ति"
+        "2–5",
+        "सबसे अच्छे छात्र",
+        "असली नौकरी",
+        "6 महीने बाद सबसे अच्छे 2 से 5 छात्रों को PICHCHRAPA में वेतन वाली नौकरी: एक्टर, डायरेक्टर या एडिटर के रूप में।"
       ]
     ],
     "tracksEyebrow": "तीन विधाएँ, एक कार्यक्रम",
@@ -657,7 +667,7 @@
       ],
       [
         "कोर्स के बाद क्या अवसर हैं?",
-        "हर बैच के शीर्ष 10 छात्रों को PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप यात्रा भत्ते के साथ मिलती है, और उसके बाद शीर्ष 2–3 को वेतन सहित नौकरी। बाकी छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"
+        "हर बैच के शीर्ष 10 छात्रों को PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप ट्रैवल अलाउंस के साथ मिलती है, और 6 महीने बाद सबसे अच्छे 2 से 5 छात्रों को PICHCHRAPA में वेतन वाली नौकरी, एक्टर, डायरेक्टर या एडिटर के रूप में। बाकी छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"
       ],
       [
         "क्या YouTube और Instagram की ट्रेनिंग भी मिलती है?",
@@ -722,7 +732,7 @@
     "guestsLede": "फ़िल्म जगत के कलाकार, निर्देशक और कास्टिंग विशेषज्ञ अपने व्यस्त समय में से छात्रों के लिए समय निकालते हैं और अपने संघर्ष और सफ़र के वास्तविक अनुभव साझा करते हैं।",
     "galleryTitle": "गैलरी",
     "galleryLede": "किसी भी तस्वीर पर क्लिक करके उसे बड़ा देखें।",
-    "galleryAcademy": "एकेडमी और मंच",
+    "galleryAcademy": "हमारे छात्र",
     "videosPageTitle": "कक्षाएँ और वीडियो",
     "videosPageLede": "Indian Films Academy के YouTube चैनल से। नई कक्षाएँ अपने-आप यहाँ जुड़ती हैं।",
     "onlinePage": {
@@ -849,7 +859,7 @@
     "blessingsEyebrow": "बाइट",
     "blessingsTitle": "सितारों की बाइट",
     "blessingsLede": "फ़िल्म जगत के जो कलाकार और अधिकारी एकेडमी आए, उनकी पूरी बात उन्हीं की ज़ुबानी। किसी भी वीडियो पर क्लिक करें, पूरी बाइट आवाज़ के साथ चलेगी।",
-    "doorSub": "{name} · 90 दिन",
+    "doorSub": "{name} कोर्स",
     "forkEyebrow": "कोर्स की बनावट",
     "forkTitle": "एक नींव, तीन रास्ते",
     "forkLede": "तीनों कोर्स अलग और पूरे हैं। सिर्फ़ पहला महीना साझा है, क्योंकि हर फ़िल्म-कला की जड़ एक ही है: अभिव्यक्ति। दूसरे महीने से पाठ्यक्रम पूरी तरह अलग हो जाता है।",
@@ -1020,6 +1030,11 @@
       "tap": "फ़ोन पर राशि पर टैप करें, UPI ऐप खुल जाएगा:",
       "fine": "सहयोग राशि Indian Films Academy के खाते (UPI: {upi}) में जाती है। यह आयकर छूट (80G) के दायरे में नहीं आती।",
       "short": "कक्षा अच्छी लगी? ज़रूरतमंद छात्रों की पढ़ाई में सहयोग करें"
+    },
+    "ninety": {
+      "n": "90",
+      "l1": "दिन में",
+      "l2": "सीखिए"
     }
   },
   "en": {
@@ -1059,26 +1074,32 @@
     "skip": "Skip to main content",
     "home": "Home",
     "hero": {
-      "kicker": "Indian Films Academy, Lucknow · CINEKAR 90-day courses",
-      "h1Hidden": "Three courses at Indian Films Academy, Lucknow:",
+      "kicker": "Indian Films Academy, Lucknow · CINEKAR courses",
+      "h1Hidden": "Indian Films Academy, Lucknow:",
       "sub": "Three separate, complete courses. The first month is shared, from the second month each course goes its own way, and the third month is on a real set. Every course comes with a YouTube and Instagram channel of your own.",
       "cta": "Apply online",
       "cta2": "Compare the three courses",
       "line": "Three separate courses in cinematic acting, film direction and film editing"
     },
-    "ladderTitle": "From classroom to career",
+    "ladderTitle": "What comes after the course",
     "ladder": [
       [
-        "90 days",
-        "Training, live projects and a channel of your own"
+        "90",
+        "days",
+        "The course",
+        "Classes, live shoots and a channel of your own."
       ],
       [
-        "Top ten students",
-        "A three-month internship at PICHCHRAPA production house, with travel allowance"
+        "10",
+        "selected students",
+        "A 3-month internship",
+        "After the course, ten selected students from each batch intern at PICHCHRAPA production house, with travel allowance."
       ],
       [
-        "Top two or three",
-        "A salaried position at PICHCHRAPA after six months"
+        "2–5",
+        "best students",
+        "A real job",
+        "After six months, the best two to five students get a salaried job at PICHCHRAPA as an actor, director or editor."
       ]
     ],
     "tracksEyebrow": "Three crafts, one programme",
@@ -1479,7 +1500,7 @@
       ],
       [
         "What opportunities follow the course?",
-        "The top ten students of each batch get a three-month internship at PICHCHRAPA production house with travel allowance, and after that the top two or three are offered salaried positions. Other students get guidance on auditions and projects."
+        "The top ten students of each batch get a three-month internship at PICHCHRAPA production house with travel allowance, and after six months the best two to five get a salaried job at PICHCHRAPA as an actor, director or editor. Other students get guidance on auditions and projects."
       ],
       [
         "Is there YouTube and Instagram training?",
@@ -1544,7 +1565,7 @@
     "guestsLede": "Actors, directors and casting experts take time from busy schedules to meet our students and share the real story of their struggles and careers.",
     "galleryTitle": "Gallery",
     "galleryLede": "Click any photograph to view it larger.",
-    "galleryAcademy": "The academy and the stage",
+    "galleryAcademy": "Our students",
     "videosPageTitle": "Classes and videos",
     "videosPageLede": "From the Indian Films Academy YouTube channel. New classes appear here automatically.",
     "onlinePage": {
@@ -1671,7 +1692,7 @@
     "blessingsEyebrow": "Bytes",
     "blessingsTitle": "Bytes from the stars",
     "blessingsLede": "Artists and officials from the film world who visited the academy, in their own words. Click any video to hear the full byte with sound.",
-    "doorSub": "90-day course",
+    "doorSub": "{name} course",
     "forkEyebrow": "How the courses are built",
     "forkTitle": "One foundation, three paths",
     "forkLede": "The three courses are separate and complete. Only the first month is shared, because every film craft has the same root: expression. From month two the curriculum splits completely.",
@@ -1842,6 +1863,11 @@
       "tap": "On a phone, tap an amount and your UPI app opens:",
       "fine": "Support goes to Indian Films Academy's account (UPI: {upi}). It is not eligible for income-tax exemption under 80G.",
       "short": "Liked the class? Support students who can't afford the fees"
+    },
+    "ninety": {
+      "n": "90",
+      "l1": "days to",
+      "l2": "learn"
     }
   },
   "founderMeta": [
@@ -1886,7 +1912,6 @@
       "kallu-3",
       "om-puri-ji",
       "sudheer-sir",
-      "kallu2",
       "y2",
       "sudhir-ji-and-anurag-ji",
       "gulshan"
@@ -2060,5 +2085,10 @@
     "nMaR5gLaQg4",
     "u_phbpxZY50",
     "Na0_AYich-A"
-  ]
+  ],
+  "doorSubEn": {
+    "actor": "Become an actor",
+    "director": "Become a director",
+    "editor": "Become an editor"
+  }
 }

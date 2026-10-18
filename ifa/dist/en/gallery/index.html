@@ -143,14 +143,21 @@ a:hover{color:var(--indigo)}
 .reelbox-cap{margin:0;font-weight:800}
 .reelbox-x{width:44px;height:44px;border:0;border-radius:50%;background:transparent;color:#fff;font:400 1.9rem/1 var(--body);cursor:pointer}
 .reelbox-x:hover{background:rgba(255,255,255,.1)}
-.ladder-band{background:var(--indigo-2);color:#fff;padding-block:2rem}
+.ladder-band{position:relative;background:linear-gradient(100deg,var(--deep),var(--indigo-2) 55%,var(--indigo));color:#fff;padding-block:2rem 2.3rem;border-top:1px solid rgba(212,166,74,.35)}
 .ladder-title{margin:0 0 1rem;font-weight:800;color:var(--marigold-2)}
 .ladder{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
-@media (min-width:52rem){.ladder{grid-template-columns:repeat(3,1fr);gap:1.6rem}}
-.ladder li{display:grid;grid-template-columns:auto 1fr;gap:.1rem .9rem;align-items:start}
-.ladder-step{grid-row:span 2;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--marigold);color:var(--marigold);font:700 1.05rem/1 var(--title)}
-.ladder strong{font-size:1.12rem;line-height:1.4}
-.ladder span:last-child{color:#C9D0E0;font-size:.98rem;line-height:1.55}
+@media (min-width:52rem){.ladder{grid-template-columns:repeat(3,1fr);gap:1.8rem}}
+.ladder li{position:relative;padding:1.1rem 1.25rem 1.2rem;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(212,166,74,.38)}
+@media (min-width:52rem){.ladder li:not(:last-child)::after{content:"";position:absolute;right:-1.2rem;top:50%;width:.7rem;height:.7rem;border-top:2px solid var(--marigold);border-right:2px solid var(--marigold);transform:translateY(-50%) rotate(45deg)}}
+.ladder-num{display:flex;align-items:baseline;gap:.5rem;margin:0}
+.ladder-big{font:700 clamp(2.3rem,4.4vw,2.9rem)/1 var(--title);letter-spacing:.02em;color:var(--marigold)}
+.ladder-unit{color:var(--marigold-2);font-weight:800;font-size:.95rem}
+.ladder strong{display:block;margin-top:.45rem;font-size:1.15rem;line-height:1.35}
+.ladder li > span{display:block;margin-top:.2rem;color:#C9D6D4;font-size:.98rem;line-height:1.55}
+.ninety{display:flex;align-items:center;gap:.8rem;margin-bottom:.3rem}
+.ninety-n{min-width:2ch;font:700 clamp(4rem,9vw,6.6rem)/.9 var(--title);color:var(--marigold);text-shadow:0 0 40px rgba(212,166,74,.35);font-variant-numeric:tabular-nums}
+.ninety-t{display:grid;color:#fff;font-weight:800;font-size:clamp(1.3rem,2.6vw,1.9rem);line-height:1.15}
+.ninety-t span:last-child{color:var(--marigold-2)}
 .ticks{list-style:none;margin:.5rem 0 0;padding:0}
 .ticks li{position:relative;padding-left:1.4rem;margin:.4rem 0;line-height:1.55;color:var(--slate);break-inside:avoid}
 .ticks li::before{content:"";position:absolute;left:.15rem;top:.62em;width:.45rem;height:.45rem;border-radius:50%;background:var(--marigold)}
@@ -465,6 +472,7 @@ a:hover{color:var(--indigo)}
 <li><a class="js-view" href="/img/g/L-kailash-kher-1200.webp" data-cap="With Kailash Kher"><img src="/img/g/L-kailash-kher-480.webp" alt="With Kailash Kher: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Kailash Kher</span></a></li>
 <li><a class="js-view" href="/img/g/L-kangna-1200.webp" data-cap="With Kangana Ranaut"><img src="/img/g/L-kangna-480.webp" alt="With Kangana Ranaut: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Kangana Ranaut</span></a></li>
 <li><a class="js-view" href="/img/g/L-khesari-1200.webp" data-cap="With Khesari Lal Yadav"><img src="/img/g/L-khesari-480.webp" alt="With Khesari Lal Yadav: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Khesari Lal Yadav</span></a></li>
+<li><a class="js-view" href="/img/g/L-kallu-3-1200.webp" data-cap="With Arvind Akela Kallu"><img src="/img/g/L-kallu-3-480.webp" alt="With Arvind Akela Kallu: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Arvind Akela Kallu</span></a></li>
 <li><a class="js-view" href="/img/g/L-manoj-joshi-ji-1200.webp" data-cap="With Manoj Joshi"><img src="/img/g/L-manoj-joshi-ji-480.webp" alt="With Manoj Joshi: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Manoj Joshi</span></a></li>
 <li><a class="js-view" href="/img/g/L-radeep-hudda-1200.webp" data-cap="With Randeep Hooda"><img src="/img/g/L-radeep-hudda-480.webp" alt="With Randeep Hooda: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Randeep Hooda</span></a></li>
 <li><a class="js-view" href="/img/g/L-akshay-1200.webp" data-cap="With Akshay Kumar"><img src="/img/g/L-akshay-480.webp" alt="With Akshay Kumar: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"><span class="gcap">Akshay Kumar</span></a></li>
@@ -472,8 +480,6 @@ a:hover{color:var(--indigo)}
 <li><a class="js-view" href="/img/g/L-award-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-award-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-award-2-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-award-2-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-gulshan-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-gulshan-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
-<li><a class="js-view" href="/img/g/L-kallu-3-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-kallu-3-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
-<li><a class="js-view" href="/img/g/L-kallu2-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-kallu2-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-kiran-ji-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-kiran-ji-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-koi-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-koi-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/L-koi-1-1200.webp" data-cap="With a legend of Indian cinema"><img src="/img/g/L-koi-1-480.webp" alt="With a legend of Indian cinema: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
@@ -504,7 +510,7 @@ a:hover{color:var(--indigo)}
 <li><a class="js-view" href="/img/g/V-rahul-jiips-1200.webp" data-cap="A guest at the academy"><img src="/img/g/V-rahul-jiips-480.webp" alt="A guest at the academy: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/V-rahul-mitra-1200.webp" data-cap="A guest at the academy"><img src="/img/g/V-rahul-mitra-480.webp" alt="A guest at the academy: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li>
 <li><a class="js-view" href="/img/g/V-x-dcp-1200.webp" data-cap="A guest at the academy"><img src="/img/g/V-x-dcp-480.webp" alt="A guest at the academy: Indian Films Academy" loading="lazy" decoding="async" width="480" height="360"></a></li></ul></div></section>
-<section class="sec sec-tight"><div class="wrap"><h2 class="h2">The academy and the stage</h2><ul class="gallery"><li><a class="js-view" href="/img/group-2-800.webp" data-cap="Indian Films Academy"><img src="/img/group-2-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/campus-1-800.webp" data-cap="Indian Films Academy"><img src="/img/campus-1-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/campus-2-800.webp" data-cap="Indian Films Academy"><img src="/img/campus-2-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/campus-3-800.webp" data-cap="Indian Films Academy"><img src="/img/campus-3-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/stage-1-800.webp" data-cap="Indian Films Academy"><img src="/img/stage-1-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/stage-2-800.webp" data-cap="Indian Films Academy"><img src="/img/stage-2-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li></ul></div></section>
+<section class="sec sec-tight"><div class="wrap"><h2 class="h2">Our students</h2><ul class="gallery"><li><a class="js-view" href="/img/group-2-800.webp" data-cap="Indian Films Academy"><img src="/img/group-2-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/campus-1-800.webp" data-cap="Indian Films Academy"><img src="/img/campus-1-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/stage-1-800.webp" data-cap="Indian Films Academy"><img src="/img/stage-1-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li><li><a class="js-view" href="/img/stage-2-800.webp" data-cap="Indian Films Academy"><img src="/img/stage-2-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li></ul></div></section>
 <dialog id="viewer" class="viewer"><figure><img alt=""><figcaption></figcaption></figure></dialog>
 </main>
 <footer class="foot">
@@ -585,6 +591,12 @@ a:hover{color:var(--indigo)}
     document.querySelectorAll('.js-view').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); big.src=a.getAttribute('href'); big.alt=a.getAttribute('data-cap')||''; cap.textContent=a.getAttribute('data-cap')||''; dlg.showModal(); }); });
     dlg.addEventListener('click',function(){ dlg.close(); });
   }
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end=parseInt(el.getAttribute('data-count'),10); if(calm||!end) return;
+    var t0=null; el.textContent='0';
+    function step(t){ if(!t0) t0=t; var p=Math.min((t-t0)/1100,1); el.textContent=Math.round(end*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
   // Reels: silent loops start as soon as they are on screen and pause when they leave.
   var lite=calm || (navigator.connection && navigator.connection.saveData);
   var vids=document.querySelectorAll('video[data-src]');

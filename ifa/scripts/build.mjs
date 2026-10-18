@@ -271,7 +271,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
   };
   const reelBox = `<dialog id="reelbox" class="reelbox" aria-label="${esc(L.blessingsTitle)}"><div class="reelbox-media"></div><div class="reelbox-bar"><p class="reelbox-cap"></p><button class="reelbox-x" type="button" aria-label="${lang === 'hi' ? 'बंद करें' : 'Close'}">×</button></div></dialog>`;
 
-  const ladder = () => `<div class="ladder-band"><div class="wrap"><p class="ladder-title">${esc(L.ladderTitle)}</p><ol class="ladder">${L.ladder.map(([k, v], i) => `<li><span class="ladder-step">${i + 1}</span><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol></div></div>`;
+  const ladder = () => `<div class="ladder-band"><div class="wrap"><p class="ladder-title">${esc(L.ladderTitle)}</p><ol class="ladder">${L.ladder.map(([big, unit, k, v]) => `<li><p class="ladder-num"><span class="ladder-big">${esc(big)}</span><span class="ladder-unit">${esc(unit)}</span></p><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol></div></div>`;
 
   // Course page: month 1 shared, months 2 and 3 only for this course.
   const syllabus = (t) => {
@@ -376,7 +376,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="kicker">${esc(L.hero.kicker)}</p>
-      <h1 class="hero-h1"><span class="sr-only">${esc(L.hero.h1Hidden)} </span>${tracks.map((t, i) => `<a class="door" href="${u(`/${t.slug}/`)}" style="--i:${i}"><span class="door-en">${esc(t.name)}</span><span class="door-sub">${esc(lang === 'hi' ? fmt(L.doorSub, { name: t.local }) : L.doorSub)}</span></a>`).join('')}</h1>
+      <h1 class="hero-h1"><span class="sr-only">${esc(L.hero.h1Hidden)} </span><span class="ninety"><span class="ninety-n" data-count="${esc(L.ninety.n)}">${esc(L.ninety.n)}</span><span class="ninety-t"><span>${esc(L.ninety.l1)}</span><span>${esc(L.ninety.l2)}</span></span></span>${tracks.map((t, i) => `<a class="door" href="${u(`/${t.slug}/`)}" style="--i:${i}"><span class="door-en">${esc(t.name)}</span><span class="door-sub">${esc(lang === 'hi' ? fmt(L.doorSub, { name: t.local }) : site.doorSubEn[t.key])}</span></a>`).join('')}</h1>
       <p class="hero-sub">${esc(L.hero.sub)}</p>
       <div class="actions">
         <a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a>
@@ -386,6 +386,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
     ${reelWall()}
   </div>
 </section>
+${ladder()}
 <section class="sec" aria-labelledby="fork-h"><div class="wrap">
   <p class="eyebrow">${esc(L.forkEyebrow)}</p>
   <h2 class="h2" id="fork-h">${esc(L.forkTitle)}</h2>
@@ -409,7 +410,6 @@ ${videos.length ? `<section class="sec" aria-labelledby="yt-h"><div class="wrap"
   ${marquee(stripPhotos)}
   <div class="wrap"><p class="more-link"><a href="${u('/gallery/')}">${esc(L.allPhotos)}</a></p></div>
 </section>
-${ladder()}
 <section class="sec" aria-labelledby="fees-h"><div class="wrap split">
   <div><p class="eyebrow">${esc(L.feesEyebrow)}</p><h2 class="h2" id="fees-h">${esc(L.feesTitle)}</h2>${steps()}</div>
   ${feeCard()}
@@ -506,7 +506,10 @@ ${reels.length ? `<section class="sec sec-dark" aria-labelledby="tb-h"><div clas
     });
   }
 
-  const caVideos = (site.cineactVideos || []).map((id) => videos.find((v) => v.id === id)).filter(Boolean);
+  const classRe = /\bclass\b|क्लास|कक्षा|cineact|\bATS\b|acting system/i;
+  const caVideos = [...videos.filter((v) => classRe.test(v.title)).slice(0, 6), ...(site.cineactVideos || []).map((id) => videos.find((v) => v.id === id)).filter(Boolean)]
+    .filter((v, i, all) => all.indexOf(v) === i)
+    .slice(0, 14);
   pages['/yogesh-cineact/'] = layout({
     title: CA.title,
     description: CA.description,
@@ -619,7 +622,7 @@ ${crumbs([[L.home, u('/')], [L.galleryTitle, u('/gallery/')]])}
 <h1 class="page-h1">${esc(L.galleryTitle)}</h1><p class="lede">${esc(L.galleryLede)}</p></div>
 <section class="sec sec-tight"><div class="wrap"><h2 class="h2">${esc(L.legendsTitle)}</h2>${grid(legends)}</div></section>
 <section class="sec sec-tight"><div class="wrap"><h2 class="h2">${esc(L.guestsTitle)}</h2>${grid(visitors)}</div></section>
-<section class="sec sec-tight"><div class="wrap"><h2 class="h2">${esc(L.galleryAcademy)}</h2><ul class="gallery">${['group-2', 'campus-1', 'campus-2', 'campus-3', 'stage-1', 'stage-2'].map((n) => `<li><a class="js-view" href="/img/${n}-800.webp" data-cap="Indian Films Academy"><img src="/img/${n}-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li>`).join('')}</ul></div></section>
+<section class="sec sec-tight"><div class="wrap"><h2 class="h2">${esc(L.galleryAcademy)}</h2><ul class="gallery">${['group-2', 'campus-1', 'stage-1', 'stage-2'].map((n) => `<li><a class="js-view" href="/img/${n}-800.webp" data-cap="Indian Films Academy"><img src="/img/${n}-800.webp" alt="Indian Films Academy, Lucknow" loading="lazy" decoding="async" width="480" height="360"></a></li>`).join('')}</ul></div></section>
 ${viewer}
 </main>`,
   });
@@ -719,6 +722,12 @@ const PAGE_JS = `<script>
     document.querySelectorAll('.js-view').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); big.src=a.getAttribute('href'); big.alt=a.getAttribute('data-cap')||''; cap.textContent=a.getAttribute('data-cap')||''; dlg.showModal(); }); });
     dlg.addEventListener('click',function(){ dlg.close(); });
   }
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    var end=parseInt(el.getAttribute('data-count'),10); if(calm||!end) return;
+    var t0=null; el.textContent='0';
+    function step(t){ if(!t0) t0=t; var p=Math.min((t-t0)/1100,1); el.textContent=Math.round(end*(1-Math.pow(1-p,3))); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  });
   // Reels: silent loops start as soon as they are on screen and pause when they leave.
   var lite=calm || (navigator.connection && navigator.connection.saveData);
   var vids=document.querySelectorAll('video[data-src]');
