@@ -6,8 +6,8 @@
   "channelUrl": "https://www.youtube.com/@gapistaan",
   "subscribeUrl": "https://www.youtube.com/@gapistaan?sub_confirmation=1",
   "instagramUrl": "https://www.instagram.com/gapistaan/",
-  "homeTitle": "Gapistaan | गैपिस्तान: चाचा बनाम Gen Z, हिंदी कॉमेडी-सटायर सीरीज़",
-  "homeDescription": "एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज की Gen Z की रोज़ नई बहस। बिना स्क्रिप्ट की, पूरी तरह improvised हिंदी कॉमेडी। सारे एपिसोड यहाँ देखें।",
+  "homeTitle": "Gapistaan | गैपिस्तान: Gen Gap हिंदी कॉमेडी सीरीज़, चाचा बनाम Gen Z",
+  "homeDescription": "गैपिस्तान (Gapistaan) PICHCHRAPA की हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर है। लखनऊ के एक एक्टिंग इंस्टीट्यूट में चाचा बनाम Gen Z, बिना स्क्रिप्ट की improvised कॉमेडी। सारे एपिसोड यहाँ देखें।",
   "heroLine": "एक एक्टिंग इंस्टीट्यूट। एक तरफ़ चाचा, दूसरी तरफ़ Gen Z।",
   "heroSub": "बिना स्क्रिप्ट की, पूरी तरह improvised हिंदी कॉमेडी-सटायर।",
   "schedule": "नया एपिसोड हर दूसरे दिन, रात 8:10 बजे",
@@ -17,29 +17,49 @@
   ],
   "cast": [
     {
-      "name": "योगेश चैतन्य",
-      "nameEn": "Yogesh Chaitanya",
-      "role": "चाचा का किरदार, क्रिएटर और डायरेक्टर"
-    },
-    {
+      "slug": "ravi-yadav",
       "name": "रवि यादव",
-      "nameEn": "Ravi Yadav"
+      "nameEn": "Ravi Yadav",
+      "role": "कलाकार",
+      "photo": "",
+      "bio": [],
+      "instagram": ""
     },
     {
+      "slug": "shubham-singh",
       "name": "शुभम सिंह",
-      "nameEn": "Shubham Singh"
+      "nameEn": "Shubham Singh",
+      "role": "कलाकार",
+      "photo": "",
+      "bio": [],
+      "instagram": ""
     },
     {
+      "slug": "deepak-mandal",
       "name": "दीपक मंडल",
-      "nameEn": "Deepak Mandal"
+      "nameEn": "Deepak Mandal",
+      "role": "कलाकार",
+      "photo": "",
+      "bio": [],
+      "instagram": ""
     },
     {
+      "slug": "rohit-das",
       "name": "रोहित दास",
-      "nameEn": "Rohit Das"
+      "nameEn": "Rohit Das",
+      "role": "कलाकार",
+      "photo": "",
+      "bio": [],
+      "instagram": ""
     },
     {
+      "slug": "aayushi-dutt-tiwari",
       "name": "आयुषी दत्त तिवारी",
-      "nameEn": "Aayushi Dutt Tiwari"
+      "nameEn": "Aayushi Dutt Tiwari",
+      "role": "कलाकार",
+      "photo": "",
+      "bio": [],
+      "instagram": ""
     }
   ],
   "brands": [
@@ -60,7 +80,73 @@
   ],
   "production": "PICHCHRAPA",
   "canonicalHost": "gapistaan.com",
-  "aboutEn": "Gapistaan (गैपिस्तान) is a Hindi comedy web series from Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.",
-  "contactEmail": "",
-  "cfAnalyticsToken": ""
+  "aboutEn": "Gapistaan (गैपिस्तान) is the home of Gen Gap, a Hindi comedy web series by PICHCHRAPA, Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.",
+  "cfAnalyticsToken": "",
+  "presents": "PICHCHRAPA",
+  "presentsUrl": "https://pichchrapa.com",
+  "business": {
+    "email": "Pichchrapa@gmail.com",
+    "phone": "+917754000121",
+    "phoneLabel": "077540 00121",
+    "city": "गोमती नगर, लखनऊ, उत्तर प्रदेश"
+  },
+  "creator": {
+    "slug": "yogesh-chaitanya",
+    "name": "योगेश चैतन्य",
+    "nameEn": "Yogesh Chaitanya",
+    "aka": [
+      "Yogesh Raj Mishra",
+      "योगेश राज मिश्रा"
+    ],
+    "role": "क्रिएटर, डायरेक्टर और चाचा",
+    "photo": "",
+    "bio": [
+      "योगेश चैतन्य गैपिस्तान के क्रिएटर और डायरेक्टर हैं, और शो में चाचा का किरदार भी खुद निभाते हैं। फ़िल्मों में उन्हें योगेश राज मिश्रा के नाम से जाना जाता है।",
+      "उन्होंने फ़िल्म ‘दबंग सरकार’ और ‘विद्यापीठ’ का निर्देशन किया है और 15 से ज़्यादा फ़ीचर फ़िल्मों में पोस्ट-प्रोडक्शन हेड रहे हैं। एडिटिंग और DI कलर ग्रेडिंग भी वे खुद करते हैं; गैपिस्तान के हर एपिसोड का एडिट और DI उन्हीं का है।",
+      "वे लखनऊ के Indian Films Academy के संस्थापक हैं, जहाँ 15 साल से ज़्यादा के अनुभव के साथ कैमरा एक्टिंग सिखाते हैं। कलाकारों को तैयार करने के लिए उन्होंने अपना ‘Actors Transformation System’ बनाया है। गैपिस्तान के कलाकार इसी एकेडमी से तैयार हुए हैं।",
+      "उनकी जड़ें रंगमंच में हैं। उन्होंने भारतेंदु नाट्य अकादमी और राष्ट्रीय नाट्य विद्यालय के रंगमंच माहौल में सीखा और रंगकर्मी सूर्य मोहन कुलश्रेष्ठ से प्रशिक्षण लिया।",
+      "PICHCHRAPA उनका प्रोडक्शन हाउस है, और गैपिस्तान PICHCHRAPA की पेशकश है।"
+    ],
+    "facts": [
+      [
+        "निर्देशन",
+        "दबंग सरकार, विद्यापीठ"
+      ],
+      [
+        "पोस्ट-प्रोडक्शन",
+        "15 से ज़्यादा फ़ीचर फ़िल्मों में पोस्ट-प्रोडक्शन हेड; एडिटर और DI कलरिस्ट"
+      ],
+      [
+        "एक्टिंग ट्रेनिंग",
+        "15+ साल; Actors Transformation System के जनक"
+      ],
+      [
+        "संस्थापक",
+        "Indian Films Academy, लखनऊ और PICHCHRAPA"
+      ],
+      [
+        "गैपिस्तान में",
+        "चाचा का किरदार, परिकल्पना, निर्देशन, एडिट और DI"
+      ]
+    ],
+    "links": [
+      [
+        "IMDb",
+        "https://www.imdb.com/name/nm8753440/"
+      ],
+      [
+        "Indian Films Academy",
+        "https://indianfilmsacademy.com/"
+      ],
+      [
+        "PICHCHRAPA",
+        "https://pichchrapa.com/"
+      ],
+      [
+        "Actors Transformation System",
+        "https://ymatsystem.com/"
+      ]
+    ]
+  },
+  "contactEmail": ""
 }
