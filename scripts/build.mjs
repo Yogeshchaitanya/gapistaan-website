@@ -163,6 +163,7 @@ ${body}
   </div>
 </footer>
 ${PAGE_JS}
+${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${esc(site.cfAnalyticsToken)}"}'></script>` : ''}
 </body>
 </html>
 `;
@@ -175,11 +176,12 @@ const shareMessage = (ep) =>
   `${ep.clean}\n\nगैपिस्तान पर देखिए: https://youtu.be/${ep.id}` + (siteUrl ? `\nसारे एपिसोड: ${siteUrl}` : '');
 const waLink = (ep) => `https://wa.me/?text=${encodeURIComponent(shareMessage(ep))}`;
 
-function shareButtons(ep, { pageLink = false } = {}) {
+function shareButtons(ep, { pageLink = false, stage = false } = {}) {
+  const id = (k) => (stage ? ` id="stage-${k}"` : '');
   return `<div class="actions">
-        <a class="btn btn-primary" href="https://www.youtube.com/watch?v=${ep.id}">YouTube पर देखें</a>
-        <a class="btn btn-wa" href="${waLink(ep)}">WhatsApp पर भेजें</a>
-        <button class="btn btn-ghost js-share" type="button" hidden data-title="${esc(ep.clean)}" data-text="${esc(shareMessage(ep))}" data-url="https://youtu.be/${ep.id}">और जगह शेयर करें</button>
+        <a class="btn btn-primary"${id('yt')} href="https://www.youtube.com/watch?v=${ep.id}">YouTube पर देखें</a>
+        <a class="btn btn-wa"${id('wa')} href="${waLink(ep)}">WhatsApp पर भेजें</a>
+        <button class="btn btn-ghost js-share"${id('share')} type="button" hidden data-title="${esc(ep.clean)}" data-text="${esc(shareMessage(ep))}" data-url="https://youtu.be/${ep.id}">और जगह शेयर करें</button>
         ${pageLink ? `<a class="btn btn-ghost" href="${ep.path}">पूरा एपिसोड पेज</a>` : ''}
       </div>`;
 }
@@ -187,18 +189,52 @@ function shareButtons(ep, { pageLink = false } = {}) {
 // Shared behaviour: click-to-play thumbnails and the phone's own share sheet.
 const PAGE_JS = `<script>
 (function(){
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function player(id,title){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+    f.title=title||'YouTube';
+    f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen=true;
+    f.className='inline-player';
+    return f;
+  }
   document.querySelectorAll('.js-play').forEach(function(a){
-    a.addEventListener('click',function(e){
-      e.preventDefault();
-      var f=document.createElement('iframe');
-      f.src='https://www.youtube.com/embed/'+a.getAttribute('data-id')+'?autoplay=1&rel=0&playsinline=1';
-      f.title=a.getAttribute('data-title')||'YouTube';
-      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      f.allowFullscreen=true;
-      f.className='inline-player';
-      a.replaceWith(f);
-    });
+    a.addEventListener('click',function(e){ e.preventDefault(); a.replaceWith(player(a.getAttribute('data-id'),a.getAttribute('data-title'))); });
   });
+
+  // Home page: any episode in the slider plays on the big screen at the top.
+  var dataEl=document.getElementById('ep-data'), stage=document.getElementById('stage');
+  if(dataEl && stage){
+    var eps=JSON.parse(dataEl.textContent);
+    function set(id,fn){ var el=document.getElementById(id); if(el) fn(el); }
+    function pick(i){
+      var e=eps[i]; if(!e) return;
+      set('stage-media',function(m){ m.innerHTML=''; m.appendChild(player(e.id,e.title)); });
+      set('stage-ribbon',function(r){ r.textContent = i===0 ? 'NEW EPISODE' : e.ep; });
+      set('stage-plate',function(p){ p.textContent=e.ep; });
+      set('stage-title',function(t){ t.textContent=e.title; t.href=e.path; });
+      set('stage-date',function(d){ d.textContent=e.date; });
+      set('stage-yt',function(y){ y.href='https://www.youtube.com/watch?v='+e.id; });
+      set('stage-wa',function(w){ w.href=e.wa; });
+      set('stage-share',function(s){ s.dataset.title=e.title; s.dataset.text=e.share; });
+      document.querySelectorAll('.js-pick').forEach(function(c){ c.classList.toggle('is-on', c.getAttribute('data-i')==String(i)); });
+      stage.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'});
+    }
+    document.querySelectorAll('.js-pick').forEach(function(c){
+      c.addEventListener('click',function(ev){
+        if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.button===1) return; // let "open in new tab" work
+        ev.preventDefault(); pick(+c.getAttribute('data-i'));
+      });
+    });
+    var first=document.querySelector('.js-pick[data-i="0"]'); if(first) first.classList.add('is-on');
+  }
+
+  var reel=document.getElementById('reel');
+  document.querySelectorAll('.reel-btn').forEach(function(b){
+    b.addEventListener('click',function(){ if(reel) reel.scrollBy({left:(+b.dataset.dir)*reel.clientWidth*0.85,behavior:calm?'auto':'smooth'}); });
+  });
+
   if(navigator.share){
     document.querySelectorAll('.js-share').forEach(function(b){
       b.hidden=false;
@@ -208,10 +244,11 @@ const PAGE_JS = `<script>
 })();
 </script>`;
 
-function card(ep, { eager = false } = {}) {
-  return `<li><a class="ep" href="${ep.path}">
+function card(ep, { eager = false, pick = null } = {}) {
+  const pickAttr = pick === null ? '' : ` js-pick" data-i="${pick}`;
+  return `<li><a class="ep${pickAttr}" href="${ep.path}">
   <span class="thumb"><img src="${esc(thumb(ep, 'standard'))}" srcset="${esc(srcset(ep))}" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" ${eager ? '' : 'loading="lazy" '}decoding="async"><span class="dur">${clock(ep.sec)}</span></span>
-  <span class="plate">${epLabel(ep.n)}</span>
+  <span><span class="plate">${epLabel(ep.n)}</span>${pick === null ? '' : '<span class="now">अभी चल रहा है</span>'}</span>
   <span class="ep-title">${esc(ep.clean)}</span>
   <span class="date">${hiDate(ep.publishedAt)}</span>
 </a></li>`;
@@ -222,34 +259,52 @@ function homePage() {
   const latest = newestFirst[0];
 
   const marquee = latest
-    ? `<div class="marquee">
+    ? `<div class="marquee" id="stage">
         <div class="marquee-frame">
-          <span class="ribbon">NEW EPISODE</span>
-          <a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
+          <span class="ribbon" id="stage-ribbon">NEW EPISODE</span>
+          <div id="stage-media"><a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
             <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 40rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
             <span class="play-btn" aria-hidden="true"></span>
             <span class="dur">${clock(latest.sec)}</span>
-          </a>
+          </a></div>
         </div>
         <div class="marquee-cap">
-          <span class="plate">${epLabel(latest.n)}</span>
-          <a class="marquee-title" href="${latest.path}">${esc(latest.clean)}</a>
-          <span class="date">${hiDate(latest.publishedAt)}, ${minutes(latest.sec)}</span>
+          <span class="plate" id="stage-plate">${epLabel(latest.n)}</span>
+          <a class="marquee-title" id="stage-title" href="${latest.path}">${esc(latest.clean)}</a>
+          <span class="date" id="stage-date">${hiDate(latest.publishedAt)}, ${minutes(latest.sec)}</span>
         </div>
-        ${shareButtons(latest)}
+        ${shareButtons(latest, { stage: true })}
       </div>`
     : '';
 
-  const older = newestFirst.slice(1);
-  const listHtml = older.length
-    ? `<section class="sec wrap" id="episodes" aria-labelledby="eps-h">
-  <h2 class="h2" id="eps-h">पिछले एपिसोड</h2>
-  <p class="count">अब तक कुल ${newestFirst.length} एपिसोड</p>
-  <ul class="grid">
-${older.map((ep) => card(ep)).join('\n')}
-  </ul>
-</section>`
-    : `<section class="sec wrap" id="episodes"><h2 class="h2">और एपिसोड जल्द आ रहे हैं</h2><p>नए एपिसोड के लिए <a href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>।</p></section>`;
+  const listHtml = newestFirst.length
+    ? `<section class="sec reel-sec" id="episodes" aria-labelledby="eps-h">
+  <div class="wrap">
+    <div class="reel-head">
+      <div>
+        <h2 class="h2" id="eps-h">सारे एपिसोड</h2>
+        <p class="count">अब तक कुल ${newestFirst.length} एपिसोड। किसी पर भी दबाओ, वो ऊपर बड़े परदे पर चलेगा।</p>
+      </div>
+      <div class="reel-nav"><button class="reel-btn" type="button" data-dir="-1" aria-label="पिछले एपिसोड दिखाओ">‹</button><button class="reel-btn" type="button" data-dir="1" aria-label="आगे के एपिसोड दिखाओ">›</button></div>
+    </div>
+    <ul class="reel" id="reel">
+${newestFirst.map((ep, i) => card(ep, { pick: i })).join('\n')}
+    </ul>
+    <p class="reel-all"><a href="/episodes/">सारे एपिसोड एक साथ देखें</a></p>
+  </div>
+</section>
+<script id="ep-data" type="application/json">${JSON.stringify(
+      newestFirst.map((ep) => ({
+        id: ep.id,
+        ep: epLabel(ep.n),
+        title: ep.clean,
+        path: ep.path,
+        date: `${hiDate(ep.publishedAt)}, ${minutes(ep.sec)}`,
+        wa: waLink(ep),
+        share: shareMessage(ep),
+      })),
+    ).replace(/</g, '\\u003c')}</script>`
+    : `<section class="sec wrap" id="episodes"><h2 class="h2">एपिसोड जल्द आ रहे हैं</h2><p>पहला एपिसोड आते ही यहाँ दिखेगा। तब तक <a href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>।</p></section>`;
 
   const shortsHtml = shorts.length
     ? `<section class="sec wrap" aria-labelledby="shorts-h">
@@ -265,11 +320,21 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
     .join('\n');
 
   const boards = (site.brands || [])
-    .map((b) => {
-      const inner = `${b.logo ? `<img src="${esc(b.logo)}" alt="" height="56" loading="lazy">` : ''}<span class="board-naam">${esc(b.name)}</span><span class="board-kaam">${esc(b.label)}</span>`;
-      return `<li>${b.url ? `<a class="board" href="${esc(b.url)}">${inner}</a>` : `<div class="board">${inner}</div>`}</li>`;
-    })
+    .map((b) => `<li class="board">
+      ${b.logo ? `<img class="board-logo" src="${esc(b.logo)}" alt="" width="64" height="64" loading="lazy">` : ''}
+      <span class="board-naam">${esc(b.name)}</span>
+      <span class="board-kaam">${esc(b.label)}</span>
+      <span class="board-links">${b.url ? `<a href="${esc(b.url)}">वेबसाइट</a>` : ''}${b.youtube ? `<a href="${esc(b.youtube)}">YouTube</a>` : ''}</span>
+    </li>`)
     .join('\n');
+
+  const contactHtml = site.contactEmail
+    ? `<section class="sec wrap" id="contact" aria-labelledby="contact-h">
+  <h2 class="h2" id="contact-h">ब्रांड कोलैब और बिज़नेस</h2>
+  <p>स्पॉन्सरशिप, ब्रांड इंटीग्रेशन या किसी भी काम के लिए सीधे लिखें।</p>
+  <div class="actions"><a class="btn btn-primary" href="mailto:${esc(site.contactEmail)}">${esc(site.contactEmail)}</a><a class="btn btn-ghost" href="${esc(site.instagramUrl)}">Instagram पर मैसेज करें</a></div>
+</section>`
+    : '';
 
   const body = `<main id="main">
 <section class="hero">
@@ -307,12 +372,13 @@ ${boards ? `<section class="sec wrap" aria-labelledby="brands-h">
 ${boards}
   </ul>
 </section>` : ''}
+${contactHtml}
 </main>`;
 
   const sameAs = [site.channelUrl, site.instagramUrl].filter(Boolean);
   const ld = siteUrl
     ? [
-        { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: ['Gapistaan', 'गैपिस्तान'], url: abs('/'), inLanguage: 'hi' },
+        { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: ['Gapistaan', 'Gapistan', 'गैपिस्तान'], url: abs('/'), inLanguage: 'hi' },
         { '@context': 'https://schema.org', '@type': 'Organization', name: 'Gapistaan', alternateName: 'गैपिस्तान', url: abs('/'), logo: abs('/img/logo-520.webp'), sameAs },
       ]
     : [];
@@ -433,6 +499,24 @@ ${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" 
   });
 }
 
+function episodesPage() {
+  const body = `<main id="main" class="wrap episode">
+<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / सारे एपिसोड</nav>
+<h1 class="ep-h1">गैपिस्तान के सारे एपिसोड</h1>
+<p class="count">अब तक कुल ${newestFirst.length} एपिसोड, सबसे नया सबसे पहले।</p>
+<ul class="grid">
+${newestFirst.map((ep) => card(ep)).join('\n')}
+</ul>
+</main>`;
+  return layout({
+    title: `सारे एपिसोड | Gapistaan गैपिस्तान`,
+    description: `गैपिस्तान के सारे ${newestFirst.length} एपिसोड एक जगह: चाचा बनाम Gen Z की improvised हिंदी कॉमेडी।`,
+    pathName: '/episodes/',
+    image: siteUrl ? abs('/img/og-home.jpg') : null,
+    body,
+  });
+}
+
 function notFoundPage() {
   return layout({
     title: 'यह पन्ना नहीं मिला | गैपिस्तान',
@@ -452,11 +536,14 @@ for (const ep of episodes) {
   await mkdir(path.join(out, 'video', ep.id), { recursive: true });
   await writeFile(path.join(out, 'video', ep.id, 'index.html'), episodePage(ep));
 }
+await mkdir(path.join(out, 'episodes'), { recursive: true });
+await writeFile(path.join(out, 'episodes', 'index.html'), episodesPage());
 await writeFile(path.join(out, '404.html'), notFoundPage());
 
 if (siteUrl) {
   const urls = [
     { loc: abs('/'), lastmod: newestFirst[0]?.publishedAt },
+    { loc: abs('/episodes/'), lastmod: newestFirst[0]?.publishedAt },
     ...episodes.map((ep) => ({ loc: abs(ep.path), lastmod: ep.publishedAt })),
   ];
   await writeFile(

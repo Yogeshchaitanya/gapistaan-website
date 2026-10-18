@@ -45,18 +45,22 @@
   "brands": [
     {
       "name": "PICHCHRAPA",
-      "label": "प्रोडक्शन हाउस",
-      "url": "",
-      "logo": ""
+      "label": "प्रोडक्शन हाउस और कॉमेडी चैनल",
+      "url": "https://pichchrapa.com",
+      "youtube": "https://www.youtube.com/@pichchrapa",
+      "logo": "https://yt3.ggpht.com/nx1qaTzLmxG8dw1W0BktZzJ-11O3vgSDr_dLsJWkW-N0iuzXFdACLmO3242IKGSl4unZaWgY6w=s128-c-k-c0x00ffffff-no-rj"
     },
     {
       "name": "Indian Films Academy",
       "label": "एक्टिंग इंस्टीट्यूट, लखनऊ",
-      "url": "",
-      "logo": ""
+      "url": "https://indianfilmsacademy.com",
+      "youtube": "https://www.youtube.com/@indianfilmsacademyy",
+      "logo": "https://yt3.ggpht.com/ZvPgZaHmYU25KhBzvAzbS4KURKP_PV5lQmS6bsP7P607zm5ilu-8mXyC4wClmvQV31bJ0YBy=s128-c-k-c0x00ffffff-no-rj"
     }
   ],
   "production": "PICHCHRAPA",
   "canonicalHost": "gapistaan.com",
-  "aboutEn": "Gapistaan (गैपिस्तान) is a Hindi comedy web series from Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script."
+  "aboutEn": "Gapistaan (गैपिस्तान) is a Hindi comedy web series from Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.",
+  "contactEmail": "",
+  "cfAnalyticsToken": ""
 }

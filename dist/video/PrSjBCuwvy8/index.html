@@ -31,8 +31,11 @@
 @font-face{font-family:"Mukta";font-style:normal;font-weight:600 800;font-display:swap;src:url(/fonts/mukta-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
 :root{
   --manch:#170705;        
-  --manch-2:#24100B;      
-  --manch-3:#3A170E;
+  --neel:#0F2D38;         
+  --neel-2:#163F4C;       
+  --neel-3:#24596A;       
+  --neel-gehra:#081E26;   
+  --teal:#4FD1C5;
   --kaala:#0A0302;
   --narangi:#F8451A;      
   --narangi-gaadha:#D23A12;
@@ -40,14 +43,14 @@
   --sona:#F6C453;         
   --bulb:#FFE9A3;
   --safed:#FFF6EE;
-  --dhundh:#D9C3B6;
+  --dhundh:#C9DCE0;
   --genz:#F72585;
   --latin:"Anton","Arial Narrow",Impact,sans-serif;
   --hindi:"Mukta","Noto Sans Devanagari",system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:1rem}
-body{margin:0;background:var(--manch);color:var(--safed);font:400 1.0625rem/1.7 var(--hindi)}
+body{margin:0;background:var(--neel);color:var(--safed);font:400 1.0625rem/1.7 var(--hindi)}
 img{max-width:100%;display:block}
 a{color:var(--sona)}
 :focus-visible{outline:3px solid var(--genz);outline-offset:3px}
@@ -58,10 +61,10 @@ a{color:var(--sona)}
 @media (min-width:48rem){.wrap{padding-inline:2rem}}
 .latin{font-family:var(--latin);font-weight:400;letter-spacing:.01em}
 .filmstrip{height:22px;background:
-  linear-gradient(var(--kaala),var(--kaala)) 0 0/100% 100%;
+  linear-gradient(var(--neel-gehra),var(--neel-gehra)) 0 0/100% 100%;
   position:relative}
-.filmstrip::before{content:"";position:absolute;inset:6px 0;background:repeating-linear-gradient(90deg,transparent 0 12px,#2C2420 12px 26px,transparent 26px 38px);border-radius:2px}
-.topbar{background:var(--kaala);border-bottom:1px solid #2a1712}
+.filmstrip::before{content:"";position:absolute;inset:6px 0;background:repeating-linear-gradient(90deg,transparent 0 12px,#1E3B45 12px 26px,transparent 26px 38px);border-radius:2px}
+.topbar{background:var(--neel-gehra);border-bottom:1px solid #12333e}
 .topbar-in{display:flex;align-items:center;gap:1rem;min-height:4.25rem}
 .brand{display:flex;align-items:center;gap:.65rem;color:var(--safed);text-decoration:none}
 .brand img{width:48px;height:48px}
@@ -83,7 +86,7 @@ a{color:var(--sona)}
 .hero{position:relative;overflow:hidden;padding-block:2.5rem 3.25rem;
   background:
     repeating-linear-gradient(135deg,rgba(248,69,26,.07) 0 34px,transparent 34px 68px),
-    radial-gradient(120% 90% at 50% 40%,#4a1a0e 0%,#2a0d07 45%,var(--manch) 80%)}
+    radial-gradient(120% 90% at 50% 40%,#4a1a0e 0%,#2a0d07 45%,var(--manch) 80%);border-bottom:4px solid var(--narangi)}
 .hero::before,.hero::after{content:"";position:absolute;top:-10%;width:34%;height:120%;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,233,190,.17),rgba(255,233,190,0) 85%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%)}
 .hero::before{left:6%;transform:rotate(-8deg)}
@@ -131,13 +134,28 @@ a{color:var(--sona)}
 .date{display:block;color:var(--dhundh);font-size:.9375rem}
 .grid{list-style:none;margin:0;padding:0;display:grid;gap:2rem 1.4rem;grid-template-columns:repeat(auto-fill,minmax(16.5rem,1fr))}
 .ep{display:flex;flex-direction:column;gap:.55rem;height:100%;text-decoration:none;color:inherit}
-.thumb{position:relative;display:block;border-radius:12px;overflow:hidden;border:2px solid #3b1c13;background:var(--manch-2)}
+.thumb{position:relative;display:block;border-radius:12px;overflow:hidden;border:2px solid var(--neel-3);background:var(--neel-2)}
 .thumb img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
 .thumb .dur{right:8px;bottom:8px}
 .ep .plate{align-self:flex-start;margin-top:.25rem}
 .ep-title{font-weight:800;line-height:1.5}
 .ep:hover .thumb{border-color:var(--narangi)}
 .ep:hover .ep-title{color:var(--sona)}
+.reel-sec{background:linear-gradient(180deg,#123744 0%,var(--neel) 100%)}
+.reel-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
+.reel-head .count{margin:0}
+.reel-nav{display:none;gap:.6rem}
+@media (min-width:48rem){.reel-nav{display:flex}}
+.reel-btn{width:46px;height:46px;border-radius:50%;border:2px solid var(--teal);background:transparent;color:var(--teal);font:800 1.6rem/1 var(--hindi);cursor:pointer}
+.reel-btn:hover{background:var(--teal);color:var(--neel-gehra)}
+.reel{list-style:none;margin:0;padding:.3rem .2rem 1.1rem;display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--neel-3) transparent}
+@media (min-width:40rem){.reel{grid-auto-columns:minmax(16rem,19.5rem)}}
+.reel > li{scroll-snap-align:start}
+.ep.is-on .thumb{border-color:var(--narangi);box-shadow:0 0 0 3px rgba(248,69,26,.35)}
+.now{display:none;margin-left:.5rem;color:var(--narangi);font-weight:800;font-size:.875rem}
+.ep.is-on .now{display:inline}
+.reel-all{margin:1rem 0 0}
+.reel-all a{color:var(--teal);font-weight:800}
 .about{background:var(--narangi);color:var(--kaala)}
 .about-in{display:grid;gap:2rem;align-items:end}
 @media (min-width:56rem){.about-in{grid-template-columns:1.15fr 1fr;gap:3rem}}
@@ -155,13 +173,14 @@ a{color:var(--sona)}
 .naam-en{font-size:.9375rem}
 .role{font-size:.9375rem;font-weight:800}
 .boards{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:1rem}
-.board{display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;min-width:15rem;padding:1rem 1.3rem;border-radius:10px;background:var(--kaala);border:2px solid #fff;color:#fff;text-decoration:none}
-.board img{max-height:56px;width:auto;margin-bottom:.35rem}
+.board{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;align-items:center;min-width:17rem;padding:1rem 1.2rem;border-radius:14px;background:var(--neel-2);border:2px solid var(--neel-3);color:#fff}
+.board-logo{grid-row:span 3;width:64px;height:64px;border-radius:50%;box-shadow:0 0 0 2px #fff}
+.board-links{display:flex;gap:.6rem;margin-top:.35rem}
+.board-links a{padding:.2rem .7rem;border-radius:999px;border:1.5px solid var(--teal);color:var(--teal);font-weight:800;font-size:.9rem;text-decoration:none}
+.board-links a:hover{background:var(--teal);color:var(--neel-gehra)}
 .board-naam{font:400 1.55rem/1.15 var(--latin);letter-spacing:.03em}
 .board-kaam{color:var(--dhundh);font-size:.9375rem}
-a.board:hover{border-color:var(--sona)}
-a.board:hover .board-naam{color:var(--sona)}
-.foot{background:var(--kaala);color:var(--dhundh);font-size:.9375rem}
+.foot{background:var(--neel-gehra);color:var(--dhundh);font-size:.9375rem}
 .foot-in{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center;justify-content:space-between;padding-block:1.8rem}
 .foot ul{list-style:none;display:flex;flex-wrap:wrap;gap:1.25rem;margin:0;padding:0}
 .foot p{margin:0}
@@ -170,7 +189,7 @@ a.board:hover .board-naam{color:var(--sona)}
 .crumbs a{color:var(--dhundh)}
 .ep-h1{margin:0 0 .8rem;max-width:32ch;font:800 clamp(1.7rem,4.6vw,2.6rem)/1.35 var(--hindi)}
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.1rem;margin:0 0 1.3rem;color:var(--dhundh)}
-.player{max-width:62rem;padding:6px;border-radius:16px;background:#2A0F08;box-shadow:0 0 0 2px var(--narangi),0 18px 50px rgba(0,0,0,.5)}
+.player{max-width:62rem;padding:6px;border-radius:16px;background:var(--neel-gehra);box-shadow:0 0 0 2px var(--narangi),0 18px 50px rgba(0,0,0,.5)}
 .player iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:11px;background:#000}
 .episode > .actions{margin-top:1.3rem}
 .block{margin-top:2.75rem;max-width:62rem}
@@ -178,12 +197,12 @@ a.board:hover .board-naam{color:var(--sona)}
 .prose{max-width:66ch}
 .prose p{margin:0 0 1rem;overflow-wrap:anywhere}
 .chapters{list-style:none;margin:0;padding:0;max-width:42rem}
-.chapters a{display:flex;gap:1rem;padding:.65rem .5rem;border-bottom:1px solid #3b1c13;text-decoration:none;color:inherit}
-.chapters a:hover{background:var(--manch-2)}
+.chapters a{display:flex;gap:1rem;padding:.65rem .5rem;border-bottom:1px solid var(--neel-3);text-decoration:none;color:inherit}
+.chapters a:hover{background:var(--neel-2)}
 .chapters .t{min-width:3.6rem;font-weight:800;color:var(--narangi);font-variant-numeric:tabular-nums}
 .prevnext{display:grid;gap:1rem;margin-top:2.75rem;max-width:62rem}
 @media (min-width:40rem){.prevnext{grid-template-columns:1fr 1fr}.pn-next{grid-column:2;text-align:right}}
-.pn{display:flex;flex-direction:column;padding:1rem 1.2rem;border-radius:12px;background:var(--manch-2);border:2px solid #3b1c13;text-decoration:none;color:inherit}
+.pn{display:flex;flex-direction:column;padding:1rem 1.2rem;border-radius:12px;background:var(--neel-2);border:2px solid var(--neel-3);text-decoration:none;color:inherit}
 .pn-k{font-size:.875rem;color:var(--dhundh)}
 .pn-t{font-weight:800;line-height:1.5}
 .pn:hover{border-color:var(--narangi)}
@@ -234,19 +253,19 @@ a.board:hover .board-naam{color:var(--sona)}
 </nav>
 <section class="block" aria-labelledby="more-h"><h2 class="h2" id="more-h">और एपिसोड</h2><ul class="grid"><li><a class="ep" href="/video/02k4tNgjOrc/">
   <span class="thumb"><img src="https://i.ytimg.com/vi/02k4tNgjOrc/sddefault.jpg" srcset="https://i.ytimg.com/vi/02k4tNgjOrc/mqdefault.jpg 320w, https://i.ytimg.com/vi/02k4tNgjOrc/hqdefault.jpg 480w, https://i.ytimg.com/vi/02k4tNgjOrc/sddefault.jpg 640w, https://i.ytimg.com/vi/02k4tNgjOrc/maxresdefault.jpg 1280w" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="dur">13:08</span></span>
-  <span class="plate">EP 07</span>
+  <span><span class="plate">EP 07</span></span>
   <span class="ep-title">घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो</span>
   <span class="date">17 अक्टूबर 2026</span>
 </a></li>
 <li><a class="ep" href="/video/Nv7F5v-9Rz0/">
   <span class="thumb"><img src="https://i.ytimg.com/vi/Nv7F5v-9Rz0/sddefault.jpg" srcset="https://i.ytimg.com/vi/Nv7F5v-9Rz0/mqdefault.jpg 320w, https://i.ytimg.com/vi/Nv7F5v-9Rz0/hqdefault.jpg 480w, https://i.ytimg.com/vi/Nv7F5v-9Rz0/sddefault.jpg 640w, https://i.ytimg.com/vi/Nv7F5v-9Rz0/maxresdefault.jpg 1280w" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="dur">12:48</span></span>
-  <span class="plate">EP 06</span>
+  <span><span class="plate">EP 06</span></span>
   <span class="ep-title">धरम परिवर्तन क्यों ? Gen Gap Comedy</span>
   <span class="date">15 अक्टूबर 2026</span>
 </a></li>
 <li><a class="ep" href="/video/AxfOesoA96Y/">
   <span class="thumb"><img src="https://i.ytimg.com/vi/AxfOesoA96Y/sddefault.jpg" srcset="https://i.ytimg.com/vi/AxfOesoA96Y/mqdefault.jpg 320w, https://i.ytimg.com/vi/AxfOesoA96Y/hqdefault.jpg 480w, https://i.ytimg.com/vi/AxfOesoA96Y/sddefault.jpg 640w, https://i.ytimg.com/vi/AxfOesoA96Y/maxresdefault.jpg 1280w" sizes="(min-width: 72rem) 22rem, (min-width: 40rem) 45vw, 92vw" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="dur">11:45</span></span>
-  <span class="plate">EP 05</span>
+  <span><span class="plate">EP 05</span></span>
   <span class="ep-title">लड़की के आने से | नमस्ते CHACHA</span>
   <span class="date">13 अक्टूबर 2026</span>
 </a></li></ul></section>
@@ -276,18 +295,52 @@ a.board:hover .board-naam{color:var(--sona)}
 </footer>
 <script>
 (function(){
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function player(id,title){
+    var f=document.createElement('iframe');
+    f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&playsinline=1';
+    f.title=title||'YouTube';
+    f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.allowFullscreen=true;
+    f.className='inline-player';
+    return f;
+  }
   document.querySelectorAll('.js-play').forEach(function(a){
-    a.addEventListener('click',function(e){
-      e.preventDefault();
-      var f=document.createElement('iframe');
-      f.src='https://www.youtube.com/embed/'+a.getAttribute('data-id')+'?autoplay=1&rel=0&playsinline=1';
-      f.title=a.getAttribute('data-title')||'YouTube';
-      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      f.allowFullscreen=true;
-      f.className='inline-player';
-      a.replaceWith(f);
-    });
+    a.addEventListener('click',function(e){ e.preventDefault(); a.replaceWith(player(a.getAttribute('data-id'),a.getAttribute('data-title'))); });
   });
+
+  // Home page: any episode in the slider plays on the big screen at the top.
+  var dataEl=document.getElementById('ep-data'), stage=document.getElementById('stage');
+  if(dataEl && stage){
+    var eps=JSON.parse(dataEl.textContent);
+    function set(id,fn){ var el=document.getElementById(id); if(el) fn(el); }
+    function pick(i){
+      var e=eps[i]; if(!e) return;
+      set('stage-media',function(m){ m.innerHTML=''; m.appendChild(player(e.id,e.title)); });
+      set('stage-ribbon',function(r){ r.textContent = i===0 ? 'NEW EPISODE' : e.ep; });
+      set('stage-plate',function(p){ p.textContent=e.ep; });
+      set('stage-title',function(t){ t.textContent=e.title; t.href=e.path; });
+      set('stage-date',function(d){ d.textContent=e.date; });
+      set('stage-yt',function(y){ y.href='https://www.youtube.com/watch?v='+e.id; });
+      set('stage-wa',function(w){ w.href=e.wa; });
+      set('stage-share',function(s){ s.dataset.title=e.title; s.dataset.text=e.share; });
+      document.querySelectorAll('.js-pick').forEach(function(c){ c.classList.toggle('is-on', c.getAttribute('data-i')==String(i)); });
+      stage.scrollIntoView({behavior:calm?'auto':'smooth',block:'start'});
+    }
+    document.querySelectorAll('.js-pick').forEach(function(c){
+      c.addEventListener('click',function(ev){
+        if(ev.metaKey||ev.ctrlKey||ev.shiftKey||ev.button===1) return; // let "open in new tab" work
+        ev.preventDefault(); pick(+c.getAttribute('data-i'));
+      });
+    });
+    var first=document.querySelector('.js-pick[data-i="0"]'); if(first) first.classList.add('is-on');
+  }
+
+  var reel=document.getElementById('reel');
+  document.querySelectorAll('.reel-btn').forEach(function(b){
+    b.addEventListener('click',function(){ if(reel) reel.scrollBy({left:(+b.dataset.dir)*reel.clientWidth*0.85,behavior:calm?'auto':'smooth'}); });
+  });
+
   if(navigator.share){
     document.querySelectorAll('.js-share').forEach(function(b){
       b.hidden=false;
@@ -296,5 +349,6 @@ a.board:hover .board-naam{color:var(--sona)}
   }
 })();
 </script>
+
 </body>
 </html>
