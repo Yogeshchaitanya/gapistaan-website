@@ -1,0 +1,6 @@
+home: 200
+admission: 200
+guides: 200
+order (expect 503 until keys): {"error":"payments-not-configured"} 503
+admin (expect 404): 404
+old cinekar redirect: 301 https://ifa-website.itsyogeshkumarmishra.workers.dev/cinematic-acting-course/
