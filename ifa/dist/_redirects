@@ -1,0 +1,25 @@
+# Old WordPress addresses -> new pages (keeps Google rankings and old links working)
+/about-academy /about/ 301
+/about-academy/* /about/ 301
+/about-yogesh-raj /about/ 301
+/about-yogesh-raj/* /about/ 301
+/about-us-3/* /about/ 301
+/one-year-diploma-in-camera-acting/* /cinekar/ 301
+/two-year-diploma-in-camera-acting/* /cinekar/ 301
+/6-month-course-in-camera-acting/* /cinekar/ 301
+/3-month-course-in-camera-acting/* /cinekar/ 301
+/1-month-course-in-camera-acting/* /cinekar/ 301
+/offline-classes/* /cinekar/ 301
+/online-classes/* /online/ 301
+/contact-us /contact/ 301
+/contact-us/* /contact/ 301
+/home-grocery/* / 301
+/shop/* / 301
+/cart/* / 301
+/checkout/* / 301
+/my-account/* / 301
+/wishlist/* / 301
+/blog/* / 301
+/feed/* / 301
+/2017/* / 301
+/2021/* / 301

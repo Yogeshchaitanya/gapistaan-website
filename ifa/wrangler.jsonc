@@ -1,0 +1,14 @@
+{
+  // Indian Films Academy: site served from ifa/dist. src/worker.js runs only for pages listed below
+  // and sends www (or any other host) to https://indianfilmsacademy.com.
+  "name": "ifa-website",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/", "/cinekar/*"]
+  }
+}

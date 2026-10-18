@@ -38,13 +38,26 @@ jobs:
       - name: साइट बनाओ
         run: node scripts/build.mjs
 
+      # Indian Films Academy (ifa/): अपना YouTube चैनल और Instagram feed, अपनी अलग साइट
+      - name: IFA के YouTube वीडियो लाओ
+        if: env.YT_API_KEY != ''
+        continue-on-error: true
+        run: node ifa/scripts/fetch-videos.mjs
+
+      - name: IFA के Instagram पोस्ट लाओ
+        continue-on-error: true
+        run: node ifa/scripts/fetch-instagram.mjs
+
+      - name: IFA साइट बनाओ
+        run: node ifa/scripts/build.mjs
+
       - name: बदलाव हों तो commit करो
         run: |
-          if [ -n "$(git status --porcelain data dist)" ]; then
+          if [ -n "$(git status --porcelain data dist ifa/data ifa/dist)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data dist
-            git commit -m "YouTube से नए वीडियो सिंक किए"
+            git add data dist ifa/data ifa/dist
+            git commit -m "YouTube/Instagram से नए वीडियो सिंक किए"
             git push
           else
             echo "कोई नया बदलाव नहीं"
