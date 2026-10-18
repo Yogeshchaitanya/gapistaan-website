@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://indianfilmsacademy.com/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/cinekar/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/cinekar/actor/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/cinekar/director/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/cinekar/editor/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/about/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/online/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/gallery/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/videos/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/contact/</loc></url>
-  <url><loc>https://indianfilmsacademy.com/privacy/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://indianfilmsacademy.com/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/"/></url>
+  <url><loc>https://indianfilmsacademy.com/cinekar/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/"/></url>
+  <url><loc>https://indianfilmsacademy.com/cinekar/actor/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/actor/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/actor/"/></url>
+  <url><loc>https://indianfilmsacademy.com/cinekar/director/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/director/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/director/"/></url>
+  <url><loc>https://indianfilmsacademy.com/cinekar/editor/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/editor/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/editor/"/></url>
+  <url><loc>https://indianfilmsacademy.com/about/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/about/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/about/"/></url>
+  <url><loc>https://indianfilmsacademy.com/gallery/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/gallery/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/gallery/"/></url>
+  <url><loc>https://indianfilmsacademy.com/videos/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/videos/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/videos/"/></url>
+  <url><loc>https://indianfilmsacademy.com/online/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/online/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/online/"/></url>
+  <url><loc>https://indianfilmsacademy.com/contact/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/contact/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/contact/"/></url>
+  <url><loc>https://indianfilmsacademy.com/privacy/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/privacy/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/privacy/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/cinekar/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/cinekar/actor/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/actor/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/actor/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/cinekar/director/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/director/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/director/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/cinekar/editor/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/cinekar/editor/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/cinekar/editor/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/about/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/about/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/about/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/gallery/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/gallery/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/gallery/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/videos/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/videos/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/videos/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/online/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/online/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/online/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/contact/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/contact/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/contact/"/></url>
+  <url><loc>https://indianfilmsacademy.com/en/privacy/</loc><xhtml:link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/privacy/"/><xhtml:link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/privacy/"/></url>
 </urlset>

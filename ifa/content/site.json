@@ -1,223 +1,1122 @@
 {
-  "siteName": "Indian Films Academy",
-  "siteNameHi": "इंडियन फिल्म्स एकेडमी",
   "siteUrl": "https://indianfilmsacademy.com",
   "canonicalHost": "indianfilmsacademy.com",
   "since": 2019,
   "channelId": "UCy1JejEhMtQl191XRConeIg",
   "youtubeUrl": "https://www.youtube.com/@indianfilmsacademyy",
   "instagramUrl": "",
-  "instagramHandle": "",
   "instagramFeed": "",
   "facebookUrl": "",
   "graphyUrl": "",
-  "hiddenVideos": ["vN9t5mrdAbs"],
   "phone": "+917754000121",
-  "phoneLabel": "77540 00121",
+  "phoneLabel": "+91 77540 00121",
   "whatsapp": "917754000121",
   "email": "info@indianfilmsacademy.com",
   "address": {
-    "street": "C1/192, वरदान खंड, सेक्टर 1, गोमती नगर",
-    "streetEn": "C1/192, Vardan Khand, Sector 1, Gomti Nagar",
-    "city": "लखनऊ",
-    "cityEn": "Lucknow",
+    "street": "C1/192, Vardan Khand, Sector 1, Gomti Nagar",
+    "city": "Lucknow",
     "region": "Uttar Pradesh",
     "pin": "226010"
   },
   "cfAnalyticsToken": "",
-
-  "homeTitle": "Acting Institute in Lucknow | CINEKAR: 3 महीने का Actor, Director, Editor कोर्स | Indian Films Academy",
-  "homeDescription": "लखनऊ का Indian Films Academy (2019 से)। नया CINEKAR प्रोग्राम: 90 दिन में Actor, Director या Editor बनिए, साथ में YouTube-Instagram क्रिएटर ट्रेनिंग, लाइव प्रोजेक्ट और टॉप छात्रों को PICHCHRAPA में इंटर्नशिप और नौकरी।",
-
-  "program": {
-    "name": "CINEKAR",
-    "nameHi": "सिनेकार",
-    "tagline": "90 दिन में Actor, Director या Editor बनिए",
-    "sub": "पहला महीना सबके लिए एक्टिंग, दूसरा महीना आपकी अपनी फ़ील्ड, तीसरा महीना लाइव प्रोजेक्ट। साथ में YouTube और Instagram क्रिएटर की पूरी ट्रेनिंग।",
-    "duration": "3 महीने (90 दिन)",
-    "durationIso": "P3M",
-    "mode": "क्लासरूम + लाइव शूट, गोमती नगर, लखनऊ",
-    "eligibility": "16 साल से ऊपर कोई भी उम्र। कोई डिग्री ज़रूरी नहीं, बस पढ़ना-लिखना आना चाहिए।",
-    "fee": 50000,
-    "feeLabel": "₹50,000",
-    "installments": [27500, 27500],
-    "installmentTotalLabel": "₹55,000",
-    "scholarship": "सिलेक्शन टेस्ट में अच्छा करने पर 20% तक स्कॉलरशिप, यानी फ़ीस ₹40,000 तक।",
-    "ladder": [
-      ["90 दिन", "ट्रेनिंग, लाइव प्रोजेक्ट और अपना चैनल"],
-      ["टॉप 10", "PICHCHRAPA प्रोडक्शन हाउस में 3 महीने की इंटर्नशिप, आने-जाने का ख़र्च हमारा"],
-      ["टॉप 2-3", "6 महीने बाद PICHCHRAPA में सैलरी वाली नौकरी"]
+  "fee": 50000,
+  "installments": [
+    27500,
+    27500
+  ],
+  "scholarshipPct": 20,
+  "videos": {
+    "note": "Only full-length class and academy videos are shown. Shorts are left out. A new upload appears automatically unless its title has one of the words in 'block'. Use 'hide' for a specific video and 'titles' to show a cleaner title on the site.",
+    "block": [
+      "airdrop",
+      "crypto",
+      "bitcoin",
+      "trading",
+      "#shorts"
     ],
+    "hide": [
+      "vN9t5mrdAbs",
+      "BLNiNleCdMQ",
+      "hZeQC8flyNM"
+    ],
+    "titles": {
+      "ShXF6p3AiF4": "Class 4: Inside the Yogesh CineAct System",
+      "s2brQcuh_eE": "Class 3: Acting Techniques",
+      "Zp8L_TB-iH0": "Class 2: The Mistake Most Actors Make",
+      "OOZ3YUvHxkk": "Class 1: Introduction to Yogesh CineAct",
+      "mEyiDCwP4ps": "The Actor as Re-Creator",
+      "7dN54PdLkHE": "Introducing Yogesh CineAct",
+      "tpvw7d43_aQ": "Cinematic Acting Class",
+      "foC1VMdC7CM": "Madhur Bhandarkar at Indian Films Academy",
+      "QEeVxZy3tjU": "Student Short Film: Acting for the Camera",
+      "HAFsSVbBuko": "First Batch: Horror Short Film",
+      "VbC3KCGPWHA": "Character Adaptation, Part 1",
+      "UyfZXIAgIyk": "Character Adaptation, Part 2",
+      "SEfcUHCTCbI": "The Soft Tone in Emotional Scenes",
+      "KcEpxJXEmkE": "Acting and Camera Technique",
+      "tvw1mmc0Cz0": "Camera Acting: Practical Tips",
+      "0stZWvhVpRw": "The Actor's Enemy (कलाकार हो तो सावधान)",
+      "yZ16uvU0f7E": "Who Does What on a Film Set (फ़िल्म में कौन क्या करता है)",
+      "ITmVvXWZ6Gs": "Live Classes: Yogesh CineAct",
+      "gt9dPiNyBic": "Filmy Adaalat: Pakhi Ka Swayambar (student production)",
+      "dBJ1i__CYW0": "Monologue Recreation: Jug Jugg Jeeyo",
+      "4QU6exzQnpY": "Feel and React: Avinash and Sarita",
+      "0B27WNsxbW4": "Monologue: A Wednesday",
+      "d3acWQDdJeA": "Feel and React: Sad Mood, Result 2",
+      "RgbGIqUvW90": "Feel and React: Sad Mood, Result 1",
+      "6GwVRfi01iI": "Recreation: A Thursday",
+      "NuLNmA9vT-8": "Feel and React: Dream Act",
+      "nMb4HaOniCY": "Action and Reaction, With Script (Second Batch)",
+      "85RgARTHjLY": "Action Class with Lalit Sir (Second Batch)",
+      "qc0WJDBosSM": "Improvisation: Action and Reaction",
+      "UwFEOx21zss": "Full Class: Emotions and Relations",
+      "rv8Sk-_4G88": "Live Observation (full class)",
+      "AEcsqCW0xes": "'Don't Do, Let It Happen': Result 2",
+      "OnvPEpFC9V0": "'Don't Do, Let It Happen': Result 1",
+      "WkhgZItXows": "Force of Emotions: Magic If",
+      "dgPldEYrd7U": "Magic If and Self-Linking: Results",
+      "EtCJotkjYWQ": "Feel and React (Third Batch)",
+      "sLHcdAa2bxI": "Kafan: Student Play (Second Batch)",
+      "09LwZiJ8JHM": "Film Direction with Yogesh Sir",
+      "Na0_AYich-A": "The Camera Look (कैमरा लुक क्या होता है)",
+      "OSgqfBk1GRI": "Diction and Speech with Actor Susheel Singh",
+      "gxD_2Dux35E": "With Actor Sanjay Pandey: The Truth of an Actor's Voice",
+      "JnZQn11t-6Y": "With Actor Sanjay Pandey: Books Every Actor Should Read",
+      "7KZlgQSODQc": "Camera Language for Actors",
+      "C2YA22BBeHI": "Breathing Exercises for Actors",
+      "IphBdC4EOXw": "Behave Like an Actor",
+      "cpjSjVxf5TM": "With Actor Manoj Tiger: Anyone Can Act, Part 1",
+      "D3_7UpIbbjg": "With Actor Manoj Tiger: Anyone Can Act, Part 2",
+      "-6hO99B53ws": "With Actor Manoj Tiger: Anyone Can Act, Part 3",
+      "i57R1E0Tf88": "With Actor Manoj Tiger: Anyone Can Act, Part 4",
+      "g3bI6e855nE": "With Actor Manoj Tiger: Anyone Can Act, Part 5",
+      "u_phbpxZY50": "Observation, Part 2",
+      "nMaR5gLaQg4": "Observation, Part 1"
+    }
+  },
+  "legendNames": {
+    "amitabh-ji": [
+      "अमिताभ बच्चन",
+      "Amitabh Bachchan"
+    ],
+    "amitab-ji-2": [
+      "अमिताभ बच्चन",
+      "Amitabh Bachchan"
+    ],
+    "sanju-baba": [
+      "संजय दत्त",
+      "Sanjay Dutt"
+    ],
+    "sanjay-dutt-2": [
+      "संजय दत्त",
+      "Sanjay Dutt"
+    ],
+    "nana-ji": [
+      "नाना पाटेकर",
+      "Nana Patekar"
+    ],
+    "nanpatekar": [
+      "नाना पाटेकर",
+      "Nana Patekar"
+    ],
+    "anupam-ji": [
+      "अनुपम खेर",
+      "Anupam Kher"
+    ],
+    "hema-ji": [
+      "हेमा मालिनी",
+      "Hema Malini"
+    ],
+    "bony-kapoor": [
+      "बोनी कपूर",
+      "Boney Kapoor"
+    ],
+    "ashutosh-rana": [
+      "आशुतोष राणा",
+      "Ashutosh Rana"
+    ],
+    "prakash-jha": [
+      "प्रकाश झा",
+      "Prakash Jha"
+    ],
+    "rajkumar-rao": [
+      "राजकुमार राव",
+      "Rajkummar Rao"
+    ],
+    "nawaj-ji": [
+      "नवाज़ुद्दीन सिद्दीक़ी",
+      "Nawazuddin Siddiqui"
+    ],
+    "om-puri-ji": [
+      "ओम पुरी",
+      "Om Puri"
+    ],
+    "rajpal": [
+      "राजपाल यादव",
+      "Rajpal Yadav"
+    ],
+    "sonu-nigam": [
+      "सोनू निगम",
+      "Sonu Nigam"
+    ],
+    "kailash-kher": [
+      "कैलाश खेर",
+      "Kailash Kher"
+    ],
+    "kangna": [
+      "कंगना रनौत",
+      "Kangana Ranaut"
+    ],
+    "khesari": [
+      "खेसारी लाल यादव",
+      "Khesari Lal Yadav"
+    ],
+    "gulshan": [
+      "गुलशन ग्रोवर",
+      "Gulshan Grover"
+    ],
+    "manoj-joshi-ji": [
+      "मनोज जोशी",
+      "Manoj Joshi"
+    ],
+    "radeep-hudda": [
+      "रणदीप हुड्डा",
+      "Randeep Hooda"
+    ],
+    "akshay": [
+      "अक्षय कुमार",
+      "Akshay Kumar"
+    ],
+    "madhur-ji": [
+      "मधुर भंडारकर",
+      "Madhur Bhandarkar"
+    ],
+    "madur-ji2": [
+      "मधुर भंडारकर",
+      "Madhur Bhandarkar"
+    ],
+    "rajjev-nigam1": [
+      "राजीव निगम",
+      "Rajeev Nigam"
+    ],
+    "rajeev-nigam-2": [
+      "राजीव निगम",
+      "Rajeev Nigam"
+    ]
+  },
+  "hi": {
+    "langName": "हिंदी",
+    "switchLabel": "English",
+    "siteName": "इंडियन फिल्म्स एकेडमी",
+    "brandSub": "लखनऊ · 2019 से",
+    "homeTitle": "Indian Films Academy, लखनऊ | CINEKAR: एक्टिंग, डायरेक्शन और एडिटिंग का 90 दिन का कार्यक्रम",
+    "homeDescription": "लखनऊ का Indian Films Academy (2019 से)। CINEKAR: 90 दिनों का सिनेमाई कार्यक्रम, Actor, Director या Editor के लिए। लाइव प्रोजेक्ट, अपना डिजिटल चैनल और PICHCHRAPA में इंटर्नशिप का रास्ता।",
+    "nav": [
+      [
+        "/cinekar/",
+        "CINEKAR"
+      ],
+      [
+        "/online/",
+        "ऑनलाइन"
+      ],
+      [
+        "/about/",
+        "एकेडमी"
+      ],
+      [
+        "/gallery/",
+        "गैलरी"
+      ],
+      [
+        "/videos/",
+        "कक्षाएँ"
+      ],
+      [
+        "/contact/",
+        "संपर्क"
+      ]
+    ],
+    "apply": "आवेदन करें",
+    "skip": "सीधे मुख्य हिस्से पर जाएँ",
+    "home": "होम",
+    "hero": {
+      "kicker": "Indian Films Academy, लखनऊ · नया कार्यक्रम",
+      "line": "90 दिनों में Actor, Director या Editor के रूप में तैयार हों",
+      "sub": "पहला महीना कैमरे के सामने, दूसरा महीना आपकी चुनी हुई विधा में, तीसरा महीना असली सेट पर। साथ ही हर छात्र अपना डिजिटल चैनल भी खड़ा करता है।",
+      "cta": "प्रवेश के लिए आवेदन करें",
+      "cta2": "कार्यक्रम देखें"
+    },
+    "ladderTitle": "कक्षा से करियर तक",
+    "ladder": [
+      [
+        "90 दिन",
+        "प्रशिक्षण, लाइव प्रोजेक्ट और आपका अपना चैनल"
+      ],
+      [
+        "शीर्ष 10 छात्र",
+        "PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप, यात्रा भत्ते के साथ"
+      ],
+      [
+        "शीर्ष 2–3 छात्र",
+        "छह महीने बाद PICHCHRAPA में वेतन सहित नियुक्ति"
+      ]
+    ],
+    "tracksEyebrow": "तीन विधाएँ, एक कार्यक्रम",
+    "tracksTitle": "आप सिनेमा में क्या बनना चाहते हैं?",
+    "tracksLede": "तीनों विधाएँ 90 दिनों की हैं। पहला महीना सब साथ सीखते हैं, उसके बाद हर छात्र अपनी विधा में गहराई से प्रशिक्षण लेता है।",
+    "trackMore": "पूरा पाठ्यक्रम",
+    "monthsEyebrow": "90 दिनों की यात्रा",
+    "monthsTitle": "तीन महीने, तीन पड़ाव",
+    "monthWord": "महीना",
     "months": [
       {
-        "n": 1,
-        "title": "फ़ाउंडेशन: कैमरे के सामने",
-        "who": "सबके लिए एक साथ",
-        "why": "जो डायरेक्टर या एडिटर बनेगा, वो भी पहले एक्टर की नज़र से कैमरा समझेगा। इसीलिए पहला महीना सबके लिए एक्टिंग का है।",
+        "title": "कैमरे के सामने",
+        "who": "सभी छात्रों के लिए",
+        "why": "जो निर्देशक या संपादक बनेगा, वह भी पहले अभिनेता की नज़र से कैमरे को समझता है। इसलिए पहला महीना सबके लिए अभिनय का है।",
         "points": [
-          "Yogesh Mishrra Actors Transformation System (YM-ATS): एक्टर के चार स्तंभ, Believing, Respect, Seriousness, Enjoying",
+          "Yogesh CineAct: अभिनेता के चार स्तंभ, Believing, Respect, Seriousness, Enjoying",
           "Observation System: Micro, Nano, Combination और Live Observation",
           "अभिनय की भारतीय जड़ें: नाट्यशास्त्र और नवरस",
-          "बॉडी, आवाज़, उच्चारण और माइक तकनीक",
-          "कैमरा फ़ेसिंग, एक्सप्रेशन और डायलॉग प्रैक्टिस",
-          "Improvisation: बिना स्क्रिप्ट के सीन बनाना",
-          "मोबाइल से शूट और Reels/Shorts की बुनियाद: Hook, कहानी और नियमितता"
+          "शरीर, आवाज़, उच्चारण और माइक तकनीक",
+          "कैमरे के सामने भाव, संवाद और उपस्थिति",
+          "Improvisation: बिना पटकथा के दृश्य रचना",
+          "मोबाइल पर शूटिंग और Reels/Shorts की बुनियाद"
         ]
       },
       {
-        "n": 2,
-        "title": "अपनी फ़ील्ड में गहराई",
-        "who": "Actor, Director या Editor, जो आपने चुना",
-        "why": "दूसरे महीने में हर छात्र अपनी चुनी हुई फ़ील्ड की पूरी ट्रेनिंग लेता है।",
+        "title": "अपनी विधा में गहराई",
+        "who": "Actor, Director या Editor",
+        "why": "दूसरे महीने में हर छात्र अपनी चुनी हुई विधा का विस्तृत प्रशिक्षण लेता है।",
         "points": []
       },
       {
-        "n": 3,
-        "title": "लाइव प्रोजेक्ट",
-        "who": "असली शूट, असली काम",
-        "why": "तीसरा महीना क्लासरूम का नहीं, सेट का है। हर छात्र असली प्रोजेक्ट पर काम करता है और अपना पोर्टफ़ोलियो लेकर निकलता है।",
+        "title": "असली सेट पर",
+        "who": "लाइव प्रोजेक्ट",
+        "why": "तीसरा महीना कक्षा का नहीं, सेट का है। हर छात्र वास्तविक प्रोजेक्ट पर काम करता है और अपना पोर्टफ़ोलियो लेकर निकलता है।",
         "points": [
-          "PICHCHRAPA के वेब-सीरीज़ और YouTube प्रोजेक्ट्स पर असली शूट",
-          "Actor: कैमरे के सामने परफ़ॉर्मेंस, शोरील और पोर्टफ़ोलियो फ़ोटोशूट",
-          "Director: एक एपिसोड या शॉर्ट फ़िल्म ख़ुद डायरेक्ट करना",
-          "Editor: असली एपिसोड एडिट करके पब्लिश करना",
-          "सबके लिए: 90 दिन में अपना YouTube/Instagram चैनल शुरू करके नियमित पोस्ट"
+          "PICHCHRAPA की वेब-सीरीज़ और डिजिटल प्रोजेक्ट्स पर वास्तविक शूट",
+          "Actor: कैमरे के सामने प्रदर्शन, शोरील और पोर्टफ़ोलियो फ़ोटोशूट",
+          "Director: एक एपिसोड या लघु फ़िल्म का स्वयं निर्देशन",
+          "Editor: वास्तविक एपिसोड का संपादन और प्रकाशन",
+          "सभी के लिए: अपना YouTube/Instagram चैनल शुरू करना और नियमित प्रकाशन"
         ]
       }
     ],
-    "tracks": [
-      {
-        "slug": "actor",
-        "name": "Actor",
-        "nameHi": "एक्टर",
+    "tracks": {
+      "actor": {
+        "nameLocal": "अभिनय",
         "seo": "Acting Course in Lucknow",
-        "title": "Acting Course in Lucknow | CINEKAR Actor: 3 महीने का कैमरा एक्टिंग कोर्स | Indian Films Academy",
-        "description": "लखनऊ में 3 महीने का कैमरा एक्टिंग कोर्स: YM-ATS, सीन वर्क, ऑडिशन, शोरील और लाइव शूट। साथ में Reels/YouTube क्रिएटर ट्रेनिंग। फ़ीस ₹50,000, सिलेक्शन टेस्ट पर 20% तक स्कॉलरशिप।",
-        "pitch": "फ़िल्म, वेब-सीरीज़, टीवी या अपना YouTube चैनल: कैमरे के सामने भरोसे से खड़े होना सीखिए।",
-        "forWhom": ["जो फ़िल्म, वेब-सीरीज़ या टीवी में एक्टर बनना चाहते हैं", "जो Reels और YouTube पर अपना चेहरा और किरदार बनाना चाहते हैं", "कॉलेज के छात्र, नौकरी करने वाले, गृहिणियाँ या रिटायर्ड लोग, उम्र कोई भी"],
+        "h1": "Acting Course in Lucknow: 90 दिनों का कैमरा अभिनय कार्यक्रम",
+        "title": "Acting Course in Lucknow | CINEKAR Actor, 90 दिन | Indian Films Academy",
+        "description": "लखनऊ में 90 दिनों का कैमरा अभिनय कार्यक्रम: Yogesh CineAct, दृश्य अभ्यास, ऑडिशन, शोरील और लाइव शूट, साथ में डिजिटल क्रिएटर प्रशिक्षण।",
+        "pitch": "फ़िल्म, वेब-सीरीज़, टेलीविज़न या अपना डिजिटल मंच: कैमरे के सामने सहज और सच्चा होना सीखिए।",
+        "forWhom": [
+          "जो फ़िल्म, वेब-सीरीज़ या टेलीविज़न में अभिनेता बनना चाहते हैं",
+          "जो डिजिटल मंच पर अपनी पहचान और किरदार गढ़ना चाहते हैं",
+          "विद्यार्थी, कामकाजी, गृहिणी या सेवानिवृत्त: उम्र कोई भी हो"
+        ],
         "month2": [
           "Stanislavski, Stella Adler और Meisner तकनीक की बुनियाद",
-          "Emotional Flow Engine (YM-ATS): इमोशन बदलना और इमोशन का प्रतिशत",
-          "किरदार बनाना, सीन वर्क और डायलॉग पर पकड़",
-          "स्क्रीन के लिए डांस, म्यूज़िक और एक्शन की बुनियाद",
-          "ऑडिशन और सेल्फ़-टेप: घर से ऑडिशन भेजना",
+          "Emotional Flow Engine (Yogesh CineAct): भावों का परिवर्तन और उनकी तीव्रता",
+          "किरदार निर्माण, दृश्य अभ्यास और संवाद पर पकड़",
+          "स्क्रीन के लिए नृत्य, संगीत और एक्शन की बुनियाद",
+          "ऑडिशन और सेल्फ़-टेप",
           "पोर्टफ़ोलियो फ़ोटोशूट"
         ],
-        "outcome": ["शोरील और पोर्टफ़ोलियो", "असली शूट का अनुभव", "ऑडिशन के लिए तैयार सेल्फ़-टेप", "अपना क्रिएटर चैनल"]
+        "outcome": [
+          "शोरील और पोर्टफ़ोलियो",
+          "वास्तविक शूट का अनुभव",
+          "ऑडिशन के लिए तैयार सेल्फ़-टेप",
+          "आपका अपना डिजिटल चैनल"
+        ]
       },
-      {
-        "slug": "director",
-        "name": "Director",
-        "nameHi": "डायरेक्टर",
+      "director": {
+        "nameLocal": "निर्देशन",
         "seo": "Film Direction Course in Lucknow",
-        "title": "Film Direction Course in Lucknow | CINEKAR Director: 3 महीने का कोर्स | Indian Films Academy",
-        "description": "लखनऊ में 3 महीने का फ़िल्म डायरेक्शन कोर्स: स्क्रीनप्ले, शॉट डिवीज़न, मल्टीकैम शूटिंग, एक्टर्स के साथ काम और लाइव प्रोजेक्ट में ख़ुद एपिसोड डायरेक्ट करना। फ़ीस ₹50,000।",
-        "pitch": "कहानी से लेकर कैमरे तक: अपनी शॉर्ट फ़िल्म, वेब-सीरीज़ या YouTube शो ख़ुद बनाना सीखिए।",
-        "forWhom": ["जो फ़िल्म या वेब-सीरीज़ डायरेक्ट करना चाहते हैं", "जो अपना YouTube शो या चैनल बनाना चाहते हैं", "जो कम बजट में अच्छा कंटेंट शूट करना सीखना चाहते हैं"],
-        "month2": [
-          "कहानी और स्क्रीनप्ले: Concept, Conflict, Climax, Resolution",
-          "शॉट डिवीज़न, स्टोरीबोर्ड और लेंस की समझ",
-          "ब्लॉकिंग और एक्टर्स के साथ काम करना",
-          "मल्टीकैम शूटिंग: एक सीन, कई कैमरे (जैसे गैपिस्तान में)",
-          "लाइट और साउंड की बुनियाद",
-          "कम बजट में वेब-सीरीज़ और YouTube शो की प्लानिंग"
+        "h1": "Film Direction Course in Lucknow: 90 दिनों का निर्देशन कार्यक्रम",
+        "title": "Film Direction Course in Lucknow | CINEKAR Director, 90 दिन | Indian Films Academy",
+        "description": "लखनऊ में 90 दिनों का फ़िल्म निर्देशन कार्यक्रम: पटकथा, शॉट विभाजन, मल्टीकैम शूटिंग, अभिनेताओं के साथ काम और लाइव प्रोजेक्ट में स्वयं निर्देशन।",
+        "pitch": "कहानी से कैमरे तक: अपनी लघु फ़िल्म, वेब-सीरीज़ या डिजिटल शो स्वयं रचना सीखिए।",
+        "forWhom": [
+          "जो फ़िल्म या वेब-सीरीज़ का निर्देशन करना चाहते हैं",
+          "जो अपना डिजिटल शो या चैनल बनाना चाहते हैं",
+          "जो सीमित संसाधनों में उत्कृष्ट दृश्य रचना सीखना चाहते हैं"
         ],
-        "outcome": ["ख़ुद डायरेक्ट किया हुआ एपिसोड या शॉर्ट फ़िल्म", "सेट और टीम संभालने का अनुभव", "अपने शो का पूरा प्लान", "अपना क्रिएटर चैनल"]
+        "month2": [
+          "कहानी और पटकथा: Concept, Conflict, Climax, Resolution",
+          "शॉट विभाजन, स्टोरीबोर्ड और लेंस की समझ",
+          "ब्लॉकिंग और अभिनेताओं के साथ काम",
+          "मल्टीकैम शूटिंग: एक दृश्य, कई कैमरे",
+          "प्रकाश और ध्वनि की बुनियाद",
+          "वेब-सीरीज़ और डिजिटल शो की प्रोडक्शन योजना"
+        ],
+        "outcome": [
+          "स्वयं निर्देशित एपिसोड या लघु फ़िल्म",
+          "सेट और टीम संभालने का अनुभव",
+          "अपने शो की पूरी योजना",
+          "आपका अपना डिजिटल चैनल"
+        ]
+      },
+      "editor": {
+        "nameLocal": "संपादन",
+        "seo": "Video Editing Course in Lucknow",
+        "h1": "Video Editing Course in Lucknow: 90 दिनों का संपादन कार्यक्रम",
+        "title": "Video Editing Course in Lucknow | CINEKAR Editor, DaVinci Resolve | Indian Films Academy",
+        "description": "लखनऊ में 90 दिनों का वीडियो संपादन कार्यक्रम: DaVinci Resolve, मल्टीकैम, ध्वनि, कलर और DI, Reels-Shorts संपादन और वास्तविक एपिसोड पर काम।",
+        "pitch": "फ़िल्म, वेब-सीरीज़ और डिजिटल मंचों के लिए संपादन: वह हुनर जिसकी आज हर रचनाकार को ज़रूरत है।",
+        "forWhom": [
+          "जो फ़िल्म और वेब-सीरीज़ संपादक बनना चाहते हैं",
+          "जो रचनाकारों और ब्रांड्स के लिए स्वतंत्र रूप से संपादन करना चाहते हैं",
+          "जो अपने वीडियो पेशेवर स्तर पर संपादित करना चाहते हैं"
+        ],
+        "month2": [
+          "DaVinci Resolve आरंभ से: कट, ट्रिम और टाइमलाइन",
+          "मल्टीकैम सिंक और संपादन",
+          "हास्य और नाटक की लय: कहाँ काटें, कहाँ ठहरें",
+          "ध्वनि की सफ़ाई, संगीत और पार्श्व ध्वनि",
+          "कलर करेक्शन और DI की बुनियाद",
+          "Reels/Shorts संपादन, थंबनेल और प्रकाशन"
+        ],
+        "outcome": [
+          "प्रकाशित वास्तविक एपिसोड का पोर्टफ़ोलियो",
+          "DaVinci Resolve पर पूरी पकड़",
+          "स्वतंत्र काम शुरू करने की तैयारी",
+          "आपका अपना डिजिटल चैनल"
+        ]
+      }
+    },
+    "creatorEyebrow": "हर छात्र एक रचनाकार भी",
+    "creatorTitle": "डिजिटल मंच की पूरी समझ",
+    "creator": [
+      "आज बहुत से कलाकार फ़िल्म की प्रतीक्षा नहीं करते, अपना मंच स्वयं बनाते हैं। इसलिए CINEKAR का हर छात्र, चाहे उसकी विधा कोई भी हो, YouTube और Instagram पर रचना और प्रकाशन का पूरा प्रशिक्षण लेता है।",
+      "शुरुआत कैसे बाँधें, कहानी कैसे कहें, मोबाइल पर अच्छा शूट कैसे करें और नियमितता कैसे बनाए रखें: यह सब 90 दिनों में, अपने ही चैनल पर करके सीखा जाता है।"
+    ],
+    "creatorProof": "उदाहरण: हास्य शृंखला <a href=\"https://gapistaan.com\">गैपिस्तान (Gen Gap)</a> के सभी कलाकार इसी एकेडमी में तैयार हुए हैं, और पूरी शृंखला इसी पद्धति से शूट होती है।",
+    "feesEyebrow": "शुल्क और प्रवेश",
+    "feesTitle": "कार्यक्रम शुल्क और प्रवेश प्रक्रिया",
+    "fee": {
+      "label": "कार्यक्रम शुल्क",
+      "note": "90 दिनों का प्रशिक्षण, लाइव प्रोजेक्ट और प्रमाणपत्र",
+      "instK": "दो किस्तों में",
+      "instV": "{i1} + {i2} (कुल {total})",
+      "schK": "मेरिट छात्रवृत्ति",
+      "schV": "चयन ऑडिशन के आधार पर {pct}% तक",
+      "eligK": "पात्रता",
+      "eligV": "16 वर्ष से ऊपर, किसी भी पृष्ठभूमि से; कोई डिग्री आवश्यक नहीं"
+    },
+    "steps": [
+      [
+        "आवेदन",
+        "नीचे दिया छोटा फ़ॉर्म भरें या फ़ोन करें।"
+      ],
+      [
+        "चयन ऑडिशन",
+        "एकेडमी में एक संक्षिप्त ऑडिशन और बातचीत। छात्रवृत्ति इसी के आधार पर तय होती है।"
+      ],
+      [
+        "नामांकन",
+        "शुल्क एक साथ या दो किस्तों में जमा करके अपना स्थान सुनिश्चित करें।"
+      ]
+    ],
+    "foundersEyebrow": "मार्गदर्शन",
+    "foundersTitle": "एकेडमी के संस्थापक",
+    "legendsEyebrow": "सिनेमा जगत से जुड़ाव",
+    "legendsTitle": "सिनेमा के दिग्गजों के साथ",
+    "legendsLede": "लखनऊ में शूटिंग के दौरान और एकेडमी में आए फ़िल्म जगत के दिग्गजों के साथ हमारे संस्थापक और छात्र।",
+    "withName": "{name} के साथ",
+    "guestCap": "एकेडमी में आए अतिथि",
+    "legendCap": "फ़िल्म जगत के दिग्गजों के साथ",
+    "allPhotos": "सभी तस्वीरें",
+    "videosEyebrow": "हमारी कक्षाओं से",
+    "videosTitle": "कक्षा की झलक",
+    "videosHint": "वीडियो पर कर्सर ले जाएँ, झलक अपने-आप चलेगी। पूरा देखने के लिए क्लिक करें।",
+    "subscribe": "YouTube पर सब्सक्राइब करें",
+    "allVideos": "सभी कक्षाएँ",
+    "igEyebrow": "Instagram",
+    "igTitle": "एकेडमी से ताज़ा",
+    "follow": "Instagram पर फ़ॉलो करें",
+    "onlineEyebrow": "लखनऊ से दूर हैं?",
+    "onlineTitle": "घर से अभिनय सीखिए",
+    "onlineText": "योगेश मिश्रा का ऑनलाइन अभिनय पाठ्यक्रम: वीडियो कक्षाएँ, अपनी गति से, फ़ोन या लैपटॉप पर।",
+    "onlineCta": "ऑनलाइन पाठ्यक्रम",
+    "faqTitle": "अक्सर पूछे जाने वाले प्रश्न",
+    "faq": [
+      [
+        "CINEKAR कार्यक्रम कितने समय का है?",
+        "90 दिनों का। पहला महीना सबके लिए अभिनय, दूसरा महीना आपकी चुनी हुई विधा (Actor, Director या Editor) और तीसरा महीना लाइव प्रोजेक्ट।"
+      ],
+      [
+        "शुल्क कितना है?",
+        "कार्यक्रम शुल्क ₹50,000 है। दो किस्तों में भुगतान करने पर ₹27,500 + ₹27,500। चयन ऑडिशन के आधार पर 20% तक मेरिट छात्रवृत्ति दी जाती है।"
+      ],
+      [
+        "चयन ऑडिशन क्या है?",
+        "एकेडमी में एक संक्षिप्त ऑडिशन और बातचीत, जिससे हम आपकी रुचि और तैयारी समझ सकें। छात्रवृत्ति इसी के आधार पर तय होती है।"
+      ],
+      [
+        "क्या कोई डिग्री या आयु सीमा है?",
+        "कोई डिग्री आवश्यक नहीं। 16 वर्ष से ऊपर किसी भी आयु के लोग आवेदन कर सकते हैं।"
+      ],
+      [
+        "कार्यक्रम के बाद क्या अवसर हैं?",
+        "हर बैच के शीर्ष 10 छात्रों को PICHCHRAPA प्रोडक्शन हाउस में तीन महीने की इंटर्नशिप यात्रा भत्ते के साथ मिलती है, और उसके बाद शीर्ष 2–3 छात्रों को वेतन सहित नियुक्ति। अन्य छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"
+      ],
+      [
+        "Director और Editor भी अभिनय क्यों सीखते हैं?",
+        "क्योंकि अच्छा निर्देशक और संपादक वही है जो अभिनेता को समझता है। पहला महीना सबको कैमरा, किरदार और प्रदर्शन की समझ देता है।"
+      ],
+      [
+        "क्या डिजिटल क्रिएटर का प्रशिक्षण भी मिलता है?",
+        "हाँ। हर छात्र 90 दिनों में अपना चैनल शुरू करता है और रचना, शूटिंग, संपादन और नियमित प्रकाशन अपने ही चैनल पर करके सीखता है।"
+      ],
+      [
+        "क्या घर से सीखा जा सकता है?",
+        "CINEKAR कक्षा और लाइव शूट वाला कार्यक्रम है। घर से सीखने के लिए हमारा अलग ऑनलाइन अभिनय पाठ्यक्रम है।"
+      ]
+    ],
+    "contactTitle": "एकेडमी आइए या हमसे बात कीजिए",
+    "contact": {
+      "address": "पता",
+      "directions": "Google Maps पर रास्ता",
+      "phone": "फ़ोन",
+      "email": "ईमेल",
+      "formTitle": "प्रवेश के लिए आवेदन",
+      "formNote": "आपका आवेदन सीधे हमारे WhatsApp पर पहुँचता है। यह वेबसाइट आपकी कोई जानकारी सहेजती नहीं।",
+      "name": "आपका नाम",
+      "phoneF": "फ़ोन नंबर",
+      "city": "शहर",
+      "track": "विधा",
+      "undecided": "अभी तय नहीं",
+      "online": "ऑनलाइन पाठ्यक्रम",
+      "note": "कोई प्रश्न?",
+      "send": "WhatsApp से भेजें",
+      "msgIntro": "नमस्ते, मैं CINEKAR कार्यक्रम में प्रवेश के लिए आवेदन करना चाहता/चाहती हूँ।"
+    },
+    "addressText": "C1/192, वरदान खंड, सेक्टर 1, गोमती नगर, लखनऊ, उत्तर प्रदेश 226010",
+    "about": [
+      "Indian Films Academy सिनेमाई अभिनय का एक समर्पित प्रशिक्षण केंद्र है, जो अभिनय की शिक्षा और पेशेवर फ़िल्म जगत के बीच की दूरी को मिटाता है।",
+      "2019 में फ़िल्म निर्देशक और अभिनय मार्गदर्शक योगेश मिश्रा ने इसकी स्थापना स्क्रीन अभिनय के व्यावहारिक प्रशिक्षण के लिए की। उनकी अपनी पद्धति Yogesh CineAct के माध्यम से एकेडमी अब तक 100 से अधिक छात्रों को तैयार कर चुकी है, जो आज मनोरंजन जगत में काम कर रहे हैं।",
+      "2026 में श्री दिनेश कुमार सहगल सह-संस्थापक के रूप में जुड़े। उत्तर प्रदेश सरकार के सूचना एवं जनसंपर्क विभाग और फ़िल्म बंधु में उप निदेशक रह चुके श्री सहगल का 30 वर्षों से अधिक का अनुभव छात्रों को एक सुरक्षित, नैतिक और पेशेवर मार्ग देता है।",
+      "यहाँ प्रशिक्षण कक्षा तक सीमित नहीं है। फ़िल्म जगत के कलाकार, निर्देशक, निर्माता और कास्टिंग निर्देशक नियमित रूप से छात्रों का मार्गदर्शन करने आते हैं, और हमारा अपना प्रोडक्शन हाउस PICHCHRAPA उन्हें वास्तविक शूट पर काम का अवसर देता है।"
+    ],
+    "aboutTitle": "Indian Films Academy, लखनऊ",
+    "aboutLede": "सिनेमा की शिक्षा, सिनेमा के बीच। 2019 से।",
+    "stats": [
+      [
+        "2019",
+        "से लखनऊ में"
+      ],
+      [
+        "100+",
+        "प्रशिक्षित छात्र"
+      ],
+      [
+        "15+ वर्ष",
+        "अभिनय प्रशिक्षण का अनुभव"
+      ],
+      [
+        "3 विधाएँ",
+        "Actor, Director, Editor"
+      ]
+    ],
+    "methodTitle": "Yogesh CineAct",
+    "method": [
+      "योगेश मिश्रा की यह पद्धति अभिनेता को भीतर से तैयार करती है। इसके चार स्तंभ हैं: Believing, Respect, Seriousness और Enjoying। Observation System (Micro, Nano, Combination और Live Observation) और Emotional Flow Engine (भावों का परिवर्तन और उनकी तीव्रता) इसके प्रमुख अंग हैं।",
+      "साथ में नाट्यशास्त्र और नवरस जैसी भारतीय परंपरा, और Stanislavski, Stella Adler तथा Meisner जैसी विश्व की तकनीकें भी सिखाई जाती हैं।"
+    ],
+    "guestsTitle": "एकेडमी में आए मार्गदर्शक",
+    "guestsLede": "फ़िल्म जगत के कलाकार, निर्देशक और कास्टिंग विशेषज्ञ अपने व्यस्त समय में से छात्रों के लिए समय निकालते हैं और अपने संघर्ष और सफ़र के वास्तविक अनुभव साझा करते हैं।",
+    "galleryTitle": "गैलरी",
+    "galleryLede": "किसी भी तस्वीर पर क्लिक करके उसे बड़ा देखें।",
+    "galleryAcademy": "एकेडमी और मंच",
+    "videosPageTitle": "कक्षाएँ और वीडियो",
+    "videosPageLede": "Indian Films Academy के YouTube चैनल से। नई कक्षाएँ अपने-आप यहाँ जुड़ती हैं।",
+    "onlinePage": {
+      "eyebrow": "घर से, अपनी गति से",
+      "h1": "ऑनलाइन अभिनय पाठ्यक्रम (हिंदी में)",
+      "lede": "जो लखनऊ नहीं आ सकते, उनके लिए योगेश मिश्रा का वीडियो पाठ्यक्रम। फ़ोन या लैपटॉप पर, कभी भी।",
+      "buy": "पाठ्यक्रम में नामांकन",
+      "ask": "जानकारी के लिए संपर्क",
+      "free": "निःशुल्क कक्षाएँ देखें",
+      "learnTitle": "आप क्या सीखेंगे",
+      "learn": [
+        "कैमरा अभिनय की बुनियाद: कैमरा लुक, भाव और संवाद",
+        "Yogesh CineAct के मूल सिद्धांत",
+        "Observation और Feel and React अभ्यास",
+        "आवाज़, उच्चारण और देह-भाषा",
+        "घर से ऑडिशन और सेल्फ़-टेप"
+      ],
+      "forTitle": "किसके लिए",
+      "for": [
+        "लखनऊ से बाहर रहने वाले",
+        "पढ़ाई या नौकरी के साथ सीखने वाले",
+        "CINEKAR से पहले शुरुआत करने वाले"
+      ],
+      "note": "वास्तविक शूट, लाइव प्रोजेक्ट और इंटर्नशिप केवल CINEKAR (कक्षा) कार्यक्रम में शामिल हैं।",
+      "title": "ऑनलाइन अभिनय पाठ्यक्रम हिंदी में | Indian Films Academy",
+      "description": "घर से हिंदी में अभिनय सीखिए: योगेश मिश्रा का ऑनलाइन कैमरा अभिनय पाठ्यक्रम, Yogesh CineAct, Observation, ऑडिशन और सेल्फ़-टेप।"
+    },
+    "contactPage": {
+      "h1": "संपर्क और प्रवेश",
+      "lede": "सबसे शीघ्र उत्तर WhatsApp पर मिलता है। एकेडमी आने से पहले फ़ोन कर लें।",
+      "title": "संपर्क | Indian Films Academy, गोमती नगर, लखनऊ",
+      "description": "Indian Films Academy, C1/192, वरदान खंड, गोमती नगर, लखनऊ। फ़ोन/WhatsApp +91 77540 00121, ईमेल info@indianfilmsacademy.com।"
+    },
+    "cinekarPage": {
+      "eyebrow": "Indian Films Academy का नया कार्यक्रम",
+      "title": "CINEKAR: एक्टिंग, डायरेक्शन और एडिटिंग का 90 दिन का कार्यक्रम, लखनऊ | Indian Films Academy",
+      "description": "CINEKAR (Indian Films Academy, लखनऊ): 90 दिनों में Actor, Director या Editor। पहला महीना अभिनय, दूसरा अपनी विधा, तीसरा लाइव प्रोजेक्ट। डिजिटल क्रिएटर प्रशिक्षण और इंटर्नशिप का मार्ग।",
+      "syllabus": "90 दिनों का पाठ्यक्रम",
+      "choose": "अपनी विधा चुनें",
+      "rowFor": "किसके लिए",
+      "rowM2": "दूसरे महीने में",
+      "rowOut": "कार्यक्रम के बाद",
+      "faq": "प्रश्न और उत्तर"
+    },
+    "trackPage": {
+      "for": "यह कार्यक्रम किसके लिए है",
+      "out": "कार्यक्रम के बाद आपके पास",
+      "syllabus": "पाठ्यक्रम देखें",
+      "others": "अन्य विधाएँ",
+      "chips": [
+        "90 दिन",
+        "गोमती नगर, लखनऊ"
+      ]
+    },
+    "aboutPage": {
+      "title": "एकेडमी के बारे में | Indian Films Academy, लखनऊ (2019 से)",
+      "description": "Indian Films Academy, गोमती नगर लखनऊ: 2019 से कैमरा अभिनय का प्रशिक्षण, 100+ प्रशिक्षित छात्र, Yogesh CineAct पद्धति और सह-संस्थापक दिनेश कुमार सहगल।"
+    },
+    "galleryPage": {
+      "title": "गैलरी | Indian Films Academy, लखनऊ",
+      "description": "Indian Films Academy, लखनऊ की गैलरी: फ़िल्म जगत के दिग्गजों और एकेडमी में आए मार्गदर्शकों के साथ।"
+    },
+    "videosPage": {
+      "title": "अभिनय कक्षाएँ (हिंदी में) | Indian Films Academy, लखनऊ",
+      "description": "Indian Films Academy के YouTube चैनल की अभिनय कक्षाएँ: कैमरा अभिनय, Observation, Feel and React, Yogesh CineAct।"
+    },
+    "privacy": {
+      "title": "प्राइवेसी नीति | Indian Films Academy",
+      "h1": "प्राइवेसी नीति",
+      "body": [
+        "indianfilmsacademy.com पर हम कोई निजी जानकारी जमा नहीं करते। आवेदन फ़ॉर्म की जानकारी सीधे आपके फ़ोन से WhatsApp पर भेजी जाती है; यह वेबसाइट उसे सहेजती नहीं।",
+        "साइट पर आने वालों की कुल संख्या समझने के लिए हम Cloudflare Web Analytics का उपयोग कर सकते हैं, जो कुकी नहीं लगाता और किसी व्यक्ति की पहचान नहीं करता।",
+        "वीडियो YouTube प्लेयर में चलते हैं और नक्शा Google Maps से आता है; ये सेवाएँ अपनी नीतियों के अनुसार कुकी का उपयोग कर सकती हैं।"
+      ]
+    },
+    "notFound": {
+      "title": "पृष्ठ नहीं मिला | Indian Films Academy",
+      "h1": "यह पृष्ठ उपलब्ध नहीं है",
+      "text": "वेबसाइट नई बनी है, इसलिए पुराना लिंक बदल गया होगा।"
+    },
+    "foot": {
+      "tag": "सिनेमा की शिक्षा, सिनेमा के बीच। 2019 से लखनऊ में।",
+      "courses": "कार्यक्रम",
+      "academy": "एकेडमी",
+      "contact": "संपर्क",
+      "cinekar": "CINEKAR: 90 दिन का कार्यक्रम",
+      "online": "ऑनलाइन अभिनय पाठ्यक्रम",
+      "about": "एकेडमी के बारे में",
+      "gallery": "गैलरी",
+      "videos": "कक्षाएँ",
+      "privacy": "प्राइवेसी",
+      "partner": "प्रोडक्शन सहयोगी",
+      "copy": "Indian Films Academy, लखनऊ"
+    },
+    "founders": [
+      {
+        "name": "योगेश मिश्रा",
+        "role": "संस्थापक एवं मुख्य मार्गदर्शक",
+        "bio": [
+          "फ़िल्म निर्देशक और कैमरा अभिनय के प्रतिष्ठित मार्गदर्शक। भारतेंदु नाट्य अकादमी और राष्ट्रीय नाट्य विद्यालय के रंगमंच वातावरण में तैयार हुए और रंगकर्मी सूर्य मोहन कुलश्रेष्ठ से प्रशिक्षण लिया।",
+          "‘दबंग सरकार’ और ‘विद्यापीठ’ जैसी फ़िल्मों का निर्देशन किया और 15 से अधिक फ़ीचर फ़िल्मों में पोस्ट-प्रोडक्शन प्रमुख रहे। 15 वर्षों से अधिक से अभिनय सिखा रहे हैं; Yogesh CineAct उन्हीं की पद्धति है।",
+          "वे हास्य शृंखला गैपिस्तान (Gen Gap) के रचनाकार और निर्देशक भी हैं, जिसके सभी कलाकार इसी एकेडमी में तैयार हुए हैं।"
+        ]
       },
       {
-        "slug": "editor",
-        "name": "Editor",
-        "nameHi": "एडिटर",
-        "seo": "Video Editing Course in Lucknow",
-        "title": "Video Editing Course in Lucknow | CINEKAR Editor: DaVinci Resolve 3 महीने में | Indian Films Academy",
-        "description": "लखनऊ में 3 महीने का वीडियो एडिटिंग कोर्स: DaVinci Resolve, मल्टीकैम, साउंड, कलर/DI, Reels-Shorts एडिटिंग और YouTube। असली एपिसोड एडिट करने का मौका। फ़ीस ₹50,000।",
-        "pitch": "फ़िल्म, वेब-सीरीज़ और YouTube के लिए एडिटिंग: वो हुनर जिसकी आज हर क्रिएटर को ज़रूरत है।",
-        "forWhom": ["जो फ़िल्म और वेब-सीरीज़ एडिटर बनना चाहते हैं", "जो YouTubers और ब्रांड्स के लिए फ़्रीलांस एडिटिंग करना चाहते हैं", "जो अपने ही वीडियो प्रोफ़ेशनल तरीके से एडिट करना चाहते हैं"],
-        "month2": [
-          "DaVinci Resolve शुरू से: कट, ट्रिम और टाइमलाइन",
-          "मल्टीकैम सिंक और एडिट",
-          "कॉमेडी और ड्रामा की रिदम: कहाँ काटना है, कहाँ रुकना है",
-          "साउंड की सफ़ाई, म्यूज़िक और बैकग्राउंड",
-          "कलर करेक्शन और DI की बुनियाद",
-          "Reels/Shorts एडिटिंग, थंबनेल, टाइटल और YouTube अपलोड"
-        ],
-        "outcome": ["पब्लिश हुए असली एपिसोड का पोर्टफ़ोलियो", "DaVinci Resolve पर पूरी पकड़", "फ़्रीलांस काम शुरू करने की तैयारी", "अपना क्रिएटर चैनल"]
+        "name": "दिनेश कुमार सहगल",
+        "role": "सह-संस्थापक",
+        "bio": [
+          "शासन, फ़िल्म, मीडिया और मनोरंजन के क्षेत्र में 30 वर्षों से अधिक का नेतृत्व अनुभव। उत्तर प्रदेश सरकार के सूचना एवं जनसंपर्क विभाग और फ़िल्म बंधु में उप निदेशक रहते हुए प्रदेश को फ़िल्म निर्माण का प्रमुख केंद्र बनाने में अहम भूमिका निभाई।",
+          "M.Sc. (गणित), B.Ed. और कंप्यूटर साइंस में स्नातकोत्तर डिप्लोमा, साथ में मल्टीमीडिया और रंगमंच का प्रशिक्षण। 2026 में सह-संस्थापक के रूप में एकेडमी से जुड़े।"
+        ]
       }
-    ],
-    "creator": [
-      "आज बहुत से लोग फ़िल्म का इंतज़ार नहीं करते, अपना चैनल ख़ुद बनाते हैं। इसलिए CINEKAR के हर छात्र को, चाहे वो किसी भी ट्रैक में हो, YouTube और Instagram क्रिएटर की पूरी ट्रेनिंग मिलती है।",
-      "Hook कैसे बनता है, कहानी कैसे कहें, मोबाइल से अच्छा शूट कैसे करें, नियमित पोस्ट कैसे करें और चैनल कैसे बढ़ाएँ: ये सब 90 दिन के अंदर, अपने ही चैनल पर करके सीखते हैं।"
-    ],
-    "admission": [
-      ["बात कीजिए", "WhatsApp या फ़ोन पर बताइए कि आप कौन-सा ट्रैक चाहते हैं।"],
-      ["सिलेक्शन टेस्ट", "एकेडमी में छोटा ऑडिशन और बातचीत। अच्छा करने पर 20% तक स्कॉलरशिप।"],
-      ["एडमिशन", "फ़ीस एक साथ या दो किस्तों में जमा करके बैच में जगह पक्की कीजिए।"]
     ]
   },
-
-  "about": [
-    "Indian Films Academy सिनेमाई अभिनय का एक समर्पित प्रशिक्षण केंद्र है, जो एक्टिंग की पढ़ाई और प्रोफ़ेशनल फ़िल्म इंडस्ट्री के बीच की दूरी को ख़त्म करता है।",
-    "2019 में फ़िल्म निर्देशक और एक्टिंग मेंटर योगेश मिश्रा ने इसकी शुरुआत स्क्रीन एक्टिंग की प्रैक्टिकल ट्रेनिंग देने के लिए की। उनके अपने Actors Transformation System (YM-ATS) से एकेडमी अब तक 100 से ज़्यादा छात्रों को तैयार कर चुकी है, जो आज मनोरंजन जगत में काम कर रहे हैं।",
-    "2026 में श्री दिनेश कुमार सहगल को-फ़ाउंडर के रूप में जुड़े। उत्तर प्रदेश सरकार के सूचना एवं जनसंपर्क विभाग और फ़िल्म बंधु में उप निदेशक रह चुके श्री सहगल का 30 साल से ज़्यादा का अनुभव छात्रों को एक सुरक्षित, नैतिक और प्रोफ़ेशनल रास्ता देता है।",
-    "यहाँ ट्रेनिंग सिर्फ़ क्लासरूम तक सीमित नहीं है। इंडस्ट्री के कलाकार, निर्देशक, निर्माता और कास्टिंग डायरेक्टर नियमित रूप से छात्रों का मार्गदर्शन करने आते हैं, और हमारा अपना प्रोडक्शन हाउस PICHCHRAPA छात्रों को असली शूट पर काम करने का मौका देता है।"
-  ],
-  "aboutEn": "Indian Films Academy (IFA) is a cinematic acting school in Gomti Nagar, Lucknow, founded in 2019 by film director and acting mentor Yogesh Mishrra. Its new CINEKAR programme trains actors, directors and editors in 90 days, with live projects at the in-house production house PICHCHRAPA.",
-
-  "founders": [
-    {
-      "name": "योगेश मिश्रा",
-      "nameEn": "Yogesh Mishrra",
-      "role": "संस्थापक और मुख्य मेंटर",
-      "photo": "founder-yogesh",
-      "bio": [
-        "योगेश मिश्रा फ़िल्म निर्देशक और कैमरा एक्टिंग के भरोसेमंद मेंटर हैं। भारतेंदु नाट्य अकादमी और राष्ट्रीय नाट्य विद्यालय के रंगमंच माहौल में तैयार हुए और रंगकर्मी सूर्य मोहन कुलश्रेष्ठ से प्रशिक्षण लिया।",
-        "उन्होंने ‘दबंग सरकार’ और ‘विद्यापीठ’ जैसी फ़िल्मों का निर्देशन किया है और 15 से ज़्यादा फ़ीचर फ़िल्मों में पोस्ट-प्रोडक्शन हेड रहे हैं। 15 साल से ज़्यादा से एक्टिंग सिखा रहे हैं और Actors Transformation System (YM-ATS) उन्हीं का बनाया हुआ है।",
-        "वे कॉमेडी सीरीज़ गैपिस्तान (Gen Gap) के क्रिएटर और डायरेक्टर भी हैं, जिसके सारे कलाकार इसी एकेडमी से तैयार हुए हैं।"
+  "en": {
+    "langName": "English",
+    "switchLabel": "हिंदी",
+    "siteName": "Indian Films Academy",
+    "brandSub": "Lucknow · Since 2019",
+    "homeTitle": "Indian Films Academy, Lucknow | CINEKAR: 90-Day Acting, Direction and Editing Programme",
+    "homeDescription": "Indian Films Academy, Lucknow (since 2019). CINEKAR is a 90-day film programme for actors, directors and editors, with live projects, a channel of your own and an internship pathway at PICHCHRAPA.",
+    "nav": [
+      [
+        "/cinekar/",
+        "CINEKAR"
       ],
-      "links": [["IMDb", "https://www.imdb.com/name/nm8753440/"], ["YM-ATS", "https://ymatsystem.com/"], ["गैपिस्तान", "https://gapistaan.com/creator/"]]
+      [
+        "/online/",
+        "Online"
+      ],
+      [
+        "/about/",
+        "Academy"
+      ],
+      [
+        "/gallery/",
+        "Gallery"
+      ],
+      [
+        "/videos/",
+        "Classes"
+      ],
+      [
+        "/contact/",
+        "Contact"
+      ]
+    ],
+    "apply": "Apply",
+    "skip": "Skip to main content",
+    "home": "Home",
+    "hero": {
+      "kicker": "Indian Films Academy, Lucknow · New programme",
+      "line": "A 90-day programme for actors, directors and editors",
+      "sub": "One month in front of the camera, one month in your chosen craft, one month on a real set. Every student also builds a channel of their own.",
+      "cta": "Apply for admission",
+      "cta2": "Explore the programme"
+    },
+    "ladderTitle": "From classroom to career",
+    "ladder": [
+      [
+        "90 days",
+        "Training, live projects and a channel of your own"
+      ],
+      [
+        "Top ten students",
+        "A three-month internship at PICHCHRAPA production house, with travel allowance"
+      ],
+      [
+        "Top two or three",
+        "A salaried position at PICHCHRAPA after six months"
+      ]
+    ],
+    "tracksEyebrow": "Three crafts, one programme",
+    "tracksTitle": "What do you want to become in cinema?",
+    "tracksLede": "All three tracks run for 90 days. The first month is shared; after that each student trains in depth in their own craft.",
+    "trackMore": "Full curriculum",
+    "monthsEyebrow": "The 90-day journey",
+    "monthsTitle": "Three months, three stages",
+    "monthWord": "Month",
+    "months": [
+      {
+        "title": "In front of the camera",
+        "who": "For every student",
+        "why": "A director or editor first learns to see the camera through an actor's eyes. That is why the first month is acting, for everyone.",
+        "points": [
+          "Yogesh CineAct: the four pillars of an actor, Believing, Respect, Seriousness, Enjoying",
+          "Observation System: Micro, Nano, Combination and Live Observation",
+          "The Indian roots of acting: Natyashastra and the nine rasas",
+          "Body, voice, diction and microphone technique",
+          "Expression, dialogue and presence on camera",
+          "Improvisation: building scenes without a script",
+          "Shooting on a phone and the basics of Reels and Shorts"
+        ]
+      },
+      {
+        "title": "Depth in your craft",
+        "who": "Actor, Director or Editor",
+        "why": "In the second month each student trains in detail in the craft they have chosen.",
+        "points": []
+      },
+      {
+        "title": "On a real set",
+        "who": "Live projects",
+        "why": "The third month belongs to the set, not the classroom. Every student works on a real production and leaves with a portfolio.",
+        "points": [
+          "Real shoots on PICHCHRAPA web series and digital productions",
+          "Actor: performance on camera, showreel and portfolio photoshoot",
+          "Director: directing an episode or a short film",
+          "Editor: editing and publishing real episodes",
+          "Everyone: launching and running a YouTube or Instagram channel"
+        ]
+      }
+    ],
+    "tracks": {
+      "actor": {
+        "nameLocal": "Acting",
+        "seo": "Acting Course in Lucknow",
+        "h1": "Acting Course in Lucknow: a 90-day screen acting programme",
+        "title": "Acting Course in Lucknow | CINEKAR Actor, 90 Days | Indian Films Academy",
+        "description": "A 90-day screen acting programme in Lucknow: Yogesh CineAct, scene work, auditions, showreel and live shoots, with digital creator training.",
+        "pitch": "Film, web series, television or your own digital stage: learn to be natural and truthful in front of the camera.",
+        "forWhom": [
+          "Aspiring actors for film, web series and television",
+          "Creators who want to build a screen presence of their own",
+          "Students, professionals, homemakers or retirees: any age"
+        ],
+        "month2": [
+          "Foundations of Stanislavski, Stella Adler and Meisner",
+          "Emotional Flow Engine (Yogesh CineAct): shifting and measuring emotion",
+          "Character building, scene work and command of dialogue",
+          "Dance, music and action basics for the screen",
+          "Auditions and self-tapes",
+          "Portfolio photoshoot"
+        ],
+        "outcome": [
+          "A showreel and portfolio",
+          "Experience on real shoots",
+          "Audition-ready self-tapes",
+          "A channel of your own"
+        ]
+      },
+      "director": {
+        "nameLocal": "Direction",
+        "seo": "Film Direction Course in Lucknow",
+        "h1": "Film Direction Course in Lucknow: a 90-day directing programme",
+        "title": "Film Direction Course in Lucknow | CINEKAR Director, 90 Days | Indian Films Academy",
+        "description": "A 90-day film direction programme in Lucknow: screenplay, shot breakdown, multi-camera shooting, working with actors and directing on a live project.",
+        "pitch": "From story to camera: learn to create your own short film, web series or digital show.",
+        "forWhom": [
+          "Aspiring directors for film and web series",
+          "Creators who want to build their own show or channel",
+          "Anyone who wants to make strong work with limited resources"
+        ],
+        "month2": [
+          "Story and screenplay: Concept, Conflict, Climax, Resolution",
+          "Shot breakdown, storyboards and lenses",
+          "Blocking and working with actors",
+          "Multi-camera shooting: one scene, many cameras",
+          "Fundamentals of light and sound",
+          "Production planning for web series and digital shows"
+        ],
+        "outcome": [
+          "An episode or short film you directed",
+          "Experience running a set and a crew",
+          "A complete plan for your own show",
+          "A channel of your own"
+        ]
+      },
+      "editor": {
+        "nameLocal": "Editing",
+        "seo": "Video Editing Course in Lucknow",
+        "h1": "Video Editing Course in Lucknow: a 90-day editing programme",
+        "title": "Video Editing Course in Lucknow | CINEKAR Editor, DaVinci Resolve | Indian Films Academy",
+        "description": "A 90-day video editing programme in Lucknow: DaVinci Resolve, multi-camera, sound, colour and DI, Reels and Shorts, and work on real episodes.",
+        "pitch": "Editing for film, web series and digital platforms: the craft every creator needs today.",
+        "forWhom": [
+          "Aspiring editors for film and web series",
+          "Freelancers who want to edit for creators and brands",
+          "Creators who want to edit their own work professionally"
+        ],
+        "month2": [
+          "DaVinci Resolve from the ground up: cuts, trims and the timeline",
+          "Multi-camera sync and editing",
+          "The rhythm of comedy and drama: when to cut, when to hold",
+          "Sound clean-up, music and ambience",
+          "Colour correction and the basics of DI",
+          "Editing Reels and Shorts, thumbnails and publishing"
+        ],
+        "outcome": [
+          "A portfolio of real, published episodes",
+          "Command of DaVinci Resolve",
+          "Readiness to start freelancing",
+          "A channel of your own"
+        ]
+      }
+    },
+    "creatorEyebrow": "Every student is also a creator",
+    "creatorTitle": "A complete grounding in digital media",
+    "creator": [
+      "Many artists no longer wait for a film; they build their own stage. So every CINEKAR student, whatever their craft, is trained to create and publish on YouTube and Instagram.",
+      "How to open strongly, how to tell a story, how to shoot well on a phone and how to stay consistent: all of it is learnt in 90 days, on the student's own channel."
+    ],
+    "creatorProof": "A case in point: every actor in the comedy series <a href=\"https://gapistaan.com\">Gapistaan (Gen Gap)</a> trained at this academy, and the series is shot using the same method.",
+    "feesEyebrow": "Fee and admission",
+    "feesTitle": "Programme fee and admission",
+    "fee": {
+      "label": "Programme fee",
+      "note": "90 days of training, live projects and a certificate",
+      "instK": "In two instalments",
+      "instV": "{i1} + {i2} ({total} in total)",
+      "schK": "Merit scholarship",
+      "schV": "Up to {pct}%, based on the selection audition",
+      "eligK": "Eligibility",
+      "eligV": "16 and above, from any background; no degree required"
+    },
+    "steps": [
+      [
+        "Apply",
+        "Fill in the short form below or call us."
+      ],
+      [
+        "Selection audition",
+        "A brief audition and conversation at the academy. Scholarships are decided here."
+      ],
+      [
+        "Enrolment",
+        "Confirm your place by paying the fee in full or in two instalments."
+      ]
+    ],
+    "foundersEyebrow": "Mentorship",
+    "foundersTitle": "Founders of the academy",
+    "legendsEyebrow": "Connected to the industry",
+    "legendsTitle": "With the legends of Indian cinema",
+    "legendsLede": "Our founders and students with leading figures of Indian cinema, during shoots in Lucknow and at the academy.",
+    "withName": "With {name}",
+    "guestCap": "A guest at the academy",
+    "legendCap": "With a legend of Indian cinema",
+    "allPhotos": "All photographs",
+    "videosEyebrow": "From our classes",
+    "videosTitle": "Inside the classroom",
+    "videosHint": "Hover over a video to preview it. Click to watch in full.",
+    "subscribe": "Subscribe on YouTube",
+    "allVideos": "All classes",
+    "igEyebrow": "Instagram",
+    "igTitle": "Latest from the academy",
+    "follow": "Follow on Instagram",
+    "onlineEyebrow": "Far from Lucknow?",
+    "onlineTitle": "Learn acting from home",
+    "onlineText": "Yogesh Mishrra's online acting course: video lessons in Hindi, at your own pace, on phone or laptop.",
+    "onlineCta": "Online course",
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      [
+        "How long is the CINEKAR programme?",
+        "90 days. The first month is acting for everyone, the second is your chosen craft (Actor, Director or Editor) and the third is a live project."
+      ],
+      [
+        "What is the fee?",
+        "The programme fee is ₹50,000. In two instalments it is ₹27,500 + ₹27,500. A merit scholarship of up to 20% is awarded on the basis of the selection audition."
+      ],
+      [
+        "What is the selection audition?",
+        "A brief audition and conversation at the academy, so that we understand your interest and preparation. Scholarships are decided on this basis."
+      ],
+      [
+        "Is there a degree or age requirement?",
+        "No degree is required. Anyone aged 16 or above may apply."
+      ],
+      [
+        "What opportunities follow the programme?",
+        "The top ten students of every batch receive a three-month internship at PICHCHRAPA production house with travel allowance, after which the top two or three are offered salaried positions. Other students receive guidance on auditions and projects."
+      ],
+      [
+        "Why do directors and editors also learn acting?",
+        "Because the best directors and editors understand actors. The first month gives everyone a feel for the camera, character and performance."
+      ],
+      [
+        "Is digital creator training included?",
+        "Yes. Every student launches a channel within the 90 days and learns creation, shooting, editing and consistent publishing on it."
+      ],
+      [
+        "Can I learn from home?",
+        "CINEKAR is a classroom and on-set programme. For learning from home we offer a separate online acting course."
+      ]
+    ],
+    "contactTitle": "Visit the academy or talk to us",
+    "contact": {
+      "address": "Address",
+      "directions": "Directions on Google Maps",
+      "phone": "Phone",
+      "email": "Email",
+      "formTitle": "Apply for admission",
+      "formNote": "Your application goes straight to our WhatsApp. This website does not store any of your details.",
+      "name": "Your name",
+      "phoneF": "Phone number",
+      "city": "City",
+      "track": "Craft",
+      "undecided": "Not decided yet",
+      "online": "Online course",
+      "note": "Any questions?",
+      "send": "Send on WhatsApp",
+      "msgIntro": "Hello, I would like to apply for admission to the CINEKAR programme."
+    },
+    "addressText": "C1/192, Vardan Khand, Sector 1, Gomti Nagar, Lucknow, Uttar Pradesh 226010",
+    "about": [
+      "Indian Films Academy is a dedicated training centre for cinematic acting that bridges the gap between acting education and the professional film industry.",
+      "It was founded in 2019 by film director and acting mentor Yogesh Mishrra, with a practical approach to screen acting. Through his own method, Yogesh CineAct, the academy has trained more than 100 students who now work across the entertainment industry.",
+      "In 2026 Mr Dinesh Kumar Sahgal joined as co-founder. A former Deputy Director in the Information and Public Relations Department and at Film Bandhu, Government of Uttar Pradesh, he brings over 30 years of leadership and a secure, ethical and professional pathway for students.",
+      "Training here goes beyond the classroom. Working actors, directors, producers and casting directors regularly visit to mentor students, and our own production house, PICHCHRAPA, gives them real shoots to work on."
+    ],
+    "aboutTitle": "Indian Films Academy, Lucknow",
+    "aboutLede": "Learning cinema, inside cinema. Since 2019.",
+    "stats": [
+      [
+        "2019",
+        "In Lucknow since"
+      ],
+      [
+        "100+",
+        "Students trained"
+      ],
+      [
+        "15+ years",
+        "Of acting training"
+      ],
+      [
+        "3 crafts",
+        "Actor, Director, Editor"
+      ]
+    ],
+    "methodTitle": "Yogesh CineAct",
+    "method": [
+      "Yogesh Mishrra's method prepares the actor from within. It rests on four pillars: Believing, Respect, Seriousness and Enjoying. Its core components are the Observation System (Micro, Nano, Combination and Live Observation) and the Emotional Flow Engine (shifting and measuring emotion).",
+      "Alongside, students learn the Indian tradition of Natyashastra and the nine rasas, and international techniques such as Stanislavski, Stella Adler and Meisner."
+    ],
+    "guestsTitle": "Mentors who have visited the academy",
+    "guestsLede": "Actors, directors and casting experts take time from busy schedules to meet our students and share the real story of their struggles and careers.",
+    "galleryTitle": "Gallery",
+    "galleryLede": "Click any photograph to view it larger.",
+    "galleryAcademy": "The academy and the stage",
+    "videosPageTitle": "Classes and videos",
+    "videosPageLede": "From the Indian Films Academy YouTube channel. New classes appear here automatically.",
+    "onlinePage": {
+      "eyebrow": "From home, at your own pace",
+      "h1": "Online acting course (in Hindi)",
+      "lede": "For those who cannot come to Lucknow: Yogesh Mishrra's video course, on phone or laptop, any time.",
+      "buy": "Enrol in the course",
+      "ask": "Ask about the course",
+      "free": "Watch free classes",
+      "learnTitle": "What you will learn",
+      "learn": [
+        "Camera acting basics: the camera look, expression and dialogue",
+        "The core principles of Yogesh CineAct",
+        "Observation and Feel and React exercises",
+        "Voice, diction and body language",
+        "Auditions and self-tapes from home"
+      ],
+      "forTitle": "Who it is for",
+      "for": [
+        "Students outside Lucknow",
+        "Those learning alongside study or work",
+        "Anyone starting out before CINEKAR"
+      ],
+      "note": "Real shoots, live projects and internships are part of the CINEKAR classroom programme only.",
+      "title": "Online Acting Course in Hindi by Yogesh Mishrra | Indian Films Academy",
+      "description": "Learn acting from home in Hindi: Yogesh Mishrra's online camera acting course, covering Yogesh CineAct, observation, auditions and self-tapes."
+    },
+    "contactPage": {
+      "h1": "Contact and admission",
+      "lede": "WhatsApp is the quickest way to reach us. Please call before visiting the academy.",
+      "title": "Contact | Indian Films Academy, Gomti Nagar, Lucknow",
+      "description": "Indian Films Academy, C1/192, Vardan Khand, Gomti Nagar, Lucknow. Phone/WhatsApp +91 77540 00121, email info@indianfilmsacademy.com."
+    },
+    "cinekarPage": {
+      "eyebrow": "A new programme from Indian Films Academy",
+      "title": "CINEKAR: 90-Day Acting, Direction and Editing Programme, Lucknow | Indian Films Academy",
+      "description": "CINEKAR (Indian Films Academy, Lucknow): become an actor, director or editor in 90 days. Month one acting, month two your craft, month three live projects, plus creator training and an internship pathway.",
+      "syllabus": "The 90-day curriculum",
+      "choose": "Choose your craft",
+      "rowFor": "Who it is for",
+      "rowM2": "In month two",
+      "rowOut": "After the programme",
+      "faq": "Questions and answers"
+    },
+    "trackPage": {
+      "for": "Who this programme is for",
+      "out": "What you leave with",
+      "syllabus": "See the curriculum",
+      "others": "Other crafts",
+      "chips": [
+        "90 days",
+        "Gomti Nagar, Lucknow"
+      ]
+    },
+    "aboutPage": {
+      "title": "About the Academy | Indian Films Academy, Lucknow (since 2019)",
+      "description": "Indian Films Academy, Gomti Nagar, Lucknow: camera acting training since 2019, 100+ students trained, the Yogesh CineAct method and co-founder Dinesh Kumar Sahgal."
+    },
+    "galleryPage": {
+      "title": "Gallery | Indian Films Academy, Lucknow",
+      "description": "Photographs from Indian Films Academy, Lucknow: with legends of Indian cinema and the mentors who have visited the academy."
+    },
+    "videosPage": {
+      "title": "Acting Classes (in Hindi) | Indian Films Academy, Lucknow",
+      "description": "Acting classes from the Indian Films Academy YouTube channel: camera acting, observation, Feel and React and Yogesh CineAct."
+    },
+    "privacy": {
+      "title": "Privacy Policy | Indian Films Academy",
+      "h1": "Privacy policy",
+      "body": [
+        "indianfilmsacademy.com does not collect personal information. The admission form sends your details from your own phone to our WhatsApp; this website does not store them.",
+        "We may use Cloudflare Web Analytics to count visits. It sets no cookies and does not identify individuals.",
+        "Videos play in the YouTube player and the map comes from Google Maps; these services may use cookies under their own policies."
+      ]
+    },
+    "notFound": {
+      "title": "Page not found | Indian Films Academy",
+      "h1": "This page is not available",
+      "text": "The website is new, so an older link may have changed."
+    },
+    "foot": {
+      "tag": "Learning cinema, inside cinema. In Lucknow since 2019.",
+      "courses": "Programmes",
+      "academy": "Academy",
+      "contact": "Contact",
+      "cinekar": "CINEKAR: 90-day programme",
+      "online": "Online acting course",
+      "about": "About the academy",
+      "gallery": "Gallery",
+      "videos": "Classes",
+      "privacy": "Privacy",
+      "partner": "Production partner",
+      "copy": "Indian Films Academy, Lucknow"
+    },
+    "founders": [
+      {
+        "name": "Yogesh Mishrra",
+        "role": "Founder and Chief Mentor",
+        "bio": [
+          "Film director and a trusted mentor in camera acting. Shaped by the theatre environments of the Bharatendu Natya Academy and the National School of Drama, he trained under theatre maestro Surya Mohan Kulshreshtha.",
+          "He has directed films such as Dabang Sarkar and Vidyapeeth and has headed post-production on more than 15 feature films. He has taught acting for over 15 years, and Yogesh CineAct is his own method.",
+          "He is also the creator and director of the comedy series Gapistaan (Gen Gap), whose entire cast trained at this academy."
+        ]
+      },
+      {
+        "name": "Dinesh Kumar Sahgal",
+        "role": "Co-founder",
+        "bio": [
+          "Over 30 years of leadership across government, film, media and entertainment. As Deputy Director in the Information and Public Relations Department and at Film Bandhu, Government of Uttar Pradesh, he helped establish the state as a major filming destination.",
+          "He holds an M.Sc. in Mathematics, a B.Ed. and a postgraduate diploma in computer science, with further training in multimedia and theatre. He joined the academy as co-founder in 2026."
+        ]
+      }
+    ]
+  },
+  "founderMeta": [
+    {
+      "nameEn": "Yogesh Mishrra",
+      "photo": "founder-yogesh",
+      "links": [
+        [
+          "IMDb",
+          "https://www.imdb.com/name/nm8753440/"
+        ],
+        [
+          "Yogesh CineAct",
+          "https://ymatsystem.com/"
+        ],
+        [
+          "Gapistaan",
+          "https://gapistaan.com/creator/"
+        ]
+      ]
     },
     {
-      "name": "दिनेश कुमार सहगल",
       "nameEn": "Dinesh Kumar Sahgal",
-      "role": "को-फ़ाउंडर",
       "photo": "founder-dinesh",
-      "bio": [
-        "सरकार, फ़िल्म, मीडिया और मनोरंजन के क्षेत्र में 30 साल से ज़्यादा का नेतृत्व अनुभव। उत्तर प्रदेश सरकार के सूचना एवं जनसंपर्क विभाग और फ़िल्म बंधु में उप निदेशक रहते हुए उन्होंने प्रदेश को फ़िल्म शूटिंग की बड़ी जगह बनाने में अहम भूमिका निभाई।",
-        "M.Sc. (गणित), B.Ed. और कंप्यूटर साइंस में पोस्ट ग्रेजुएट डिप्लोमा के साथ मल्टीमीडिया और थिएटर की ट्रेनिंग। 2026 में को-फ़ाउंडर के रूप में एकेडमी से जुड़े।"
-      ],
       "links": []
     }
   ],
-
-  "stats": [
-    ["2019", "से लखनऊ में"],
-    ["100+", "प्रशिक्षित छात्र"],
-    ["15+ साल", "एक्टिंग ट्रेनिंग का अनुभव"],
-    ["3 ट्रैक", "Actor, Director, Editor"]
+  "trackOrder": [
+    "actor",
+    "director",
+    "editor"
   ],
-
-  "legendNames": {
-    "amitabh-ji": "अमिताभ बच्चन", "amitab-ji-2": "अमिताभ बच्चन",
-    "sanju-baba": "संजय दत्त", "sanjay-dutt-2": "संजय दत्त",
-    "nana-ji": "नाना पाटेकर", "nanpatekar": "नाना पाटेकर",
-    "anupam-ji": "अनुपम खेर", "hema-ji": "हेमा मालिनी", "bony-kapoor": "बोनी कपूर",
-    "ashutosh-rana": "आशुतोष राणा", "prakash-jha": "प्रकाश झा", "rajkumar-rao": "राजकुमार राव",
-    "nawaj-ji": "नवाज़ुद्दीन सिद्दीक़ी", "om-puri-ji": "ओम पुरी", "rajpal": "राजपाल यादव",
-    "sonu-nigam": "सोनू निगम", "kailash-kher": "कैलाश खेर", "kangna": "कंगना रनौत",
-    "khesari": "खेसारी लाल यादव", "gulshan": "गुलशन ग्रोवर", "manoj-joshi-ji": "मनोज जोशी",
-    "radeep-hudda": "रणदीप हुड्डा", "akshay": "अक्षय कुमार",
-    "madhur-ji": "मधुर भंडारकर", "madur-ji2": "मधुर भंडारकर",
-    "rajjev-nigam1": "राजीव निगम", "rajeev-nigam-2": "राजीव निगम"
-  },
-
-  "faq": [
-    ["CINEKAR कोर्स कितने दिन का है?", "3 महीने यानी 90 दिन का। पहला महीना सबके लिए एक्टिंग, दूसरा महीना आपकी फ़ील्ड (Actor, Director या Editor) और तीसरा महीना लाइव प्रोजेक्ट।"],
-    ["फ़ीस कितनी है?", "एक साथ जमा करने पर ₹50,000। दो किस्तों में ₹27,500 + ₹27,500 यानी कुल ₹55,000। सिलेक्शन टेस्ट में अच्छा करने पर 20% तक स्कॉलरशिप, यानी फ़ीस ₹40,000 तक हो सकती है।"],
-    ["सिलेक्शन टेस्ट क्या होता है?", "एकेडमी में एक छोटा ऑडिशन और बातचीत, ताकि हम आपकी रुचि और तैयारी समझ सकें। इसी के आधार पर स्कॉलरशिप तय होती है।"],
-    ["क्या कोई डिग्री या उम्र की सीमा है?", "कोई डिग्री ज़रूरी नहीं, बस पढ़ना-लिखना आना चाहिए। 16 साल से ऊपर कोई भी उम्र के लोग आ सकते हैं।"],
-    ["क्या कोर्स के बाद काम मिलेगा?", "हर बैच के टॉप 10 छात्रों को हमारे प्रोडक्शन हाउस PICHCHRAPA में 3 महीने की इंटर्नशिप मिलती है, जिसमें आने-जाने का ख़र्च हम देते हैं। उसके बाद टॉप 2-3 छात्रों को सैलरी वाली नौकरी का मौका। बाकी छात्रों को ऑडिशन और प्रोजेक्ट्स में मार्गदर्शन मिलता है।"],
-    ["Director और Editor वाले भी एक्टिंग क्यों सीखेंगे?", "क्योंकि अच्छा डायरेक्टर और एडिटर वही है जो एक्टर को समझता है। पहला महीना सबको कैमरा, किरदार और परफ़ॉर्मेंस की समझ देता है।"],
-    ["क्या YouTube और Instagram की ट्रेनिंग भी मिलेगी?", "हाँ। हर छात्र 90 दिन में अपना चैनल शुरू करता है और Hook, कहानी, शूटिंग, एडिटिंग और नियमित पोस्ट करना अपने ही चैनल पर सीखता है।"],
-    ["क्या घर बैठे सीख सकते हैं?", "CINEKAR क्लासरूम और लाइव शूट वाला कोर्स है। घर बैठे सीखने के लिए हमारा अलग ऑनलाइन एक्टिंग कोर्स है।"]
-  ]
+  "trackNames": {
+    "actor": "Actor",
+    "director": "Director",
+    "editor": "Editor"
+  }
 }
