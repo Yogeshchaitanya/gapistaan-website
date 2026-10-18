@@ -54,6 +54,7 @@ function parseDescription(v) {
   const chapters = [];
   const body = [];
   for (const line of lines) {
+    if (/^\s*📅/.test(line)) continue; // old schedule lines in YouTube descriptions; the site shows the current one
     const m = TS.exec(line);
     if (m) chapters.push({ t: toSec(m[1]), label: m[2] });
     else body.push(line);
@@ -172,8 +173,19 @@ const NAV = [
   ['/episodes/', 'एपिसोड'],
   ['/cast/', 'कलाकार'],
   ['/creator/', 'क्रिएटर'],
+  ['/about/', 'बारे में'],
   ['/#contact', 'संपर्क'],
 ];
+
+// FAQ answers may use {schedule}, {email}, {phone} so they never drift from the rest of the site.
+const fillTokens = (s) => {
+  const b = site.business || {};
+  return s
+    .replace(/\{schedule\}/g, site.schedule || '')
+    .replace(/\{email\}/g, site.contactEmail || b.email || '')
+    .replace(/\{phone\}/g, b.phoneLabel || b.phone || '');
+};
+const faq = (site.faq || []).map(([q, a]) => [q, fillTokens(a)]);
 
 function layout({ title, description, pathName, image, type = 'website', ld = [], body, preloadImage, noindex = false }) {
   const url = abs(pathName);
@@ -231,6 +243,7 @@ ${body}
         <li><a href="/episodes/">सारे एपिसोड</a></li>
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: ${esc(creator.name)}</a></li>
+        <li><a href="/about/">गैपिस्तान के बारे में</a></li>
         <li><a href="/privacy/">प्राइवेसी</a></li>
       </ul>
     </div>
@@ -315,6 +328,24 @@ const PAGE_JS = `<script>
     var first=document.querySelector('.js-pick[data-i="0"]'); if(first) first.classList.add('is-on');
   }
 
+  // Marquee bulbs around the home player: placed along the frame, lit in a 3-step chase so the light runs around.
+  document.querySelectorAll('.stage-frame .bulbs').forEach(function(box){
+    var frame=box.parentNode, key='';
+    function draw(){
+      var w=frame.offsetWidth, h=frame.offsetHeight; if(!w||!h||key===w+'x'+h) return; key=w+'x'+h;
+      var o=(parseFloat(getComputedStyle(frame).paddingTop)||18)/2, W=w-2*o, H=h-2*o, P=2*(W+H);
+      var n=Math.max(24,Math.round(P/(w<520?19:23)/3)*3), html='';
+      for(var i=0;i<n;i++){
+        var d=i*P/n, x, y;
+        if(d<W){x=o+d;y=o;} else if(d<W+H){x=o+W;y=o+d-W;} else if(d<2*W+H){x=o+W-(d-W-H);y=o+H;} else {x=o;y=o+H-(d-2*W-H);}
+        html+='<i class="bulb" style="left:'+x.toFixed(1)+'px;top:'+y.toFixed(1)+'px;animation-delay:'+((i%3)*0.3-0.9).toFixed(1)+'s"></i>';
+      }
+      box.innerHTML=html;
+    }
+    draw();
+    if(window.ResizeObserver) new ResizeObserver(draw).observe(frame); else window.addEventListener('resize',draw);
+  });
+
   var reel=document.getElementById('reel');
   document.querySelectorAll('.reel-btn').forEach(function(b){
     b.addEventListener('click',function(){ if(reel) reel.scrollBy({left:(+b.dataset.dir)*reel.clientWidth*0.85,behavior:calm?'auto':'smooth'}); });
@@ -375,6 +406,7 @@ function homePage() {
   const stage = latest
     ? `<div class="stage" id="stage">
         <div class="stage-frame">
+          <div class="bulbs" aria-hidden="true"></div>
           <span class="badge" id="stage-badge">NEW EPISODE</span>
           <div id="stage-media"><a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
             <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 44rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
@@ -430,6 +462,18 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
     </li>`)
     .join('\n');
 
+  const faqHtml = faq.length
+    ? `<section class="sec sec-alt" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <h2 class="h2" id="faq-h">गैपिस्तान से जुड़े सवाल</h2>
+    <div class="faq">
+${faq.map(([q, a], i) => `      <details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}
+    </div>
+    <p class="more-link"><a href="/about/">गैपिस्तान कैसे बनता है, पूरी कहानी पढ़ें</a></p>
+  </div>
+</section>`
+    : '';
+
   const email = site.contactEmail || b.email;
   const contactHtml = `<section class="sec" id="contact" aria-labelledby="contact-h">
   <div class="wrap">
@@ -451,7 +495,10 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
 <section class="hero">
   <div class="wrap hero-in">
     <div class="hero-text">
-      <img class="hero-logo" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="170px" alt="Gapistaan का लोगो: चाचा" width="190" height="190" fetchpriority="high">
+      <span class="logo-stage"><span class="coin">
+        <img class="hero-logo" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="190px" alt="Gapistaan का लोगो: चाचा" width="190" height="190" fetchpriority="high">
+        <img class="hero-logo coin-back" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="190px" alt="" aria-hidden="true" width="190" height="190">
+      </span></span>
       <p class="presents"><a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> प्रस्तुत करता है</p>
       <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
       <p class="hero-line">${esc(site.heroLine)}</p>
@@ -494,6 +541,7 @@ ${boards}
     </ul>
   </div>
 </section>` : ''}
+${faqHtml}
 ${contactHtml}
 </main>`;
 
@@ -512,6 +560,9 @@ ${contactHtml}
           ...(email ? { email } : {}),
         },
         seriesLd(),
+        ...(faq.length
+          ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }]
+          : []),
       ]
     : [];
 
@@ -757,6 +808,47 @@ function castPage(c) {
   });
 }
 
+function aboutPage() {
+  const body = `<main id="main" class="wrap page">
+<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / बारे में</nav>
+<h1 class="page-h1">गैपिस्तान और Gen Gap के बारे में</h1>
+<p class="lede">${esc(site.heroLine)} ${esc(site.heroSub)}</p>
+<section class="block prose" aria-labelledby="story-h">
+  <h2 class="h2" id="story-h">कहानी क्या है</h2>
+  ${site.about.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
+  <p>एक तरफ़ चाचा हैं, जिनकी हर बात "हमारे टाइम में" से शुरू होती है। दूसरी तरफ़ Gen Z लड़के हैं, जिनके लिए YouTube, Instagram और ट्रेंड ही सब कुछ है। दोनों एक ही हॉस्टल, एक ही क्लास और एक ही कमरे में हैं, और यहीं से निकलती है गैपिस्तान की कॉमेडी।</p>
+  ${site.aboutEn ? `<p lang="en">${esc(site.aboutEn)}</p>` : ''}
+</section>
+${site.making?.length ? `<section class="block prose" aria-labelledby="making-h">
+  <h2 class="h2" id="making-h">गैपिस्तान कैसे बनता है</h2>
+  ${site.making.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
+</section>` : ''}
+<section class="block prose" aria-labelledby="watch-h">
+  <h2 class="h2" id="watch-h">कब और कहाँ देखें</h2>
+  <p>${esc(site.schedule)}। हर एपिसोड YouTube चैनल <a href="${esc(site.channelUrl)}">@gapistaan</a> पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी। छोटे क्लिप और पर्दे के पीछे की झलक Instagram पर <a href="${esc(site.instagramUrl)}">@gapistaan</a> पर मिलती है।</p>
+  <h3 class="h3">अब तक के ${episodes.length} एपिसोड</h3>
+  <ol class="ep-list">
+${episodes.map((ep) => `    <li><a href="${ep.path}">${epLabel(ep.n)}: ${esc(ep.clean)}</a></li>`).join('\n')}
+  </ol>
+</section>
+<section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">गैपिस्तान की टीम</h2>${peopleList()}</section>
+<section class="block prose" aria-labelledby="prod-h">
+  <h2 class="h2" id="prod-h">${esc(site.presents)} की पेशकश</h2>
+  <p>गैपिस्तान लखनऊ के प्रोडक्शन हाउस <a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> का हिस्सा है। इसके कलाकार <a href="https://indianfilmsacademy.com/">Indian Films Academy</a> से तैयार हुए हैं। परिकल्पना और निर्देशन: <a href="/creator/">${esc(creator.name)}</a>।</p>
+</section>
+</main>`;
+  return layout({
+    title: 'गैपिस्तान के बारे में: Gen Gap कैसे बनता है | Gapistaan गैपिस्तान',
+    description: 'गैपिस्तान (Gapistaan) और Gen Gap की पूरी कहानी: बिना स्क्रिप्ट की improvised हिंदी कॉमेडी, 4-5 कैमरों से शूटिंग, Indian Films Academy के कलाकार और PICHCHRAPA की पेशकश।',
+    pathName: '/about/',
+    ld: [
+      ...(siteUrl ? [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'गैपिस्तान के बारे में', url: abs('/about/'), inLanguage: 'hi', about: { '@type': 'TVSeries', name: 'Gen Gap', alternateName: ['Gapistaan', 'गैपिस्तान'], url: abs('/') } }] : []),
+      ...crumbsLd([['गैपिस्तान', '/'], ['बारे में', '/about/']]),
+    ],
+    body,
+  });
+}
+
 function privacyPage() {
   const b = site.business || {};
   const email = site.contactEmail || b.email;
@@ -808,6 +900,7 @@ await page('episodes', episodesPage());
 await page('creator', creatorPage());
 await page('cast', castIndexPage());
 for (const c of cast) await page(`cast/${c.slug}`, castPage(c));
+await page('about', aboutPage());
 await page('privacy', privacyPage());
 await writeFile(path.join(out, '404.html'), notFoundPage());
 
@@ -818,6 +911,7 @@ if (siteUrl) {
     { loc: abs('/episodes/'), lastmod: latestDate },
     { loc: abs('/creator/'), lastmod: latestDate },
     { loc: abs('/cast/'), lastmod: latestDate },
+    { loc: abs('/about/'), lastmod: latestDate },
     ...cast.map((c) => ({ loc: abs(c.path), lastmod: c.episodes[0]?.publishedAt || latestDate })),
     ...episodes.map((ep) => ({ loc: abs(ep.path), lastmod: ep.publishedAt })),
     { loc: abs('/privacy/') },
