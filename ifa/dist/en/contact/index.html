@@ -94,7 +94,7 @@ a:hover{color:var(--indigo)}
 .topnav a{color:var(--slate);text-decoration:none;font-weight:800;font-size:.97rem;white-space:nowrap;padding-block:.2rem;border-bottom:2px solid transparent}
 .topnav a:hover{color:var(--indigo)}
 .topnav a[aria-current]{color:var(--indigo);border-bottom-color:var(--marigold)}
-@media (min-width:66rem){.topbar-in{grid-template-columns:auto 1fr auto}.topnav{grid-column:2;grid-row:1;justify-content:center;gap:1.7rem}.top-actions{grid-column:3}}
+@media (min-width:66rem){.topbar-in{grid-template-columns:auto 1fr auto}.topnav{grid-column:2;grid-row:1;justify-content:center;gap:1.2rem}.top-actions{grid-column:3}}
 .hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(50% 70% at 76% 45%,rgba(212,166,74,.22),rgba(212,166,74,0) 70%),radial-gradient(40% 50% at 8% 0%,rgba(21,106,108,.55),rgba(21,106,108,0) 70%),linear-gradient(165deg,var(--indigo) 0%,var(--deep) 75%)}
 .hero-grid{display:grid;gap:2rem;padding-block:clamp(2.4rem,7vw,4rem) clamp(2.4rem,6vw,3.5rem)}
 @media (min-width:60rem){.hero-grid{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:3rem;align-items:center;min-height:min(88vh,780px);padding-block:1.5rem}}
@@ -151,32 +151,145 @@ a:hover{color:var(--indigo)}
 .ladder-step{grid-row:span 2;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1.5px solid var(--marigold);color:var(--marigold);font:700 1.05rem/1 var(--title)}
 .ladder strong{font-size:1.12rem;line-height:1.4}
 .ladder span:last-child{color:#C9D0E0;font-size:.98rem;line-height:1.55}
-.tracks{list-style:none;margin:0;padding:0;display:grid;gap:1.2rem}
-@media (min-width:58rem){.tracks{grid-template-columns:repeat(3,1fr)}}
-.track{display:flex;flex-direction:column;height:100%;padding:1.6rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);color:var(--ink);text-decoration:none}
-.track:hover{border-color:var(--indigo);color:var(--ink)}
-.track-name{font:700 1.9rem/1.1 var(--title);letter-spacing:.05em;color:var(--indigo)}
-.track-local{color:var(--marigold-ink);font-weight:800}
-.track-pitch{margin:.9rem 0 .4rem;font-weight:800;line-height:1.5}
-.track .more{margin-top:auto;padding-top:1.1rem;color:var(--indigo-3);font-weight:800;text-decoration:underline;text-underline-offset:.25em}
 .ticks{list-style:none;margin:.5rem 0 0;padding:0}
-.ticks li{position:relative;padding-left:1.4rem;margin:.4rem 0;line-height:1.55;color:var(--slate)}
+.ticks li{position:relative;padding-left:1.4rem;margin:.4rem 0;line-height:1.55;color:var(--slate);break-inside:avoid}
 .ticks li::before{content:"";position:absolute;left:.15rem;top:.62em;width:.45rem;height:.45rem;border-radius:50%;background:var(--marigold)}
 .ticks.big li{font-size:1.05rem;color:var(--ink);margin:.6rem 0}
-.months{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1.2rem}
-@media (min-width:64rem){.months{grid-template-columns:repeat(3,1fr)}}
-.month{padding:1.5rem;border-radius:var(--r);background:var(--paper);border:1px solid var(--line)}
-.sec-alt .month{background:var(--paper)}
-.sec:not(.sec-alt) .month{background:var(--white)}
+.ticks.cols{columns:2 17rem;column-gap:2.2rem}
+.ticks.light li{color:#D3E0DE}
 .month-n{display:inline-block;padding:.12rem .7rem;border-radius:6px;background:var(--indigo);color:#fff;font-weight:800;font-size:.88rem}
-.month h3{margin:.6rem 0 0;font-size:1.28rem;line-height:1.35;color:var(--indigo)}
-.month-who{margin:.1rem 0 .5rem;color:var(--marigold-ink);font-weight:800;font-size:.95rem}
-.month p.muted{margin:.2rem 0 .5rem;font-size:.98rem}
-.tracklets{display:grid;gap:.6rem;margin-top:.7rem}
-.tracklets a{display:block;padding:.75rem .9rem;border-radius:10px;background:var(--white);border:1px solid var(--line);text-decoration:none;color:var(--ink)}
-.tracklets a:hover{border-color:var(--indigo)}
-.tracklets strong{display:block;font:700 1.12rem/1.2 var(--title);letter-spacing:.04em;color:var(--indigo)}
-.tracklets span{display:block;margin-top:.2rem;color:var(--slate);font-size:.92rem;line-height:1.45}
+.h3{margin:0 0 .4rem;font-size:1.25rem;line-height:1.35;color:var(--indigo)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.hero-h1{display:grid;gap:.55rem;margin:0}
+.door{display:block;width:max-content;max-width:100%;color:#fff;text-decoration:none;animation:lift .8s cubic-bezier(.34,1.45,.64,1) both;animation-delay:calc(.08s + var(--i,0)*.12s)}
+.door-en{display:block;padding-right:.08em;font:700 clamp(1.55rem,3.4vw,2.95rem)/1.1 var(--title);letter-spacing:.04em;background:linear-gradient(100deg,var(--marigold) 0 40%,#FFF1C9 50%,var(--marigold) 60% 100%) 100% 0/250% 100% no-repeat;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 2.2s ease-out both;animation-delay:calc(.7s + var(--i,0)*.35s)}
+.door-sub{display:flex;align-items:center;gap:.55rem;margin-top:.1rem;color:#C7D6D4;font-weight:800;font-size:.98rem;line-height:1.4}
+.door-sub::after{content:"";width:1.4rem;height:2px;background:var(--marigold);transition:width .3s ease}
+.door:hover .door-sub,.door:focus-visible .door-sub{color:#fff}
+.door:hover .door-sub::after,.door:focus-visible .door-sub::after{width:3.2rem}
+.hero .hero-sub{margin-top:1.4rem}
+@media (prefers-reduced-motion:reduce){.door,.door-en{animation:none}.door-en{background-position:0 0}}
+.fork{margin-top:.6rem}
+.trunk{position:relative;max-width:62rem;margin-inline:auto;padding:1.5rem 1.7rem;border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff}
+.trunk-label{margin:0;color:var(--marigold-2);font-weight:800}
+.trunk h3{margin:.15rem 0 .5rem;font-size:clamp(1.3rem,2.6vw,1.65rem);line-height:1.3}
+.fork-lines{display:none}
+.branches{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:1.2rem}
+.trunk::after{content:"";position:absolute;left:50%;bottom:-2rem;width:2px;height:2rem;background:var(--marigold)}
+@media (min-width:58rem){
+  .trunk::after{display:none}
+  .fork-lines{display:block;width:100%;height:70px;overflow:visible}
+  .fork-lines path{fill:none;stroke:var(--marigold);stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:0}
+  .fork.reveal .fork-lines path{stroke-dashoffset:1}
+  .fork.reveal.in .fork-lines path{stroke-dashoffset:0;transition:stroke-dashoffset 1.2s ease .4s}
+  .branches{margin-top:0;grid-template-columns:repeat(3,1fr)}
+}
+.branch{display:flex;flex-direction:column;height:100%;padding:1.5rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);border-top:4px solid var(--marigold);color:var(--ink);text-decoration:none;transition:transform .35s cubic-bezier(.34,1.45,.64,1),box-shadow .2s ease}
+.branch:hover{transform:translateY(-6px);box-shadow:0 20px 40px -24px rgba(2,62,65,.55);color:var(--ink)}
+.branch-en{font:700 clamp(1.4rem,2.2vw,1.65rem)/1.12 var(--title);letter-spacing:.04em;color:var(--indigo)}
+.branch-hi{margin-top:.15rem;color:var(--marigold-ink);font-weight:800}
+.branch-pitch{margin:.7rem 0 .1rem;font-weight:800;line-height:1.5}
+.branch-m{align-self:flex-start;margin-top:1rem;padding:.05rem .6rem;border-radius:6px;background:var(--indigo);color:#fff;font-weight:800;font-size:.85rem}
+.branch-p3{margin-top:.45rem;color:var(--slate);line-height:1.55}
+.branch .more{margin-top:auto;padding-top:1.2rem;color:var(--indigo-3);font-weight:800;text-decoration:underline;text-underline-offset:.25em}
+@media (prefers-reduced-motion:reduce){.branch{transition:none}}
+.hl{list-style:none;margin:1rem 0 0;padding:0;display:grid;gap:1rem}
+@media (min-width:40rem){.hl{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:64rem){.hl{grid-template-columns:repeat(3,1fr)}}
+.hl li{position:relative;padding:1.35rem 1.4rem 1.3rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line)}
+.sec-alt .hl li{background:var(--paper)}
+.hl li::before{content:"";position:absolute;left:1.4rem;top:0;width:2.4rem;height:3px;border-radius:0 0 3px 3px;background:var(--marigold)}
+.hl h3{margin:.15rem 0 .3rem;font-size:1.14rem;line-height:1.4;color:var(--indigo)}
+.hl p{margin:0;color:var(--slate);line-height:1.6}
+.syl{list-style:none;margin:1.2rem 0 0;padding:0;display:grid;gap:1.2rem}
+.syl-m{padding:1.5rem 1.6rem;border-radius:var(--r);background:var(--paper);border:1px solid var(--line)}
+.syl-m.shared{background:var(--white);border:1.5px dashed #B9C9C6}
+.syl-top{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0}
+.tag{padding:.05rem .65rem;border-radius:999px;border:1px solid var(--line);color:var(--slate);font-weight:800;font-size:.85rem}
+.tag.gold{border-color:var(--marigold);background:rgba(212,166,74,.12);color:var(--marigold-ink)}
+.syl-m h3{margin:.6rem 0 .2rem;font-size:1.3rem;line-height:1.35;color:var(--indigo)}
+.syl-m p.muted{margin:.2rem 0 .4rem;max-width:70ch}
+.mods{margin:.8rem 0 0;display:grid;gap:0 2rem}
+@media (min-width:52rem){.mods{grid-template-columns:1fr 1fr}}
+.mods div{padding:.8rem 0;border-top:1px solid var(--line)}
+.mods dt{font-weight:800;color:var(--indigo)}
+.mods dd{margin:.15rem 0 0;color:var(--slate);line-height:1.6}
+.course-hero{background:radial-gradient(50% 80% at 85% 15%,rgba(212,166,74,.18),rgba(212,166,74,0) 70%),linear-gradient(165deg,var(--indigo),var(--deep));color:#fff;padding-block:1.5rem clamp(2.4rem,6vw,3.6rem)}
+.course-hero .crumbs,.course-hero .crumbs a{color:#B3C6C3}
+.course-hero .page-h1{color:#fff}
+.course-hero .lede{margin-bottom:0;color:#D3E0DE}
+.course-hero .chips li{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22);color:#E6EEEC}
+.course-en{margin:0 0 .35rem;font:700 clamp(2.2rem,6.4vw,4.2rem)/1.05 var(--title);letter-spacing:.04em;color:var(--marigold);animation:lift .8s cubic-bezier(.34,1.45,.64,1) both}
+.three{display:grid;gap:2rem}
+@media (min-width:58rem){.three{grid-template-columns:repeat(3,1fr)}}
+.th-hi{display:block;margin-top:.2rem;font:800 .9rem/1.3 var(--body);letter-spacing:0;color:var(--marigold-ink)}
+.ca-hero-in{display:grid;gap:2rem;align-items:center}
+@media (min-width:60rem){.ca-hero-in{grid-template-columns:1fr auto}}
+.ca-h1{margin:0}
+.ca-h1 .brandword{font-size:clamp(2.5rem,7vw,4.6rem);animation:lift .8s cubic-bezier(.34,1.45,.64,1) both}
+.ca-sub{display:block;margin-top:.5rem;font:700 clamp(1rem,2.2vw,1.3rem)/1.3 var(--title);letter-spacing:.12em;color:#fff}
+.ca-hero .lede{margin-top:1rem;font-size:1.2rem;color:#fff}
+.ca-photo{width:min(300px,66vw);border-radius:18px;box-shadow:0 0 0 1px rgba(212,166,74,.55),0 30px 60px -30px rgba(0,0,0,.85)}
+.ca-body p{font-size:1.14rem;line-height:1.85}
+.tech{list-style:none;margin:1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.tech li{padding:.45rem 1rem;border-radius:999px;background:var(--indigo);color:#fff;font-weight:800;font-size:.95rem}
+.tech li:nth-child(3n+2){background:var(--indigo-3)}
+.tech li:nth-child(4n){background:var(--marigold);color:var(--deep)}
+.ca-band{align-items:center}
+.ca-text{color:#C7D6D4;max-width:56ch}
+.quote{position:relative;margin:0;padding:2rem 1.8rem 1.6rem;border-radius:18px;border:1px solid rgba(212,166,74,.45);background:rgba(255,255,255,.03)}
+.quote::before{content:"\201C";position:absolute;left:1rem;top:-.6rem;font:700 5rem/1 var(--title);color:var(--marigold);opacity:.65}
+.quote blockquote{margin:0;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.5;font-weight:800;color:#fff}
+.quote figcaption{margin-top:.9rem;color:var(--marigold-2);font:700 1rem/1.2 var(--title);letter-spacing:.06em}
+.reelgrid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+@media (min-width:40rem){.reelgrid{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:64rem){.reelgrid{grid-template-columns:repeat(5,1fr)}}
+.reel-dur{position:absolute;left:.6rem;top:.6rem;z-index:1;padding:.12rem .55rem;border-radius:999px;background:rgba(1,42,44,.82);color:#fff;font-weight:800;font-size:.78rem;line-height:1.5}
+.donate{display:grid;gap:1.4rem;margin-top:2rem;padding:clamp(1.3rem,3vw,2rem);border-radius:18px;background:linear-gradient(160deg,var(--indigo),var(--deep));color:#fff}
+@media (min-width:48rem){.donate{grid-template-columns:1fr auto;align-items:center}}
+.donate .eyebrow{color:var(--marigold-2)}
+.donate h2{margin:0 0 .5rem;font-size:clamp(1.3rem,2.6vw,1.6rem);line-height:1.35}
+.donate p{margin:.45rem 0;color:#D3E0DE}
+.donate .tap{color:#fff;font-weight:800;font-size:.95rem}
+.amts{display:flex;flex-wrap:wrap;gap:.5rem}
+.amt{display:inline-flex;align-items:center;min-height:44px;padding:.3rem 1.05rem;border-radius:999px;background:var(--marigold);color:var(--deep);font-weight:800;text-decoration:none}
+.amt:hover{background:var(--marigold-2);color:var(--deep)}
+.donate .fine{font-size:.85rem;color:#9FB6B3}
+.qr{justify-self:center;width:max-content;max-width:100%;margin:0;padding:1rem;border-radius:14px;background:#fff;color:var(--slate);text-align:center}
+.qr img{width:190px;height:190px;margin:auto}
+.qr figcaption{max-width:200px;margin-top:.5rem;font-size:.85rem;line-height:1.4}
+.upi-id{display:block;margin-top:.35rem;color:var(--ink);font-weight:800;word-break:break-all}
+.copy{margin-left:.25rem;padding:.1rem .5rem;border-radius:6px;border:1px solid var(--line);background:var(--paper);color:var(--indigo);font:800 .8rem/1.5 var(--body);cursor:pointer}
+@media (hover:hover) and (pointer:fine){.donate .tap,.donate .amts,.pay-btn{display:none}}
+.donate-line{margin:.7rem 0 0}
+.donate-line a{color:var(--marigold-ink);font-weight:800}
+.vid-layout{display:grid;gap:1.4rem}
+.vid-layout .donate{order:-1;margin-top:1rem}
+@media (min-width:64rem){.vid-layout{grid-template-columns:1fr 330px;align-items:start}.vid-layout .vgrid{grid-template-columns:repeat(2,1fr)}.vid-layout .donate{order:0;position:sticky;top:5.5rem;grid-template-columns:1fr}}
+.admit{display:grid;gap:1.4rem;max-width:58rem;margin-bottom:4rem}
+.astep{margin:0;padding:1.3rem 1.5rem 1.5rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);min-width:0}
+.astep legend{display:flex;align-items:center;gap:.6rem;padding:0 .4rem;color:var(--indigo);font-weight:800;font-size:1.15rem}
+.astep-n{display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;background:var(--indigo);color:#fff;font:700 .95rem/1 var(--title)}
+.pick{display:grid;gap:.8rem;margin-top:.4rem}
+@media (min-width:46rem){.pick{grid-template-columns:repeat(3,1fr)}}
+.pick-card{position:relative;display:grid;gap:.1rem;padding:1rem 1rem 1rem 2.8rem;border-radius:12px;border:1.5px solid var(--line);background:var(--paper);cursor:pointer}
+.pick-card input{position:absolute;left:1rem;top:1.25rem;width:1.15rem;height:1.15rem;margin:0;accent-color:var(--indigo)}
+.pick-card:has(input:checked){border-color:var(--indigo);background:var(--white);box-shadow:0 0 0 3px rgba(212,166,74,.4)}
+.pick-en{font:700 1.12rem/1.2 var(--title);letter-spacing:.03em;color:var(--indigo)}
+.pick-hi{color:var(--marigold-ink);font-weight:800}
+.pick-meta{color:var(--slate);font-size:.9rem}
+.fields{display:grid;gap:.9rem;margin-top:.4rem}
+@media (min-width:40rem){.fields{grid-template-columns:1fr 1fr}.fields .wide{grid-column:1/-1}}
+.fields label{display:grid;gap:.3rem;color:var(--indigo);font-weight:800;font-size:.95rem}
+.fields input,.fields textarea{width:100%;min-height:46px;padding:.6rem .8rem;border-radius:10px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);font:400 1rem/1.4 var(--body)}
+.fields input:focus,.fields textarea:focus{outline:none;border-color:var(--indigo)}
+.pay{display:grid;gap:1.4rem;align-items:center;margin-top:.4rem}
+@media (min-width:46rem){.pay{grid-template-columns:1fr auto}}
+.pay-amt{margin:0;font:700 2.6rem/1.1 var(--title);color:var(--indigo)}
+.pay-btn{margin:.6rem 0 .3rem}
+.pay .qr{border:1px solid var(--line)}
+.btn-lg{min-height:54px;padding:.8rem 1.8rem;font-size:1.08rem}
+.admit-send p{margin:.7rem 0 0}
 .rail-wrap{position:relative}
 .rail{list-style:none;margin:0;padding:.3rem .1rem 1rem;display:grid;grid-auto-flow:column;grid-auto-columns:min(82%,21rem);gap:1.1rem;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:var(--mist) transparent}
 .rail > li{scroll-snap-align:start}
@@ -314,8 +427,9 @@ a:hover{color:var(--indigo)}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 .reel-cap small{display:block;margin-top:.15rem;color:var(--marigold-2);font-weight:600;font-size:.78rem;line-height:1.3}
 @media (max-width:59.99rem){.hero .reel-cap small{display:none}}
+@media (max-width:59.99rem){.door-en{font-size:clamp(1.35rem,7.4vw,2.6rem)}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":["EducationalOrganization","LocalBusiness"],"@id":"https://indianfilmsacademy.com/#academy","name":"Indian Films Academy","alternateName":["इंडियन फिल्म्स एकेडमी","IFA Lucknow","Indian Film Academy Lucknow"],"url":"https://indianfilmsacademy.com/","logo":"https://indianfilmsacademy.com/img/logo-emblem-512.webp","image":"https://indianfilmsacademy.com/img/hero-group-1600.webp","description":"Indian Films Academy is a dedicated training centre for cinematic acting that bridges the gap between acting education and the professional film industry.","foundingDate":"2019","telephone":"+917754000121","email":"info@indianfilmsacademy.com","address":{"@type":"PostalAddress","streetAddress":"C1/192, Vardan Khand, Sector 1, Gomti Nagar","addressLocality":"Lucknow","addressRegion":"Uttar Pradesh","postalCode":"226010","addressCountry":"IN"},"founder":[{"@type":"Person","name":"Yogesh Mishrra","jobTitle":"Founder and Chief Mentor","sameAs":["https://www.imdb.com/name/nm8753440/","https://ymatsystem.com/","https://gapistaan.com/creator/"]},{"@type":"Person","name":"Dinesh Kumar Sahgal","jobTitle":"Co-founder"}],"sameAs":["https://www.youtube.com/@indianfilmsacademyy"],"inLanguage":"en"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":["EducationalOrganization","LocalBusiness"],"@id":"https://indianfilmsacademy.com/#academy","name":"Indian Films Academy","alternateName":["इंडियन फिल्म्स एकेडमी","IFA Lucknow","Indian Film Academy Lucknow"],"url":"https://indianfilmsacademy.com/","logo":"https://indianfilmsacademy.com/img/logo-emblem-512.webp","image":"https://indianfilmsacademy.com/img/hero-group-1600.webp","description":"Indian Films Academy is a dedicated training centre for cinematic acting that bridges the gap between acting education and the professional film industry.","foundingDate":"2019","telephone":"+917754000121","email":"info@indianfilmsacademy.com","address":{"@type":"PostalAddress","streetAddress":"C1/192, Vardan Khand, Sector 1, Gomti Nagar","addressLocality":"Lucknow","addressRegion":"Uttar Pradesh","postalCode":"226010","addressCountry":"IN"},"founder":[{"@type":"Person","name":"Yogesh Mishrra","jobTitle":"Founder and Chief Mentor","sameAs":["https://www.imdb.com/name/nm8753440/","https://indianfilmsacademy.com/yogesh-cineact/","https://gapistaan.com/creator/"]},{"@type":"Person","name":"Dinesh Kumar Sahgal","jobTitle":"Co-founder"}],"sameAs":["https://www.youtube.com/@indianfilmsacademyy"],"inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indianfilmsacademy.com/en/"},{"@type":"ListItem","position":2,"name":"Contact and admission","item":"https://indianfilmsacademy.com/en/contact/"}]}</script>
 </head>
 <body class="lang-en">
@@ -323,10 +437,10 @@ a:hover{color:var(--indigo)}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/en/"><img src="/img/logo-emblem-96.webp" alt="" width="44" height="44"><span><span class="brand-name">Indian Films Academy</span><span class="brand-sub">Lucknow · Since 2019</span></span></a>
-    <nav class="topnav" aria-label="Menu"><a href="/en/cinekar/">CINEKAR</a><a href="/en/online/">Online</a><a href="/en/about/">Academy</a><a href="/en/gallery/">Gallery</a><a href="/en/videos/">Classes</a><a href="/en/contact/" aria-current="page">Contact</a></nav>
+    <nav class="topnav" aria-label="Menu"><a href="/en/cinematic-acting-course/">Cinematic Acting</a><a href="/en/film-direction-course/">Film Direction</a><a href="/en/film-editing-course/">Film Editing</a><a href="/en/yogesh-cineact/">Yogesh CineAct</a><a href="/en/about/">Academy</a><a href="/en/contact/" aria-current="page">Contact</a></nav>
     <div class="top-actions">
       <a class="lang-switch" href="/contact/" hreflang="hi" lang="hi">हिंदी</a>
-      <a class="btn btn-primary btn-sm" href="/en/contact/#apply">Apply</a>
+      <a class="btn btn-primary btn-sm" href="/en/admission/">Apply online</a>
     </div>
   </div>
 </header>
@@ -340,13 +454,13 @@ a:hover{color:var(--indigo)}
     <h3>Phone</h3><p><a href="tel:+917754000121">+91 77540 00121</a></p>
     <h3>Email</h3><p><a href="mailto:info@indianfilmsacademy.com">info@indianfilmsacademy.com</a></p>
   </div>
-  <form class="apply" id="apply" action="https://wa.me/917754000121" method="get" data-intro="Hello, I would like to apply for admission to the CINEKAR programme.">
-    <h3>Apply for admission</h3>
+  <form class="apply js-wa" id="apply" action="https://wa.me/917754000121" method="get" data-intro="Hello, I would like to know about the courses at Indian Films Academy.">
+    <h3>Have a question?</h3>
     <p class="muted">Your application goes straight to our WhatsApp. This website does not store any of your details.</p>
     <label>Your name<input name="name" autocomplete="name" required data-k="Your name"></label>
     <label>Phone number<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required data-k="Phone number"></label>
     <label>City<input name="city" autocomplete="address-level2" data-k="City"></label>
-    <label>Craft<select name="track" data-k="Craft"><option>Actor (Acting)</option><option>Director (Direction)</option><option>Editor (Editing)</option><option>Not decided yet</option><option>Online course</option></select></label>
+    <label>Course<select name="track" data-k="Course"><option>Cinematic Acting</option><option>Film Direction</option><option>Film Editing</option><option>Not decided yet</option><option>Online course</option></select></label>
     <label>Any questions?<textarea name="note" rows="3" data-k="Any questions?"></textarea></label>
     <button class="btn btn-primary" type="submit">Send on WhatsApp</button>
   </form>
@@ -361,12 +475,13 @@ a:hover{color:var(--indigo)}
       <p class="foot-muted">C1/192, Vardan Khand, Sector 1, Gomti Nagar, Lucknow, Uttar Pradesh 226010</p>
     </div>
     <div>
-      <h2>Programmes</h2>
+      <h2>Courses</h2>
       <ul>
-        <li><a href="/en/cinekar/">CINEKAR: 90-day programme</a></li>
-        <li><a href="/en/cinekar/actor/">Acting Course in Lucknow</a></li>
-        <li><a href="/en/cinekar/director/">Film Direction Course in Lucknow</a></li>
-        <li><a href="/en/cinekar/editor/">Video Editing Course in Lucknow</a></li>
+        <li><a href="/en/cinematic-acting-course/">Cinematic Acting Course in Lucknow</a></li>
+        <li><a href="/en/film-direction-course/">Film Direction Course in Lucknow</a></li>
+        <li><a href="/en/film-editing-course/">Film Editing Course in Lucknow</a></li>
+        <li><a href="/en/courses/">Compare the three courses</a></li>
+        <li><a href="/en/admission/">Apply online</a></li>
         <li><a href="/en/online/">Online acting course</a></li>
       </ul>
     </div>
@@ -374,6 +489,8 @@ a:hover{color:var(--indigo)}
       <h2>Academy</h2>
       <ul>
         <li><a href="/en/about/">About the academy</a></li>
+        <li><a href="/en/yogesh-cineact/">Yogesh CineAct</a></li>
+        <li><a href="/en/bytes/">Bytes from the stars</a></li>
         <li><a href="/en/gallery/">Gallery</a></li>
         <li><a href="/en/videos/">Classes</a></li>
         <li><a href="/en/privacy/">Privacy</a></li>
@@ -453,20 +570,23 @@ a:hover{color:var(--indigo)}
   }
   if('IntersectionObserver' in window && !calm){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card').forEach(function(el){
+    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card, .fork, .branches > li, .hl > li, .syl-m, .tech li, .donate, .quote, .pick-card').forEach(function(el){
       var sib=el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
       el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
     });
   }
-  var form=document.getElementById('apply');
-  if(form){
+  document.querySelectorAll('form.js-wa').forEach(function(form){
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var lines=[form.getAttribute('data-intro')];
-      form.querySelectorAll('[data-k]').forEach(function(el){ var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+      form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+      if(form.getAttribute('data-tail')) lines.push(form.getAttribute('data-tail'));
       window.location.href='https://wa.me/917754000121?text='+encodeURIComponent(lines.join('\n'));
     });
-  }
+  });
+  var pre=new URLSearchParams(location.search).get('c');
+  if(pre){ var r=document.querySelector('input[data-key="'+pre.replace(/[^a-z]/g,'')+'"]'); if(r) r.checked=true; }
+  document.querySelectorAll('button.copy').forEach(function(b){ b.addEventListener('click',function(){ var t=b.getAttribute('data-copy'), old=b.textContent; function done(){ b.textContent=b.getAttribute('data-done'); setTimeout(function(){ b.textContent=old; },1800); } if(navigator.clipboard){ navigator.clipboard.writeText(t).then(done,function(){}); } }); });
 })();
 </script>
 

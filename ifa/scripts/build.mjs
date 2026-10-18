@@ -107,7 +107,7 @@ const orgLd = (lang) => ({
   telephone: site.phone,
   email: site.email,
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, postalCode: site.address.pin, addressCountry: 'IN' },
-  founder: site.founderMeta.map((f, i) => ({ '@type': 'Person', name: f.nameEn, jobTitle: site.en.founders[i].role, ...(f.links.length ? { sameAs: f.links.map(([, h]) => h) } : {}) })),
+  founder: site.founderMeta.map((f, i) => ({ '@type': 'Person', name: f.nameEn, jobTitle: site.en.founders[i].role, ...(f.links.length ? { sameAs: f.links.map(([, h]) => (h.startsWith('/') ? abs(h) : h)) } : {}) })),
   sameAs: [site.youtubeUrl, site.instagramUrl, site.facebookUrl].filter(Boolean),
   inLanguage: lang,
 });
@@ -116,11 +116,11 @@ const courseLd = (lang, slug) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Course',
-    name: `CINEKAR ${site.trackNames[slug]}: ${T.seo}`,
+    name: `${site.courses[slug].en}: ${T.seo}`,
     description: T.description,
     inLanguage: 'hi',
     provider: { '@type': 'EducationalOrganization', '@id': orgId, name: 'Indian Films Academy', sameAs: abs('/') },
-    offers: { '@type': 'Offer', category: 'Paid', price: site.fee, priceCurrency: 'INR', url: abs(`${prefixOf(lang)}/cinekar/${slug}/`) },
+    offers: { '@type': 'Offer', category: 'Paid', price: site.fee, priceCurrency: 'INR', url: abs(`${prefixOf(lang)}/${site.courses[slug].slug}/`) },
     hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'Onsite', location: { '@type': 'Place', name: 'Indian Films Academy', address: addressEn }, courseWorkload: 'P3M' },
   };
 };
@@ -133,9 +133,11 @@ function buildLang(lang) {
   const pre = prefixOf(lang);
   const other = lang === 'hi' ? 'en' : 'hi';
   const u = (p) => pre + p;
-  const applyUrl = u('/contact/#apply');
+  const applyUrl = u('/admission/');
   const crumbs = (items) => `<nav class="crumbs" aria-label="breadcrumb">${items.map(([n, p], i) => (i < items.length - 1 ? `<a href="${p}">${esc(n)}</a>` : `<span>${esc(n)}</span>`)).join('<span aria-hidden="true"> / </span>')}</nav>`;
-  const tracks = site.trackOrder.map((slug) => ({ slug, name: site.trackNames[slug], ...L.tracks[slug] }));
+  const tracks = site.trackOrder.map((key) => ({ key, slug: site.courses[key].slug, name: site.courses[key].en, ...L.tracks[key] }));
+  const TP = L.trackPage, CPG = L.coursesPage, DN = L.donate, AD = L.admit, CA = L.cineact, CH = L.cineactHome;
+  const li = (x) => `<li>${esc(x)}</li>`;
   const feeVars = { i1: money(site.installments[0]), i2: money(site.installments[1]), total: money(site.installments.reduce((a, b) => a + b, 0)), pct: site.scholarshipPct };
 
   function layout({ title, description, pathName, image, ld = [], body, type = 'website', noindex = false }) {
@@ -197,8 +199,9 @@ ${body}
     <div>
       <h2>${esc(F.courses)}</h2>
       <ul>
-        <li><a href="${u('/cinekar/')}">${esc(F.cinekar)}</a></li>
-        ${tracks.map((t) => `<li><a href="${u(`/cinekar/${t.slug}/`)}">${esc(t.seo)}</a></li>`).join('\n        ')}
+        ${tracks.map((t) => `<li><a href="${u(`/${t.slug}/`)}">${esc(t.seo)}</a></li>`).join('\n        ')}
+        <li><a href="${u('/courses/')}">${esc(F.cinekar)}</a></li>
+        <li><a href="${u('/admission/')}">${esc(F.admission)}</a></li>
         <li><a href="${u('/online/')}">${esc(F.online)}</a></li>
       </ul>
     </div>
@@ -206,6 +209,8 @@ ${body}
       <h2>${esc(F.academy)}</h2>
       <ul>
         <li><a href="${u('/about/')}">${esc(F.about)}</a></li>
+        <li><a href="${u('/yogesh-cineact/')}">${esc(F.cineact)}</a></li>
+        <li><a href="${u('/bytes/')}">${esc(F.bytes)}</a></li>
         <li><a href="${u('/gallery/')}">${esc(F.gallery)}</a></li>
         <li><a href="${u('/videos/')}">${esc(F.videos)}</a></li>
         <li><a href="${u('/privacy/')}">${esc(F.privacy)}</a></li>
@@ -256,7 +261,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
   const reelName = (r) => (lang === 'hi' ? r.hi : r.en);
   const reelRole = (r) => (lang === 'hi' ? r.roleHi : r.roleEn) || '';
   const SPEAKER = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.6a4.4 4.4 0 0 1 0 6.8M18.6 6a8 8 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
-  const reelCard = (r, d = 0) => `<li class="reel-card"${d ? ` style="--d:${d}s"` : ''}><button class="reel" type="button" data-full="${esc(r.full)}" data-yt="${esc(r.yt || '')}" data-cap="${esc(reelName(r) + (reelRole(r) ? ', ' + reelRole(r) : ''))}" aria-label="${esc(fmt(L.reelPlay, { name: reelName(r) }))}"><video muted loop playsinline preload="none" poster="/media/poster-${r.slug}.jpg" data-src="/media/loop-${r.slug}.mp4" aria-hidden="true"></video><span class="reel-cap">${esc(reelName(r))}${reelRole(r) ? `<small>${esc(reelRole(r))}</small>` : ''}</span><span class="reel-sound">${SPEAKER}</span></button></li>`;
+  const reelCard = (r, d = 0, dur = false) => `<li class="reel-card"${d ? ` style="--d:${d}s"` : ''}><button class="reel" type="button" data-full="${esc(r.full)}" data-yt="${esc(r.yt || '')}" data-cap="${esc(reelName(r) + (reelRole(r) ? ', ' + reelRole(r) : ''))}" aria-label="${esc(fmt(L.reelPlay, { name: reelName(r) }))}"><video muted loop playsinline preload="none" poster="/media/poster-${r.slug}.jpg" data-src="/media/loop-${r.slug}.mp4" aria-hidden="true"></video><span class="reel-cap">${esc(reelName(r))}${reelRole(r) ? `<small>${esc(reelRole(r))}</small>` : ''}</span><span class="reel-sound">${SPEAKER}</span>${dur && r.sec ? `<span class="reel-dur">${esc(L.fullByte)} · ${clock(r.sec)}</span>` : ''}</button></li>`;
   // Hero wall: 3 columns of 2 (mobile shows the first of each column).
   const reelWall = () => {
     if (heroReels.length < 3) return '';
@@ -268,17 +273,48 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
 
   const ladder = () => `<div class="ladder-band"><div class="wrap"><p class="ladder-title">${esc(L.ladderTitle)}</p><ol class="ladder">${L.ladder.map(([k, v], i) => `<li><span class="ladder-step">${i + 1}</span><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol></div></div>`;
 
-  const months = (track) => `<ol class="months">${L.months
-    .map((m, i) => {
-      const pts = i === 1 ? (track ? track.month2 : null) : m.points;
-      const body = pts
-        ? `<ul class="ticks">${pts.map((p) => `<li>${esc(p)}</li>`).join('')}</ul>`
-        : `<div class="tracklets">${tracks.map((t) => `<a href="${u(`/cinekar/${t.slug}/`)}"><strong>${esc(t.name)}</strong><span>${esc(t.month2.slice(0, 3).join(' · '))}</span></a>`).join('')}</div>`;
-      return `<li class="month"><span class="month-n">${esc(L.monthWord)} ${i + 1}</span><h3>${esc(m.title)}</h3><p class="month-who">${esc(m.who)}</p><p class="muted">${esc(m.why)}</p>${body}</li>`;
-    })
-    .join('')}</ol>`;
-
-  const feeCard = () => `<div class="fee-card">
+  // Course page: month 1 shared, months 2 and 3 only for this course.
+  const syllabus = (t) => {
+    const [m1, m2, m3] = L.months;
+    return `<ol class="syl">
+<li class="syl-m shared"><p class="syl-top"><span class="month-n">${esc(L.monthWord)} 1</span><span class="tag">${esc(TP.shared)}</span></p><h3>${esc(m1.title)}</h3><p class="muted">${esc(m1.why)}</p><ul class="ticks cols">${m1.points.map(li).join('')}</ul></li>
+<li class="syl-m"><p class="syl-top"><span class="month-n">${esc(L.monthWord)} 2</span><span class="tag gold">${esc(TP.own)}</span></p><h3>${esc(m2.title)}</h3><p class="muted">${esc(m2.why)}</p><dl class="mods">${t.month2.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl></li>
+<li class="syl-m"><p class="syl-top"><span class="month-n">${esc(L.monthWord)} 3</span><span class="tag gold">${esc(TP.own)}</span></p><h3>${esc(m3.title)}</h3><p class="muted">${esc(m3.why)}</p><ul class="ticks">${t.month3.map(li).join('')}</ul></li>
+</ol>`;
+  };
+  // Home and /courses/: one shared trunk that splits into three courses.
+  const fork = () => {
+    const m1 = L.months[0];
+    return `<div class="fork">
+  <div class="trunk"><p class="trunk-label">${esc(L.trunkLabel)}</p><h3>${esc(m1.title)}</h3><ul class="ticks cols light">${m1.points.map(li).join('')}</ul></div>
+  <svg class="fork-lines" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M150 0V20C150 42 50 34 50 60"/><path pathLength="1" d="M150 0V60"/><path pathLength="1" d="M150 0V20C150 42 250 34 250 60"/></svg>
+  <ul class="branches">${tracks
+    .map((t) => `<li><a class="branch" href="${u(`/${t.slug}/`)}"><span class="branch-en">${esc(t.name)}</span>${lang === 'hi' ? `<span class="branch-hi">${esc(t.local)}</span>` : ''}<span class="branch-pitch">${esc(t.pitch)}</span><span class="branch-m">${esc(L.branchM2)}</span><ul class="ticks">${t.month2.slice(0, 5).map(([k]) => li(k)).join('')}</ul><span class="branch-m">${esc(L.branchM3)}</span><span class="branch-p3">${esc(t.month3[0])}</span><span class="more">${esc(L.courseMore)}</span></a></li>`)
+    .join('')}</ul>
+</div>`;
+  };
+  const tiles = (items, cls = '') => `<ul class="hl${cls ? ' ' + cls : ''}">${items.map(([k, v]) => `<li><h3>${esc(k)}</h3><p>${esc(v)}</p></li>`).join('')}</ul>`;
+  const channel = (cls = 'sec-alt') => `<section class="sec ${cls}" aria-labelledby="ch-h"><div class="wrap">
+  <p class="eyebrow">${esc(L.channel.eyebrow)}</p><h2 class="h2" id="ch-h">${esc(L.channel.title)}</h2><p class="lede">${esc(L.channel.lede)}</p>
+  ${tiles(L.channel.points, 'hl-ch')}
+  <p class="proof">${L.creatorProof}</p>
+</div></section>`;
+  const cineactBand = () => `<section class="sec sec-dark" aria-labelledby="ca-h"><div class="wrap split ca-band">
+  <div><p class="eyebrow">${esc(CH.eyebrow)}</p><h2 class="h2" id="ca-h">${esc(CH.title)}</h2><p class="ca-text">${esc(CH.text)}</p><a class="btn btn-gold" href="${u('/yogesh-cineact/')}">${esc(CH.cta)}</a></div>
+  <figure class="quote"><blockquote>${esc(CH.quote)}</blockquote><figcaption>Yogesh Mishrra</figcaption></figure>
+</div></section>`;
+  // UPI: the bank's own QR payload; amount and note added only for the phone link.
+  const upi = site.upi || {};
+  const upiLink = (amt, note) => (upi.payload ? upi.payload + (amt ? `&am=${Number(amt).toFixed(2)}` : '') + (note ? `&tn=${encodeURIComponent(note)}` : '') : '');
+  const qrFig = (caption) => `<figure class="qr"><img src="/img/upi-qr.svg" alt="UPI QR, ${esc(upi.id)}" width="190" height="190" loading="lazy"><figcaption>${esc(caption)}<span class="upi-id">${esc(upi.id)} <button type="button" class="copy" data-copy="${esc(upi.id)}" data-done="${esc(AD.copied)}">${esc(AD.copy)}</button></span></figcaption></figure>`;
+  const donate = () => (upi.payload ? `<aside class="donate" id="support" aria-labelledby="dn-h">
+  <div class="donate-text"><p class="eyebrow">${esc(DN.eyebrow)}</p><h2 id="dn-h">${esc(DN.title)}</h2><p>${esc(DN.text)}</p>
+  <p class="tap">${esc(DN.tap)}</p><p class="amts">${(upi.donate || []).map((a) => `<a class="amt" href="${esc(upiLink(a, 'IFA student support'))}">${money(a)}</a>`).join('')}<a class="amt" href="${esc(upiLink(0, 'IFA student support'))}">${esc(DN.any)}</a></p>
+  <p class="fine">${esc(fmt(DN.fine, { upi: upi.id }))}</p></div>
+  ${qrFig(DN.scan)}
+</aside>` : '');
+  const donateLine = () => (upi.payload ? `<p class="donate-line"><a href="${u('/videos/')}#support">${esc(DN.short)}</a></p>` : '');
+  const feeCard = (key) => `<div class="fee-card">
   <p class="fee-k">${esc(L.fee.label)}</p>
   <p class="fee-v">${money(site.fee)}</p>
   <p class="fee-note">${esc(L.fee.note)}</p>
@@ -287,7 +323,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
     <div><dt>${esc(L.fee.schK)}</dt><dd>${esc(fmt(L.fee.schV, feeVars))}</dd></div>
     <div><dt>${esc(L.fee.eligK)}</dt><dd>${esc(L.fee.eligV)}</dd></div>
   </dl>
-  <a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a>
+  <a class="btn btn-gold" href="${applyUrl}${key ? `?c=${key}` : ''}">${esc(L.hero.cta)}</a>
 </div>`;
   const steps = () => `<ol class="steps">${L.steps.map(([k, v]) => `<li><strong>${esc(k)}</strong><span>${esc(v)}</span></li>`).join('')}</ol>`;
   const faq = (list) => `<div class="faq">${list.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}</div>`;
@@ -301,7 +337,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
       <h3>${esc(f.name)}${lang === 'hi' ? ` <span class="en" lang="en">${esc(m.nameEn)}</span>` : ''}</h3>
       <p class="role">${esc(f.role)}</p>
       ${f.bio.map((b) => `<p>${esc(b)}</p>`).join('\n      ')}
-      ${m.links.length ? `<p class="link-row">${m.links.map(([l, h]) => `<a class="chip-link" href="${esc(h)}">${esc(l)}</a>`).join('')}</p>` : ''}
+      ${m.links.length ? `<p class="link-row">${m.links.map(([l, h]) => `<a class="chip-link" href="${esc(h.startsWith('/') ? u(h) : h)}">${esc(l)}</a>`).join('')}</p>` : ''}
     </div>
   </article>`;
     })
@@ -315,13 +351,13 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
     <h3>${esc(C.phone)}</h3><p><a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></p>
     <h3>${esc(C.email)}</h3><p><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></p>
   </div>
-  <form class="apply" id="apply" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(C.msgIntro)}">
+  <form class="apply js-wa" id="apply" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(C.msgIntro)}">
     <h3>${esc(C.formTitle)}</h3>
     <p class="muted">${esc(C.formNote)}</p>
     <label>${esc(C.name)}<input name="name" autocomplete="name" required data-k="${esc(C.name)}"></label>
     <label>${esc(C.phoneF)}<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required data-k="${esc(C.phoneF)}"></label>
     <label>${esc(C.city)}<input name="city" autocomplete="address-level2" data-k="${esc(C.city)}"></label>
-    <label>${esc(C.track)}<select name="track" data-k="${esc(C.track)}">${tracks.map((t) => `<option>${esc(t.name)} (${esc(t.nameLocal)})</option>`).join('')}<option>${esc(C.undecided)}</option><option>${esc(C.online)}</option></select></label>
+    <label>${esc(C.track)}<select name="track" data-k="${esc(C.track)}">${tracks.map((t) => `<option>${esc(lang === 'hi' ? `${t.name} (${t.local})` : t.name)}</option>`).join('')}<option>${esc(C.undecided)}</option><option>${esc(C.online)}</option></select></label>
     <label>${esc(C.note)}<textarea name="note" rows="3" data-k="${esc(C.note)}"></textarea></label>
     <button class="btn btn-primary" type="submit">${esc(C.send)}</button>
   </form>
@@ -334,71 +370,55 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
     title: L.homeTitle,
     description: L.homeDescription,
     pathName: '/',
-    ld: [orgLd(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Indian Films Academy', url: abs(u('/')), inLanguage: lang }, faqLd(L.faq)],
+    ld: [orgLd(lang), { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Indian Films Academy', url: abs(u('/')), inLanguage: lang }, ...site.trackOrder.map((k) => courseLd(lang, k)), faqLd(L.faq)],
     body: `<main id="main">
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="kicker">${esc(L.hero.kicker)}</p>
-      <h1 class="hero-h1"><span class="brandword">CINEKAR</span><span class="hero-line">${esc(L.hero.line)}</span></h1>
+      <h1 class="hero-h1"><span class="sr-only">${esc(L.hero.h1Hidden)} </span>${tracks.map((t, i) => `<a class="door" href="${u(`/${t.slug}/`)}" style="--i:${i}"><span class="door-en">${esc(t.name)}</span><span class="door-sub">${esc(lang === 'hi' ? fmt(L.doorSub, { name: t.local }) : L.doorSub)}</span></a>`).join('')}</h1>
       <p class="hero-sub">${esc(L.hero.sub)}</p>
       <div class="actions">
         <a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a>
-        <a class="btn btn-ghost-light" href="${u('/cinekar/')}">${esc(L.hero.cta2)}</a>
+        <a class="btn btn-ghost-light" href="${u('/courses/')}">${esc(L.hero.cta2)}</a>
       </div>
     </div>
     ${reelWall()}
   </div>
 </section>
-${ladder()}
-<section class="sec" aria-labelledby="tracks-h"><div class="wrap">
-  <p class="eyebrow">${esc(L.tracksEyebrow)}</p>
-  <h2 class="h2" id="tracks-h">${esc(L.tracksTitle)}</h2>
-  <p class="lede">${esc(L.tracksLede)}</p>
-  <ul class="tracks">${tracks
-    .map((t) => `<li><a class="track" href="${u(`/cinekar/${t.slug}/`)}"><span class="track-name">${esc(t.name)}</span><span class="track-local">${esc(t.nameLocal)}</span><span class="track-pitch">${esc(t.pitch)}</span><ul class="ticks">${t.month2.slice(0, 4).map((p) => `<li>${esc(p)}</li>`).join('')}</ul><span class="more">${esc(L.trackMore)}</span></a></li>`)
-    .join('')}</ul>
+<section class="sec" aria-labelledby="fork-h"><div class="wrap">
+  <p class="eyebrow">${esc(L.forkEyebrow)}</p>
+  <h2 class="h2" id="fork-h">${esc(L.forkTitle)}</h2>
+  <p class="lede">${esc(L.forkLede)}</p>
+  ${fork()}
 </div></section>
 ${reels.length ? `<section class="sec sec-dark" aria-labelledby="bless-h"><div class="wrap">
-  <p class="eyebrow">${esc(L.blessingsEyebrow)}</p>
-  <h2 class="h2" id="bless-h">${esc(L.blessingsTitle)}</h2>
-  <p class="lede">${esc(L.blessingsLede)}</p>
-  ${rail(reels.map((r) => reelCard(r)).join(''), 'reelrail', L.blessingsTitle)}
-</div></section>
-${reelBox}` : ''}
-<section class="sec sec-alt" aria-labelledby="months-h"><div class="wrap">
-  <p class="eyebrow">${esc(L.monthsEyebrow)}</p>
-  <h2 class="h2" id="months-h">${esc(L.monthsTitle)}</h2>
-  ${months(null)}
-</div></section>
+  <div class="sec-head"><div><p class="eyebrow">${esc(L.blessingsEyebrow)}</p><h2 class="h2" id="bless-h">${esc(L.blessingsTitle)}</h2><p class="lede">${esc(L.blessingsLede)}</p></div><a class="chip-link" href="${u('/bytes/')}">${esc(L.allBytes)}</a></div>
+  ${rail(reels.map((r) => reelCard(r, 0, true)).join(''), 'reelrail', L.blessingsTitle)}
+</div></section>` : ''}
+${channel()}
+${cineactBand()}
 ${videos.length ? `<section class="sec" aria-labelledby="yt-h"><div class="wrap">
   <div class="sec-head"><div><p class="eyebrow">${esc(L.videosEyebrow)}</p><h2 class="h2" id="yt-h">${esc(L.videosTitle)}</h2><p class="hint">${esc(L.videosHint)}</p></div><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div>
   ${rail(videos.slice(0, 16).map(videoCard).join(''), 'vrail', L.videosTitle)}
   <p class="more-link"><a href="${u('/videos/')}">${esc(L.allVideos)}</a></p>
+  ${donateLine()}
 </div></section>` : ''}
-<section class="sec sec-alt" aria-labelledby="creator-h"><div class="wrap split">
-  <div>
-    <p class="eyebrow">${esc(L.creatorEyebrow)}</p>
-    <h2 class="h2" id="creator-h">${esc(L.creatorTitle)}</h2>
-    ${L.creator.map((p) => `<p>${esc(p)}</p>`).join('\n    ')}
-    <p class="proof">${L.creatorProof}</p>
-  </div>
-  ${img('group-3', 800, 'Indian Films Academy', { widths: [800, 1400], sizes: '(min-width: 64rem) 520px, 92vw', cls: 'rounded', width: 800, height: 570 })}
-</div></section>
-<section class="sec" aria-labelledby="legends-h">
+<section class="sec sec-alt" aria-labelledby="legends-h">
   <div class="wrap"><p class="eyebrow">${esc(L.legendsEyebrow)}</p><h2 class="h2" id="legends-h">${esc(L.legendsTitle)}</h2><p class="lede">${esc(L.legendsLede)}</p></div>
   ${marquee(stripPhotos)}
   <div class="wrap"><p class="more-link"><a href="${u('/gallery/')}">${esc(L.allPhotos)}</a></p></div>
 </section>
-<section class="sec sec-alt" aria-labelledby="fees-h"><div class="wrap split">
+${ladder()}
+<section class="sec" aria-labelledby="fees-h"><div class="wrap split">
   <div><p class="eyebrow">${esc(L.feesEyebrow)}</p><h2 class="h2" id="fees-h">${esc(L.feesTitle)}</h2>${steps()}</div>
   ${feeCard()}
 </div></section>
-<section class="sec" aria-labelledby="founders-h"><div class="wrap">
+<section class="sec sec-alt" aria-labelledby="founders-h"><div class="wrap">
   <p class="eyebrow">${esc(L.foundersEyebrow)}</p><h2 class="h2" id="founders-h">${esc(L.foundersTitle)}</h2>
   ${founders()}
 </div></section>
-${igPosts.length ? `<section class="sec sec-alt" aria-labelledby="ig-h"><div class="wrap">
+${igPosts.length ? `<section class="sec" aria-labelledby="ig-h"><div class="wrap">
   <div class="sec-head"><div><p class="eyebrow">${esc(L.igEyebrow)}</p><h2 class="h2" id="ig-h">${esc(L.igTitle)}</h2></div>${site.instagramUrl ? `<a class="chip-link" href="${esc(site.instagramUrl)}">${esc(L.follow)}</a>` : ''}</div>
   ${rail(igPosts.slice(0, 12).map((p) => `<li><a class="igcard" href="${esc(p.permalink)}"><img src="${esc(p.img)}" alt="${esc((p.caption || 'Instagram').slice(0, 90))}" loading="lazy" decoding="async" width="320" height="320">${p.type === 'reel' || p.type === 'video' ? '<span class="ig-reel" aria-hidden="true">▶</span>' : ''}</a></li>`).join(''), 'igrail', L.igTitle)}
 </div></section>` : ''}
@@ -409,71 +429,161 @@ ${igPosts.length ? `<section class="sec sec-alt" aria-labelledby="ig-h"><div cla
 <section class="sec sec-alt" aria-labelledby="faq-h"><div class="wrap"><h2 class="h2" id="faq-h">${esc(L.faqTitle)}</h2>${faq(L.faq)}</div></section>
 <section class="sec" id="contact" aria-labelledby="contact-h"><div class="wrap"><h2 class="h2" id="contact-h">${esc(L.contactTitle)}</h2>${contactBlock()}</div></section>
 ${viewer}
+${reelBox}
 </main>`,
   });
 
-  const CP = L.cinekarPage;
-  pages['/cinekar/'] = layout({
-    title: CP.title,
-    description: CP.description,
-    pathName: '/cinekar/',
-    ld: [...site.trackOrder.map((s) => courseLd(lang, s)), faqLd(L.faq), crumbsLd([[L.home, u('/')], ['CINEKAR', u('/cinekar/')]])],
+  pages['/courses/'] = layout({
+    title: CPG.title,
+    description: CPG.description,
+    pathName: '/courses/',
+    ld: [...site.trackOrder.map((k) => courseLd(lang, k)), faqLd(L.faq), crumbsLd([[L.home, u('/')], [CPG.h1, u('/courses/')]])],
     body: `<main id="main" class="page">
 <div class="wrap page-head">
-${crumbs([[L.home, u('/')], ['CINEKAR', u('/cinekar/')]])}
-<p class="eyebrow">${esc(CP.eyebrow)}</p>
-<h1 class="page-h1"><span class="brandword sm">CINEKAR</span> <span class="h1-line">${esc(L.hero.line)}</span></h1>
-<p class="lede">${esc(L.hero.sub)}</p>
+${crumbs([[L.home, u('/')], [CPG.h1, u('/courses/')]])}
+<p class="eyebrow">${esc(L.forkEyebrow)}</p>
+<h1 class="page-h1">${esc(CPG.h1)}</h1>
+<p class="lede">${esc(L.forkLede)}</p>
 <div class="actions"><a class="btn btn-primary" href="${applyUrl}">${esc(L.hero.cta)}</a></div>
 </div>
-${ladder()}
-<section class="sec"><div class="wrap"><h2 class="h2">${esc(CP.syllabus)}</h2>${months(null)}</div></section>
+<section class="sec sec-tight"><div class="wrap">${fork()}</div></section>
 <section class="sec sec-alt"><div class="wrap">
-  <h2 class="h2">${esc(CP.choose)}</h2>
+  <h2 class="h2">${esc(CPG.compareTitle)}</h2>
   <div class="compare-wrap"><table class="compare">
-    <thead><tr><th></th>${tracks.map((t) => `<th><a href="${u(`/cinekar/${t.slug}/`)}">${esc(t.name)}</a></th>`).join('')}</tr></thead>
+    <thead><tr><th></th>${tracks.map((t) => `<th><a href="${u(`/${t.slug}/`)}">${esc(t.name)}</a>${lang === 'hi' ? `<span class="th-hi">${esc(t.local)}</span>` : ''}</th>`).join('')}</tr></thead>
     <tbody>
-      <tr><th>${esc(CP.rowFor)}</th>${tracks.map((t) => `<td>${esc(t.forWhom[0])}</td>`).join('')}</tr>
-      <tr><th>${esc(CP.rowM2)}</th>${tracks.map((t) => `<td>${esc(t.month2.slice(0, 3).join('; '))}</td>`).join('')}</tr>
-      <tr><th>${esc(CP.rowOut)}</th>${tracks.map((t) => `<td>${esc(t.outcome.join(', '))}</td>`).join('')}</tr>
+      <tr><th>${esc(CPG.rowFor)}</th>${tracks.map((t) => `<td>${esc(t.forWhom[0])}</td>`).join('')}</tr>
+      <tr><th>${esc(CPG.rowM2)}</th>${tracks.map((t) => `<td>${esc(t.month2.map(([k]) => k).join(', '))}</td>`).join('')}</tr>
+      <tr><th>${esc(CPG.rowM3)}</th>${tracks.map((t) => `<td>${esc(t.month3[0])}</td>`).join('')}</tr>
+      <tr><th>${esc(CPG.rowCareer)}</th>${tracks.map((t) => `<td>${esc(t.careers.join(', '))}</td>`).join('')}</tr>
+      <tr><th>${esc(CPG.rowFee)}</th>${tracks.map(() => `<td>${money(site.fee)}</td>`).join('')}</tr>
     </tbody>
   </table></div>
 </div></section>
+${channel('')}
+${ladder()}
 <section class="sec"><div class="wrap split"><div><h2 class="h2">${esc(L.feesTitle)}</h2>${steps()}</div>${feeCard()}</div></section>
-<section class="sec sec-alt"><div class="wrap"><h2 class="h2">${esc(CP.faq)}</h2>${faq(L.faq)}</div></section>
+<section class="sec sec-alt"><div class="wrap"><h2 class="h2">${esc(CPG.faq)}</h2>${faq(L.faq)}</div></section>
 </main>`,
   });
 
-  const TP = L.trackPage;
   for (const t of tracks) {
     const others = tracks.filter((x) => x !== t);
-    pages[`/cinekar/${t.slug}/`] = layout({
+    const path = `/${t.slug}/`;
+    const trail = [[L.home, u('/')], [CPG.h1, u('/courses/')], [lang === 'hi' ? t.local : t.name, u(path)]];
+    pages[path] = layout({
       title: t.title,
       description: t.description,
-      pathName: `/cinekar/${t.slug}/`,
-      ld: [courseLd(lang, t.slug), crumbsLd([[L.home, u('/')], ['CINEKAR', u('/cinekar/')], [t.name, u(`/cinekar/${t.slug}/`)]])],
+      pathName: path,
+      ld: [courseLd(lang, t.key), crumbsLd(trail)],
       body: `<main id="main" class="page">
-<div class="wrap page-head">
-${crumbs([[L.home, u('/')], ['CINEKAR', u('/cinekar/')], [t.name, u(`/cinekar/${t.slug}/`)]])}
-<p class="eyebrow">CINEKAR ${esc(t.name)}</p>
+<section class="course-hero"><div class="wrap">
+${crumbs(trail)}
+<p class="course-en" aria-hidden="true">${esc(t.name)}</p>
 <h1 class="page-h1">${esc(t.h1)}</h1>
 <p class="lede">${esc(t.pitch)}</p>
-<ul class="chips">${TP.chips.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-<div class="actions"><a class="btn btn-primary" href="${applyUrl}">${esc(L.hero.cta)}</a><a class="btn btn-ghost" href="#syllabus">${esc(TP.syllabus)}</a></div>
-</div>
-<section class="sec sec-alt"><div class="wrap split">
-  <div><h2 class="h2">${esc(TP.for)}</h2><ul class="ticks big">${t.forWhom.map((p) => `<li>${esc(p)}</li>`).join('')}</ul></div>
-  <div class="card"><h2 class="h2">${esc(TP.out)}</h2><ul class="ticks big">${t.outcome.map((p) => `<li>${esc(p)}</li>`).join('')}</ul></div>
+<ul class="chips">${[...TP.chips, money(site.fee)].map(li).join('')}</ul>
+<div class="actions"><a class="btn btn-gold" href="${applyUrl}?c=${t.key}">${esc(L.hero.cta)}</a><a class="btn btn-ghost-light" href="#syllabus">${esc(TP.syllabus)}</a></div>
 </div></section>
-<section class="sec" id="syllabus"><div class="wrap"><h2 class="h2">${esc(L.cinekarPage.syllabus)}</h2>${months(t)}</div></section>
+<section class="sec" aria-labelledby="hl-h"><div class="wrap"><h2 class="h2" id="hl-h">${esc(L.highlightsTitle)}</h2>${tiles(t.highlights)}</div></section>
+<section class="sec sec-alt" id="syllabus" aria-labelledby="syl-h"><div class="wrap"><h2 class="h2" id="syl-h">${esc(TP.syllabusTitle)}</h2>${syllabus(t)}</div></section>
+${channel('')}
+<section class="sec sec-alt"><div class="wrap three">
+  <div><h2 class="h3">${esc(TP.for)}</h2><ul class="ticks big">${t.forWhom.map(li).join('')}</ul></div>
+  <div><h2 class="h3">${esc(TP.out)}</h2><ul class="ticks big">${t.outcome.map(li).join('')}</ul></div>
+  <div><h2 class="h3">${esc(TP.careers)}</h2><ul class="ticks big">${t.careers.map(li).join('')}</ul></div>
+</div></section>
 ${ladder()}
+${reels.length ? `<section class="sec sec-dark" aria-labelledby="tb-h"><div class="wrap">
+  <div class="sec-head"><div><h2 class="h2" id="tb-h">${esc(TP.bytesTitle)}</h2><p class="lede">${esc(L.blessingsLede)}</p></div><a class="chip-link" href="${u('/bytes/')}">${esc(L.allBytes)}</a></div>
+  ${rail(reels.map((r) => reelCard(r, 0, true)).join(''), 'reelrail', TP.bytesTitle)}
+</div></section>${reelBox}` : ''}
 <section class="sec"><div class="wrap split">
-  <div><h2 class="h2">${esc(L.feesTitle)}</h2>${steps()}<p class="muted">${esc(TP.others)}: ${others.map((o) => `<a href="${u(`/cinekar/${o.slug}/`)}">${esc(o.seo)}</a>`).join(' · ')}</p></div>
-  ${feeCard()}
+  <div><h2 class="h2">${esc(L.feesTitle)}</h2>${steps()}<p class="muted">${esc(TP.others)}: ${others.map((o) => `<a href="${u(`/${o.slug}/`)}">${esc(lang === 'hi' ? o.local : o.name)}</a>`).join(' · ')}</p></div>
+  ${feeCard(t.key)}
 </div></section>
 </main>`,
     });
   }
+
+  const caVideos = (site.cineactVideos || []).map((id) => videos.find((v) => v.id === id)).filter(Boolean);
+  pages['/yogesh-cineact/'] = layout({
+    title: CA.title,
+    description: CA.description,
+    pathName: '/yogesh-cineact/',
+    image: abs('/img/founder-yogesh-640.webp'),
+    ld: [crumbsLd([[L.home, u('/')], ['Yogesh CineAct', u('/yogesh-cineact/')]])],
+    body: `<main id="main" class="page">
+<section class="course-hero ca-hero"><div class="wrap ca-hero-in">
+  <div>
+    ${crumbs([[L.home, u('/')], ['Yogesh CineAct', u('/yogesh-cineact/')]])}
+    <p class="kicker">${esc(CA.eyebrow)}</p>
+    <h1 class="ca-h1"><span class="brandword">Yogesh CineAct</span><span class="ca-sub">${esc(CA.sub)}</span></h1>
+    <p class="lede">${esc(CA.lede)}</p>
+    <div class="actions"><a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a><a class="btn btn-ghost-light" href="#classes">${esc(CA.classesTitle)}</a></div>
+  </div>
+  ${img('founder-yogesh', 320, 'Yogesh Mishrra', { widths: [320, 640], sizes: '(min-width: 60rem) 300px, 60vw', cls: 'ca-photo', width: 320, height: 380 })}
+</div></section>
+<section class="sec"><div class="wrap prose ca-body">${CA.body.map((x) => `<p>${esc(x)}</p>`).join('\n')}</div></section>
+<section class="sec sec-alt" aria-labelledby="pr-h"><div class="wrap"><h2 class="h2" id="pr-h">${esc(CA.principlesTitle)}</h2>${tiles(CA.principles, 'principles')}</div></section>
+<section class="sec" aria-labelledby="tech-h"><div class="wrap"><h2 class="h2" id="tech-h">${esc(CA.techTitle)}</h2><p class="lede">${esc(CA.techLede)}</p><ul class="tech">${CA.tech.map(li).join('')}</ul></div></section>
+${caVideos.length ? `<section class="sec sec-alt" id="classes" aria-labelledby="cl-h"><div class="wrap"><h2 class="h2" id="cl-h">${esc(CA.classesTitle)}</h2><p class="lede">${esc(CA.classesLede)}</p>${rail(caVideos.map(videoCard).join(''), 'vrail', CA.classesTitle)}${donate()}</div></section>` : ''}
+<section class="sec"><div class="wrap"><div class="online-band"><h2 class="h2">${esc(CA.cta)}</h2><a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a></div></div></section>
+</main>`,
+  });
+
+  pages['/bytes/'] = layout({
+    title: L.bytesPage.title,
+    description: L.bytesPage.description,
+    pathName: '/bytes/',
+    ld: [crumbsLd([[L.home, u('/')], [L.blessingsTitle, u('/bytes/')]])],
+    body: `<main id="main" class="page">
+<section class="course-hero"><div class="wrap">
+${crumbs([[L.home, u('/')], [L.blessingsTitle, u('/bytes/')]])}
+<h1 class="page-h1">${esc(L.blessingsTitle)}</h1>
+<p class="lede">${esc(L.blessingsLede)}</p>
+</div></section>
+<section class="sec sec-dark sec-tight"><div class="wrap"><ul class="reelgrid">${reels.map((r) => reelCard(r, 0, true)).join('')}</ul></div></section>
+${reelBox}
+</main>`,
+  });
+
+  const courseVal = (t) => (lang === 'hi' ? `${t.name} (${t.local})` : t.name);
+  pages['/admission/'] = layout({
+    title: AD.title,
+    description: AD.description,
+    pathName: '/admission/',
+    ld: [crumbsLd([[L.home, u('/')], [AD.h1, u('/admission/')]])],
+    body: `<main id="main" class="page">
+<div class="wrap page-head">
+${crumbs([[L.home, u('/')], [AD.h1, u('/admission/')]])}
+<h1 class="page-h1">${esc(AD.h1)}</h1>
+<p class="lede">${esc(AD.lede)}</p>
+</div>
+<div class="wrap"><form class="admit js-wa" id="admit" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(AD.msgIntro)}"${upi.payload ? ` data-tail="${esc(fmt(AD.paidLine, { amount: money(upi.registrationFee) }))}"` : ''}>
+  <fieldset class="astep"><legend><span class="astep-n">1</span>${esc(AD.step1)}</legend>
+    <div class="pick">${tracks.map((t, i) => `<label class="pick-card"><input type="radio" name="course" value="${esc(courseVal(t))}" data-k="${esc(AD.course)}" data-key="${t.key}"${i === 0 ? ' checked' : ''}><span class="pick-en">${esc(t.name)}</span>${lang === 'hi' ? `<span class="pick-hi">${esc(t.local)}</span>` : ''}<span class="pick-meta">${esc(TP.chips[0])} · ${money(site.fee)}</span></label>`).join('')}</div>
+    <p class="muted">${esc(fmt(AD.feeLine, { fee: money(site.fee), i1: feeVars.i1, i2: feeVars.i2 }))} · ${esc(fmt(L.fee.schV, feeVars))}</p>
+  </fieldset>
+  <fieldset class="astep"><legend><span class="astep-n">2</span>${esc(AD.step2)}</legend>
+    <div class="fields">
+      <label>${esc(AD.name)}<input name="name" autocomplete="name" required data-k="${esc(AD.name)}"></label>
+      <label>${esc(AD.phone)}<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required data-k="${esc(AD.phone)}"></label>
+      <label>${esc(AD.age)}<input name="age" inputmode="numeric" data-k="${esc(AD.age)}"></label>
+      <label>${esc(AD.city)}<input name="city" autocomplete="address-level2" data-k="${esc(AD.city)}"></label>
+      <label class="wide">${esc(AD.note)}<textarea name="note" rows="2" data-k="${esc(AD.note)}"></textarea></label>
+    </div>
+  </fieldset>
+  <fieldset class="astep"><legend><span class="astep-n">3</span>${esc(AD.step3)}</legend>
+    ${upi.payload ? `<div class="pay">
+      <div class="pay-main"><p class="pay-amt">${money(upi.registrationFee)}</p><a class="btn btn-gold pay-btn" href="${esc(upiLink(upi.registrationFee, 'IFA Registration'))}">${esc(fmt(AD.payBtn, { amount: money(upi.registrationFee) }))}</a><p class="muted">${esc(AD.payNote)}</p></div>
+      ${qrFig(fmt(AD.scan, { amount: money(upi.registrationFee) }))}
+    </div>` : `<p>${esc(AD.payLater)}</p>`}
+  </fieldset>
+  <div class="admit-send"><button class="btn btn-primary btn-lg" type="submit">${esc(AD.send)}</button><p class="muted">${esc(L.contact.formNote)} ${esc(AD.help)}: <a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></p></div>
+</form></div>
+</main>`,
+  });
 
   pages['/about/'] = layout({
     title: L.aboutPage.title,
@@ -493,7 +603,7 @@ ${crumbs([[L.home, u('/')], [L.foot.about, u('/about/')]])}
   ${img('founders', 640, 'Indian Films Academy', { widths: [640, 1000], sizes: '(min-width: 64rem) 460px, 92vw', cls: 'rounded', width: 640, height: 640 })}
 </div></section>
 <section class="sec"><div class="wrap"><h2 class="h2">${esc(L.foundersTitle)}</h2>${founders()}</div></section>
-<section class="sec sec-alt"><div class="wrap"><h2 class="h2 cine">${esc(L.methodTitle)}</h2><div class="prose">${L.method.map((p) => `<p>${esc(p)}</p>`).join('')}</div></div></section>
+<section class="sec sec-alt"><div class="wrap"><h2 class="h2 cine">${esc(L.methodTitle)}</h2><div class="prose">${L.method.map((p) => `<p>${esc(p)}</p>`).join('')}</div><p class="more-link"><a href="${u('/yogesh-cineact/')}">${esc(CH.cta)}</a></p></div></section>
 <section class="sec"><div class="wrap"><h2 class="h2">${esc(L.guestsTitle)}</h2><p class="lede">${esc(L.guestsLede)}</p>${grid(visitors.slice(0, 8))}<p class="more-link"><a href="${u('/gallery/')}">${esc(L.allPhotos)}</a></p></div></section>
 ${viewer}
 </main>`,
@@ -522,7 +632,7 @@ ${viewer}
     body: `<main id="main" class="page"><div class="wrap page-head">
 ${crumbs([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])}
 <div class="sec-head"><div><h1 class="page-h1">${esc(L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div>
-<ul class="vgrid">${videos.map(videoCard).join('\n')}</ul>
+<div class="vid-layout"><ul class="vgrid">${videos.map(videoCard).join('\n')}</ul>${donate()}</div>
 </div></main>`,
   });
 
@@ -570,7 +680,7 @@ ${contactBlock()}
     description: L.notFound.text,
     pathName: '/404',
     noindex: true,
-    body: `<main id="main" class="page"><div class="wrap lost"><img src="/img/logo-emblem-192.webp" alt="" width="120" height="120"><h1 class="page-h1">${esc(L.notFound.h1)}</h1><p>${esc(L.notFound.text)}</p><p class="actions"><a class="btn btn-primary" href="${u('/cinekar/')}">CINEKAR</a><a class="btn btn-ghost" href="${u('/')}">${esc(L.home)}</a></p></div></main>`,
+    body: `<main id="main" class="page"><div class="wrap lost"><img src="/img/logo-emblem-192.webp" alt="" width="120" height="120"><h1 class="page-h1">${esc(L.notFound.h1)}</h1><p>${esc(L.notFound.text)}</p><p class="actions"><a class="btn btn-primary" href="${u('/courses/')}">${esc(CPG.h1)}</a><a class="btn btn-ghost" href="${u('/')}">${esc(L.home)}</a></p></div></main>`,
   });
   return { pages, notFound };
 }
@@ -634,20 +744,23 @@ const PAGE_JS = `<script>
   }
   if('IntersectionObserver' in window && !calm){
     var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); },{rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card').forEach(function(el){
+    document.querySelectorAll('.sec .h2, .sec .lede, .track, .month, .founder, .fee-card, .steps li, .faq details, .online-band, .ladder li, .stats li, .sec .reel-card, .fork, .branches > li, .hl > li, .syl-m, .tech li, .donate, .quote, .pick-card').forEach(function(el){
       var sib=el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
       el.style.setProperty('--d', Math.min(sib,5)*0.08+'s'); el.classList.add('reveal'); io.observe(el);
     });
   }
-  var form=document.getElementById('apply');
-  if(form){
+  document.querySelectorAll('form.js-wa').forEach(function(form){
     form.addEventListener('submit',function(e){
       e.preventDefault();
       var lines=[form.getAttribute('data-intro')];
-      form.querySelectorAll('[data-k]').forEach(function(el){ var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+      form.querySelectorAll('[data-k]').forEach(function(el){ if((el.type==='radio'||el.type==='checkbox') && !el.checked) return; var v=(el.value||'').trim(); if(v) lines.push(el.getAttribute('data-k')+': '+v); });
+      if(form.getAttribute('data-tail')) lines.push(form.getAttribute('data-tail'));
       window.location.href='https://wa.me/${site.whatsapp}?text='+encodeURIComponent(lines.join('\\n'));
     });
-  }
+  });
+  var pre=new URLSearchParams(location.search).get('c');
+  if(pre){ var r=document.querySelector('input[data-key="'+pre.replace(/[^a-z]/g,'')+'"]'); if(r) r.checked=true; }
+  document.querySelectorAll('button.copy').forEach(function(b){ b.addEventListener('click',function(){ var t=b.getAttribute('data-copy'), old=b.textContent; function done(){ b.textContent=b.getAttribute('data-done'); setTimeout(function(){ b.textContent=old; },1800); } if(navigator.clipboard){ navigator.clipboard.writeText(t).then(done,function(){}); } }); });
 })();
 </script>`;
 

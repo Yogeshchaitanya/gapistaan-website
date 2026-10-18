@@ -4,12 +4,12 @@
 /about-yogesh-raj /about/ 301
 /about-yogesh-raj/* /about/ 301
 /about-us-3/* /about/ 301
-/one-year-diploma-in-camera-acting/* /cinekar/ 301
-/two-year-diploma-in-camera-acting/* /cinekar/ 301
-/6-month-course-in-camera-acting/* /cinekar/ 301
-/3-month-course-in-camera-acting/* /cinekar/ 301
-/1-month-course-in-camera-acting/* /cinekar/ 301
-/offline-classes/* /cinekar/ 301
+/one-year-diploma-in-camera-acting/* /cinematic-acting-course/ 301
+/two-year-diploma-in-camera-acting/* /cinematic-acting-course/ 301
+/6-month-course-in-camera-acting/* /cinematic-acting-course/ 301
+/3-month-course-in-camera-acting/* /cinematic-acting-course/ 301
+/1-month-course-in-camera-acting/* /cinematic-acting-course/ 301
+/offline-classes/* /courses/ 301
 /online-classes/* /online/ 301
 /contact-us /contact/ 301
 /contact-us/* /contact/ 301
@@ -23,3 +23,13 @@
 /feed/* / 301
 /2017/* / 301
 /2021/* / 301
+
+# First version of the new site (Oct 2026) used /cinekar/ addresses
+/cinekar/actor/ /cinematic-acting-course/ 301
+/cinekar/director/ /film-direction-course/ 301
+/cinekar/editor/ /film-editing-course/ 301
+/cinekar/ /courses/ 301
+/en/cinekar/actor/ /en/cinematic-acting-course/ 301
+/en/cinekar/director/ /en/film-direction-course/ 301
+/en/cinekar/editor/ /en/film-editing-course/ 301
+/en/cinekar/ /en/courses/ 301
