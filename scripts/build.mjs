@@ -433,6 +433,7 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
 <section class="hero">
   <div class="wrap hero-in">
     <div class="hero-text">
+      <img class="hero-logo" src="/img/logo-520.webp" alt="Gapistaan का लोगो: चाचा" width="190" height="190">
       <p class="presents"><a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> प्रस्तुत करता है</p>
       <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
       <p class="hero-line">${esc(site.heroLine)}</p>
