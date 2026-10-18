@@ -1,0 +1,14 @@
+dr-dilpeep-sir dur=120s src=1080,1920 loop=200652 full=17095746 kbps=1100
+final-reel-madhur-sir dur=118s src=1080,1920 loop=317450 full=17065080 kbps=1100
+final-raeesh-ji dur=119s src=1080,1920 loop=228308 full=17281908 kbps=1100
+gaurav-ji-new dur=74s src=1080,1920 loop=267883 full=10693209 kbps=1100
+ifa-reel-khesari-ji-1 dur=40s src=1080,1920 loop=341071 full=5037941 kbps=1100
+ifa-reel-khesari-ji-2 dur=56s src=1080,1920 loop=291377 full=7114293 kbps=1100
+madhu-short dur=127s src=1080,1920 loop=362733 full=18215700 kbps=1100
+new-information dur=94s src=1080,1920 loop=329834 full=12886698 kbps=1100
+rahul-miktra-ji-final dur=96s src=1080,1920 loop=737773 full=13091130 kbps=1100
+raj-pal-ji dur=100s src=1080,1920 loop=160877 full=14689662 kbps=1100
+rajeev-nigam-final dur=76s src=1080,1920 loop=440539 full=10924876 kbps=1100
+seeta-and-karan dur=33s src=1080,1920 loop=297643 full=4917578 kbps=1100
+vimal-panday-ji dur=48s src=1080,1920 loop=192357 full=6985710 kbps=1100
+mita-ji-final dur=75s src=1080,1920 loop=343189 full=10762378 kbps=1100
