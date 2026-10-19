@@ -356,7 +356,7 @@ function behindHtml({ heading = true } = {}) {
     ${heading && st ? `<div class="studio-head"><h2 class="h2" id="studio-h">${esc(st.title)}</h2><p>${esc(st.lead)}</p></div>` : ''}
     ${tm && tm.main ? `<div class="team-grid">${tm.main.map((p, i) => `<figure class="sf t${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
     ${tm && tm.strip ? `<h3 class="h3 strip-h">${esc(tm.stripTitle)}</h3>${stripHtml(tm.strip, 'set-strip', tm.stripTitle)}` : ''}
-    ${tm && tm.portraits ? `<h3 class="h3 strip-h">${esc(tm.portraitsTitle)}</h3>${stripHtml(tm.portraits, 'face-strip', tm.portraitsTitle)}` : ''}
+    ${tm && tm.portraits ? `<h3 class="h3 strip-h">${esc(tm.portraitsTitle)}</h3>${stripHtml(tm.portraits.map((p) => ({ ...p, alt: p.name ? T(p.name, p.nameEn || p.name) : T('परिवार के एक कलाकार का पोर्ट्रेट', "Portrait of one of the family's artists"), cap: p.name ? T(p.name, p.nameEn || p.name) : '' })), 'face-strip', tm.portraitsTitle)}` : ''}
     ${st && st.photos ? `<h3 class="h3 strip-h">${esc(st.subTitle)}</h3>
     <div class="studio-grid">${st.photos.map((p, i) => `<figure class="sf sf-${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
   </div>`;

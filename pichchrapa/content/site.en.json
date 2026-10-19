@@ -22,12 +22,30 @@
     "why": "This platform exists so that after learning acting, no artist has to run from door to door or beg for work. They stand on their own feet, make their own work and show it to the world.",
     "creditsTitle": "Credits",
     "credits": [
-      ["Acting", "The family's actors"],
-      ["Writing", "The family's actors"],
-      ["Direction", "The family's actors"],
-      ["Editing", "The family's actors"],
-      ["DI colour", "The family's actors"],
-      ["Music", "The family's actors"]
+      [
+        "Acting",
+        "The family's actors"
+      ],
+      [
+        "Writing",
+        "The family's actors"
+      ],
+      [
+        "Direction",
+        "The family's actors"
+      ],
+      [
+        "Editing",
+        "The family's actors"
+      ],
+      [
+        "DI colour",
+        "The family's actors"
+      ],
+      [
+        "Music",
+        "The family's actors"
+      ]
     ],
     "creditsNote": "No outside person is hired for the work."
   },
@@ -38,11 +56,21 @@
       "intro": "Our first web series. A comedy courtroom where every story is a new case: Husband, Wife and the Other One; Pakhi's Swayamvar; the Jinn's Freedom; the Jija–Saale Divorce.",
       "pageIntro": "Filmy Adalat is PICHCHRAPA's first web series, a courtroom comedy. Every story is a separate case, with its trailer, episodes and making-of kept in one place. Some episodes are also on our other channels; those carry the channel's name.",
       "cases": [
-        { "name": "Pati, Patni Aur Woh" },
-        { "name": "Pakhi Ka Swayamvar" },
-        { "name": "Jinn Ki Azaadi" },
-        { "name": "Jija Saale Ka Talaaq" },
-        { "name": "Theme song and behind the scenes" }
+        {
+          "name": "Pati, Patni Aur Woh"
+        },
+        {
+          "name": "Pakhi Ka Swayamvar"
+        },
+        {
+          "name": "Jinn Ki Azaadi"
+        },
+        {
+          "name": "Jija Saale Ka Talaaq"
+        },
+        {
+          "name": "Theme song and behind the scenes"
+        }
       ]
     },
     "raja": {
@@ -64,9 +92,18 @@
   "what": {
     "title": "What we make",
     "items": [
-      ["Web series and comedy", "Our own series such as Filmy Adalat, Raja Ka Baja and Gapistaan, streaming on YouTube."],
-      ["Short films and Shorts", "Short stories, reels and Shorts that our artists write and shoot themselves."],
-      ["Videos for clients", "Brand work and documentary-style projects, including AI documentary films. Get in touch to talk."]
+      [
+        "Web series and comedy",
+        "Our own series such as Filmy Adalat, Raja Ka Baja and Gapistaan, streaming on YouTube."
+      ],
+      [
+        "Short films and Shorts",
+        "Short stories, reels and Shorts that our artists write and shoot themselves."
+      ],
+      [
+        "Videos for clients",
+        "Brand work and documentary-style projects, including AI documentary films. Get in touch to talk."
+      ]
     ]
   },
   "contact": {
@@ -93,49 +130,109 @@
     "title": "Behind the scenes",
     "lead": "Editing, colour and sound are done by the family's own artists in their own studio. We do not depend on any outside editor or colourist.",
     "photos": [
-      { "alt": "Two colleagues in the editing suite watching a shot on screen", "cap": "Editing suite: two colleagues review a shot together" },
-      { "alt": "An artist sitting before a colour-grading panel and monitors", "cap": "DI colour suite: trackball panel and scopes" },
-      { "alt": "An artist working at a colour-grading panel", "cap": "Every shot's colour is decided here" }
+      {
+        "alt": "Two colleagues in the editing suite watching a shot on screen",
+        "cap": "Editing suite: two colleagues review a shot together"
+      },
+      {
+        "alt": "An artist sitting before a colour-grading panel and monitors",
+        "cap": "DI colour suite: trackball panel and scopes"
+      },
+      {
+        "alt": "An artist working at a colour-grading panel",
+        "cap": "Every shot's colour is decided here"
+      }
     ],
     "subTitle": "Editing and colour"
   },
   "team": {
     "title": "The family",
     "main": [
-      { "alt": "Members of the PICHCHRAPA family together in the studio hall", "cap": "The whole PICHCHRAPA family in one frame" },
-      { "alt": "The whole team with the camera between shoots in a lane", "cap": "Between shots in the lane" },
-      { "alt": "Team members with the camera in the studio", "cap": "The whole team with the camera" }
+      {
+        "alt": "Members of the PICHCHRAPA family together in the studio hall",
+        "cap": "The whole PICHCHRAPA family in one frame"
+      },
+      {
+        "alt": "The whole team with the camera between shoots in a lane",
+        "cap": "Between shots in the lane"
+      },
+      {
+        "alt": "Team members with the camera in the studio",
+        "cap": "The whole team with the camera"
+      }
     ],
     "stripTitle": "From the set",
     "strip": [
-      { "alt": "The team and the camera on a sofa on set", "cap": "A break on set" },
-      { "alt": "The team having fun in front of the camera", "cap": "Fun after the shoot" },
-      { "alt": "Team members in marigold garlands together at a doorway", "cap": "A happy moment for the team" },
-      { "alt": "A colleague sitting by a camera on a tripod, with a monitor and colleagues behind", "cap": "By the camera and monitor" },
-      { "alt": "Five artists with a stethoscope and an oxygen mask, the hospital scene", "cap": "From the set: the hospital scene" },
-      { "alt": "Shooting in a lane, seen from behind the camera", "cap": "Shooting in the lane, from behind the camera" },
-      { "alt": "Five colleagues laughing with dumbbells and a rope", "cap": "Fun on set" },
-      { "alt": "A colleague cutting large thermocol letters", "cap": "Cutting thermocol letters for the set" },
-      { "alt": "A photoshoot in the studio in front of a backdrop, with lights and a camera crew", "cap": "A photoshoot in the studio" },
-      { "alt": "An artist in a purple saree with four colleagues in white shirts behind her", "cap": "A group photo from the set" }
+      {
+        "alt": "The team and the camera on a sofa on set",
+        "cap": "A break on set"
+      },
+      {
+        "alt": "The team having fun in front of the camera",
+        "cap": "Fun after the shoot"
+      },
+      {
+        "alt": "Team members in marigold garlands together at a doorway",
+        "cap": "A happy moment for the team"
+      },
+      {
+        "alt": "A colleague sitting by a camera on a tripod, with a monitor and colleagues behind",
+        "cap": "By the camera and monitor"
+      },
+      {
+        "alt": "Five artists with a stethoscope and an oxygen mask, the hospital scene",
+        "cap": "From the set: the hospital scene"
+      },
+      {
+        "alt": "Shooting in a lane, seen from behind the camera",
+        "cap": "Shooting in the lane, from behind the camera"
+      },
+      {
+        "alt": "Five colleagues laughing with dumbbells and a rope",
+        "cap": "Fun on set"
+      },
+      {
+        "alt": "A colleague cutting large thermocol letters",
+        "cap": "Cutting thermocol letters for the set"
+      },
+      {
+        "alt": "A photoshoot in the studio in front of a backdrop, with lights and a camera crew",
+        "cap": "A photoshoot in the studio"
+      },
+      {
+        "alt": "An artist in a purple saree with four colleagues in white shirts behind her",
+        "cap": "A group photo from the set"
+      }
     ],
-    "portraitsTitle": "Artists",
-    "portraits": [
-      { "alt": "Portrait of a female artist of the family" },
-      { "alt": "Portrait of a male artist of the family" },
-      { "alt": "Portrait of a female artist of the family" },
-      { "alt": "Portrait of a male artist of the family" }
-    ]
+    "portraitsTitle": "The family's artists"
   },
   "posters": {
     "title": "Posters",
     "items": [
-      { "alt": "Filmy Adalat first episode poster: Out Now", "cap": "First episode: Out Now" },
-      { "alt": "Filmy Adalat first episode teaser poster", "cap": "Teaser for the first episode, 21 January 2025" },
-      { "alt": "Second teaser poster for the first episode", "cap": "Second teaser for the first episode" },
-      { "alt": "Filmy Adalat case Pakhi Ka Swayamvar poster", "cap": "Case 02: Pakhi Ka Swayamvar" },
-      { "alt": "Filmy Adalat case Jinn Ki Azaadi art", "cap": "Case 03: Jinn Ki Azaadi" },
-      { "alt": "Filmy Adalat case Jija Saale Ka Talaaq art", "cap": "Case 04: Jija Saale Ka Talaaq" }
+      {
+        "alt": "Filmy Adalat first episode poster: Out Now",
+        "cap": "First episode: Out Now"
+      },
+      {
+        "alt": "Filmy Adalat first episode teaser poster",
+        "cap": "Teaser for the first episode, 21 January 2025"
+      },
+      {
+        "alt": "Second teaser poster for the first episode",
+        "cap": "Second teaser for the first episode"
+      },
+      {
+        "alt": "Filmy Adalat case Pakhi Ka Swayamvar poster",
+        "cap": "Case 02: Pakhi Ka Swayamvar"
+      },
+      {
+        "alt": "Filmy Adalat case Jinn Ki Azaadi art",
+        "cap": "Case 03: Jinn Ki Azaadi"
+      },
+      {
+        "alt": "Filmy Adalat case Jija Saale Ka Talaaq art",
+        "cap": "Case 04: Jija Saale Ka Talaaq"
+      }
     ]
   },
   "artists": {
@@ -143,13 +240,32 @@
     "lead": "The cast of Gapistaan's comedy series Gen Gap. All trained at Indian Films Academy and part of this family.",
     "cta": "See the profile on Gapistaan",
     "items": [
-      { "name": "Ayushi Tiwari" },
-      { "name": "Saanviya", "note": "Acted in Salman Ali's big songs" },
-      { "name": "Sarita Vyas", "note": "‘Filmi Adalat’" },
-      { "name": "Ravi Dev Rai", "note": "Film ‘Vidyapeeth’" },
-      { "name": "Shubham Kumar Singh", "note": "Film ‘Vidyapeeth’" },
-      { "name": "Rohit Daas" },
-      { "name": "Deepak Mandal", "note": "‘Filmi Adalat’" }
+      {
+        "name": "Ayushi Tiwari"
+      },
+      {
+        "name": "Saanviya",
+        "note": "Acted in Salman Ali's big songs"
+      },
+      {
+        "name": "Sarita Vyas",
+        "note": "‘Filmi Adalat’"
+      },
+      {
+        "name": "Ravi Dev Rai",
+        "note": "Film ‘Vidyapeeth’"
+      },
+      {
+        "name": "Shubham Kumar Singh",
+        "note": "Film ‘Vidyapeeth’"
+      },
+      {
+        "name": "Rohit Daas"
+      },
+      {
+        "name": "Deepak Mandal",
+        "note": "‘Filmi Adalat’"
+      }
     ]
   }
 }
