@@ -272,6 +272,15 @@ function caseBlock(c, { limit = 0, grid = false } = {}) {
 </section>`;
 }
 
+function studioHtml({ heading = true } = {}) {
+  const st = site.studio;
+  if (!st || !st.photos || !st.photos.length) return '';
+  return `<div class="studio">
+    ${heading ? `<div class="studio-head"><h2 class="h2" id="studio-h">${esc(st.title)}</h2><p>${esc(st.lead)}</p></div>` : ''}
+    <div class="studio-grid">${st.photos.map((p, i) => `<figure class="sf sf-${i + 1}"><img src="${esc(p.src)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async" alt="${esc(p.alt)}"><figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>
+  </div>`;
+}
+
 function homePage() {
   const latest = rajaEps[0];
   const side = rajaEps.slice(1, 6);
@@ -352,6 +361,10 @@ function homePage() {
     <div class="shorts" role="list" aria-label="हिट शॉर्ट्स">${hitShorts.map(shortCard).join('')}</div>
     <p class="more"><a class="btn btn-ghost" href="${esc(site.shortsUrl)}" target="_blank" rel="noopener">YouTube पर और शॉर्ट्स</a></p>` : ''}
   </div>
+</section>
+
+<section class="sec" aria-labelledby="studio-h">
+  <div class="wrap">${studioHtml()}</div>
 </section>
 
 <section class="sec sec-alt" aria-labelledby="brands-h">
@@ -513,12 +526,15 @@ ${crumbNav(['PICHCHRAPA', '/'], ['हमारी कहानी'])}
     <p class="why" style="border-left:3px solid var(--brass);padding-left:1.1rem;color:#fff">${esc(site.family.why)}</p>
     <h2>कैसे काम होता है</h2>
     <p>हर सीरीज़ की कहानी, निर्देशन, एडिटिंग, कलर और संगीत परिवार के कलाकार ख़ुद करते हैं। फ़िल्मी अदालत हमारी पहली वेब सीरीज़ थी। आज राजा का बाजा हर रोज़ आता है, और गैपिस्तान जैसी नई सीरीज़ भी इसी परिवार से निकल रही हैं।</p>
+    <h2>${esc(site.studio ? site.studio.title : 'स्टूडियो')}</h2>
+    <p>${esc(site.studio ? site.studio.lead : '')}</p>
     <h2>संस्थापक</h2>
     ${founderHtml()}
     <p style="margin-top:1rem">योगेश चैतन्य अभिनय-गुरु, निर्देशक और अभिनेता हैं और Indian Films Academy के संस्थापक हैं। PICHCHRAPA के कलाकार उन्हीं के सिखाए हुए अभिनेता हैं।</p>
   </div>
   <div>${creditsHtml()}</div>
 </div>
+<section style="margin-top:2.2rem" aria-label="स्टूडियो की तस्वीरें">${studioHtml({ heading: false })}</section>
 <section class="prose" style="margin-top:2.4rem"><h2>${esc(site.company.title)}</h2><p>${esc(site.company.lead)}</p>${companyFacts()}</section>
 <div class="actions" style="margin-top:2rem"><a class="btn btn-gold" href="/filmy-adalat/">${esc(S.adalat.name)} देखिए</a><a class="btn btn-ghost" href="/raja-ka-baja/">${esc(S.raja.name)} देखिए</a><a class="btn btn-ghost" href="/contact/">संपर्क कीजिए</a></div>
 </main>`;

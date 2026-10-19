@@ -326,6 +326,19 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   .strip{overflow-x:auto;transform:none}
   .screen,.vcard,.credits,.short{transform:none!important;transition:none}
 }
+
+/* studio photos */
+.studio-head{max-width:46rem;margin-bottom:1.6rem}
+.studio-head p{margin-top:.6rem;color:#d6e6e2}
+.studio-grid{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:clamp(.7rem,1.6vw,1.1rem)}
+.sf{margin:0;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:6px;background:var(--ink);box-shadow:0 18px 40px -22px #000}
+.sf img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.sf:hover img{transform:scale(1.04)}
+.sf-1{grid-row:1 / span 2}
+.sf-2 img,.sf-3 img{aspect-ratio:3/2}
+.sf figcaption{position:absolute;inset:auto 0 0 0;padding:1.6rem .9rem .7rem;background:linear-gradient(to top,rgba(2,24,25,.92),rgba(2,24,25,0));color:#fff;font-size:.9rem}
+@media (max-width:52rem){.studio-grid{grid-template-columns:1fr}.sf-1{grid-row:auto}}
+@media (prefers-reduced-motion:reduce){.sf img{transition:none}.sf:hover img{transform:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/"},{"@type":"ListItem","position":2,"name":"राजा का बाजा","item":"https://pichchrapa.com/raja-ka-baja/"},{"@type":"ListItem","position":3,"name":"गाड़ी ने उड़ाया Raja को, RAJA सड़क का राजा, चटोरी गली लखनऊ","item":"https://pichchrapa.com/video/xvvH7KvxhiM/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"गाड़ी ने उड़ाया Raja को, RAJA सड़क का राजा, चटोरी गली लखनऊ","description":"Kaling Desh ke Raja aur unke Mantri phir nikle Lucknow ki sadkon par — public ka reaction dekh kar hansi nahi rukegi! 👑😂 Raja Ka Baja (राजा का बाजा) Pichchrapa ki desi street comedy series hai. Kaling Desh ka Raja apne Mantri ke saath Lucknow ke bazaar, station, chauraha aur park mein pahunchta hai, shahi andaaz mein aam logon se milta hai — aur har episode mein hota hai naya hungama. 👑 Raja — Shubham","thumbnailUrl":["https://i.ytimg.com/vi/xvvH7KvxhiM/maxresdefault.jpg","https://i.ytimg.com/vi/xvvH7KvxhiM/hqdefault.jpg"],"uploadDate":"2026-10-01T12:54:42Z","duration":"PT7M39S","embedUrl":"https://www.youtube.com/embed/xvvH7KvxhiM","contentUrl":"https://www.youtube.com/watch?v=xvvH7KvxhiM","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"partOfSeries":{"@type":"TVSeries","name":"राजा का बाजा","url":"https://pichchrapa.com/raja-ka-baja/"},"keywords":"raja ka baja, राजा का बाजा, raja ka baja comedy, raja ka baja shubham, raja ka baja deepak mandal, raja ka baja vlog, raja ka baja lucknow, raja ka baja new episode, raja ka baja full video, raja aur mantri, raja mantri comedy, kaling desh ka raja"}</script>

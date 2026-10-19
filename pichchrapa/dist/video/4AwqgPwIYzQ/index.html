@@ -326,6 +326,19 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
   .strip{overflow-x:auto;transform:none}
   .screen,.vcard,.credits,.short{transform:none!important;transition:none}
 }
+
+/* studio photos */
+.studio-head{max-width:46rem;margin-bottom:1.6rem}
+.studio-head p{margin-top:.6rem;color:#d6e6e2}
+.studio-grid{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:clamp(.7rem,1.6vw,1.1rem)}
+.sf{margin:0;position:relative;overflow:hidden;border:1px solid var(--line);border-radius:6px;background:var(--ink);box-shadow:0 18px 40px -22px #000}
+.sf img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.sf:hover img{transform:scale(1.04)}
+.sf-1{grid-row:1 / span 2}
+.sf-2 img,.sf-3 img{aspect-ratio:3/2}
+.sf figcaption{position:absolute;inset:auto 0 0 0;padding:1.6rem .9rem .7rem;background:linear-gradient(to top,rgba(2,24,25,.92),rgba(2,24,25,0));color:#fff;font-size:.9rem}
+@media (max-width:52rem){.studio-grid{grid-template-columns:1fr}.sf-1{grid-row:auto}}
+@media (prefers-reduced-motion:reduce){.sf img{transition:none}.sf:hover img{transform:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/"},{"@type":"ListItem","position":2,"name":"राजा का बाजा","item":"https://pichchrapa.com/raja-ka-baja/"},{"@type":"ListItem","position":3,"name":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama","item":"https://pichchrapa.com/video/4AwqgPwIYzQ/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama","description":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama Raja ji beech sadak par gir gaye aur wahin lete-lete drama shuru kar diya. Aas-paas khade logon ki halat dekhne layak thi — kisi ko samajh hi nahi aaya ki ye sach hai ya natak. Raja Ka Baja ek desi comedy series hai jismein Kaling Desh ka Raja apne mantri ke saath sadak par nikalta hai aur aam logon ke beech hangama karta hai. Poora episode bina script, bina retake — sirf asli reactions.","thumbnailUrl":["https://i.ytimg.com/vi/4AwqgPwIYzQ/maxresdefault.jpg","https://i.ytimg.com/vi/4AwqgPwIYzQ/hqdefault.jpg"],"uploadDate":"2026-06-22T13:31:16Z","duration":"PT6M8S","embedUrl":"https://www.youtube.com/embed/4AwqgPwIYzQ","contentUrl":"https://www.youtube.com/watch?v=4AwqgPwIYzQ","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"partOfSeries":{"@type":"TVSeries","name":"राजा का बाजा","url":"https://pichchrapa.com/raja-ka-baja/"},"keywords":"Raja Ka Baja, Raja Ka baja Deepak mandal, Raja ka Baja Shubham, comedy show, comedy sketch, couple comedy, couple vlog, daily vlog, daily vlogs, entertainment, entertainment video, family vlog"}</script>
