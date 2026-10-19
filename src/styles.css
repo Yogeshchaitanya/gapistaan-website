@@ -323,3 +323,62 @@ a{color:var(--accent)}
 .h3{margin:1.6rem 0 .5rem;font:800 1.2rem/1.4 var(--hindi)}
 .ep-list{margin:0;padding-left:1.4rem;line-height:2}
 .ep-list a{color:var(--text)}
+
+/* Language switch and the gold "applause" link in the menu */
+.lang{order:2;color:var(--muted);font-weight:800;font-size:.9rem;line-height:1;text-decoration:none;padding:.5rem .8rem;border:1.5px solid var(--line-2);border-radius:999px}
+.lang:hover{color:var(--text);border-color:var(--accent)}
+.topnav a.gift-link{color:var(--gold)}
+.topnav a.gift-link:hover,.topnav a.gift-link[aria-current="page"]{color:#F6C453;text-decoration:underline;text-underline-offset:.25em}
+.topbar-in .btn-sm{order:2}
+@media (min-width:52rem){.lang,.topbar-in .btn-sm{order:0}}
+
+/* Applause box: an admit-one ticket (perforated gold edge, amounts as ticket stubs) */
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F2C466}
+.btn-gold:disabled{opacity:.6;cursor:progress}
+.gift{position:relative;max-width:64rem;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#1A4450,#13313B 62%);box-shadow:0 0 0 1px var(--line-2)}
+.gift::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:repeating-linear-gradient(180deg,var(--gold) 0 12px,transparent 12px 22px)}
+.gift-body{padding:1.6rem 1.3rem 1.4rem 2rem}
+@media (min-width:48rem){.gift-body{padding:2.2rem 2.6rem 2rem 3.2rem}}
+.gift-h{margin:0 0 .5rem;font:800 clamp(1.35rem,3vw,1.85rem)/1.4 var(--hindi)}
+.gift-text{margin:0 0 1.3rem;max-width:62ch;color:var(--muted)}
+.stubs{list-style:none;margin:0 0 1.2rem;padding:0;display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(8.6rem,1fr))}
+.stubs li{border-radius:8px}
+.stubs li:has(.stub:focus-visible){outline:3px solid var(--gold);outline-offset:3px}
+.stub{--n:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;width:100%;min-height:4.7rem;padding:.6rem 1rem;border:0;border-radius:6px;background:rgba(233,180,76,.15);color:var(--text);font:inherit;cursor:pointer;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.stub:focus-visible{outline:none}
+.stub b{font:400 1.55rem/1 var(--latin);letter-spacing:.03em;color:var(--gold)}
+.stub span{font-size:.85rem;font-weight:800;color:var(--muted);line-height:1.3;text-align:center}
+.stub:hover{background:rgba(233,180,76,.27)}
+.stub.is-on{background:var(--gold)}
+.stub.is-on b,.stub.is-on span{color:var(--ink)}
+.gift-fields{display:grid;gap:.9rem;max-width:40rem;margin:0 0 1.1rem}
+.gift label{display:grid;gap:.3rem;font-weight:800;font-size:.95rem}
+.gift input,.gift textarea{width:100%;font:400 1rem/1.5 var(--hindi);color:var(--text);background:rgba(6,20,26,.55);border:1.5px solid var(--line-2);border-radius:10px;padding:.6rem .8rem}
+.gift textarea{resize:vertical;min-height:4.2rem}
+.gift input:focus,.gift textarea:focus{outline:3px solid var(--gold);outline-offset:1px}
+.gift-own{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.8rem 1.1rem;margin:0}
+.gift-own label{display:flex;align-items:center;gap:.6rem}
+.rs{display:inline-flex;align-items:center;gap:.4rem;font:400 1.4rem/1 var(--latin);color:var(--gold)}
+.rs input{width:7.5rem;font:800 1.1rem/1.3 var(--hindi);color:var(--text)}
+.pay-status{min-height:1.6em;margin:.9rem 0 0;font-weight:800;color:var(--gold)}
+.gift.is-thanked .pay-status{color:#9BE3B0}
+.gift .fine{margin:.5rem 0 0;max-width:64ch;color:var(--muted);font-size:.85rem;line-height:1.6}
+.gift .fine a{color:var(--muted)}
+.gift-episode .gift-body{padding-block:1.3rem}
+.gift-episode .gift-h{font-size:1.25rem}
+.gift-episode .gift-text{margin-bottom:1rem}
+@media (max-width:30rem){.gift-own .btn{width:100%}}
+@media (max-width:30rem){
+  .topbar-in{gap:.4rem .55rem}
+  .brand{gap:.45rem}
+  .brand-name{font-size:1.25rem}
+  .lang{padding:.45rem .65rem;font-size:.82rem}
+  .topbar-in .btn-sm{padding:.4rem .8rem;font-size:.85rem;min-height:2.3rem}
+}
+
+/* Applause UI appears only when /api/status says payments are on (script adds .gift-on to <html>) */
+html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
+html.gift-on .gift-off-note{display:none}

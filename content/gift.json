@@ -1,0 +1,193 @@
+{
+  "amounts": [
+    {
+      "amt": 51,
+      "hi": "एक ताली",
+      "en": "One clap"
+    },
+    {
+      "amt": 101,
+      "hi": "तालियाँ",
+      "en": "Applause"
+    },
+    {
+      "amt": 251,
+      "hi": "वाह-वाह",
+      "en": "Bravo"
+    },
+    {
+      "amt": 501,
+      "hi": "दिल से शाबाशी",
+      "en": "From the heart"
+    },
+    {
+      "amt": 1100,
+      "hi": "स्टैंडिंग ओवेशन",
+      "en": "Standing ovation"
+    }
+  ],
+  "min": 20,
+  "max": 50000,
+  "hi": {
+    "title": "सीन पसंद आया? कलाकारों को तालियाँ भेजिए",
+    "text": "गैपिस्तान का हर सीन बिना स्क्रिप्ट के, उसी पल बनता है। कलाकार अपने दम पर डायलॉग गढ़ते हैं, और आपकी हँसी ही उनकी सबसे बड़ी कमाई है। एपिसोड देखना मुफ़्त है और हमेशा मुफ़्त रहेगा। पर अगर किसी सीन ने आपका दिन बना दिया, तो अपनी मर्ज़ी से एक गिफ़्ट भेजकर टीम को बता दीजिए कि मेहनत आप तक पहुँची।",
+    "episodeTitle": "एपिसोड पसंद आया? तालियाँ भेजिए",
+    "episodeText": "इस एपिसोड का हर डायलॉग कलाकारों ने उसी पल गढ़ा है। अच्छा लगा हो तो अपनी मर्ज़ी से एक गिफ़्ट भेजकर उनका हौसला बढ़ाइए।",
+    "castTitle": "{name} की एक्टिंग पसंद आई? तालियाँ भेजिए",
+    "castText": "अपनी मर्ज़ी से जो भी भेजेंगे, वह पूरी गैपिस्तान टीम का हौसला बढ़ाएगा। चाहें तो {name} के लिए दो शब्द भी लिख दीजिए; हम उन्हें पढ़ते हैं।",
+    "nameLabel": "आपका नाम (चाहें तो)",
+    "msgLabel": "कलाकारों के लिए दो शब्द (चाहें तो)",
+    "otherLabel": "या अपनी राशि",
+    "btn": "तालियाँ भेजें",
+    "payInfo": "भुगतान Razorpay के सुरक्षित पेज पर होता है।",
+    "fine": "यह अपनी मर्ज़ी से दिया गया गिफ़्ट है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और भेजी गई राशि वापस नहीं होती।",
+    "termsLink": "नियम और वापसी नीति",
+    "short": "सीन पसंद आया? कलाकारों को तालियाँ भेजिए",
+    "nav": "तालियाँ भेजें",
+    "opening": "भुगतान का पेज खुल रहा है…",
+    "verifying": "भुगतान की पुष्टि हो रही है…",
+    "thanks": "शुक्रिया! आपकी तालियाँ पूरी टीम तक पहुँच गईं।",
+    "failed": "कुछ गड़बड़ हुई। अगर आपके पैसे कट गए हों तो हमें ईमेल कीजिए, हम जाँचकर बताएँगे।",
+    "offline": "तालियाँ भेजने की सुविधा अभी चालू हो रही है। थोड़ी देर बाद फिर कोशिश कीजिए।",
+    "amountErr": "कम से कम ₹20 की राशि लिखिए।",
+    "desc": "गैपिस्तान के कलाकारों के लिए तालियाँ",
+    "page": {
+      "title": "कलाकारों को तालियाँ भेजिए",
+      "lede": "गैपिस्तान के एपिसोड मुफ़्त हैं और मुफ़्त ही रहेंगे। अगर कोई सीन आपको पसंद आया है, तो यहाँ से अपनी मर्ज़ी की राशि का गिफ़्ट भेजा जा सकता है।",
+      "qa": [
+        [
+          "गिफ़्ट की राशि कहाँ जाती है?",
+          "राशि PICHCHRAPA (गैपिस्तान की प्रोडक्शन कंपनी) के खाते में जाती है और गैपिस्तान की टीम का हौसला बनाए रखने और नए एपिसोड बनाने में लगती है।"
+        ],
+        [
+          "क्या एपिसोड देखने के लिए कुछ देना पड़ता है?",
+          "नहीं। सारे एपिसोड YouTube और इस वेबसाइट पर हमेशा मुफ़्त रहेंगे। गिफ़्ट पूरी तरह आपकी मर्ज़ी है।"
+        ],
+        [
+          "क्या यह दान है?",
+          "नहीं। यह अपनी ख़ुशी से दिया गया गिफ़्ट है और इसके बदले कोई सामान या सेवा नहीं बेची जाती। इस पर आयकर छूट (80G) नहीं मिलती।"
+        ],
+        [
+          "क्या मेरा पैसा सुरक्षित है?",
+          "भुगतान Razorpay के सुरक्षित पेज पर होता है। आपके कार्ड, UPI या बैंक की जानकारी Razorpay के पास रहती है; यह वेबसाइट उसे न देखती है और न सहेजती है।"
+        ],
+        [
+          "कुछ गड़बड़ हो जाए तो क्या करूँ?",
+          "पेमेंट आईडी के साथ हमें ईमेल कीजिए या फ़ोन कीजिए। डबल कटौती या फ़ेल हुए भुगतान की जाँच कर, रकम वापस कर दी जाती है।"
+        ]
+      ],
+      "offNote": "तालियाँ भेजने की सुविधा अभी चालू हो रही है। कुछ ही दिन में आप यहाँ से कलाकारों को गिफ़्ट भेज सकेंगे। तब तक, एपिसोड देखिए और शेयर कीजिए: यही सबसे बड़ा हौसला है।"
+    }
+  },
+  "en": {
+    "title": "Loved the scene? Send the cast a round of applause",
+    "text": "Every Gapistaan scene is made on the spot with no script. The actors invent the dialogue on their own, and your laughter is the biggest reward they get. Watching is free and always will be. But if a scene made your day, send a gift of any size, only if you want to, and let the team know the work reached you.",
+    "episodeTitle": "Loved this episode? Send some applause",
+    "episodeText": "Every line in this episode was invented by the actors in that very moment. If you enjoyed it, send a gift of any size to lift their spirits.",
+    "castTitle": "Loved {name}'s acting? Send some applause",
+    "castText": "Whatever you choose to send lifts the spirits of the whole Gapistaan team. If you like, write a few words for {name}; we read every one.",
+    "nameLabel": "Your name (optional)",
+    "msgLabel": "A few words for the cast (optional)",
+    "otherLabel": "or your own amount",
+    "btn": "Send applause",
+    "payInfo": "Payment happens on Razorpay's secure page.",
+    "fine": "This is a voluntary gift, not a donation; it is not eligible for income-tax exemption (80G), and amounts sent are non-refundable.",
+    "termsLink": "Terms and refund policy",
+    "short": "Loved the scene? Send the cast some applause",
+    "nav": "Send applause",
+    "opening": "Opening the payment page…",
+    "verifying": "Confirming your payment…",
+    "thanks": "Thank you! Your applause has reached the whole team.",
+    "failed": "Something went wrong. If money was deducted from your account, please email us and we will look into it.",
+    "offline": "Sending applause is being switched on. Please try again in a little while.",
+    "amountErr": "Please enter an amount of at least ₹20.",
+    "desc": "Applause for the Gapistaan cast",
+    "page": {
+      "title": "Send the cast some applause",
+      "lede": "Gapistaan episodes are free and will stay free. If a scene made you laugh, you can send a gift of any amount from here.",
+      "qa": [
+        [
+          "Where does the gift go?",
+          "The amount goes to PICHCHRAPA, the production company behind Gapistaan, and is used to keep the team going and to make new episodes."
+        ],
+        [
+          "Do I have to pay to watch an episode?",
+          "No. Every episode will always be free on YouTube and on this website. A gift is entirely your choice."
+        ],
+        [
+          "Is this a donation?",
+          "No. It is a gift given of your own free will, and nothing is sold in return, no goods and no services. It is not eligible for income-tax exemption (80G)."
+        ],
+        [
+          "Is my payment safe?",
+          "Payment happens on Razorpay's secure page. Your card, UPI or bank details stay with Razorpay; this website neither sees nor stores them."
+        ],
+        [
+          "What if something goes wrong?",
+          "Email or call us with your payment ID. If you were charged twice or a failed payment was debited, we check and refund it."
+        ]
+      ],
+      "offNote": "Sending applause is being switched on and will be here within a few days. Until then, watching and sharing the episodes is the biggest encouragement you can give."
+    }
+  },
+  "terms": {
+    "hi": {
+      "title": "नियम और वापसी नीति",
+      "paras": [
+        [
+          "हम कौन हैं",
+          "gapistaan.com गैपिस्तान (Gen Gap) की वेबसाइट है, जो PICHCHRAPA (गोमती नगर, लखनऊ, उत्तर प्रदेश) की पेशकश है।"
+        ],
+        [
+          "यहाँ क्या लिया जाता है",
+          "वेबसाइट पर कुछ बेचा नहीं जाता। एपिसोड मुफ़्त हैं। 'तालियाँ भेजें' से मिलने वाली राशि दर्शकों का अपनी मर्ज़ी से दिया गया गिफ़्ट है। इसके बदले कोई सामान नहीं भेजा जाता और कोई सेवा नहीं दी जाती, इसलिए डिलीवरी या शिपिंग जैसी कोई चीज़ यहाँ लागू नहीं है।"
+        ],
+        [
+          "वापसी (रिफ़ंड) नीति",
+          "स्वेच्छा से भेजा गया गिफ़्ट वापस नहीं होता। पर अगर किसी भूल से आपके खाते से दो बार पैसे कटे हों, या भुगतान फ़ेल हुआ हो और पैसे कट गए हों, तो 7 दिन के भीतर पेमेंट आईडी के साथ हमें ईमेल कीजिए। जाँच के बाद रकम उसी माध्यम में लौटा दी जाती है, जिससे भुगतान हुआ था। बैंक के हिसाब से इसमें आम तौर पर 5 से 7 कार्य-दिवस लगते हैं।"
+        ],
+        [
+          "भुगतान की सुरक्षा",
+          "सारे भुगतान Razorpay के सुरक्षित पेज पर होते हैं। कार्ड, UPI या बैंक की जानकारी हमारे पास नहीं आती।"
+        ],
+        [
+          "संपर्क",
+          "ईमेल: {email}, फ़ोन: {phone}।"
+        ],
+        [
+          "क़ानूनी क्षेत्र",
+          "इन नियमों पर भारत का क़ानून लागू होगा। किसी भी विवाद का क्षेत्राधिकार लखनऊ की अदालतों का होगा।"
+        ]
+      ]
+    },
+    "en": {
+      "title": "Terms and refund policy",
+      "paras": [
+        [
+          "Who we are",
+          "gapistaan.com is the website of Gapistaan (Gen Gap), presented by PICHCHRAPA (Gomti Nagar, Lucknow, Uttar Pradesh)."
+        ],
+        [
+          "What is collected here",
+          "Nothing is sold on this website. Episodes are free. The amount received through “Send applause” is a gift that viewers give of their own free will. No goods are sent and no service is provided in return, so delivery or shipping does not apply here."
+        ],
+        [
+          "Refund policy",
+          "A gift sent voluntarily is not refundable. But if money was deducted twice from your account by mistake, or a payment failed and the money was still deducted, email us within 7 days with the payment ID. After checking, the amount is returned to the same method used for the payment. Depending on your bank this usually takes 5 to 7 working days."
+        ],
+        [
+          "Payment security",
+          "All payments happen on Razorpay's secure page. Your card, UPI or bank details never reach us."
+        ],
+        [
+          "Contact",
+          "Email: {email}, phone: {phone}."
+        ],
+        [
+          "Governing law",
+          "These terms are governed by the laws of India. Any dispute is subject to the jurisdiction of the courts at Lucknow."
+        ]
+      ]
+    }
+  }
+}

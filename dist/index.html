@@ -6,6 +6,9 @@
 <title>Gapistaan | गैपिस्तान: Gen Gap हिंदी कॉमेडी सीरीज़, चाचा बनाम Gen Z</title>
 <meta name="description" content="गैपिस्तान (Gapistaan) PICHCHRAPA की हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर है। लखनऊ के एक एक्टिंग इंस्टीट्यूट में चाचा बनाम Gen Z, बिना स्क्रिप्ट की improvised कॉमेडी। सारे एपिसोड यहाँ देखें।">
 <link rel="canonical" href="https://gapistaan.com/">
+<link rel="alternate" hreflang="hi" href="https://gapistaan.com/">
+<link rel="alternate" hreflang="en" href="https://gapistaan.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://gapistaan.com/">
 
 <meta name="theme-color" content="#0B1D24">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -304,18 +307,72 @@ a{color:var(--accent)}
 .h3{margin:1.6rem 0 .5rem;font:800 1.2rem/1.4 var(--hindi)}
 .ep-list{margin:0;padding-left:1.4rem;line-height:2}
 .ep-list a{color:var(--text)}
+.lang{order:2;color:var(--muted);font-weight:800;font-size:.9rem;line-height:1;text-decoration:none;padding:.5rem .8rem;border:1.5px solid var(--line-2);border-radius:999px}
+.lang:hover{color:var(--text);border-color:var(--accent)}
+.topnav a.gift-link{color:var(--gold)}
+.topnav a.gift-link:hover,.topnav a.gift-link[aria-current="page"]{color:#F6C453;text-decoration:underline;text-underline-offset:.25em}
+.topbar-in .btn-sm{order:2}
+@media (min-width:52rem){.lang,.topbar-in .btn-sm{order:0}}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F2C466}
+.btn-gold:disabled{opacity:.6;cursor:progress}
+.gift{position:relative;max-width:64rem;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#1A4450,#13313B 62%);box-shadow:0 0 0 1px var(--line-2)}
+.gift::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:repeating-linear-gradient(180deg,var(--gold) 0 12px,transparent 12px 22px)}
+.gift-body{padding:1.6rem 1.3rem 1.4rem 2rem}
+@media (min-width:48rem){.gift-body{padding:2.2rem 2.6rem 2rem 3.2rem}}
+.gift-h{margin:0 0 .5rem;font:800 clamp(1.35rem,3vw,1.85rem)/1.4 var(--hindi)}
+.gift-text{margin:0 0 1.3rem;max-width:62ch;color:var(--muted)}
+.stubs{list-style:none;margin:0 0 1.2rem;padding:0;display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(8.6rem,1fr))}
+.stubs li{border-radius:8px}
+.stubs li:has(.stub:focus-visible){outline:3px solid var(--gold);outline-offset:3px}
+.stub{--n:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;width:100%;min-height:4.7rem;padding:.6rem 1rem;border:0;border-radius:6px;background:rgba(233,180,76,.15);color:var(--text);font:inherit;cursor:pointer;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.stub:focus-visible{outline:none}
+.stub b{font:400 1.55rem/1 var(--latin);letter-spacing:.03em;color:var(--gold)}
+.stub span{font-size:.85rem;font-weight:800;color:var(--muted);line-height:1.3;text-align:center}
+.stub:hover{background:rgba(233,180,76,.27)}
+.stub.is-on{background:var(--gold)}
+.stub.is-on b,.stub.is-on span{color:var(--ink)}
+.gift-fields{display:grid;gap:.9rem;max-width:40rem;margin:0 0 1.1rem}
+.gift label{display:grid;gap:.3rem;font-weight:800;font-size:.95rem}
+.gift input,.gift textarea{width:100%;font:400 1rem/1.5 var(--hindi);color:var(--text);background:rgba(6,20,26,.55);border:1.5px solid var(--line-2);border-radius:10px;padding:.6rem .8rem}
+.gift textarea{resize:vertical;min-height:4.2rem}
+.gift input:focus,.gift textarea:focus{outline:3px solid var(--gold);outline-offset:1px}
+.gift-own{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.8rem 1.1rem;margin:0}
+.gift-own label{display:flex;align-items:center;gap:.6rem}
+.rs{display:inline-flex;align-items:center;gap:.4rem;font:400 1.4rem/1 var(--latin);color:var(--gold)}
+.rs input{width:7.5rem;font:800 1.1rem/1.3 var(--hindi);color:var(--text)}
+.pay-status{min-height:1.6em;margin:.9rem 0 0;font-weight:800;color:var(--gold)}
+.gift.is-thanked .pay-status{color:#9BE3B0}
+.gift .fine{margin:.5rem 0 0;max-width:64ch;color:var(--muted);font-size:.85rem;line-height:1.6}
+.gift .fine a{color:var(--muted)}
+.gift-episode .gift-body{padding-block:1.3rem}
+.gift-episode .gift-h{font-size:1.25rem}
+.gift-episode .gift-text{margin-bottom:1rem}
+@media (max-width:30rem){.gift-own .btn{width:100%}}
+@media (max-width:30rem){
+  .topbar-in{gap:.4rem .55rem}
+  .brand{gap:.45rem}
+  .brand-name{font-size:1.25rem}
+  .lang{padding:.45rem .65rem;font-size:.82rem}
+  .topbar-in .btn-sm{padding:.4rem .8rem;font-size:.85rem;min-height:2.3rem}
+}
+html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
+html.gift-on .gift-off-note{display:none}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Gapistaan | गैपिस्तान","alternateName":["Gapistaan","Gapistan","गैपिस्तान","Gen Gap"],"url":"https://gapistaan.com/","inLanguage":"hi"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Gapistaan","alternateName":"गैपिस्तान","url":"https://gapistaan.com/","logo":"https://gapistaan.com/img/logo-520.webp","sameAs":["https://www.youtube.com/@gapistaan","https://www.instagram.com/gapistaan/"],"parentOrganization":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com","sameAs":["https://www.youtube.com/@pichchrapa"]},"email":"Pichchrapa@gmail.com"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TVSeries","name":"Gen Gap","alternateName":["Gapistaan","गैपिस्तान","जेन गैप"],"url":"https://gapistaan.com/","inLanguage":"hi","genre":["Comedy","Satire"],"description":"Gapistaan (गैपिस्तान) is the home of Gen Gap, a Hindi comedy web series by PICHCHRAPA, Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.","numberOfEpisodes":7,"creator":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"director":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"actor":[{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},{"@type":"Person","name":"Ayushi Tiwari","alternateName":["आयुषी तिवारी","Aayushi Dutt Tiwari"],"url":"https://gapistaan.com/cast/ayushi-tiwari/"},{"@type":"Person","name":"Saanviya","alternateName":["सान्विया"],"url":"https://gapistaan.com/cast/saanviya/"},{"@type":"Person","name":"Sarita Vyas","alternateName":["सरिता व्यास"],"url":"https://gapistaan.com/cast/sarita-vyas/"},{"@type":"Person","name":"Ravi Dev Rai","alternateName":["रवि देव राय","Ravi Yadav"],"url":"https://gapistaan.com/cast/ravi-dev-rai/"},{"@type":"Person","name":"Shubham Kumar Singh","alternateName":["शुभम कुमार सिंह","Shubham Singh"],"url":"https://gapistaan.com/cast/shubham-kumar-singh/"},{"@type":"Person","name":"Rohit Daas","alternateName":["रोहित दास","Rohit Das"],"url":"https://gapistaan.com/cast/rohit-das/"},{"@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/"}],"productionCompany":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com"},"image":"https://gapistaan.com/img/og-home.jpg"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"गैपिस्तान (Gapistaan) क्या है?","acceptedAnswer":{"@type":"Answer","text":"गैपिस्तान एक YouTube चैनल है और हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर। लखनऊ के एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज के Gen Z लड़कों की रोज़ की नोकझोंक इसकी कहानी है। ये PICHCHRAPA की पेशकश है।"}},{"@type":"Question","name":"Gen Gap का नया एपिसोड कब आता है?","acceptedAnswer":{"@type":"Answer","text":"नया एपिसोड हर दूसरे दिन, शाम 6:30 से 7:30 के बीच। हर एपिसोड पहले YouTube चैनल @gapistaan पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी।"}},{"@type":"Question","name":"क्या Gen Gap की कोई स्क्रिप्ट होती है?","acceptedAnswer":{"@type":"Answer","text":"नहीं। सिर्फ़ सिचुएशन तय होती है, डायलॉग कलाकार मौके पर ख़ुद बनाते हैं। पूरी सीरीज़ improvised है।"}},{"@type":"Question","name":"गैपिस्तान किसने बनाया है?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।"}},{"@type":"Question","name":"गैपिस्तान में कौन-कौन से कलाकार हैं?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।"}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?","acceptedAnswer":{"@type":"Answer","text":"हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।"}},{"@type":"Question","name":"ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?","acceptedAnswer":{"@type":"Answer","text":"ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"गैपिस्तान (Gapistaan) क्या है?","acceptedAnswer":{"@type":"Answer","text":"गैपिस्तान एक YouTube चैनल है और हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर। लखनऊ के एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज के Gen Z लड़कों की रोज़ की नोकझोंक इसकी कहानी है। ये PICHCHRAPA की पेशकश है।"}},{"@type":"Question","name":"Gen Gap का नया एपिसोड कब आता है?","acceptedAnswer":{"@type":"Answer","text":"नया एपिसोड हर दूसरे दिन, शाम 6:30 से 7:30 के बीच। हर एपिसोड पहले YouTube चैनल @gapistaan पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी।"}},{"@type":"Question","name":"क्या Gen Gap की कोई स्क्रिप्ट होती है?","acceptedAnswer":{"@type":"Answer","text":"नहीं। सिर्फ़ सिचुएशन तय होती है, डायलॉग कलाकार मौके पर ख़ुद बनाते हैं। पूरी सीरीज़ improvised है।"}},{"@type":"Question","name":"गैपिस्तान किसने बनाया है?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।"}},{"@type":"Question","name":"गैपिस्तान में कौन-कौन से कलाकार हैं?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।"}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?","acceptedAnswer":{"@type":"Answer","text":"हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।"}},{"@type":"Question","name":"कलाकारों को तालियाँ (गिफ़्ट) कैसे भेज सकते हैं?","acceptedAnswer":{"@type":"Answer","text":"अगर आपका मन करे, तो gapistaan.com/support/ पर अपनी मर्ज़ी की राशि चुनिए। यह पूरी तरह स्वैच्छिक है और सारे एपिसोड हमेशा मुफ़्त रहेंगे।"}},{"@type":"Question","name":"ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?","acceptedAnswer":{"@type":"Answer","text":"ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">सीधे मुख्य हिस्से पर जाएँ</a>
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
+    <a class="lang" href="/en/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
 </header>
@@ -353,11 +410,11 @@ a{color:var(--accent)}
         </div>
         <div class="actions">
         <a class="btn btn-primary" id="stage-yt" href="https://www.youtube.com/watch?v=02k4tNgjOrc">YouTube पर देखें</a>
-        <a class="btn btn-wa" id="stage-wa" href="https://wa.me/?text=%E0%A4%98%E0%A4%9F%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%B9%E0%A5%88%20Protest%20Chacha%20%E0%A4%95%E0%A5%80%20Chachi%20%E0%A4%A8%E0%A5%87%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A4%BE%20%E0%A4%90%E0%A4%B8%E0%A4%BE%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F02k4tNgjOrc%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com">WhatsApp पर भेजें</a>
+        <a class="btn btn-wa" id="stage-wa" href="https://wa.me/?text=%E0%A4%98%E0%A4%9F%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%B9%E0%A5%88%20Protest%20Chacha%20%E0%A4%95%E0%A5%80%20Chachi%20%E0%A4%A8%E0%A5%87%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A4%BE%20%E0%A4%90%E0%A4%B8%E0%A4%BE%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F02k4tNgjOrc%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F">WhatsApp पर भेजें</a>
         <button class="btn btn-ghost js-share" id="stage-share" type="button" hidden data-title="घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो" data-text="घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो
 
 गैपिस्तान पर देखिए: https://youtu.be/02k4tNgjOrc
-सारे एपिसोड: https://gapistaan.com">और जगह शेयर करें</button>
+सारे एपिसोड: https://gapistaan.com/">और जगह शेयर करें</button>
       </div>
       </div>
   </div>
@@ -418,7 +475,7 @@ a{color:var(--accent)}
     <p class="more-link"><a href="/episodes/">सारे एपिसोड एक साथ देखें</a></p>
   </div>
 </section>
-<script id="ep-data" type="application/json">[{"id":"02k4tNgjOrc","ep":"EP 07","title":"घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो","path":"/video/02k4tNgjOrc/","date":"17 अक्टूबर 2026, 13 मिनट","wa":"https://wa.me/?text=%E0%A4%98%E0%A4%9F%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%B9%E0%A5%88%20Protest%20Chacha%20%E0%A4%95%E0%A5%80%20Chachi%20%E0%A4%A8%E0%A5%87%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A4%BE%20%E0%A4%90%E0%A4%B8%E0%A4%BE%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F02k4tNgjOrc%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो\n\nगैपिस्तान पर देखिए: https://youtu.be/02k4tNgjOrc\nसारे एपिसोड: https://gapistaan.com"},{"id":"Nv7F5v-9Rz0","ep":"EP 06","title":"धरम परिवर्तन क्यों ?","path":"/video/Nv7F5v-9Rz0/","date":"15 अक्टूबर 2026, 13 मिनट","wa":"https://wa.me/?text=%E0%A4%A7%E0%A4%B0%E0%A4%AE%20%E0%A4%AA%E0%A4%B0%E0%A4%BF%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%A8%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%E0%A4%82%20%3F%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FNv7F5v-9Rz0%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"धरम परिवर्तन क्यों ?\n\nगैपिस्तान पर देखिए: https://youtu.be/Nv7F5v-9Rz0\nसारे एपिसोड: https://gapistaan.com"},{"id":"AxfOesoA96Y","ep":"EP 05","title":"लड़की के आने से | नमस्ते CHACHA","path":"/video/AxfOesoA96Y/","date":"13 अक्टूबर 2026, 12 मिनट","wa":"https://wa.me/?text=%E0%A4%B2%E0%A4%A1%E0%A4%BC%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A5%87%20%E0%A4%86%E0%A4%A8%E0%A5%87%20%E0%A4%B8%E0%A5%87%20%7C%20%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20CHACHA%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FAxfOesoA96Y%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"लड़की के आने से | नमस्ते CHACHA\n\nगैपिस्तान पर देखिए: https://youtu.be/AxfOesoA96Y\nसारे एपिसोड: https://gapistaan.com"},{"id":"A5cMhST_od4","ep":"EP 04","title":"Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂","path":"/video/A5cMhST_od4/","date":"9 अक्टूबर 2026, 18 मिनट","wa":"https://wa.me/?text=Hostel%20%E0%A4%95%E0%A5%80%20%E0%A4%85%E0%A4%A6%E0%A4%BE%E0%A4%B2%E0%A4%A4%20%7C%20%E0%A4%AB%E0%A4%BC%E0%A5%8D%E0%A4%B2%E0%A4%B6%20%E0%A4%95%E0%A4%BF%E0%A4%B8%E0%A4%A8%E0%A5%87%20%E0%A4%A8%E0%A4%B9%E0%A5%80%E0%A4%82%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20%E0%A4%9C%E0%A4%9C%20%E0%A4%95%E0%A4%BE%20%E0%A4%AB%E0%A4%BC%E0%A5%88%E0%A4%B8%E0%A4%B2%E0%A4%BE%20%F0%9F%98%82%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FA5cMhST_od4%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂\n\nगैपिस्तान पर देखिए: https://youtu.be/A5cMhST_od4\nसारे एपिसोड: https://gapistaan.com"},{"id":"2hVUS2mVNRk","ep":"EP 03","title":"Hostel Ka साबुन चोर","path":"/video/2hVUS2mVNRk/","date":"9 अक्टूबर 2026, 6 मिनट","wa":"https://wa.me/?text=Hostel%20Ka%20%E0%A4%B8%E0%A4%BE%E0%A4%AC%E0%A5%81%E0%A4%A8%20%E0%A4%9A%E0%A5%8B%E0%A4%B0%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F2hVUS2mVNRk%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"Hostel Ka साबुन चोर\n\nगैपिस्तान पर देखिए: https://youtu.be/2hVUS2mVNRk\nसारे एपिसोड: https://gapistaan.com"},{"id":"TN8aYgNz2uA","ep":"EP 02","title":"बिहारी हो का | Gapistaan का नया धमाका","path":"/video/TN8aYgNz2uA/","date":"7 अक्टूबर 2026, 12 मिनट","wa":"https://wa.me/?text=%E0%A4%AC%E0%A4%BF%E0%A4%B9%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%B9%E0%A5%8B%20%E0%A4%95%E0%A4%BE%20%7C%20Gapistaan%20%E0%A4%95%E0%A4%BE%20%E0%A4%A8%E0%A4%AF%E0%A4%BE%20%E0%A4%A7%E0%A4%AE%E0%A4%BE%E0%A4%95%E0%A4%BE%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FTN8aYgNz2uA%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"बिहारी हो का | Gapistaan का नया धमाका\n\nगैपिस्तान पर देखिए: https://youtu.be/TN8aYgNz2uA\nसारे एपिसोड: https://gapistaan.com"},{"id":"PrSjBCuwvy8","ep":"EP 01","title":"YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z","path":"/video/PrSjBCuwvy8/","date":"6 अक्टूबर 2026, 6 मिनट","wa":"https://wa.me/?text=YouTube%20%E0%A4%A8%E0%A5%87%20%E0%A4%AB%E0%A4%81%E0%A4%B8%E0%A4%BE%E0%A4%AF%E0%A4%BE%20%E0%A4%AF%E0%A4%BE%20Cinema%20%E0%A4%A8%E0%A5%87%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20vs%20Gen%20Z%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FPrSjBCuwvy8%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com","share":"YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z\n\nगैपिस्तान पर देखिए: https://youtu.be/PrSjBCuwvy8\nसारे एपिसोड: https://gapistaan.com"}]</script>
+<script id="ep-data" type="application/json">[{"id":"02k4tNgjOrc","ep":"EP 07","title":"घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो","path":"/video/02k4tNgjOrc/","date":"17 अक्टूबर 2026, 13 मिनट","wa":"https://wa.me/?text=%E0%A4%98%E0%A4%9F%E0%A4%BF%E0%A4%AF%E0%A4%BE%20%E0%A4%B9%E0%A5%88%20Protest%20Chacha%20%E0%A4%95%E0%A5%80%20Chachi%20%E0%A4%A8%E0%A5%87%20%E0%A4%AC%E0%A5%8B%E0%A4%B2%E0%A4%BE%20%E0%A4%90%E0%A4%B8%E0%A4%BE%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F02k4tNgjOrc%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो\n\nगैपिस्तान पर देखिए: https://youtu.be/02k4tNgjOrc\nसारे एपिसोड: https://gapistaan.com/"},{"id":"Nv7F5v-9Rz0","ep":"EP 06","title":"धरम परिवर्तन क्यों ?","path":"/video/Nv7F5v-9Rz0/","date":"15 अक्टूबर 2026, 13 मिनट","wa":"https://wa.me/?text=%E0%A4%A7%E0%A4%B0%E0%A4%AE%20%E0%A4%AA%E0%A4%B0%E0%A4%BF%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%A4%E0%A4%A8%20%E0%A4%95%E0%A5%8D%E0%A4%AF%E0%A5%8B%E0%A4%82%20%3F%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FNv7F5v-9Rz0%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"धरम परिवर्तन क्यों ?\n\nगैपिस्तान पर देखिए: https://youtu.be/Nv7F5v-9Rz0\nसारे एपिसोड: https://gapistaan.com/"},{"id":"AxfOesoA96Y","ep":"EP 05","title":"लड़की के आने से | नमस्ते CHACHA","path":"/video/AxfOesoA96Y/","date":"13 अक्टूबर 2026, 12 मिनट","wa":"https://wa.me/?text=%E0%A4%B2%E0%A4%A1%E0%A4%BC%E0%A4%95%E0%A5%80%20%E0%A4%95%E0%A5%87%20%E0%A4%86%E0%A4%A8%E0%A5%87%20%E0%A4%B8%E0%A5%87%20%7C%20%E0%A4%A8%E0%A4%AE%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A5%87%20CHACHA%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FAxfOesoA96Y%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"लड़की के आने से | नमस्ते CHACHA\n\nगैपिस्तान पर देखिए: https://youtu.be/AxfOesoA96Y\nसारे एपिसोड: https://gapistaan.com/"},{"id":"A5cMhST_od4","ep":"EP 04","title":"Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂","path":"/video/A5cMhST_od4/","date":"9 अक्टूबर 2026, 18 मिनट","wa":"https://wa.me/?text=Hostel%20%E0%A4%95%E0%A5%80%20%E0%A4%85%E0%A4%A6%E0%A4%BE%E0%A4%B2%E0%A4%A4%20%7C%20%E0%A4%AB%E0%A4%BC%E0%A5%8D%E0%A4%B2%E0%A4%B6%20%E0%A4%95%E0%A4%BF%E0%A4%B8%E0%A4%A8%E0%A5%87%20%E0%A4%A8%E0%A4%B9%E0%A5%80%E0%A4%82%20%E0%A4%95%E0%A4%BF%E0%A4%AF%E0%A4%BE%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20%E0%A4%9C%E0%A4%9C%20%E0%A4%95%E0%A4%BE%20%E0%A4%AB%E0%A4%BC%E0%A5%88%E0%A4%B8%E0%A4%B2%E0%A4%BE%20%F0%9F%98%82%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FA5cMhST_od4%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂\n\nगैपिस्तान पर देखिए: https://youtu.be/A5cMhST_od4\nसारे एपिसोड: https://gapistaan.com/"},{"id":"2hVUS2mVNRk","ep":"EP 03","title":"Hostel Ka साबुन चोर","path":"/video/2hVUS2mVNRk/","date":"9 अक्टूबर 2026, 6 मिनट","wa":"https://wa.me/?text=Hostel%20Ka%20%E0%A4%B8%E0%A4%BE%E0%A4%AC%E0%A5%81%E0%A4%A8%20%E0%A4%9A%E0%A5%8B%E0%A4%B0%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2F2hVUS2mVNRk%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"Hostel Ka साबुन चोर\n\nगैपिस्तान पर देखिए: https://youtu.be/2hVUS2mVNRk\nसारे एपिसोड: https://gapistaan.com/"},{"id":"TN8aYgNz2uA","ep":"EP 02","title":"बिहारी हो का | Gapistaan का नया धमाका","path":"/video/TN8aYgNz2uA/","date":"7 अक्टूबर 2026, 12 मिनट","wa":"https://wa.me/?text=%E0%A4%AC%E0%A4%BF%E0%A4%B9%E0%A4%BE%E0%A4%B0%E0%A5%80%20%E0%A4%B9%E0%A5%8B%20%E0%A4%95%E0%A4%BE%20%7C%20Gapistaan%20%E0%A4%95%E0%A4%BE%20%E0%A4%A8%E0%A4%AF%E0%A4%BE%20%E0%A4%A7%E0%A4%AE%E0%A4%BE%E0%A4%95%E0%A4%BE%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FTN8aYgNz2uA%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"बिहारी हो का | Gapistaan का नया धमाका\n\nगैपिस्तान पर देखिए: https://youtu.be/TN8aYgNz2uA\nसारे एपिसोड: https://gapistaan.com/"},{"id":"PrSjBCuwvy8","ep":"EP 01","title":"YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z","path":"/video/PrSjBCuwvy8/","date":"6 अक्टूबर 2026, 6 मिनट","wa":"https://wa.me/?text=YouTube%20%E0%A4%A8%E0%A5%87%20%E0%A4%AB%E0%A4%81%E0%A4%B8%E0%A4%BE%E0%A4%AF%E0%A4%BE%20%E0%A4%AF%E0%A4%BE%20Cinema%20%E0%A4%A8%E0%A5%87%3F%20%E0%A4%9A%E0%A4%BE%E0%A4%9A%E0%A4%BE%20vs%20Gen%20Z%0A%0A%E0%A4%97%E0%A5%88%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%BE%E0%A4%A8%20%E0%A4%AA%E0%A4%B0%20%E0%A4%A6%E0%A5%87%E0%A4%96%E0%A4%BF%E0%A4%8F%3A%20https%3A%2F%2Fyoutu.be%2FPrSjBCuwvy8%0A%E0%A4%B8%E0%A4%BE%E0%A4%B0%E0%A5%87%20%E0%A4%8F%E0%A4%AA%E0%A4%BF%E0%A4%B8%E0%A5%8B%E0%A4%A1%3A%20https%3A%2F%2Fgapistaan.com%2F","share":"YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z\n\nगैपिस्तान पर देखिए: https://youtu.be/PrSjBCuwvy8\nसारे एपिसोड: https://gapistaan.com/"}]</script>
 
 <section class="sec about" id="about" aria-labelledby="about-h">
   <div class="wrap about-in">
@@ -473,7 +530,25 @@ a{color:var(--accent)}
 </ul>
   </div>
 </section>
-<section class="sec" aria-labelledby="brands-h">
+<section class="sec" aria-label="सीन पसंद आया? कलाकारों को तालियाँ भेजिए">
+  <div class="wrap">
+    <aside class="gift gift-home" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;भुगतान का पेज खुल रहा है…&quot;,&quot;verifying&quot;:&quot;भुगतान की पुष्टि हो रही है…&quot;,&quot;thanks&quot;:&quot;शुक्रिया! आपकी तालियाँ पूरी टीम तक पहुँच गईं।&quot;,&quot;failed&quot;:&quot;कुछ गड़बड़ हुई। अगर आपके पैसे कट गए हों तो हमें ईमेल कीजिए, हम जाँचकर बताएँगे।&quot;,&quot;offline&quot;:&quot;तालियाँ भेजने की सुविधा अभी चालू हो रही है। थोड़ी देर बाद फिर कोशिश कीजिए।&quot;,&quot;amountErr&quot;:&quot;कम से कम ₹20 की राशि लिखिए।&quot;,&quot;desc&quot;:&quot;गैपिस्तान के कलाकारों के लिए तालियाँ&quot;,&quot;min&quot;:20}" data-who="" data-page="home">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">सीन पसंद आया? कलाकारों को तालियाँ भेजिए</h2>
+    <p class="gift-text">गैपिस्तान का हर सीन बिना स्क्रिप्ट के, उसी पल बनता है। कलाकार अपने दम पर डायलॉग गढ़ते हैं, और आपकी हँसी ही उनकी सबसे बड़ी कमाई है। एपिसोड देखना मुफ़्त है और हमेशा मुफ़्त रहेगा। पर अगर किसी सीन ने आपका दिन बना दिया, तो अपनी मर्ज़ी से एक गिफ़्ट भेजकर टीम को बता दीजिए कि मेहनत आप तक पहुँची।</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>एक ताली</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>तालियाँ</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>वाह-वाह</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>दिल से शाबाशी</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>स्टैंडिंग ओवेशन</span></button></li></ul>
+    <div class="gift-fields">
+      <label>आपका नाम (चाहें तो)<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>कलाकारों के लिए दो शब्द (चाहें तो)<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>
+    <p class="gift-own"><label>या अपनी राशि <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="या अपनी राशि"></span></label><button type="button" class="btn btn-gold gift-go">तालियाँ भेजें</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">भुगतान Razorpay के सुरक्षित पेज पर होता है। यह अपनी मर्ज़ी से दिया गया गिफ़्ट है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और भेजी गई राशि वापस नहीं होती। <a href="/terms/">नियम और वापसी नीति</a></p>
+  </div>
+</aside>
+  </div>
+</section>
+<section class="sec sec-alt" aria-labelledby="brands-h">
   <div class="wrap">
     <h2 class="h2" id="brands-h">PICHCHRAPA परिवार</h2>
     <p class="lede">गैपिस्तान PICHCHRAPA का हिस्सा है। हमारे दूसरे चैनल और संस्थान:</p>
@@ -503,6 +578,7 @@ a{color:var(--accent)}
       <details><summary>गैपिस्तान किसने बनाया है?</summary><p>योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।</p></details>
       <details><summary>गैपिस्तान में कौन-कौन से कलाकार हैं?</summary><p>योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।</p></details>
       <details><summary>Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?</summary><p>हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।</p></details>
+      <details><summary>कलाकारों को तालियाँ (गिफ़्ट) कैसे भेज सकते हैं?</summary><p>अगर आपका मन करे, तो gapistaan.com/support/ पर अपनी मर्ज़ी की राशि चुनिए। यह पूरी तरह स्वैच्छिक है और सारे एपिसोड हमेशा मुफ़्त रहेंगे।</p></details>
       <details><summary>ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?</summary><p>ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।</p></details>
     </div>
     <p class="more-link"><a href="/about/">गैपिस्तान कैसे बनता है, पूरी कहानी पढ़ें</a></p>
@@ -538,7 +614,9 @@ a{color:var(--accent)}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/privacy/">प्राइवेसी</a></li>
+        <li><a href="/terms/">नियम और वापसी नीति</a></li>
       </ul>
     </div>
     <div>
@@ -646,6 +724,45 @@ a{color:var(--accent)}
       b.addEventListener('click',function(){ navigator.share({title:b.dataset.title,text:b.dataset.text}).catch(function(){}); });
     });
   }
+  // The applause box, its menu link and its page text stay hidden until the server says payments are switched on.
+  if(document.querySelector('.gift,.gift-link')){
+    var on=function(){ document.documentElement.classList.add('gift-on'); };
+    var cached=false; try{ cached=sessionStorage.getItem('gift-on')==='1'; }catch(e){}
+    if(cached) on();
+    fetch('/api/status').then(function(r){ return r.json(); }).then(function(j){
+      if(j&&j.payments==='on'){ on(); try{ sessionStorage.setItem('gift-on','1'); }catch(e){} }
+      else { document.documentElement.classList.remove('gift-on'); try{ sessionStorage.removeItem('gift-on'); }catch(e){} }
+    }).catch(function(){});
+  }
+  // Applause box: pick a ticket stub, then Razorpay Checkout opens. The server decides nothing about the amount except the limits.
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+  document.querySelectorAll('.gift').forEach(function(box){
+    var T=JSON.parse(box.getAttribute('data-t')), who=box.getAttribute('data-who')||'', pg=box.getAttribute('data-page')||'';
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.gift-go');
+    var nm=box.querySelector('input[name=gname]'), msg=box.querySelector('textarea[name=gmsg]');
+    var stubs=box.querySelectorAll('.stub');
+    var say=function(m){ st.textContent=m||''; };
+    function mark(){ stubs.forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-amt')===String(+input.value)); }); }
+    stubs.forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); mark(); say(''); }); });
+    input.addEventListener('input',mark);
+    function fail(m){ go.disabled=false; say(m); }
+    go.addEventListener('click',function(){
+      var a=Math.round(+input.value);
+      if(!(a>=T.min)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true; say(T.opening);
+      post('/api/order',{amount:a,name:nm?nm.value:'',message:msg?msg.value:'',to:who,page:pg,lang:document.documentElement.lang}).then(function(o){
+        if(!o.order_id){ fail(o._status===503||o._status===404?T.offline:T.failed); return; }
+        return loadRzp().then(function(){
+          var paid=false;
+          var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'Gapistaan', description:T.desc, image:location.origin+'/img/logo-160.webp', prefill:{ name:nm?nm.value:'' }, notes:{ source:'website' }, theme:{ color:'#C93F15' },
+            handler:function(r){ paid=true; say(T.verifying); post('/api/verify',r).then(function(v){ if(v.ok){ go.disabled=false; box.classList.add('is-thanked'); say(T.thanks); } else fail(T.failed); },function(){ fail(T.failed); }); },
+            modal:{ ondismiss:function(){ if(!paid) fail(''); } } });
+          rz.open();
+        },function(){ fail(T.offline); });
+      },function(){ fail(T.offline); });
+    });
+  });
 })();
 </script>
 

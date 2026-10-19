@@ -1,5 +1,5 @@
-// Builds the static site into dist/ from content/site.json + data/videos.json.
-// No dependencies: run with `node scripts/build.mjs`.
+// Builds the site into dist/ from content/site.json + data/videos.json, in two languages:
+// Hindi at the root (/) and English under /en/. No dependencies: run with `node scripts/build.mjs`.
 import { readFile, writeFile, mkdir, rm, cp, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
@@ -9,17 +9,31 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist');
 
 const site = JSON.parse(await readFile(path.join(root, 'content/site.json'), 'utf8'));
+const en = JSON.parse(await readFile(path.join(root, 'content/en.json'), 'utf8'));
+const gift = JSON.parse(await readFile(path.join(root, 'content/gift.json'), 'utf8'));
 const data = JSON.parse(await readFile(path.join(root, 'data/videos.json'), 'utf8'));
 const css = (await readFile(path.join(root, 'src/styles.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n+/g, '\n');
 const siteUrl = (process.env.SITE_URL || site.siteUrl || '').trim().replace(/\/+$/, '');
 const abs = (p) => (siteUrl ? siteUrl + p : '');
 
+// ---------- language ----------
+// Every page function reads LANG, so build('hi') and build('en') render the same templates.
+let LANG = 'hi';
+const T = (hi, eng) => (LANG === 'en' ? eng : hi);
+const lp = (p) => (LANG === 'en' ? '/en' + p : p); // path of a page in the current language
+const A = (p) => abs(lp(p));
+const G = () => gift[LANG];
+let S = site; // site texts in the current language
+
 // ---------- helpers ----------
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const jsonLd = (obj) => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 
-const dateFmt = new Intl.DateTimeFormat('hi-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' });
-const hiDate = (iso) => dateFmt.format(new Date(iso));
+const dateFmt = {
+  hi: new Intl.DateTimeFormat('hi-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }),
+  en: new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' }),
+};
+const hiDate = (iso) => dateFmt[LANG].format(new Date(iso));
 
 function seconds(iso) {
   const m = /^P(?:(\d+)D)?T?(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/.exec(iso || '');
@@ -31,7 +45,10 @@ function clock(sec) {
   const pad = (n) => String(n).padStart(2, '0');
   return h ? `${h}:${pad(m)}:${pad(s)}` : `${m}:${pad(s)}`;
 }
-const minutes = (sec) => `${Math.max(1, Math.round(sec / 60))} मिनट`;
+const minutes = (sec) => {
+  const n = Math.max(1, Math.round(sec / 60));
+  return T(`${n} मिनट`, `${n} min`);
+};
 
 const BRAND = /^(gapistaan|gapistan|गैपिस्तान|गपिस्तान)$/i;
 // "Gen Gap Comedy" / "Gen Gap Full Comedy" tags from YouTube titles: the site adds "Gen Gap EP 0x" itself.
@@ -73,10 +90,16 @@ function parseDescription(v) {
 }
 
 function summary(v, paragraphs, max = 155) {
-  const candidates = paragraphs
-    .map((p) => p.split('\n').filter((l) => !BOILER.test(l.trim())).join(' ').trim())
-    .filter((p) => p.length >= 40 && !/^[\x00-\x7F]+$/.test(p)); // prefer Hindi prose over the Hinglish/English blocks
-  let text = candidates[0] || `गैपिस्तान का एपिसोड "${cleanTitle(v.title)}"। चाचा बनाम Gen Z की improvised हिंदी कॉमेडी।`;
+  // English pages summarise only from the hand-written English text; the YouTube description is Hindi/Hinglish.
+  const candidates =
+    LANG === 'en'
+      ? paragraphs.map((p) => p.replace(/\s+/g, ' ').trim()).filter((p) => p.length >= 40)
+      : paragraphs
+          .map((p) => p.split('\n').filter((l) => !BOILER.test(l.trim())).join(' ').trim())
+          .filter((p) => p.length >= 40 && !/^[\x00-\x7F]+$/.test(p)); // prefer Hindi prose over the Hinglish/English blocks
+  let text =
+    candidates[0] ||
+    T(`गैपिस्तान का एपिसोड "${cleanTitle(v.title)}"। चाचा बनाम Gen Z की improvised हिंदी कॉमेडी।`, `Gapistaan episode "${cleanTitle(v.title)}". Improvised Hindi comedy: Chacha vs Gen Z.`);
   text = text.replace(/\s+/g, ' ');
   if (text.length > max) text = text.slice(0, max).replace(/\s+\S*$/, '') + '…';
   return text;
@@ -99,9 +122,9 @@ function srcset(v) {
     .join(', ');
 }
 
-// Optional hand-written text per episode: content/episodes/<videoId>.md (plain paragraphs).
-async function customText(id) {
-  const f = path.join(root, 'content/episodes', `${id}.md`);
+// Optional hand-written text per episode: content/episodes/<videoId>.md (Hindi) and <videoId>.en.md (English).
+async function customText(id, lang) {
+  const f = path.join(root, 'content/episodes', lang === 'en' ? `${id}.en.md` : `${id}.md`);
   if (!existsSync(f)) return [];
   return (await readFile(f, 'utf8')).split(/\n\s*\n/).map((p) => p.trim()).filter((p) => p && !p.startsWith('<!--'));
 }
@@ -111,33 +134,71 @@ const all = [...(data.videos || [])].sort((a, b) => a.publishedAt.localeCompare(
 const episodes = all.filter((v) => !v.isShort).map((v, i) => ({ ...v, n: i + 1 }));
 const shorts = all.filter((v) => v.isShort).reverse();
 const newestFirst = [...episodes].reverse();
+const customs = { hi: {}, en: {} };
 for (const ep of episodes) {
   ep.sec = seconds(ep.duration);
   ep.clean = cleanTitle(ep.title);
   ep.path = `/video/${ep.id}/`;
   Object.assign(ep, parseDescription(ep));
-  ep.custom = await customText(ep.id);
-  ep.summary = summary(ep, [...ep.custom, ...ep.paragraphs]);
+  customs.hi[ep.id] = await customText(ep.id, 'hi');
+  customs.en[ep.id] = await customText(ep.id, 'en');
 }
 
 // People: the creator plays Chacha in every episode; the rest are matched by name in the episode credits.
-const creator = { ...site.creator, path: '/creator/' };
-const cast = (site.cast || []).map((c) => ({ ...c, path: `/cast/${c.slug}/` }));
-for (const c of cast) {
-  // YouTube credits may use an older spelling of the name, so every spelling in `match` counts too.
-  const names = [c.nameEn, ...(c.match || [])].map((n) => n.toLowerCase());
-  c.episodes = newestFirst.filter((ep) => names.some((n) => (ep.description || '').toLowerCase().includes(n)));
+// The English view swaps in the English name, role, bio and facts from content/en.json.
+const baseCreator = { ...site.creator, path: '/creator/' };
+const baseCast = (site.cast || []).map((c) => ({ ...c, path: `/cast/${c.slug}/` }));
+let creator, cast, faq;
+const DEFAULT_CHIP = '2-year cinematic acting course at IFA';
+function localizePerson(p, isCreator) {
+  if (LANG !== 'en') return { ...p, nameHi: p.name };
+  const o = isCreator ? en.creator : en.cast[p.slug] || {};
+  const L = en.labels;
+  const facts = isCreator
+    ? o.facts
+    : [['Training', L.trained], ['Experience', L.experience], ...(o.selected ? [['Selected work', o.selected]] : []), ['In Gapistaan', L.inGapistaan]];
+  return { ...p, nameHi: p.name, name: p.nameEn, role: o.role || L.role, bio: o.bio, credits: o.credits || [DEFAULT_CHIP], facts };
 }
-creator.episodes = newestFirst;
 const initials = (p) => [...p.name][0];
 const photoSet = (p) => (p.photos || []).map((id) => ({ src: `/img/cast/${id}.webp`, small: `/img/cast/${id}-s.webp` }));
-for (const p of [creator, ...cast]) {
-  p.pics = photoSet(p);
-  if (!p.photo && p.pics.length) p.photo = p.pics[0].src;
+
+// FAQ answers may use {schedule}, {email}, {phone} so they never drift from the rest of the site.
+const biz = () => ({ ...(site.business || {}), ...(LANG === 'en' ? en.business : {}) });
+const fillTokens = (s) => {
+  const b = site.business || {};
+  return s
+    .replace(/\{schedule\}/g, S.schedule || '')
+    .replace(/\{email\}/g, site.contactEmail || b.email || '')
+    .replace(/\{phone\}/g, b.phoneLabel || b.phone || '');
+};
+
+function setLang(lang) {
+  LANG = lang;
+  S = lang === 'en' ? { ...site, ...en.site } : site;
+  creator = localizePerson(baseCreator, true);
+  cast = baseCast.map((c) => localizePerson(c, false));
+  for (const c of cast) {
+    // YouTube credits may use an older spelling of the name, so every spelling in `match` counts too.
+    const names = [c.nameEn, ...(c.match || [])].map((n) => n.toLowerCase());
+    c.episodes = newestFirst.filter((ep) => names.some((n) => (ep.description || '').toLowerCase().includes(n)));
+  }
+  creator.episodes = newestFirst;
+  for (const p of [creator, ...cast]) {
+    p.pics = photoSet(p);
+    p.photo = p.pics.length ? p.pics[0].src : '';
+  }
+  for (const ep of episodes) {
+    ep.custom = customs[lang][ep.id] || [];
+    // The YouTube description is Hindi/Hinglish: English pages keep only its English-script paragraphs (credits, links).
+    ep.paras = lang === 'en' ? ep.paragraphs.filter((x) => !/[\u0900-\u097F]/.test(x)) : ep.paragraphs;
+    ep.summary = summary(ep, lang === 'en' ? ep.custom : [...ep.custom, ...ep.paragraphs]);
+  }
+  faq = (S.faq || []).map(([q, a]) => [q, fillTokens(a)]);
 }
+
 const imgTag = (pic, alt, sizes, extra = '') =>
   `<img src="${esc(pic.small)}" srcset="${esc(pic.small)} 400w, ${esc(pic.src)} 800w" sizes="${sizes}" alt="${esc(alt)}" width="400" height="500" ${extra || 'loading="lazy" decoding="async"'}>`;
-const creditList = (p) => (p.credits?.length ? `<ul class="credits" aria-label="चुनिंदा काम">${p.credits.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '');
+const creditList = (p) => (p.credits?.length ? `<ul class="credits" aria-label="${T('चुनिंदा काम', 'Selected work')}">${p.credits.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '');
 const factsBlock = (p, title, id) =>
   p.facts?.length ? `<section class="block" aria-labelledby="${id}">
   <h2 class="h2" id="${id}">${title}</h2>
@@ -145,8 +206,8 @@ const factsBlock = (p, title, id) =>
 </section>` : '';
 const galleryBlock = (p) =>
   p.pics.length > 1 ? `<section class="block" aria-labelledby="gal-h">
-  <h2 class="h2" id="gal-h">तस्वीरें</h2>
-  <ul class="gallery">${p.pics.slice(1).map((x, i) => `<li>${imgTag(x, `${p.name}, तस्वीर ${i + 2}`, '(min-width: 44rem) 22vw, 45vw')}</li>`).join('')}</ul>
+  <h2 class="h2" id="gal-h">${T('तस्वीरें', 'Photos')}</h2>
+  <ul class="gallery">${p.pics.slice(1).map((x, i) => `<li>${imgTag(x, `${p.name}, ${T('तस्वीर', 'photo')} ${i + 2}`, '(min-width: 44rem) 22vw, 45vw')}</li>`).join('')}</ul>
 </section>` : '';
 const portrait = (p, fallback) =>
   p.pics.length ? imgTag(p.pics[0], p.name, '(min-width: 52rem) 20rem, 78vw', 'fetchpriority="high"').replace('<img ', '<img class="profile-pic" ') : fallback;
@@ -155,7 +216,7 @@ const epLabel = (n) => `EP ${String(n).padStart(2, '0')}`;
 
 // WhatsApp: YouTube link first, so the chat shows the YouTube preview and a tap opens the YouTube app.
 const shareMessage = (ep) =>
-  `${ep.clean}\n\nगैपिस्तान पर देखिए: https://youtu.be/${ep.id}` + (siteUrl ? `\nसारे एपिसोड: ${siteUrl}` : '');
+  `${ep.clean}\n\n${T('गैपिस्तान पर देखिए', 'Watch it on Gapistaan')}: https://youtu.be/${ep.id}` + (siteUrl ? `\n${T('सारे एपिसोड', 'All episodes')}: ${A('/')}` : '');
 const waLink = (ep) => `https://wa.me/?text=${encodeURIComponent(shareMessage(ep))}`;
 
 // ---------- structured data shared across pages ----------
@@ -163,8 +224,8 @@ const production = { '@type': 'Organization', name: site.presents || site.produc
 const personLd = (p, extra = {}) => ({
   '@type': 'Person',
   name: p.nameEn,
-  alternateName: [p.name, ...(p.aka || []), ...(p.match || [])],
-  ...(siteUrl ? { url: abs(p.path) } : {}),
+  alternateName: [p.nameHi, ...(p.aka || []), ...(p.match || [])],
+  ...(siteUrl ? { url: A(p.path) } : {}),
   ...extra,
 });
 const seriesLd = () => ({
@@ -172,7 +233,7 @@ const seriesLd = () => ({
   '@type': 'TVSeries',
   name: 'Gen Gap',
   alternateName: ['Gapistaan', 'गैपिस्तान', 'जेन गैप'],
-  ...(siteUrl ? { url: abs('/') } : {}),
+  ...(siteUrl ? { url: A('/') } : {}),
   inLanguage: 'hi',
   genre: ['Comedy', 'Satire'],
   description: site.aboutEn,
@@ -186,41 +247,45 @@ const seriesLd = () => ({
 
 const crumbsLd = (items) =>
   siteUrl
-    ? [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: abs(p) })) }]
+    ? [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: A(p) })) }]
     : [];
 
 // ---------- layout ----------
-const NAV = [
-  ['/episodes/', 'एपिसोड'],
-  ['/cast/', 'कलाकार'],
-  ['/creator/', 'क्रिएटर'],
-  ['/about/', 'बारे में'],
-  ['/#contact', 'संपर्क'],
+const navItems = () => [
+  ['/episodes/', T('एपिसोड', 'Episodes')],
+  ['/cast/', T('कलाकार', 'Cast')],
+  ['/creator/', T('क्रिएटर', 'Creator')],
+  ['/about/', T('बारे में', 'About')],
+  ['/#contact', T('संपर्क', 'Contact')],
+  ['/support/', G().nav, 'gift-link'],
 ];
 
-// FAQ answers may use {schedule}, {email}, {phone} so they never drift from the rest of the site.
-const fillTokens = (s) => {
-  const b = site.business || {};
-  return s
-    .replace(/\{schedule\}/g, site.schedule || '')
-    .replace(/\{email\}/g, site.contactEmail || b.email || '')
-    .replace(/\{phone\}/g, b.phoneLabel || b.phone || '');
-};
-const faq = (site.faq || []).map(([q, a]) => [q, fillTokens(a)]);
+// English pages: every link to an internal page gets the /en prefix (assets and the YouTube links stay as they are).
+const INTERNAL = /href="(\/(?:episodes|cast|creator|about|privacy|terms|support|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
+const localize = (html) => (LANG === 'en' ? html.replace(INTERNAL, (m, p) => `href="/en${p}"`) : html);
 
-function layout({ title, description, pathName, image, type = 'website', ld = [], body, preloadImage, noindex = false }) {
-  const url = abs(pathName);
+function layout({ title, description, pathName, image, type = 'website', ld = [], body, preloadImage, noindex = false, bilingual = false }) {
+  const url = A(pathName);
   image = image || (siteUrl ? abs('/img/og-home.jpg') : null);
-  const nav = NAV.map(([href, label]) => `<a href="${href}"${href === pathName ? ' aria-current="page"' : ''}>${label}</a>`).join('');
-  const b = site.business || {};
-  return `<!doctype html>
-<html lang="hi">
+  const nav = navItems().map(([href, label, cls]) => `<a${cls ? ` class="${cls}"` : ''} href="${href}"${href === pathName ? ' aria-current="page"' : ''}>${label}</a>`).join('');
+  const b = biz();
+  const alternates = siteUrl && !noindex
+    ? `<link rel="alternate" hreflang="hi" href="${esc(abs(pathName))}">
+<link rel="alternate" hreflang="en" href="${esc(abs('/en' + pathName))}">
+<link rel="alternate" hreflang="x-default" href="${esc(abs(pathName))}">`
+    : '';
+  // The language switch points at the same page in the other language.
+  const altHref = LANG === 'en' ? pathName : '/en' + pathName;
+  const langSwitch = noindex && bilingual ? '' : `<a class="lang" href="@@ALT@@" hreflang="${T('en', 'hi')}" lang="${T('en', 'hi')}" title="${T('Read this page in English', 'यह पेज हिंदी में पढ़ें')}">${T('English', 'हिंदी')}</a>`;
+  const html = `<!doctype html>
+<html lang="${T('hi', 'en')}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 ${url ? `<link rel="canonical" href="${esc(url)}">` : ''}
+${alternates}
 ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <meta name="theme-color" content="#0B1D24">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -231,7 +296,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : ''}
 <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${preloadImage ? `<link rel="preload" as="image" href="${esc(preloadImage)}">` : ''}
 <meta property="og:site_name" content="${esc(site.siteName)}">
-<meta property="og:locale" content="hi_IN">
+<meta property="og:locale" content="${T('hi_IN', 'en_IN')}">
 <meta property="og:type" content="${type}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
@@ -242,12 +307,13 @@ ${image ? `<meta property="og:image" content="${esc(image)}">\n<meta name="twitt
 ${ld.map(jsonLd).join('\n')}
 </head>
 <body>
-<a class="skip" href="#main">सीधे मुख्य हिस्से पर जाएँ</a>
+<a class="skip" href="#main">${T('सीधे मुख्य हिस्से पर जाएँ', 'Skip to the main content')}</a>
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू">${nav}</nav>
-    <a class="btn btn-primary btn-sm" href="${esc(site.subscribeUrl)}">सब्सक्राइब करें</a>
+    <nav class="topnav" aria-label="${T('मुख्य मेन्यू', 'Main menu')}">${nav}</nav>
+    ${langSwitch}
+    <a class="btn btn-primary btn-sm" href="${esc(site.subscribeUrl)}">${T('सब्सक्राइब करें', 'Subscribe')}</a>
   </div>
 </header>
 ${body}
@@ -255,21 +321,23 @@ ${body}
   <div class="wrap foot-grid">
     <div>
       <div class="foot-brand"><img src="/img/logo-96.webp" alt="" width="44" height="44" loading="lazy"><span>Gapistaan</span></div>
-      <p>Gen Gap हिंदी कॉमेडी सीरीज़ का घर।</p>
-      <p>${esc(site.presents)} की पेशकश, ${esc(b.city || 'लखनऊ')}</p>
+      <p>${T('Gen Gap हिंदी कॉमेडी सीरीज़ का घर।', 'Home of the Gen Gap Hindi comedy series.')}</p>
+      <p>${T(`${esc(site.presents)} की पेशकश, ${esc(b.city || 'लखनऊ')}`, `Presented by ${esc(site.presents)}, ${esc(b.city || 'Lucknow')}`)}</p>
     </div>
     <div>
-      <h2>साइट</h2>
+      <h2>${T('साइट', 'Site')}</h2>
       <ul>
-        <li><a href="/episodes/">सारे एपिसोड</a></li>
-        <li><a href="/cast/">कलाकार</a></li>
-        <li><a href="/creator/">क्रिएटर: ${esc(creator.name)}</a></li>
-        <li><a href="/about/">गैपिस्तान के बारे में</a></li>
-        <li><a href="/privacy/">प्राइवेसी</a></li>
+        <li><a href="/episodes/">${T('सारे एपिसोड', 'All episodes')}</a></li>
+        <li><a href="/cast/">${T('कलाकार', 'Cast')}</a></li>
+        <li><a href="/creator/">${T('क्रिएटर', 'Creator')}: ${esc(creator.name)}</a></li>
+        <li><a href="/about/">${T('गैपिस्तान के बारे में', 'About Gapistaan')}</a></li>
+        <li class="gift-only"><a href="/support/">${esc(G().nav)}</a></li>
+        <li><a href="/privacy/">${T('प्राइवेसी', 'Privacy')}</a></li>
+        <li><a href="/terms/">${T('नियम और वापसी नीति', 'Terms and refunds')}</a></li>
       </ul>
     </div>
     <div>
-      <h2>हमें फ़ॉलो करें</h2>
+      <h2>${T('हमें फ़ॉलो करें', 'Follow us')}</h2>
       <ul>
         <li><a href="${esc(site.channelUrl)}">YouTube: @gapistaan</a></li>
         <li><a href="${esc(site.instagramUrl)}">Instagram: @gapistaan</a></li>
@@ -277,7 +345,7 @@ ${body}
       </ul>
     </div>
     ${b.email || b.phone ? `<div>
-      <h2>बिज़नेस और कोलैब</h2>
+      <h2>${T('बिज़नेस और कोलैब', 'Business and collabs')}</h2>
       <ul>
         ${site.contactEmail ? `<li><a href="mailto:${esc(site.contactEmail)}">${esc(site.contactEmail)}</a></li>` : ''}
         ${b.email ? `<li><a href="mailto:${esc(b.email)}">${esc(b.email)}</a></li>` : ''}
@@ -286,7 +354,7 @@ ${body}
     </div>` : ''}
   </div>
   <div class="wrap foot-bottom">
-    <span>© ${new Date().getFullYear()} ${esc(site.production)}. सर्वाधिकार सुरक्षित।</span>
+    <span>© ${new Date().getFullYear()} ${esc(site.production)}. ${T('सर्वाधिकार सुरक्षित।', 'All rights reserved.')}</span>
     <span>Gapistaan is a part of ${esc(site.production)}.</span>
   </div>
 </footer>
@@ -295,15 +363,44 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
 </body>
 </html>
 `;
+  return localize(html).replace('@@ALT@@', altHref);
 }
 
 function shareButtons(ep, { stage = false } = {}) {
   const id = (k) => (stage ? ` id="stage-${k}"` : '');
   return `<div class="actions">
-        <a class="btn btn-primary"${id('yt')} href="https://www.youtube.com/watch?v=${ep.id}">YouTube पर देखें</a>
-        <a class="btn btn-wa"${id('wa')} href="${waLink(ep)}">WhatsApp पर भेजें</a>
-        <button class="btn btn-ghost js-share"${id('share')} type="button" hidden data-title="${esc(ep.clean)}" data-text="${esc(shareMessage(ep))}">और जगह शेयर करें</button>
+        <a class="btn btn-primary"${id('yt')} href="https://www.youtube.com/watch?v=${ep.id}">${T('YouTube पर देखें', 'Watch on YouTube')}</a>
+        <a class="btn btn-wa"${id('wa')} href="${waLink(ep)}">${T('WhatsApp पर भेजें', 'Share on WhatsApp')}</a>
+        <button class="btn btn-ghost js-share"${id('share')} type="button" hidden data-title="${esc(ep.clean)}" data-text="${esc(shareMessage(ep))}">${T('और जगह शेयर करें', 'Share elsewhere')}</button>
       </div>`;
+}
+
+// The applause box: a ticket-stub amount picker that opens Razorpay Checkout.
+// variant: 'home' (full), 'episode' (short, no form fields), 'cast' (for one actor).
+function giftBox({ variant = 'home', person = null, id = 'gift', pageName = '' } = {}) {
+  const g = G();
+  const fill = (s) => s.replace(/\{name\}/g, person ? person.name : '');
+  const title = variant === 'cast' ? fill(g.castTitle) : variant === 'episode' ? g.episodeTitle : g.title;
+  const text = variant === 'cast' ? fill(g.castText) : variant === 'episode' ? g.episodeText : g.text;
+  const msgs = { opening: g.opening, verifying: g.verifying, thanks: g.thanks, failed: g.failed, offline: g.offline, amountErr: g.amountErr, desc: g.desc, min: gift.min };
+  const first = gift.amounts[1].amt;
+  const fields = variant === 'episode'
+    ? ''
+    : `<div class="gift-fields">
+      <label>${esc(g.nameLabel)}<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>${esc(g.msgLabel)}<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>`;
+  return `<aside class="gift gift-${variant}" id="${id}" aria-labelledby="${id}-h" data-t="${esc(JSON.stringify(msgs))}" data-who="${esc(person ? person.nameEn : '')}" data-page="${esc(pageName)}">
+  <div class="gift-body">
+    <h2 class="gift-h" id="${id}-h">${esc(title)}</h2>
+    <p class="gift-text">${esc(text)}</p>
+    <ul class="stubs">${gift.amounts.map((a) => `<li><button type="button" class="stub${a.amt === first ? ' is-on' : ''}" data-amt="${a.amt}"><b>₹${a.amt}</b><span>${esc(a[LANG])}</span></button></li>`).join('')}</ul>
+    ${fields}
+    <p class="gift-own"><label>${esc(g.otherLabel)} <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="${first}" aria-label="${esc(g.otherLabel)}"></span></label><button type="button" class="btn btn-gold gift-go">${esc(g.btn)}</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">${esc(g.payInfo)} ${esc(g.fine)} <a href="/terms/">${esc(g.termsLink)}</a></p>
+  </div>
+</aside>`;
 }
 
 // Shared behaviour: click-to-play thumbnails, the home slider, chapters, and the phone's share sheet.
@@ -389,6 +486,45 @@ const PAGE_JS = `<script>
       b.addEventListener('click',function(){ navigator.share({title:b.dataset.title,text:b.dataset.text}).catch(function(){}); });
     });
   }
+  // The applause box, its menu link and its page text stay hidden until the server says payments are switched on.
+  if(document.querySelector('.gift,.gift-link')){
+    var on=function(){ document.documentElement.classList.add('gift-on'); };
+    var cached=false; try{ cached=sessionStorage.getItem('gift-on')==='1'; }catch(e){}
+    if(cached) on();
+    fetch('/api/status').then(function(r){ return r.json(); }).then(function(j){
+      if(j&&j.payments==='on'){ on(); try{ sessionStorage.setItem('gift-on','1'); }catch(e){} }
+      else { document.documentElement.classList.remove('gift-on'); try{ sessionStorage.removeItem('gift-on'); }catch(e){} }
+    }).catch(function(){});
+  }
+  // Applause box: pick a ticket stub, then Razorpay Checkout opens. The server decides nothing about the amount except the limits.
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+  document.querySelectorAll('.gift').forEach(function(box){
+    var T=JSON.parse(box.getAttribute('data-t')), who=box.getAttribute('data-who')||'', pg=box.getAttribute('data-page')||'';
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.gift-go');
+    var nm=box.querySelector('input[name=gname]'), msg=box.querySelector('textarea[name=gmsg]');
+    var stubs=box.querySelectorAll('.stub');
+    var say=function(m){ st.textContent=m||''; };
+    function mark(){ stubs.forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-amt')===String(+input.value)); }); }
+    stubs.forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); mark(); say(''); }); });
+    input.addEventListener('input',mark);
+    function fail(m){ go.disabled=false; say(m); }
+    go.addEventListener('click',function(){
+      var a=Math.round(+input.value);
+      if(!(a>=T.min)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true; say(T.opening);
+      post('/api/order',{amount:a,name:nm?nm.value:'',message:msg?msg.value:'',to:who,page:pg,lang:document.documentElement.lang}).then(function(o){
+        if(!o.order_id){ fail(o._status===503||o._status===404?T.offline:T.failed); return; }
+        return loadRzp().then(function(){
+          var paid=false;
+          var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'Gapistaan', description:T.desc, image:location.origin+'/img/logo-160.webp', prefill:{ name:nm?nm.value:'' }, notes:{ source:'website' }, theme:{ color:'#C93F15' },
+            handler:function(r){ paid=true; say(T.verifying); post('/api/verify',r).then(function(v){ if(v.ok){ go.disabled=false; box.classList.add('is-thanked'); say(T.thanks); } else fail(T.failed); },function(){ fail(T.failed); }); },
+            modal:{ ondismiss:function(){ if(!paid) fail(''); } } });
+          rz.open();
+        },function(){ fail(T.offline); });
+      },function(){ fail(T.offline); });
+    });
+  });
 })();
 </script>`;
 
@@ -396,7 +532,7 @@ function card(ep, { pick = null } = {}) {
   const pickAttr = pick === null ? '' : ` js-pick" data-i="${pick}`;
   return `<li><a class="ep${pickAttr}" href="${ep.path}">
   <span class="thumb"><img src="${esc(thumb(ep, 'standard'))}" srcset="${esc(srcset(ep))}" sizes="(min-width: 72rem) 19rem, (min-width: 40rem) 45vw, 80vw" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="dur">${clock(ep.sec)}</span></span>
-  <span class="ep-meta"><span class="chip">${epLabel(ep.n)}</span>${pick === null ? '' : '<span class="now">अभी चल रहा है</span>'}</span>
+  <span class="ep-meta"><span class="chip">${epLabel(ep.n)}</span>${pick === null ? '' : `<span class="now">${T('अभी चल रहा है', 'Now playing')}</span>`}</span>
   <span class="ep-title">${esc(ep.clean)}</span>
   <span class="date">${hiDate(ep.publishedAt)}</span>
 </a></li>`;
@@ -410,7 +546,7 @@ function personCard(p, { lead = false } = {}) {
       : `<span class="pic-init">${esc(initials(p))}</span>`;
   return `<li${lead ? ' class="lead-li"' : ''}><a class="person${lead ? ' lead' : ''}" href="${p.path}">
   <span class="pic">${pic}</span>
-  <span class="person-body"><span class="person-name">${esc(p.name)}</span><span class="person-en" lang="en">${esc(p.nameEn)}</span><span class="person-role">${esc(p.role)}</span></span>
+  <span class="person-body"><span class="person-name">${esc(p.name)}</span><span class="person-en" lang="${T('en', 'hi')}">${esc(T(p.nameEn, p.nameHi))}</span><span class="person-role">${esc(p.role)}</span></span>
 </a></li>`;
 }
 
@@ -419,17 +555,20 @@ ${personCard(creator, { lead: true })}
 ${cast.map((c) => personCard(c)).join('\n')}
 </ul>`;
 
+const crumbNav = (...parts) => `<nav class="crumbs" aria-label="${T('आप यहाँ हैं', 'You are here')}">${parts.join(' / ')}</nav>`;
+const homeCrumb = () => `<a href="/">${T('गैपिस्तान', 'Gapistaan')}</a>`;
+
 // ---------- home ----------
 function homePage() {
   const latest = newestFirst[0];
-  const b = site.business || {};
+  const b = biz();
 
   const stage = latest
     ? `<div class="stage" id="stage">
         <div class="stage-frame">
           <div class="bulbs" aria-hidden="true"></div>
           <span class="badge" id="stage-badge">NEW EPISODE</span>
-          <div id="stage-media"><a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="एपिसोड यहीं चलाएँ: ${esc(latest.clean)}">
+          <div id="stage-media"><a class="js-play play" href="${latest.path}" data-id="${latest.id}" data-title="${esc(latest.clean)}" aria-label="${T('एपिसोड यहीं चलाएँ', 'Play the episode here')}: ${esc(latest.clean)}">
             <img src="${esc(thumb(latest, 'maxres'))}" srcset="${esc(srcset(latest))}" sizes="(min-width: 64rem) 44rem, 92vw" alt="" width="1280" height="720" fetchpriority="high">
             <span class="play-btn" aria-hidden="true"></span>
             <span class="dur" aria-hidden="true">${clock(latest.sec)}</span>
@@ -449,19 +588,19 @@ function homePage() {
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <h2 class="h2" id="eps-h">सारे एपिसोड</h2>
-        <p class="lede">अब तक ${newestFirst.length} एपिसोड। किसी पर भी दबाइए, वो ऊपर बड़े प्लेयर में चलेगा।</p>
+        <h2 class="h2" id="eps-h">${T('सारे एपिसोड', 'All episodes')}</h2>
+        <p class="lede">${T(`अब तक ${newestFirst.length} एपिसोड। किसी पर भी दबाइए, वो ऊपर बड़े प्लेयर में चलेगा।`, `${newestFirst.length} episodes so far. Tap any one and it plays in the big player above.`)}</p>
       </div>
-      <div class="reel-nav"><button class="reel-btn" type="button" data-dir="-1" aria-label="पिछले एपिसोड दिखाओ">‹</button><button class="reel-btn" type="button" data-dir="1" aria-label="आगे के एपिसोड दिखाओ">›</button></div>
+      <div class="reel-nav"><button class="reel-btn" type="button" data-dir="-1" aria-label="${T('पिछले एपिसोड दिखाओ', 'Show earlier episodes')}">‹</button><button class="reel-btn" type="button" data-dir="1" aria-label="${T('आगे के एपिसोड दिखाओ', 'Show more episodes')}">›</button></div>
     </div>
     <ul class="reel" id="reel">
 ${newestFirst.map((ep, i) => card(ep, { pick: i })).join('\n')}
     </ul>
-    <p class="more-link"><a href="/episodes/">सारे एपिसोड एक साथ देखें</a></p>
+    <p class="more-link"><a href="/episodes/">${T('सारे एपिसोड एक साथ देखें', 'See all episodes together')}</a></p>
   </div>
 </section>
 <script id="ep-data" type="application/json">${JSON.stringify(
-      newestFirst.map((ep) => ({ id: ep.id, ep: epLabel(ep.n), title: ep.clean, path: ep.path, date: `${hiDate(ep.publishedAt)}, ${minutes(ep.sec)}`, wa: waLink(ep), share: shareMessage(ep) })),
+      newestFirst.map((ep) => ({ id: ep.id, ep: epLabel(ep.n), title: ep.clean, path: lp(ep.path), date: `${hiDate(ep.publishedAt)}, ${minutes(ep.sec)}`, wa: waLink(ep), share: shareMessage(ep) })),
     ).replace(/</g, '\\u003c')}</script>`
     : '';
 
@@ -478,19 +617,19 @@ ${shorts.slice(0, 8).map((s) => `<li><a class="ep" href="https://www.youtube.com
     .map((x) => `<li class="board">
       ${x.logo ? `<img class="board-logo" src="${esc(x.logo)}" alt="" width="60" height="60" loading="lazy">` : ''}
       <span class="board-naam">${esc(x.name)}</span>
-      <span class="board-kaam">${esc(x.label)}</span>
-      <span class="board-links">${x.url ? `<a href="${esc(x.url)}">वेबसाइट</a>` : ''}${x.youtube ? `<a href="${esc(x.youtube)}">YouTube</a>` : ''}</span>
+      <span class="board-kaam">${esc(LANG === 'en' ? en.brands[x.name] || x.label : x.label)}</span>
+      <span class="board-links">${x.url ? `<a href="${esc(x.url)}">${T('वेबसाइट', 'Website')}</a>` : ''}${x.youtube ? `<a href="${esc(x.youtube)}">YouTube</a>` : ''}</span>
     </li>`)
     .join('\n');
 
   const faqHtml = faq.length
     ? `<section class="sec sec-alt" id="faq" aria-labelledby="faq-h">
   <div class="wrap">
-    <h2 class="h2" id="faq-h">गैपिस्तान से जुड़े सवाल</h2>
+    <h2 class="h2" id="faq-h">${T('गैपिस्तान से जुड़े सवाल', 'Questions about Gapistaan')}</h2>
     <div class="faq">
 ${faq.map(([q, a], i) => `      <details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('\n')}
     </div>
-    <p class="more-link"><a href="/about/">गैपिस्तान कैसे बनता है, पूरी कहानी पढ़ें</a></p>
+    <p class="more-link"><a href="/about/">${T('गैपिस्तान कैसे बनता है, पूरी कहानी पढ़ें', 'How Gapistaan is made: read the full story')}</a></p>
   </div>
 </section>`
     : '';
@@ -500,13 +639,13 @@ ${faq.map(([q, a], i) => `      <details${i === 0 ? ' open' : ''}><summary>${esc
   <div class="wrap">
     <div class="contact">
       <div>
-        <h2 class="h2" id="contact-h">ब्रांड कोलैब और बिज़नेस</h2>
-        <p>स्पॉन्सरशिप, ब्रांड इंटीग्रेशन, प्रमोशन या किसी नए प्रोजेक्ट के लिए सीधे बात कीजिए। गैपिस्तान ${esc(site.presents)} की पेशकश है।</p>
+        <h2 class="h2" id="contact-h">${T('ब्रांड कोलैब और बिज़नेस', 'Brand collabs and business')}</h2>
+        <p>${T(`स्पॉन्सरशिप, ब्रांड इंटीग्रेशन, प्रमोशन या किसी नए प्रोजेक्ट के लिए सीधे बात कीजिए। गैपिस्तान ${esc(site.presents)} की पेशकश है।`, `For sponsorship, brand integration, promotion or a new project, talk to us directly. Gapistaan is presented by ${esc(site.presents)}.`)}</p>
       </div>
       <div class="actions">
-        ${email ? `<a class="btn btn-primary" href="mailto:${esc(email)}?subject=${encodeURIComponent('Gapistaan collaboration')}">ईमेल भेजें</a>` : ''}
-        ${b.phone ? `<a class="btn btn-ghost" href="tel:${esc(b.phone)}">कॉल करें</a>` : ''}
-        <a class="btn btn-ghost" href="${esc(site.instagramUrl)}">Instagram पर मैसेज</a>
+        ${email ? `<a class="btn btn-primary" href="mailto:${esc(email)}?subject=${encodeURIComponent('Gapistaan collaboration')}">${T('ईमेल भेजें', 'Send an email')}</a>` : ''}
+        ${b.phone ? `<a class="btn btn-ghost" href="tel:${esc(b.phone)}">${T('कॉल करें', 'Call us')}</a>` : ''}
+        <a class="btn btn-ghost" href="${esc(site.instagramUrl)}">${T('Instagram पर मैसेज', 'Message on Instagram')}</a>
       </div>
     </div>
   </div>
@@ -517,16 +656,16 @@ ${faq.map(([q, a], i) => `      <details${i === 0 ? ' open' : ''}><summary>${esc
   <div class="wrap hero-in">
     <div class="hero-text">
       <span class="logo-stage"><span class="coin">
-        <img class="hero-logo" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="190px" alt="Gapistaan का लोगो: चाचा" width="190" height="190" fetchpriority="high">
+        <img class="hero-logo" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="190px" alt="${T('Gapistaan का लोगो: चाचा', 'Gapistaan logo: Chacha')}" width="190" height="190" fetchpriority="high">
         <img class="hero-logo coin-back" src="/img/logo-340.webp" srcset="/img/logo-160.webp 160w, /img/logo-340.webp 340w, /img/logo-520.webp 520w" sizes="190px" alt="" aria-hidden="true" width="190" height="190">
       </span></span>
-      <p class="presents"><a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> प्रस्तुत करता है</p>
+      <p class="presents">${T(`<a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> प्रस्तुत करता है`, `<a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> presents`)}</p>
       <h1 class="hero-name"><span class="latin">Gapistaan</span><span class="hi">गैपिस्तान</span></h1>
-      <p class="hero-line">${esc(site.heroLine)}</p>
-      <p class="hero-sub">${esc(site.heroSub)}</p>
-      <p class="schedule">${esc(site.schedule)}</p>
+      <p class="hero-line">${esc(S.heroLine)}</p>
+      <p class="hero-sub">${esc(S.heroSub)}</p>
+      <p class="schedule">${esc(S.schedule)}</p>
       <div class="actions">
-        <a class="btn btn-ghost" href="${esc(site.subscribeUrl)}">YouTube पर सब्सक्राइब करें</a>
+        <a class="btn btn-ghost" href="${esc(site.subscribeUrl)}">${T('YouTube पर सब्सक्राइब करें', 'Subscribe on YouTube')}</a>
       </div>
     </div>
     ${stage}
@@ -538,25 +677,30 @@ ${shortsHtml}
   <div class="wrap about-in">
     <div>
       <img class="gengap" src="/img/gengap-440.webp" srcset="/img/gengap-440.webp 440w, /img/gengap-880.webp 880w" sizes="300px" alt="Gen Gap" width="300" height="101" loading="lazy">
-      <h2 class="h2" id="about-h">गैपिस्तान क्या है?</h2>
-      ${site.about.map((p) => `<p>${esc(p)}</p>`).join('\n      ')}
-      ${site.aboutEn ? `<p class="about-en" lang="en">${esc(site.aboutEn)}</p>` : ''}
-      <p class="prod-note"><strong>${esc(site.presents)}</strong> की पेशकश। परिकल्पना और निर्देशन: <a href="/creator/">${esc(creator.name)}</a></p>
+      <h2 class="h2" id="about-h">${T('गैपिस्तान क्या है?', 'What is Gapistaan?')}</h2>
+      ${S.about.map((p) => `<p>${esc(p)}</p>`).join('\n      ')}
+      ${LANG === 'hi' && site.aboutEn ? `<p class="about-en" lang="en">${esc(site.aboutEn)}</p>` : ''}
+      <p class="prod-note">${T(`<strong>${esc(site.presents)}</strong> की पेशकश। परिकल्पना और निर्देशन: <a href="/creator/">${esc(creator.name)}</a>`, `Presented by <strong>${esc(site.presents)}</strong>. Concept and direction: <a href="/creator/">${esc(creator.name)}</a>`)}</p>
     </div>
-    <img class="chacha" src="/img/chacha-560.webp" srcset="/img/chacha-560.webp 560w, /img/chacha-1040.webp 1040w" sizes="(min-width: 58rem) 470px, 92vw" alt="चाचा, हाथ में चार्जर का प्लग और केबल लिए" width="470" height="470" loading="lazy">
+    <img class="chacha" src="/img/chacha-560.webp" srcset="/img/chacha-560.webp 560w, /img/chacha-1040.webp 1040w" sizes="(min-width: 58rem) 470px, 92vw" alt="${T('चाचा, हाथ में चार्जर का प्लग और केबल लिए', 'Chacha, holding a charger plug and cable')}" width="470" height="470" loading="lazy">
   </div>
 </section>
 <section class="sec sec-alt" id="cast" aria-labelledby="cast-h">
   <div class="wrap">
-    <h2 class="h2" id="cast-h">कलाकार और टीम</h2>
-    <p class="lede">किसी की भी फ़ोटो या नाम पर दबाइए और उनके बारे में पढ़िए।</p>
+    <h2 class="h2" id="cast-h">${T('कलाकार और टीम', 'Cast and team')}</h2>
+    <p class="lede">${T('किसी की भी फ़ोटो या नाम पर दबाइए और उनके बारे में पढ़िए।', 'Tap anyone\'s photo or name to read about them.')}</p>
     ${peopleList()}
   </div>
 </section>
-${boards ? `<section class="sec" aria-labelledby="brands-h">
+<section class="sec" aria-label="${esc(G().short)}">
   <div class="wrap">
-    <h2 class="h2" id="brands-h">${esc(site.presents)} परिवार</h2>
-    <p class="lede">गैपिस्तान ${esc(site.presents)} का हिस्सा है। हमारे दूसरे चैनल और संस्थान:</p>
+    ${giftBox({ variant: 'home', id: 'gift', pageName: 'home' })}
+  </div>
+</section>
+${boards ? `<section class="sec sec-alt" aria-labelledby="brands-h">
+  <div class="wrap">
+    <h2 class="h2" id="brands-h">${T(`${esc(site.presents)} परिवार`, `The ${esc(site.presents)} family`)}</h2>
+    <p class="lede">${T(`गैपिस्तान ${esc(site.presents)} का हिस्सा है। हमारे दूसरे चैनल और संस्थान:`, `Gapistaan is part of ${esc(site.presents)}. Our other channels and institutes:`)}</p>
     <ul class="boards">
 ${boards}
     </ul>
@@ -568,13 +712,13 @@ ${contactHtml}
 
   const ld = siteUrl
     ? [
-        { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: ['Gapistaan', 'Gapistan', 'गैपिस्तान', 'Gen Gap'], url: abs('/'), inLanguage: 'hi' },
+        { '@context': 'https://schema.org', '@type': 'WebSite', name: site.siteName, alternateName: ['Gapistaan', 'Gapistan', 'गैपिस्तान', 'Gen Gap'], url: A('/'), inLanguage: LANG },
         {
           '@context': 'https://schema.org',
           '@type': 'Organization',
           name: 'Gapistaan',
           alternateName: 'गैपिस्तान',
-          url: abs('/'),
+          url: A('/'),
           logo: abs('/img/logo-520.webp'),
           sameAs: [site.channelUrl, site.instagramUrl],
           parentOrganization: { ...production, sameAs: (site.brands || []).filter((x) => x.name === site.presents).map((x) => x.youtube) },
@@ -588,8 +732,8 @@ ${contactHtml}
     : [];
 
   return layout({
-    title: site.homeTitle,
-    description: site.homeDescription,
+    title: S.homeTitle,
+    description: S.homeDescription,
     pathName: '/',
     image: siteUrl ? abs('/img/og-home.jpg') : latest ? thumb(latest, 'maxres') : null,
     ld,
@@ -603,7 +747,7 @@ function episodePage(ep) {
   const idx = episodes.indexOf(ep);
   const prev = episodes[idx - 1];
   const next = episodes[idx + 1];
-  const pageUrl = abs(ep.path);
+  const pageUrl = A(ep.path);
   const watchUrl = `https://www.youtube.com/watch?v=${ep.id}`;
   const embed = `https://www.youtube.com/embed/${ep.id}?rel=0`;
   const more = newestFirst.filter((e) => e !== ep).slice(0, 3);
@@ -611,7 +755,7 @@ function episodePage(ep) {
 
   const chaptersHtml = ep.chapters.length
     ? `<section class="block" aria-labelledby="ch-h">
-  <h2 class="h2" id="ch-h">इस एपिसोड के हिस्से</h2>
+  <h2 class="h2" id="ch-h">${T('इस एपिसोड के हिस्से', 'Parts of this episode')}</h2>
   <ol class="chapters">
 ${ep.chapters.map((c) => `<li><a href="${watchUrl}&amp;t=${c.t}s" data-t="${c.t}"><span class="t">${clock(c.t)}</span><span>${esc(c.label)}</span></a></li>`).join('\n')}
   </ol>
@@ -619,27 +763,27 @@ ${ep.chapters.map((c) => `<li><a href="${watchUrl}&amp;t=${c.t}s" data-t="${c.t}
     : '';
 
   const customHtml = ep.custom.length
-    ? `<section class="block prose" aria-labelledby="note-h"><h2 class="h2" id="note-h">इस एपिसोड में क्या है</h2>${renderParagraphs(ep.custom)}</section>`
+    ? `<section class="block prose" aria-labelledby="note-h"><h2 class="h2" id="note-h">${T('इस एपिसोड में क्या है', 'What happens in this episode')}</h2>${renderParagraphs(ep.custom)}</section>`
     : '';
 
-  const castHtml = `<section class="block" aria-labelledby="ec-h"><h2 class="h2" id="ec-h">इस एपिसोड में</h2><ul class="people">
+  const castHtml = `<section class="block" aria-labelledby="ec-h"><h2 class="h2" id="ec-h">${T('इस एपिसोड में', 'In this episode')}</h2><ul class="people">
 ${personCard(creator)}
 ${inThis.map((c) => personCard(c)).join('\n')}
 </ul></section>`;
 
-  const descHtml = ep.paragraphs.length
-    ? `<section class="block prose" aria-labelledby="desc-h"><h2 class="h2" id="desc-h">एपिसोड के बारे में</h2>${renderParagraphs(ep.paragraphs)}</section>`
+  const descHtml = ep.paras.length
+    ? `<section class="block prose" aria-labelledby="desc-h"><h2 class="h2" id="desc-h">${T('एपिसोड के बारे में', 'About the episode')}</h2>${renderParagraphs(ep.paras)}</section>`
     : '';
 
   const prevNext = prev || next
-    ? `<nav class="prevnext" aria-label="पिछला और अगला एपिसोड">
-  ${prev ? `<a class="pn" href="${prev.path}"><span class="pn-k">पिछला एपिसोड</span><span class="pn-t">${esc(prev.clean)}</span></a>` : ''}
-  ${next ? `<a class="pn pn-next" href="${next.path}"><span class="pn-k">अगला एपिसोड</span><span class="pn-t">${esc(next.clean)}</span></a>` : ''}
+    ? `<nav class="prevnext" aria-label="${T('पिछला और अगला एपिसोड', 'Previous and next episode')}">
+  ${prev ? `<a class="pn" href="${prev.path}"><span class="pn-k">${T('पिछला एपिसोड', 'Previous episode')}</span><span class="pn-t">${esc(prev.clean)}</span></a>` : ''}
+  ${next ? `<a class="pn pn-next" href="${next.path}"><span class="pn-k">${T('अगला एपिसोड', 'Next episode')}</span><span class="pn-t">${esc(next.clean)}</span></a>` : ''}
 </nav>`
     : '';
 
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / <a href="/episodes/">एपिसोड</a> / ${epLabel(ep.n)}</nav>
+${crumbNav(homeCrumb(), `<a href="/episodes/">${T('एपिसोड', 'Episodes')}</a>`, epLabel(ep.n))}
 <h1 class="page-h1">${esc(ep.clean)}</h1>
 <p class="meta"><span class="chip">${epLabel(ep.n)}</span><span>${hiDate(ep.publishedAt)}</span><span>${minutes(ep.sec)}</span></p>
 <div class="player"><iframe id="player" src="${embed}" data-src="${embed}" title="${esc(ep.clean)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
@@ -647,9 +791,10 @@ ${shareButtons(ep)}
 ${customHtml}
 ${chaptersHtml}
 ${castHtml}
+<div class="block">${giftBox({ variant: 'episode', id: 'gift', pageName: `episode ${epLabel(ep.n)}` })}</div>
 ${descHtml}
 ${prevNext}
-${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" id="more-h">और एपिसोड</h2><ul class="grid">${more.map((e) => card(e)).join('\n')}</ul></section>` : ''}
+${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" id="more-h">${T('और एपिसोड', 'More episodes')}</h2><ul class="grid">${more.map((e) => card(e)).join('\n')}</ul></section>` : ''}
 </main>`;
 
   const video = {
@@ -677,21 +822,10 @@ ${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" 
       url: `${pageUrl}?t=${c.t}`,
     }));
   }
-  const ld = [video];
-  if (siteUrl) {
-    ld.push({
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'गैपिस्तान', item: abs('/') },
-        { '@type': 'ListItem', position: 2, name: 'एपिसोड', item: abs('/episodes/') },
-        { '@type': 'ListItem', position: 3, name: ep.clean, item: pageUrl },
-      ],
-    });
-  }
+  const ld = [video, ...crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('एपिसोड', 'Episodes'), '/episodes/'], [ep.clean, ep.path]])];
 
   return layout({
-    title: `${ep.clean} | Gen Gap ${epLabel(ep.n)} | गैपिस्तान`,
+    title: `${ep.clean} | Gen Gap ${epLabel(ep.n)} | ${T('गैपिस्तान', 'Gapistaan')}`,
     description: ep.summary,
     pathName: ep.path,
     image: thumb(ep, 'maxres'),
@@ -703,22 +837,22 @@ ${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" 
 
 function episodesPage() {
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / सारे एपिसोड</nav>
-<h1 class="page-h1">Gen Gap: गैपिस्तान के सारे एपिसोड</h1>
-<p class="lede">अब तक ${newestFirst.length} एपिसोड, सबसे नया सबसे पहले।</p>
+${crumbNav(homeCrumb(), T('सारे एपिसोड', 'All episodes'))}
+<h1 class="page-h1">${T('Gen Gap: गैपिस्तान के सारे एपिसोड', 'Gen Gap: all Gapistaan episodes')}</h1>
+<p class="lede">${T(`अब तक ${newestFirst.length} एपिसोड, सबसे नया सबसे पहले।`, `${newestFirst.length} episodes so far, newest first.`)}</p>
 <ul class="grid">
 ${newestFirst.map((ep) => card(ep)).join('\n')}
 </ul>
 </main>`;
   return layout({
-    title: `सारे एपिसोड | Gen Gap हिंदी कॉमेडी | Gapistaan गैपिस्तान`,
-    description: `Gen Gap के सारे ${newestFirst.length} एपिसोड एक जगह: चाचा बनाम Gen Z की improvised हिंदी कॉमेडी, ${site.presents} की पेशकश।`,
+    title: T('सारे एपिसोड | Gen Gap हिंदी कॉमेडी | Gapistaan गैपिस्तान', 'All episodes | Gen Gap Hindi comedy | Gapistaan'),
+    description: T(`Gen Gap के सारे ${newestFirst.length} एपिसोड एक जगह: चाचा बनाम Gen Z की improvised हिंदी कॉमेडी, ${site.presents} की पेशकश।`, `All ${newestFirst.length} Gen Gap episodes in one place: improvised Hindi comedy, Chacha vs Gen Z, presented by ${site.presents}.`),
     pathName: '/episodes/',
     image: siteUrl ? abs('/img/og-home.jpg') : null,
     ld: siteUrl
       ? [
-          { ...seriesLd(), episode: newestFirst.map((ep) => ({ '@type': 'TVEpisode', name: ep.clean, episodeNumber: ep.n, url: abs(ep.path), datePublished: ep.publishedAt })) },
-          ...crumbsLd([['गैपिस्तान', '/'], ['सारे एपिसोड', '/episodes/']]),
+          { ...seriesLd(), episode: newestFirst.map((ep) => ({ '@type': 'TVEpisode', name: ep.clean, episodeNumber: ep.n, url: A(ep.path), datePublished: ep.publishedAt })) },
+          ...crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('सारे एपिसोड', 'All episodes'), '/episodes/']]),
         ]
       : [],
     body,
@@ -727,33 +861,39 @@ ${newestFirst.map((ep) => card(ep)).join('\n')}
 
 // ---------- people ----------
 function episodeMiniList(list) {
-  return list.length ? `<ul class="grid">${list.slice(0, 6).map((e) => card(e)).join('\n')}</ul>${list.length > 6 ? '<p class="more-link"><a href="/episodes/">सारे एपिसोड देखें</a></p>' : ''}` : '<p class="muted">एपिसोड की जानकारी जल्द जोड़ी जाएगी।</p>';
+  return list.length
+    ? `<ul class="grid">${list.slice(0, 6).map((e) => card(e)).join('\n')}</ul>${list.length > 6 ? `<p class="more-link"><a href="/episodes/">${T('सारे एपिसोड देखें', 'See all episodes')}</a></p>` : ''}`
+    : `<p class="muted">${T('एपिसोड की जानकारी जल्द जोड़ी जाएगी।', 'Episode details will be added soon.')}</p>`;
 }
 
 function creatorPage() {
   const p = creator;
-  const pic = portrait(p, `<img class="profile-pic profile-art" src="/img/chacha-560.webp" alt="${esc(p.name)}, चाचा के रूप में (इलस्ट्रेशन)" width="560" height="560">`);
+  const aka = (p.aka || [])[0] || '';
+  const pic = portrait(p, `<img class="profile-pic profile-art" src="/img/chacha-560.webp" alt="${esc(p.name)}, ${T('चाचा के रूप में (इलस्ट्रेशन)', 'as Chacha (illustration)')}" width="560" height="560">`);
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / क्रिएटर</nav>
+${crumbNav(homeCrumb(), T('क्रिएटर', 'Creator'))}
 <div class="profile">
   ${pic}
   <div>
     <h1 class="page-h1">${esc(p.name)}</h1>
-    <p class="aka">${esc(p.nameEn)}. फ़िल्मों में: ${esc((p.aka || [])[0] || '')}</p>
+    <p class="aka">${esc(T(p.nameEn, p.nameHi))}. ${T('फ़िल्मों में', 'In films')}: ${esc(aka)}</p>
     <p class="role-line">${esc(p.role)}</p>
     ${creditList(p)}
     <div class="link-row">${(p.links || []).map(([l, u]) => `<a class="btn btn-ghost btn-sm" href="${esc(u)}">${esc(l)}</a>`).join('')}</div>
   </div>
 </div>
-<section class="prose" aria-label="परिचय">${renderParagraphs(p.bio || [])}</section>
-${factsBlock(p, 'बायोडाटा', 'facts-h')}
+<section class="prose" aria-label="${T('परिचय', 'About')}">${renderParagraphs(p.bio || [])}</section>
+${factsBlock(p, T('बायोडाटा', 'Biodata'), 'facts-h')}
 ${galleryBlock(p)}
-<section class="block" aria-labelledby="pe-h"><h2 class="h2" id="pe-h">गैपिस्तान के ताज़ा एपिसोड</h2>${episodeMiniList(p.episodes)}</section>
-<section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">गैपिस्तान की टीम</h2><ul class="people">${cast.map((c) => personCard(c)).join('\n')}</ul></section>
+<section class="block" aria-labelledby="pe-h"><h2 class="h2" id="pe-h">${T('गैपिस्तान के ताज़ा एपिसोड', 'Latest Gapistaan episodes')}</h2>${episodeMiniList(p.episodes)}</section>
+<section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">${T('गैपिस्तान की टीम', 'The Gapistaan team')}</h2><ul class="people">${cast.map((c) => personCard(c)).join('\n')}</ul></section>
 </main>`;
   return layout({
-    title: `${p.name} (${p.nameEn}, ${(p.aka || [])[0] || ''}) | Gapistaan के क्रिएटर और डायरेक्टर`,
-    description: `${p.name} उर्फ़ ${(p.aka || [])[0] || ''}: गैपिस्तान (Gen Gap) के क्रिएटर, डायरेक्टर और चाचा। दबंग सरकार और विद्यापीठ के निर्देशक, Indian Films Academy और PICHCHRAPA के संस्थापक।`,
+    title: T(`${p.name} (${p.nameEn}, ${aka}) | Gapistaan के क्रिएटर और डायरेक्टर`, `${p.name} (${aka}) | Creator and director of Gapistaan`),
+    description: T(
+      `${p.name} उर्फ़ ${aka}: गैपिस्तान (Gen Gap) के क्रिएटर, डायरेक्टर और चाचा। दबंग सरकार और विद्यापीठ के निर्देशक, Indian Films Academy और PICHCHRAPA के संस्थापक।`,
+      `${p.name}, also known as ${aka}: creator, director and Chacha of Gapistaan (Gen Gap). Director of Dabang Sarkar and Vidyapeeth, founder of Indian Films Academy and PICHCHRAPA.`,
+    ),
     pathName: p.path,
     image: siteUrl ? abs(p.photo || '/img/chacha-1040.webp') : null,
     preloadImage: p.pics[0]?.src,
@@ -770,7 +910,7 @@ ${galleryBlock(p)}
           image: siteUrl ? abs(p.photo || '/img/chacha-1040.webp') : undefined,
         }),
       },
-      ...crumbsLd([['गैपिस्तान', '/'], ['क्रिएटर', '/creator/']]),
+      ...crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('क्रिएटर', 'Creator'), '/creator/']]),
     ],
     body,
   });
@@ -778,17 +918,20 @@ ${galleryBlock(p)}
 
 function castIndexPage() {
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / कलाकार</nav>
-<h1 class="page-h1">गैपिस्तान के कलाकार और टीम</h1>
-<p class="lede">Gen Gap के सारे कलाकार पेशेवर अभिनेता हैं और Indian Films Academy, लखनऊ से दो साल का सिनेमैटिक एक्टिंग कोर्स करके आए हैं। हर एपिसोड improvised होता है, यानी हर डायलॉग इन्हीं का। किसी की भी फ़ोटो पर क्लिक करके उनका पूरा परिचय पढ़िए।</p>
+${crumbNav(homeCrumb(), T('कलाकार', 'Cast'))}
+<h1 class="page-h1">${T('गैपिस्तान के कलाकार और टीम', 'The Gapistaan cast and team')}</h1>
+<p class="lede">${T(
+    'Gen Gap के सारे कलाकार पेशेवर अभिनेता हैं और Indian Films Academy, लखनऊ से दो साल का सिनेमैटिक एक्टिंग कोर्स करके आए हैं। हर एपिसोड improvised होता है, यानी हर डायलॉग इन्हीं का। किसी की भी फ़ोटो पर क्लिक करके उनका पूरा परिचय पढ़िए।',
+    'Everyone in the Gen Gap cast is a professional actor who has done a two-year cinematic acting course at Indian Films Academy, Lucknow. Every episode is improvised, which means every line is theirs. Click anyone\'s photo to read their full profile.',
+  )}</p>
 ${peopleList()}
 </main>`;
   return layout({
-    title: 'कलाकार और टीम | Gen Gap हिंदी कॉमेडी | Gapistaan गैपिस्तान',
-    description: `गैपिस्तान (Gen Gap) के कलाकार: ${[creator, ...cast].map((c) => c.name).join(', ')}।`,
+    title: T('कलाकार और टीम | Gen Gap हिंदी कॉमेडी | Gapistaan गैपिस्तान', 'Cast and team | Gen Gap Hindi comedy | Gapistaan'),
+    description: T(`गैपिस्तान (Gen Gap) के कलाकार: ${[creator, ...cast].map((c) => c.name).join(', ')}।`, `The cast of Gapistaan (Gen Gap): ${[creator, ...cast].map((c) => c.name).join(', ')}.`),
     pathName: '/cast/',
     image: siteUrl ? abs('/img/og-home.jpg') : null,
-    ld: crumbsLd([['गैपिस्तान', '/'], ['कलाकार', '/cast/']]),
+    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('कलाकार', 'Cast'), '/cast/']]),
     body,
   });
 }
@@ -797,29 +940,33 @@ function castPage(c) {
   const pic = portrait(c, `<div class="profile-initials" aria-hidden="true">${esc(initials(c))}</div>`);
   const bio = c.bio?.length
     ? c.bio
-    : [`${c.name} गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार हैं, जहाँ हर सीन बिना स्क्रिप्ट के, improvisation से बनता है। वे लखनऊ के Indian Films Academy से प्रशिक्षित हैं।`];
-  const work = (c.credits || []).filter((x) => !x.startsWith('IFA')).join(', ');
+    : [T(`${c.name} गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार हैं, जहाँ हर सीन बिना स्क्रिप्ट के, improvisation से बनता है। वे लखनऊ के Indian Films Academy से प्रशिक्षित हैं।`, `${c.name} is part of the cast of Gapistaan's Hindi comedy series Gen Gap, where every scene is improvised with no script. Trained at Indian Films Academy, Lucknow.`)];
+  const work = (c.credits || []).filter((x) => !x.startsWith('IFA') && !x.startsWith('2-year')).join(', ');
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / <a href="/cast/">कलाकार</a> / ${esc(c.name)}</nav>
+${crumbNav(homeCrumb(), `<a href="/cast/">${T('कलाकार', 'Cast')}</a>`, esc(c.name))}
 <div class="profile">
   ${pic}
   <div>
     <h1 class="page-h1">${esc(c.name)}</h1>
-    <p class="aka" lang="en">${esc(c.nameEn)}</p>
+    <p class="aka" lang="${T('en', 'hi')}">${esc(T(c.nameEn, c.nameHi))}</p>
     <p class="role-line">${esc(c.role)}, Gen Gap</p>
     ${creditList(c)}
     ${c.instagram ? `<div class="link-row"><a class="btn btn-ghost btn-sm" href="${esc(c.instagram)}">Instagram</a></div>` : ''}
   </div>
 </div>
-<section class="prose" aria-label="परिचय">${renderParagraphs(bio)}</section>
-${factsBlock(c, 'एक नज़र में', 'cf-h')}
+<section class="prose" aria-label="${T('परिचय', 'About')}">${renderParagraphs(bio)}</section>
+${factsBlock(c, T('एक नज़र में', 'At a glance'), 'cf-h')}
 ${galleryBlock(c)}
-<section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">${esc(c.name)} के एपिसोड</h2>${episodeMiniList(c.episodes)}</section>
-<section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">बाकी टीम</h2><ul class="people">${personCard(creator)}${cast.filter((x) => x !== c).map((x) => personCard(x)).join('\n')}</ul></section>
+<section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">${T(`${esc(c.name)} के एपिसोड`, `Episodes with ${esc(c.name)}`)}</h2>${episodeMiniList(c.episodes)}</section>
+<div class="block">${giftBox({ variant: 'cast', person: c, id: 'gift', pageName: `cast ${c.nameEn}` })}</div>
+<section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">${T('बाकी टीम', 'The rest of the team')}</h2><ul class="people">${personCard(creator)}${cast.filter((x) => x !== c).map((x) => personCard(x)).join('\n')}</ul></section>
 </main>`;
   return layout({
-    title: `${c.name} (${c.nameEn}) | Gen Gap कलाकार | Gapistaan गैपिस्तान`,
-    description: `${c.name} (${c.nameEn}), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के पेशेवर कलाकार। Indian Films Academy, लखनऊ से सिनेमैटिक एक्टिंग का दो साल का कोर्स${work ? `; काम: ${work}` : ''}।`,
+    title: T(`${c.name} (${c.nameEn}) | Gen Gap कलाकार | Gapistaan गैपिस्तान`, `${c.name} | Gen Gap cast | Gapistaan`),
+    description: T(
+      `${c.name} (${c.nameEn}), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के पेशेवर कलाकार। Indian Films Academy, लखनऊ से सिनेमैटिक एक्टिंग का दो साल का कोर्स${work ? `; काम: ${work}` : ''}।`,
+      `${c.name} (${c.nameHi}), professional actor in Gapistaan's Hindi comedy series Gen Gap. Two-year cinematic acting course at Indian Films Academy, Lucknow${work ? `; work: ${work}` : ''}.`,
+    ),
     pathName: c.path,
     image: c.photo ? (siteUrl ? abs(c.photo) : c.photo) : siteUrl ? abs('/img/og-home.jpg') : null,
     preloadImage: c.pics[0]?.src,
@@ -834,7 +981,7 @@ ${galleryBlock(c)}
           ...(c.photo && siteUrl ? { image: abs(c.photo) } : {}),
         }),
       },
-      ...crumbsLd([['गैपिस्तान', '/'], ['कलाकार', '/cast/'], [c.name, c.path]]),
+      ...crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('कलाकार', 'Cast'), '/cast/'], [c.name, c.path]]),
     ],
     body,
   });
@@ -842,41 +989,98 @@ ${galleryBlock(c)}
 
 function aboutPage() {
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / बारे में</nav>
-<h1 class="page-h1">गैपिस्तान और Gen Gap के बारे में</h1>
-<p class="lede">${esc(site.heroLine)} ${esc(site.heroSub)}</p>
+${crumbNav(homeCrumb(), T('बारे में', 'About'))}
+<h1 class="page-h1">${T('गैपिस्तान और Gen Gap के बारे में', 'About Gapistaan and Gen Gap')}</h1>
+<p class="lede">${esc(S.heroLine)} ${esc(S.heroSub)}</p>
 <section class="block prose" aria-labelledby="story-h">
-  <h2 class="h2" id="story-h">कहानी क्या है</h2>
-  ${site.about.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
-  <p>एक तरफ़ चाचा हैं, जिनकी हर बात "हमारे टाइम में" से शुरू होती है। दूसरी तरफ़ Gen Z लड़के हैं, जिनके लिए YouTube, Instagram और ट्रेंड ही सब कुछ है। दोनों एक ही हॉस्टल, एक ही क्लास और एक ही कमरे में हैं, और यहीं से निकलती है गैपिस्तान की कॉमेडी।</p>
-  ${site.aboutEn ? `<p lang="en">${esc(site.aboutEn)}</p>` : ''}
+  <h2 class="h2" id="story-h">${T('कहानी क्या है', 'What the story is')}</h2>
+  ${S.about.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
+  <p>${T(
+    'एक तरफ़ चाचा हैं, जिनकी हर बात "हमारे टाइम में" से शुरू होती है। दूसरी तरफ़ Gen Z लड़के हैं, जिनके लिए YouTube, Instagram और ट्रेंड ही सब कुछ है। दोनों एक ही हॉस्टल, एक ही क्लास और एक ही कमरे में हैं, और यहीं से निकलती है गैपिस्तान की कॉमेडी।',
+    'On one side is Chacha, who starts every sentence with "in our time". On the other side are the Gen Z boys, for whom YouTube, Instagram and trends are everything. Both live in the same hostel, the same class and the same room, and that is where Gapistaan\'s comedy comes from.',
+  )}</p>
+  ${LANG === 'hi' && site.aboutEn ? `<p lang="en">${esc(site.aboutEn)}</p>` : ''}
 </section>
-${site.making?.length ? `<section class="block prose" aria-labelledby="making-h">
-  <h2 class="h2" id="making-h">गैपिस्तान कैसे बनता है</h2>
-  ${site.making.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
+${S.making?.length ? `<section class="block prose" aria-labelledby="making-h">
+  <h2 class="h2" id="making-h">${T('गैपिस्तान कैसे बनता है', 'How Gapistaan is made')}</h2>
+  ${S.making.map((p) => `<p>${esc(p)}</p>`).join('\n  ')}
 </section>` : ''}
 <section class="block prose" aria-labelledby="watch-h">
-  <h2 class="h2" id="watch-h">कब और कहाँ देखें</h2>
-  <p>${esc(site.schedule)}। हर एपिसोड YouTube चैनल <a href="${esc(site.channelUrl)}">@gapistaan</a> पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी। छोटे क्लिप और पर्दे के पीछे की झलक Instagram पर <a href="${esc(site.instagramUrl)}">@gapistaan</a> पर मिलती है।</p>
-  <h3 class="h3">अब तक के ${episodes.length} एपिसोड</h3>
+  <h2 class="h2" id="watch-h">${T('कब और कहाँ देखें', 'When and where to watch')}</h2>
+  <p>${T(
+    `${esc(S.schedule)}। हर एपिसोड YouTube चैनल <a href="${esc(site.channelUrl)}">@gapistaan</a> पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी। छोटे क्लिप और पर्दे के पीछे की झलक Instagram पर <a href="${esc(site.instagramUrl)}">@gapistaan</a> पर मिलती है।`,
+    `${esc(S.schedule)}. Every episode comes out on the YouTube channel <a href="${esc(site.channelUrl)}">@gapistaan</a> and on this website about an hour later. Short clips and behind-the-scenes glimpses are on Instagram at <a href="${esc(site.instagramUrl)}">@gapistaan</a>.`,
+  )}</p>
+  <h3 class="h3">${T(`अब तक के ${episodes.length} एपिसोड`, `All ${episodes.length} episodes so far`)}</h3>
   <ol class="ep-list">
 ${episodes.map((ep) => `    <li><a href="${ep.path}">${epLabel(ep.n)}: ${esc(ep.clean)}</a></li>`).join('\n')}
   </ol>
 </section>
-<section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">गैपिस्तान की टीम</h2>${peopleList()}</section>
+<section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">${T('गैपिस्तान की टीम', 'The Gapistaan team')}</h2>${peopleList()}</section>
 <section class="block prose" aria-labelledby="prod-h">
-  <h2 class="h2" id="prod-h">${esc(site.presents)} की पेशकश</h2>
-  <p>गैपिस्तान लखनऊ के प्रोडक्शन हाउस <a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> का हिस्सा है। इसके कलाकार <a href="https://indianfilmsacademy.com/">Indian Films Academy</a> से तैयार हुए हैं। परिकल्पना और निर्देशन: <a href="/creator/">${esc(creator.name)}</a>।</p>
+  <h2 class="h2" id="prod-h">${T(`${esc(site.presents)} की पेशकश`, `Presented by ${esc(site.presents)}`)}</h2>
+  <p>${T(
+    `गैपिस्तान लखनऊ के प्रोडक्शन हाउस <a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a> का हिस्सा है। इसके कलाकार <a href="https://indianfilmsacademy.com/">Indian Films Academy</a> से तैयार हुए हैं। परिकल्पना और निर्देशन: <a href="/creator/">${esc(creator.name)}</a>।`,
+    `Gapistaan is part of the Lucknow production house <a href="${esc(site.presentsUrl)}">${esc(site.presents)}</a>. Its actors are trained at <a href="https://indianfilmsacademy.com/">Indian Films Academy</a>. Concept and direction: <a href="/creator/">${esc(creator.name)}</a>.`,
+  )}</p>
 </section>
 </main>`;
   return layout({
-    title: 'गैपिस्तान के बारे में: Gen Gap कैसे बनता है | Gapistaan गैपिस्तान',
-    description: 'गैपिस्तान (Gapistaan) और Gen Gap की पूरी कहानी: बिना स्क्रिप्ट की improvised हिंदी कॉमेडी, 4-5 कैमरों से शूटिंग, Indian Films Academy के कलाकार और PICHCHRAPA की पेशकश।',
+    title: T('गैपिस्तान के बारे में: Gen Gap कैसे बनता है | Gapistaan गैपिस्तान', 'About Gapistaan: how Gen Gap is made | Gapistaan'),
+    description: T(
+      'गैपिस्तान (Gapistaan) और Gen Gap की पूरी कहानी: बिना स्क्रिप्ट की improvised हिंदी कॉमेडी, 4-5 कैमरों से शूटिंग, Indian Films Academy के कलाकार और PICHCHRAPA की पेशकश।',
+      'The full story of Gapistaan and Gen Gap: improvised Hindi comedy with no script, shot on 4-5 cameras, with actors from Indian Films Academy, presented by PICHCHRAPA.',
+    ),
     pathName: '/about/',
     ld: [
-      ...(siteUrl ? [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: 'गैपिस्तान के बारे में', url: abs('/about/'), inLanguage: 'hi', about: { '@type': 'TVSeries', name: 'Gen Gap', alternateName: ['Gapistaan', 'गैपिस्तान'], url: abs('/') } }] : []),
-      ...crumbsLd([['गैपिस्तान', '/'], ['बारे में', '/about/']]),
+      ...(siteUrl ? [{ '@context': 'https://schema.org', '@type': 'AboutPage', name: T('गैपिस्तान के बारे में', 'About Gapistaan'), url: A('/about/'), inLanguage: LANG, about: { '@type': 'TVSeries', name: 'Gen Gap', alternateName: ['Gapistaan', 'गैपिस्तान'], url: A('/') } }] : []),
+      ...crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('बारे में', 'About'), '/about/']]),
     ],
+    body,
+  });
+}
+
+function supportPage() {
+  const g = G();
+  const body = `<main id="main" class="wrap page">
+${crumbNav(homeCrumb(), esc(g.nav))}
+<h1 class="page-h1">${esc(g.page.title)}</h1>
+<p class="lede gift-off-note">${esc(g.page.offNote)}</p>
+<p class="lede gift-only">${esc(g.page.lede)}</p>
+<div class="block">${giftBox({ variant: 'home', id: 'gift', pageName: 'support page' })}</div>
+<section class="block prose gift-only" aria-label="${T('सवाल-जवाब', 'Questions and answers')}">
+${g.page.qa.map(([q, a]) => `  <h2 class="h3">${esc(q)}</h2>\n  <p>${esc(a)}</p>`).join('\n')}
+  <p><a href="/terms/">${esc(g.termsLink)}</a></p>
+</section>
+</main>`;
+  return layout({
+    title: `${g.page.title} | Gapistaan`,
+    description: g.page.lede,
+    pathName: '/support/',
+    image: siteUrl ? abs('/img/og-home.jpg') : null,
+    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [g.nav, '/support/']]),
+    body,
+  });
+}
+
+function termsPage() {
+  const tt = gift.terms[LANG];
+  const b = site.business || {};
+  const email = site.contactEmail || b.email || '';
+  const fill = (s) => s.replace(/\{email\}/g, email).replace(/\{phone\}/g, b.phoneLabel || b.phone || '');
+  const body = `<main id="main" class="wrap page">
+${crumbNav(homeCrumb(), esc(tt.title))}
+<h1 class="page-h1">${esc(tt.title)}</h1>
+<section class="prose">
+${tt.paras.map(([h, p]) => `<h2 class="h3">${esc(h)}</h2>\n<p>${esc(fill(p))}</p>`).join('\n')}
+<p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${hiDate(new Date().toISOString())}</p>
+</section>
+</main>`;
+  return layout({
+    title: `${tt.title} | Gapistaan`,
+    description: T('गैपिस्तान की वेबसाइट के नियम, तालियाँ (गिफ़्ट) की वापसी नीति और भुगतान की सुरक्षा।', 'Terms of the Gapistaan website, the refund policy for applause gifts, and payment security.'),
+    pathName: '/terms/',
+    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [tt.title, '/terms/']]),
     body,
   });
 }
@@ -885,33 +1089,36 @@ function privacyPage() {
   const b = site.business || {};
   const email = site.contactEmail || b.email;
   const body = `<main id="main" class="wrap page">
-<nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / प्राइवेसी</nav>
-<h1 class="page-h1">प्राइवेसी नीति</h1>
+${crumbNav(homeCrumb(), T('प्राइवेसी', 'Privacy'))}
+<h1 class="page-h1">${T('प्राइवेसी नीति', 'Privacy policy')}</h1>
 <section class="prose">
-<p>gapistaan.com पर हम आपसे नाम, फ़ोन या ईमेल जैसी कोई निजी जानकारी नहीं माँगते और न ही जमा करते हैं।</p>
-<p>साइट पर कितने लोग आए, यह समझने के लिए हम Cloudflare Web Analytics इस्तेमाल करते हैं। यह कुकी नहीं लगाता और किसी व्यक्ति को पहचानता नहीं, सिर्फ़ कुल गिनती दिखाता है।</p>
-<p>एपिसोड YouTube के प्लेयर में चलते हैं। जब आप कोई वीडियो चलाते हैं, तो YouTube (Google) अपनी नीति के अनुसार कुकी इस्तेमाल कर सकता है।</p>
-<p>WhatsApp या दूसरे ऐप पर शेयर करने के बटन सिर्फ़ उस ऐप को खोलते हैं; हमें कुछ नहीं भेजा जाता।</p>
-${email ? `<p>किसी भी सवाल के लिए लिखें: <a href="mailto:${esc(email)}">${esc(email)}</a></p>` : ''}
-<p class="muted">आख़िरी बदलाव: ${hiDate(new Date().toISOString())}</p>
+<p>${T('gapistaan.com पर हम आपसे नाम, फ़ोन या ईमेल जैसी कोई निजी जानकारी नहीं माँगते और न ही जमा करते हैं।', 'On gapistaan.com we do not ask for or collect personal details such as your name, phone number or email.')}</p>
+<p>${T('अगर आप "तालियाँ भेजें" से गिफ़्ट भेजते हैं, तो आपका नाम और संदेश सिर्फ़ तभी लिया जाता है जब आप ख़ुद लिखें, और वह भुगतान के रिकॉर्ड में हमें दिखता है। कार्ड, UPI या बैंक की जानकारी हमारे पास नहीं आती; वह Razorpay के पास रहती है।', 'If you send a gift through "Send applause", your name and message are taken only if you write them yourself, and they appear to us in the payment record. Your card, UPI or bank details never reach us; they stay with Razorpay.')}</p>
+<p>${T('साइट पर कितने लोग आए, यह समझने के लिए हम Cloudflare Web Analytics इस्तेमाल करते हैं। यह कुकी नहीं लगाता और किसी व्यक्ति को पहचानता नहीं, सिर्फ़ कुल गिनती दिखाता है।', 'To understand how many people visit, we use Cloudflare Web Analytics. It sets no cookies and does not identify any person; it only shows a total count.')}</p>
+<p>${T('एपिसोड YouTube के प्लेयर में चलते हैं। जब आप कोई वीडियो चलाते हैं, तो YouTube (Google) अपनी नीति के अनुसार कुकी इस्तेमाल कर सकता है।', 'Episodes play in the YouTube player. When you play a video, YouTube (Google) may use cookies according to its own policy.')}</p>
+<p>${T('WhatsApp या दूसरे ऐप पर शेयर करने के बटन सिर्फ़ उस ऐप को खोलते हैं; हमें कुछ नहीं भेजा जाता।', 'The share buttons for WhatsApp and other apps only open that app; nothing is sent to us.')}</p>
+${email ? `<p>${T('किसी भी सवाल के लिए लिखें', 'For any question, write to')}: <a href="mailto:${esc(email)}">${esc(email)}</a></p>` : ''}
+<p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${hiDate(new Date().toISOString())}</p>
 </section>
 </main>`;
   return layout({
-    title: 'प्राइवेसी नीति | Gapistaan गैपिस्तान',
-    description: 'gapistaan.com की प्राइवेसी नीति: हम कौन-सी जानकारी लेते हैं (कोई निजी जानकारी नहीं), analytics और YouTube प्लेयर के बारे में।',
+    title: T('प्राइवेसी नीति | Gapistaan गैपिस्तान', 'Privacy policy | Gapistaan'),
+    description: T('gapistaan.com की प्राइवेसी नीति: हम कौन-सी जानकारी लेते हैं (कोई निजी जानकारी नहीं), analytics और YouTube प्लेयर के बारे में।', 'The privacy policy of gapistaan.com: what we collect (no personal details), analytics, payments and the YouTube player.'),
     pathName: '/privacy/',
-    ld: crumbsLd([['गैपिस्तान', '/'], ['प्राइवेसी', '/privacy/']]),
+    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [T('प्राइवेसी', 'Privacy'), '/privacy/']]),
     body,
   });
 }
 
+// One 404 page serves both languages, so it speaks both.
 function notFoundPage() {
   return layout({
-    title: 'यह पन्ना नहीं मिला | गैपिस्तान',
-    description: 'यह पन्ना गैपिस्तान की साइट पर नहीं है।',
+    title: 'यह पन्ना नहीं मिला | Page not found | Gapistaan',
+    description: 'This page is not on the Gapistaan website.',
     pathName: '/404',
     noindex: true,
-    body: `<main id="main" class="wrap lost"><img src="/img/logo-520.webp" alt="" width="160" height="160"><h1 class="page-h1">यह पन्ना यहाँ नहीं है</h1><p>हो सकता है लिंक पुराना हो। सारे एपिसोड होम पेज पर हैं।</p><p><a class="btn btn-primary" href="/">होम पेज पर जाएँ</a></p></main>`,
+    bilingual: true,
+    body: `<main id="main" class="wrap lost"><img src="/img/logo-520.webp" alt="" width="160" height="160"><h1 class="page-h1">यह पन्ना यहाँ नहीं है<br><span lang="en">This page is not here</span></h1><p>हो सकता है लिंक पुराना हो। सारे एपिसोड होम पेज पर हैं।<br><span lang="en">The link may be old. All episodes are on the home page.</span></p><p class="actions" style="justify-content:center"><a class="btn btn-primary" href="/">होम पेज पर जाएँ</a><a class="btn btn-ghost" href="/en/">Go to the English home page</a></p></main>`,
   });
 }
 
@@ -926,39 +1133,52 @@ await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 if (existsSync(path.join(root, 'public'))) await cp(path.join(root, 'public'), out, { recursive: true });
 
-await writeFile(path.join(out, 'index.html'), homePage());
-for (const ep of episodes) await page(`video/${ep.id}`, episodePage(ep));
-await page('episodes', episodesPage());
-await page('creator', creatorPage());
-await page('cast', castIndexPage());
-for (const c of cast) await page(`cast/${c.slug}`, castPage(c));
-await page('about', aboutPage());
-await page('privacy', privacyPage());
+async function buildLang(lang) {
+  setLang(lang);
+  const pre = lang === 'en' ? 'en/' : '';
+  await page(pre.replace(/\/$/, ''), homePage());
+  for (const ep of episodes) await page(`${pre}video/${ep.id}`, episodePage(ep));
+  await page(`${pre}episodes`, episodesPage());
+  await page(`${pre}creator`, creatorPage());
+  await page(`${pre}cast`, castIndexPage());
+  for (const c of cast) await page(`${pre}cast/${c.slug}`, castPage(c));
+  await page(`${pre}about`, aboutPage());
+  await page(`${pre}support`, supportPage());
+  await page(`${pre}terms`, termsPage());
+  await page(`${pre}privacy`, privacyPage());
+}
+await buildLang('en');
+await buildLang('hi'); // last, so the 404 page below is rendered in Hindi/bilingual mode
 await writeFile(path.join(out, '404.html'), notFoundPage());
 
 if (siteUrl) {
   const latestDate = newestFirst[0]?.publishedAt;
   const urls = [
-    { loc: abs('/'), lastmod: latestDate },
-    { loc: abs('/episodes/'), lastmod: latestDate },
-    { loc: abs('/creator/'), lastmod: latestDate },
-    { loc: abs('/cast/'), lastmod: latestDate },
-    { loc: abs('/about/'), lastmod: latestDate },
-    ...cast.map((c) => ({ loc: abs(c.path), lastmod: c.episodes[0]?.publishedAt || latestDate })),
-    ...episodes.map((ep) => ({ loc: abs(ep.path), lastmod: ep.publishedAt })),
-    { loc: abs('/privacy/') },
+    { p: '/', lastmod: latestDate },
+    { p: '/episodes/', lastmod: latestDate },
+    { p: '/creator/', lastmod: latestDate },
+    { p: '/cast/', lastmod: latestDate },
+    { p: '/about/', lastmod: latestDate },
+    { p: '/support/' },
+    ...cast.map((c) => ({ p: c.path, lastmod: c.episodes[0]?.publishedAt || latestDate })),
+    ...episodes.map((ep) => ({ p: ep.path, lastmod: ep.publishedAt })),
+    { p: '/privacy/' },
+    { p: '/terms/' },
   ];
+  // Each page is listed in both languages, each entry pointing at its alternate (hreflang).
+  const entry = (u, lang) => {
+    const loc = lang === 'en' ? '/en' + u.p : u.p;
+    return `  <url><loc>${esc(abs(loc))}</loc>${u.lastmod ? `<lastmod>${u.lastmod.slice(0, 10)}</lastmod>` : ''}<xhtml:link rel="alternate" hreflang="hi" href="${esc(abs(u.p))}"/><xhtml:link rel="alternate" hreflang="en" href="${esc(abs('/en' + u.p))}"/><xhtml:link rel="alternate" hreflang="x-default" href="${esc(abs(u.p))}"/></url>`;
+  };
   await writeFile(
     path.join(out, 'sitemap.xml'),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-      .map((u) => `  <url><loc>${esc(u.loc)}</loc>${u.lastmod ? `<lastmod>${u.lastmod.slice(0, 10)}</lastmod>` : ''}</url>`)
-      .join('\n')}\n</urlset>\n`,
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.flatMap((u) => [entry(u, 'hi'), entry(u, 'en')]).join('\n')}\n</urlset>\n`,
   );
-  await writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${abs('/sitemap.xml')}\n`);
+  await writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: ${abs('/sitemap.xml')}\n`);
 } else {
-  await writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\n`);
+  await writeFile(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /api/\n`);
   console.warn('siteUrl खाली है: canonical, sitemap और Clip markup domain जुड़ने के बाद बनेंगे।');
 }
 
 const files = await readdir(out, { recursive: true });
-console.log(`dist/ तैयार: ${episodes.length} एपिसोड, ${cast.length + 1} प्रोफ़ाइल, ${files.length} फ़ाइलें`);
+console.log(`dist/ तैयार: ${episodes.length} एपिसोड, ${cast.length + 1} प्रोफ़ाइल, 2 भाषाएँ, ${files.length} फ़ाइलें`);

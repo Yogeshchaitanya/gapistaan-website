@@ -6,6 +6,9 @@
 <title>प्राइवेसी नीति | Gapistaan गैपिस्तान</title>
 <meta name="description" content="gapistaan.com की प्राइवेसी नीति: हम कौन-सी जानकारी लेते हैं (कोई निजी जानकारी नहीं), analytics और YouTube प्लेयर के बारे में।">
 <link rel="canonical" href="https://gapistaan.com/privacy/">
+<link rel="alternate" hreflang="hi" href="https://gapistaan.com/privacy/">
+<link rel="alternate" hreflang="en" href="https://gapistaan.com/en/privacy/">
+<link rel="alternate" hreflang="x-default" href="https://gapistaan.com/privacy/">
 
 <meta name="theme-color" content="#0B1D24">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -304,6 +307,59 @@ a{color:var(--accent)}
 .h3{margin:1.6rem 0 .5rem;font:800 1.2rem/1.4 var(--hindi)}
 .ep-list{margin:0;padding-left:1.4rem;line-height:2}
 .ep-list a{color:var(--text)}
+.lang{order:2;color:var(--muted);font-weight:800;font-size:.9rem;line-height:1;text-decoration:none;padding:.5rem .8rem;border:1.5px solid var(--line-2);border-radius:999px}
+.lang:hover{color:var(--text);border-color:var(--accent)}
+.topnav a.gift-link{color:var(--gold)}
+.topnav a.gift-link:hover,.topnav a.gift-link[aria-current="page"]{color:#F6C453;text-decoration:underline;text-underline-offset:.25em}
+.topbar-in .btn-sm{order:2}
+@media (min-width:52rem){.lang,.topbar-in .btn-sm{order:0}}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:#F2C466}
+.btn-gold:disabled{opacity:.6;cursor:progress}
+.gift{position:relative;max-width:64rem;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#1A4450,#13313B 62%);box-shadow:0 0 0 1px var(--line-2)}
+.gift::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:repeating-linear-gradient(180deg,var(--gold) 0 12px,transparent 12px 22px)}
+.gift-body{padding:1.6rem 1.3rem 1.4rem 2rem}
+@media (min-width:48rem){.gift-body{padding:2.2rem 2.6rem 2rem 3.2rem}}
+.gift-h{margin:0 0 .5rem;font:800 clamp(1.35rem,3vw,1.85rem)/1.4 var(--hindi)}
+.gift-text{margin:0 0 1.3rem;max-width:62ch;color:var(--muted)}
+.stubs{list-style:none;margin:0 0 1.2rem;padding:0;display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(8.6rem,1fr))}
+.stubs li{border-radius:8px}
+.stubs li:has(.stub:focus-visible){outline:3px solid var(--gold);outline-offset:3px}
+.stub{--n:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.15rem;width:100%;min-height:4.7rem;padding:.6rem 1rem;border:0;border-radius:6px;background:rgba(233,180,76,.15);color:var(--text);font:inherit;cursor:pointer;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.stub:focus-visible{outline:none}
+.stub b{font:400 1.55rem/1 var(--latin);letter-spacing:.03em;color:var(--gold)}
+.stub span{font-size:.85rem;font-weight:800;color:var(--muted);line-height:1.3;text-align:center}
+.stub:hover{background:rgba(233,180,76,.27)}
+.stub.is-on{background:var(--gold)}
+.stub.is-on b,.stub.is-on span{color:var(--ink)}
+.gift-fields{display:grid;gap:.9rem;max-width:40rem;margin:0 0 1.1rem}
+.gift label{display:grid;gap:.3rem;font-weight:800;font-size:.95rem}
+.gift input,.gift textarea{width:100%;font:400 1rem/1.5 var(--hindi);color:var(--text);background:rgba(6,20,26,.55);border:1.5px solid var(--line-2);border-radius:10px;padding:.6rem .8rem}
+.gift textarea{resize:vertical;min-height:4.2rem}
+.gift input:focus,.gift textarea:focus{outline:3px solid var(--gold);outline-offset:1px}
+.gift-own{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.8rem 1.1rem;margin:0}
+.gift-own label{display:flex;align-items:center;gap:.6rem}
+.rs{display:inline-flex;align-items:center;gap:.4rem;font:400 1.4rem/1 var(--latin);color:var(--gold)}
+.rs input{width:7.5rem;font:800 1.1rem/1.3 var(--hindi);color:var(--text)}
+.pay-status{min-height:1.6em;margin:.9rem 0 0;font-weight:800;color:var(--gold)}
+.gift.is-thanked .pay-status{color:#9BE3B0}
+.gift .fine{margin:.5rem 0 0;max-width:64ch;color:var(--muted);font-size:.85rem;line-height:1.6}
+.gift .fine a{color:var(--muted)}
+.gift-episode .gift-body{padding-block:1.3rem}
+.gift-episode .gift-h{font-size:1.25rem}
+.gift-episode .gift-text{margin-bottom:1rem}
+@media (max-width:30rem){.gift-own .btn{width:100%}}
+@media (max-width:30rem){
+  .topbar-in{gap:.4rem .55rem}
+  .brand{gap:.45rem}
+  .brand-name{font-size:1.25rem}
+  .lang{padding:.45rem .65rem;font-size:.82rem}
+  .topbar-in .btn-sm{padding:.4rem .8rem;font-size:.85rem;min-height:2.3rem}
+}
+html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
+html.gift-on .gift-off-note{display:none}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"गैपिस्तान","item":"https://gapistaan.com/"},{"@type":"ListItem","position":2,"name":"प्राइवेसी","item":"https://gapistaan.com/privacy/"}]}</script>
 </head>
@@ -312,7 +368,8 @@ a{color:var(--accent)}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
+    <a class="lang" href="/en/privacy/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
 </header>
@@ -321,6 +378,7 @@ a{color:var(--accent)}
 <h1 class="page-h1">प्राइवेसी नीति</h1>
 <section class="prose">
 <p>gapistaan.com पर हम आपसे नाम, फ़ोन या ईमेल जैसी कोई निजी जानकारी नहीं माँगते और न ही जमा करते हैं।</p>
+<p>अगर आप "तालियाँ भेजें" से गिफ़्ट भेजते हैं, तो आपका नाम और संदेश सिर्फ़ तभी लिया जाता है जब आप ख़ुद लिखें, और वह भुगतान के रिकॉर्ड में हमें दिखता है। कार्ड, UPI या बैंक की जानकारी हमारे पास नहीं आती; वह Razorpay के पास रहती है।</p>
 <p>साइट पर कितने लोग आए, यह समझने के लिए हम Cloudflare Web Analytics इस्तेमाल करते हैं। यह कुकी नहीं लगाता और किसी व्यक्ति को पहचानता नहीं, सिर्फ़ कुल गिनती दिखाता है।</p>
 <p>एपिसोड YouTube के प्लेयर में चलते हैं। जब आप कोई वीडियो चलाते हैं, तो YouTube (Google) अपनी नीति के अनुसार कुकी इस्तेमाल कर सकता है।</p>
 <p>WhatsApp या दूसरे ऐप पर शेयर करने के बटन सिर्फ़ उस ऐप को खोलते हैं; हमें कुछ नहीं भेजा जाता।</p>
@@ -342,7 +400,9 @@ a{color:var(--accent)}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/privacy/">प्राइवेसी</a></li>
+        <li><a href="/terms/">नियम और वापसी नीति</a></li>
       </ul>
     </div>
     <div>
@@ -450,6 +510,45 @@ a{color:var(--accent)}
       b.addEventListener('click',function(){ navigator.share({title:b.dataset.title,text:b.dataset.text}).catch(function(){}); });
     });
   }
+  // The applause box, its menu link and its page text stay hidden until the server says payments are switched on.
+  if(document.querySelector('.gift,.gift-link')){
+    var on=function(){ document.documentElement.classList.add('gift-on'); };
+    var cached=false; try{ cached=sessionStorage.getItem('gift-on')==='1'; }catch(e){}
+    if(cached) on();
+    fetch('/api/status').then(function(r){ return r.json(); }).then(function(j){
+      if(j&&j.payments==='on'){ on(); try{ sessionStorage.setItem('gift-on','1'); }catch(e){} }
+      else { document.documentElement.classList.remove('gift-on'); try{ sessionStorage.removeItem('gift-on'); }catch(e){} }
+    }).catch(function(){});
+  }
+  // Applause box: pick a ticket stub, then Razorpay Checkout opens. The server decides nothing about the amount except the limits.
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=document.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; document.head.appendChild(s); }); }
+  document.querySelectorAll('.gift').forEach(function(box){
+    var T=JSON.parse(box.getAttribute('data-t')), who=box.getAttribute('data-who')||'', pg=box.getAttribute('data-page')||'';
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.gift-go');
+    var nm=box.querySelector('input[name=gname]'), msg=box.querySelector('textarea[name=gmsg]');
+    var stubs=box.querySelectorAll('.stub');
+    var say=function(m){ st.textContent=m||''; };
+    function mark(){ stubs.forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-amt')===String(+input.value)); }); }
+    stubs.forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); mark(); say(''); }); });
+    input.addEventListener('input',mark);
+    function fail(m){ go.disabled=false; say(m); }
+    go.addEventListener('click',function(){
+      var a=Math.round(+input.value);
+      if(!(a>=T.min)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true; say(T.opening);
+      post('/api/order',{amount:a,name:nm?nm.value:'',message:msg?msg.value:'',to:who,page:pg,lang:document.documentElement.lang}).then(function(o){
+        if(!o.order_id){ fail(o._status===503||o._status===404?T.offline:T.failed); return; }
+        return loadRzp().then(function(){
+          var paid=false;
+          var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'Gapistaan', description:T.desc, image:location.origin+'/img/logo-160.webp', prefill:{ name:nm?nm.value:'' }, notes:{ source:'website' }, theme:{ color:'#C93F15' },
+            handler:function(r){ paid=true; say(T.verifying); post('/api/verify',r).then(function(v){ if(v.ok){ go.disabled=false; box.classList.add('is-thanked'); say(T.thanks); } else fail(T.failed); },function(){ fail(T.failed); }); },
+            modal:{ ondismiss:function(){ if(!paid) fail(''); } } });
+          rz.open();
+        },function(){ fail(T.offline); });
+      },function(){ fail(T.offline); });
+    });
+  });
 })();
 </script>
 

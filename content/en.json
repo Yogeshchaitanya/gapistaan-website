@@ -1,0 +1,154 @@
+{
+  "site": {
+    "homeTitle": "Gapistaan: Gen Gap Hindi Comedy Series, Chacha vs Gen Z",
+    "homeDescription": "Gapistaan is the home of Gen Gap, a Hindi comedy-satire series by PICHCHRAPA. Chacha vs Gen Z in a Lucknow acting institute, fully improvised, no script. Watch every episode here.",
+    "heroLine": "One acting institute. Chacha on one side, Gen Z on the other.",
+    "heroSub": "Hindi comedy-satire with no script, completely improvised.",
+    "schedule": "A new episode every alternate day, between 6:30 and 7:30 PM IST",
+    "making": [
+      "Every Gapistaan story starts from a situation, not from a script. The actors only know what has happened today: someone's soap was stolen, a court has been set up in the hostel, or a new student has joined the academy. After that there are no fixed dialogues; the cameras keep rolling until the scene reaches its end.",
+      "For shooting, 4 to 5 phones and small cameras are placed inside the scene and record together. So the actors play for each other, not for the camera, and every reaction feels real.",
+      "Yogesh Chaitanya himself syncs all the footage in DaVinci Resolve as a multicam, edits it and does the DI colour grade.",
+      "All the actors are trained at Indian Films Academy in Lucknow. Most of the team comes from Uttar Pradesh and the Bhojpuri belt, so both the language and the humour stay close to the ground."
+    ],
+    "about": [
+      "In an acting institute in Lucknow, Chacha from the older generation and today's Gen Z boys face each other every day. Sometimes a court is set up in the hostel, sometimes an argument breaks out over whether YouTube is bigger than cinema.",
+      "There is no script here. Only the situation is fixed, the cameras keep rolling and the rest is the actors' magic."
+    ],
+    "faq": [
+      [
+        "What is Gapistaan?",
+        "Gapistaan is a YouTube channel and the home of Gen Gap, a Hindi comedy-satire series. Its story is the daily bickering between Chacha from the older generation and today's Gen Z boys in a Lucknow acting institute. It is presented by PICHCHRAPA."
+      ],
+      [
+        "When does a new episode of Gen Gap come out?",
+        "{schedule}. Every episode comes out first on the YouTube channel @gapistaan and on this website about an hour later."
+      ],
+      [
+        "Does Gen Gap have a script?",
+        "No. Only the situation is fixed; the actors make up the dialogue on the spot. The whole series is improvised."
+      ],
+      [
+        "Who made Gapistaan?",
+        "Yogesh Chaitanya, known in films as Yogesh Raj Mishra. He is its creator, director and editor, and he plays Chacha himself."
+      ],
+      [
+        "Who is in the cast of Gapistaan?",
+        "Yogesh Chaitanya (Chacha), Ayushi Tiwari, Saanviya, Sarita Vyas, Ravi Dev Rai, Shubham Kumar Singh, Rohit Daas and Deepak Mandal. All of them are trained at Indian Films Academy, Lucknow."
+      ],
+      [
+        "Gapistaan, Gapistan, गैपिस्तान and गपिस्तान: are they all the same?",
+        "Yes. The name is spelled in many ways, but the channel and the series are the same: @gapistaan on YouTube and gapistaan.com."
+      ],
+      [
+        "Can I send the actors a gift?",
+        "Yes, if you want to. Choose any amount on gapistaan.com/en/support/. It is completely voluntary and every episode stays free to watch."
+      ],
+      [
+        "Whom do I talk to about brand collaborations or sponsorship?",
+        "Write to {email} or call {phone}."
+      ]
+    ]
+  },
+  "labels": {
+    "role": "Actor",
+    "trained": "Two-year cinematic acting course at Indian Films Academy, Lucknow",
+    "experience": "Acting in many web series and films",
+    "inGapistaan": "Actor, Gen Gap (improvised comedy with no script)"
+  },
+  "cast": {
+    "ayushi-tiwari": {
+      "bio": [
+        "Ayushi Tiwari is a professional actress and part of the cast of Gapistaan's comedy series Gen Gap.",
+        "She completed a two-year cinematic acting course at Indian Films Academy, Lucknow, and has worked in many web series and films.",
+        "Every Gen Gap scene is created on the spot with no script. In such a scene you have to listen to the other person and answer truthfully in that moment, and that ease in front of the camera is the foundation of her training."
+      ]
+    },
+    "saanviya": {
+      "credits": ["2-year cinematic acting course at IFA", "Acted in Salman Ali's big songs"],
+      "selected": "Actress in Salman Ali's big songs",
+      "bio": [
+        "Saanviya is a professional actress and part of the cast of Gapistaan's series Gen Gap.",
+        "She completed a two-year cinematic acting course at Indian Films Academy, Lucknow. She has acted in Salman Ali's big songs and has been part of many web series and films.",
+        "A song has to tell a whole story in a few minutes, and in Gen Gap a scene has to be built on the spot with no script. In both, clear expression in front of the camera matters most."
+      ]
+    },
+    "sarita-vyas": {
+      "credits": ["2-year cinematic acting course at IFA", "Filmi Adalat"],
+      "selected": "‘Filmi Adalat’",
+      "bio": [
+        "Sarita Vyas is a professional actress and part of the cast of Gapistaan's series Gen Gap.",
+        "She completed a two-year cinematic acting course at Indian Films Academy, Lucknow. She has acted in ‘Filmi Adalat’ and has also worked in many web series and films.",
+        "In improvised comedy, timing is everything. It does not come from memorised lines but from listening to the other person and answering in that moment, in front of the camera."
+      ]
+    },
+    "ravi-dev-rai": {
+      "credits": ["2-year cinematic acting course at IFA", "Film ‘Vidyapeeth’"],
+      "selected": "Film ‘Vidyapeeth’",
+      "bio": [
+        "Ravi Dev Rai is a professional actor and part of the cast of Gapistaan's series Gen Gap.",
+        "He completed a two-year cinematic acting course at Indian Films Academy, Lucknow. He has worked in the film ‘Vidyapeeth’ and has been part of many web series and films.",
+        "‘Vidyapeeth’ was directed by Yogesh Chaitanya, the creator of Gapistaan, so Ravi already has experience of working in front of the camera under his direction."
+      ]
+    },
+    "shubham-kumar-singh": {
+      "credits": ["2-year cinematic acting course at IFA", "Film ‘Vidyapeeth’"],
+      "selected": "Film ‘Vidyapeeth’",
+      "bio": [
+        "Shubham Kumar Singh is a professional actor and part of the cast of Gapistaan's series Gen Gap.",
+        "He completed a two-year cinematic acting course at Indian Films Academy, Lucknow. He has acted in the film ‘Vidyapeeth’ and worked in many web series and films.",
+        "In Gen Gap every line is the actor's own. Listening, feeling and answering in that very moment is his greatest asset in every episode."
+      ]
+    },
+    "rohit-das": {
+      "bio": [
+        "Rohit Daas is a professional actor and part of the cast of Gapistaan's series Gen Gap.",
+        "He completed a two-year cinematic acting course at Indian Films Academy, Lucknow, and has worked in many web series and films.",
+        "Every Gen Gap scene is made with no script, so every dialogue is the actor's own. His training, which is to listen, feel and answer in that very moment, is put to use in every episode."
+      ]
+    },
+    "deepak-mandal": {
+      "credits": ["2-year cinematic acting course at IFA", "Filmi Adalat"],
+      "selected": "‘Filmi Adalat’",
+      "bio": [
+        "Deepak Mandal is a professional actor and part of the cast of Gapistaan's series Gen Gap.",
+        "He completed a two-year cinematic acting course at Indian Films Academy, Lucknow. He has acted in ‘Filmi Adalat’ and also worked in many web series and films.",
+        "In comedy with no script, you have to catch the character in an instant. In front of the camera that grip comes from the training he received at the academy."
+      ]
+    }
+  },
+  "creator": {
+    "role": "Creator, Director and Chacha",
+    "bio": [
+      "Yogesh Chaitanya is the creator and director of Gapistaan, and also plays Chacha in the show. In films he is credited as Yogesh Raj Mishra.",
+      "He directed the films ‘Dabang Sarkar’ and ‘Vidyapeeth’ and has been post-production head on more than 15 feature films. He edits and does the DI colour grading himself; every Gapistaan episode is edited and graded by him.",
+      "He is the founder of Indian Films Academy in Lucknow, where he has been teaching camera acting for more than 15 years. To train actors he developed his own method, ‘Yogesh CineAct’. Gapistaan's cast is trained at this academy.",
+      "His roots are in theatre. He learnt in the theatre circles of Bharatendu Natya Akademi and the National School of Drama, and trained under theatre artist Surya Mohan Kulshreshtha.",
+      "PICHCHRAPA is his production house, and Gapistaan is presented by PICHCHRAPA."
+    ],
+    "facts": [
+      ["Full name", "Yogesh Chaitanya (Yogesh Raj Mishra in films)"],
+      ["Known as", "Film director, acting mentor, editor and DI colourist"],
+      ["Directed", "Dabang Sarkar, Vidyapeeth"],
+      ["Post-production", "Post-production head on 15+ feature films"],
+      ["Acting training", "15+ years; creator of the Yogesh CineAct (Actors Transformation System) method"],
+      ["Theatre", "Grew up in the theatre circles of Bharatendu Natya Akademi and the National School of Drama; trained under theatre artist Surya Mohan Kulshreshtha"],
+      ["Founder", "Indian Films Academy, Lucknow (100+ students trained) and PICHCHRAPA"],
+      ["In Gapistaan", "Plays Chacha; concept, direction, edit and DI"],
+      ["City", "Gomti Nagar, Lucknow, Uttar Pradesh"]
+    ],
+    "credits": [
+      "Dabang Sarkar (director)",
+      "Vidyapeeth (director)",
+      "Post-production head on 15+ feature films",
+      "Creator of Yogesh CineAct"
+    ]
+  },
+  "business": {
+    "city": "Gomti Nagar, Lucknow, Uttar Pradesh"
+  },
+  "brands": {
+    "PICHCHRAPA": "Production house and comedy channel",
+    "Indian Films Academy": "Acting institute, Lucknow"
+  }
+}

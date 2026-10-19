@@ -1,6 +1,7 @@
 {
-  // Cloudflare Workers: साइट dist/ फ़ोल्डर से चलती है। src/worker.js सिर्फ़ पेजों पर चलकर
-  // बाकी domains (gapistaan.in, gapistan.in, www) को gapistaan.com पर भेजता है।
+  // Cloudflare Workers: साइट dist/ फ़ोल्डर से चलती है। src/worker.js इन पेजों पर चलकर
+  // बाकी domains (gapistaan.in, gapistan.in, www) को gapistaan.com पर भेजता है, और /api/* पर
+  // "तालियाँ भेजें" के Razorpay भुगतान संभालता है।
   "name": "gapistaan-website",
   "main": "src/worker.js",
   "compatibility_date": "2026-10-01",
@@ -9,6 +10,6 @@
     "binding": "ASSETS",
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash",
-    "run_worker_first": ["/", "/video/*"]
+    "run_worker_first": ["/", "/video/*", "/en/", "/en/video/*", "/api/*"]
   }
 }
