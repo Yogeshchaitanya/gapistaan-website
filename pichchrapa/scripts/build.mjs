@@ -4,7 +4,6 @@ import { readFile, writeFile, mkdir, rm, cp, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { stuntLane } from './stunt.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist');
@@ -175,7 +174,7 @@ function reelStrips() {
   const cell = (v, hide) => `<a class="cell" href="${esc(hrefOf(v))}"${hide ? ' tabindex="-1" aria-hidden="true"' : ''}><img src="${esc(smallThumb(v))}" width="210" height="118" loading="lazy" decoding="async" alt="${hide ? '' : esc(vt(v))}"></a>`;
   const row = (items, cls, dur) => `<div class="strip${cls}" style="--dur:${dur}s"><div class="strip-track">${items.map((v) => cell(v, false)).join('')}${items.map((v) => cell(v, true)).join('')}</div></div>`;
   const label = (cls, name, href, n) => `<div class="wrap reel-label ${cls}"><a href="${href}">${esc(name)}</a><span>${n} ${T('वीडियो', 'videos')}</span></div>`;
-  return `<div class="reels" aria-label="${T('PICHCHRAPA की रील', 'PICHCHRAPA reels')}">${label('rl-raja', S.raja.name, '/raja-ka-baja/', top.length)}${stuntLane()}${row(top, '', Math.round(top.length * 5.5))}${label('rl-adalat', `${S.adalat.name} ${T('और बाक़ी', 'and more')}`, '/filmy-adalat/', rest.length)}${row(rest, ' rev', Math.round(rest.length * 5.5))}</div>`;
+  return `<div class="reels" aria-label="${T('PICHCHRAPA की रील', 'PICHCHRAPA reels')}">${label('rl-raja', S.raja.name, '/raja-ka-baja/', top.length)}<div class="stunt3d" aria-hidden="true"></div>${row(top, '', Math.round(top.length * 5.5))}${label('rl-adalat', `${S.adalat.name} ${T('और बाक़ी', 'and more')}`, '/filmy-adalat/', rest.length)}${row(rest, ' rev', Math.round(rest.length * 5.5))}</div>`;
 }
 
 // The logo, drawn flat and level. The clapper is closed at rest, so it sits straight; in the header it claps once on load and again on hover.
@@ -463,7 +462,7 @@ function homePage() {
       <div class="screen" id="screen">
         <span class="perf perf-t" aria-hidden="true"></span><span class="perf perf-b" aria-hidden="true"></span><span class="perf perf-l" aria-hidden="true"></span><span class="perf perf-r" aria-hidden="true"></span>
         <div class="frame">
-          <video id="intro" muted playsinline autoplay loop preload="auto" poster="/media/intro-poster.jpg" width="1100" height="803" disablepictureinpicture aria-label="${T('PICHCHRAPA का क्लैपर-बोर्ड इंट्रो', 'PICHCHRAPA clapperboard intro')}"><source src="/media/intro.mp4" type="video/mp4"></video>
+          <video id="intro" muted playsinline autoplay loop preload="auto" poster="/media/intro-poster-2.jpg" width="1100" height="803" disablepictureinpicture aria-label="${T('PICHCHRAPA का क्लैपर-बोर्ड इंट्रो', 'PICHCHRAPA clapperboard intro')}"><source src="/media/intro-2.mp4" type="video/mp4"></video>
           <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="rec"><b></b>REC</span><span class="tc" id="tc">00:00:00:00</span><span class="spec">24 FPS</span></div>
           <button class="btn btn-gold btn-sm replay" id="replay" type="button" data-play="${T('इंट्रो चलाइए', 'Play the intro')}">${T('फिर से देखिए', 'Watch again')}</button>
         </div>
@@ -578,7 +577,7 @@ ${GIFT_ON ? `<section class="sec gift-sec" aria-label="${esc(G().short)}">
     title: T('PICHCHRAPA | फ़िल्मी अदालत और राजा का बाजा बनाने वाला लखनऊ का प्रोडक्शन', 'PICHCHRAPA | Filmy Adalat and Raja Ka Baja, a Lucknow production run by actors'),
     description: T('PICHCHRAPA लखनऊ का फ़िल्म और वेब-सीरीज़ प्रोडक्शन है, जिसे अभिनेताओं का परिवार चलाता है। फ़िल्मी अदालत, राजा का बाजा और शॉर्ट्स यहाँ देखिए।', 'PICHCHRAPA is a film and web-series production house in Lucknow, run by a family of actors. Watch Filmy Adalat, Raja Ka Baja and Shorts here.'),
     pathName: '/',
-    preload: ['/media/intro-poster.jpg'],
+    preload: ['/media/intro-poster-2.jpg'],
     ld: [orgLd(), { '@context': 'https://schema.org', '@type': 'WebSite', name: 'PICHCHRAPA', url: A('/'), inLanguage: T('hi', 'en'), publisher: { '@id': abs('/#org') } }],
     body,
   });

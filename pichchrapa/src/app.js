@@ -173,6 +173,22 @@
       if(!grid.querySelector('[hidden]')) btn.remove();
     });
   });
+  // 3D stunt lane above the first film strip: load the module only when the lane is near the screen, run it only while visible
+  var lane=doc.querySelector('.stunt3d');
+  if(lane){
+    var sd=navigator.connection&&navigator.connection.saveData;
+    if(calm||sd||!('IntersectionObserver' in window)){ lane.classList.add('off'); }
+    else {
+      var show=false, api=null, loading=false;
+      var sync=function(){ if(api){ if(show&&!doc.hidden) api.play(); else api.pause(); } };
+      var boot=function(){
+        if(loading) return; loading=true;
+        import('/js/stunt3d.js').then(function(m){ api=m.start(lane); if(!api) lane.classList.add('off'); else sync(); },function(){ lane.classList.add('off'); });
+      };
+      new IntersectionObserver(function(es){ show=es[0].isIntersecting; if(show) boot(); sync(); },{rootMargin:'200px 0px'}).observe(lane);
+      doc.addEventListener('visibilitychange',sync);
+    }
+  }
 })();
 
 // "Honour the artists": the box, its menu link and the page text stay hidden until the server says payments are switched on.
