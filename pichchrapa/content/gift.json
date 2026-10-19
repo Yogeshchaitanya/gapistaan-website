@@ -1,0 +1,164 @@
+{
+  "min": 20,
+  "max": 50000,
+  "enabled": true,
+  "amounts": [
+    { "amt": 51, "hi": "सलाम", "en": "Salute" },
+    { "amt": 101, "hi": "शाबाश", "en": "Well done" },
+    { "amt": 251, "hi": "वाह-वाह", "en": "Bravo" },
+    { "amt": 501, "hi": "दिल से सम्मान", "en": "Heartfelt honour" },
+    { "amt": 1100, "hi": "राजा का इनाम", "en": "The King's reward" }
+  ],
+  "hi": {
+    "title": "वीडियो अच्छे लगे? कलाकारों को सम्मान दीजिए",
+    "text": "PICHCHRAPA के वीडियो अगर आपको अच्छे लगे हैं, तो कलाकारों को सम्मान देने के लिए आप अपनी तरफ़ से कुछ भी दे सकते हैं। देखना मुफ़्त है और हमेशा मुफ़्त रहेगा; देना पूरी तरह आपकी मर्ज़ी है, और कम-ज़्यादा का कोई हिसाब नहीं।",
+    "episodeTitle": "यह वीडियो अच्छा लगा? कलाकारों को सम्मान दीजिए",
+    "episodeText": "अच्छा लगा हो तो अपनी तरफ़ से कुछ भी देकर इस वीडियो के कलाकारों का सम्मान कीजिए। न दें, तब भी देखना मुफ़्त है।",
+    "nameLabel": "आपका नाम (चाहें तो)",
+    "msgLabel": "कलाकारों के लिए दो शब्द (चाहें तो)",
+    "otherLabel": "या अपनी राशि",
+    "btn": "सम्मान दीजिए",
+    "payInfo": "भुगतान Razorpay के सुरक्षित पेज पर होता है।",
+    "fine": "यह अपनी मर्ज़ी से दिया गया सम्मान है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और दी गई राशि वापस नहीं होती।",
+    "termsLink": "वापसी नीति",
+    "short": "वीडियो अच्छे लगे? कलाकारों को सम्मान दीजिए",
+    "nav": "सम्मान दीजिए",
+    "opening": "भुगतान का पेज खुल रहा है…",
+    "verifying": "भुगतान की पुष्टि हो रही है…",
+    "thanks": "शुक्रिया! आपका सम्मान कलाकारों तक पहुँच गया।",
+    "failed": "कुछ गड़बड़ हुई। अगर आपके पैसे कट गए हों तो हमें ईमेल कीजिए, हम जाँचकर बताएँगे।",
+    "offline": "यह सुविधा अभी चालू हो रही है। थोड़ी देर बाद फिर कोशिश कीजिए।",
+    "amountErr": "कम से कम ₹20 की राशि लिखिए।",
+    "desc": "PICHCHRAPA के कलाकारों का सम्मान",
+    "page": {
+      "title": "कलाकारों को सम्मान दीजिए",
+      "lede": "PICHCHRAPA के वीडियो मुफ़्त हैं और मुफ़्त ही रहेंगे। अगर वे आपको अच्छे लगे हैं, तो कलाकारों को सम्मान देने के लिए आप अपनी तरफ़ से कुछ भी दे सकते हैं।",
+      "qa": [
+        ["राशि कहाँ जाती है?", "राशि PICHCHRAPA के खाते में आती है और कलाकारों व टीम का सम्मान करने तथा नए वीडियो बनाने में लगती है।"],
+        ["क्या वीडियो देखने के लिए कुछ देना पड़ता है?", "नहीं। सारे वीडियो YouTube और इस वेबसाइट पर हमेशा मुफ़्त रहेंगे। सम्मान देना पूरी तरह आपकी मर्ज़ी है।"],
+        ["क्या यह दान है?", "नहीं। यह अपनी ख़ुशी से दिया गया सम्मान है और इसके बदले कोई सामान या सेवा नहीं बेची जाती। इस पर आयकर छूट (80G) नहीं मिलती।"],
+        ["क्या मेरा पैसा सुरक्षित है?", "भुगतान Razorpay के सुरक्षित पेज पर होता है। आपके कार्ड, UPI या बैंक की जानकारी Razorpay के पास रहती है; यह वेबसाइट उसे न देखती है और न सहेजती है।"],
+        ["कुछ गड़बड़ हो जाए तो क्या करूँ?", "पेमेंट आईडी के साथ हमें ईमेल कीजिए या फ़ोन कीजिए। डबल कटौती या फ़ेल हुए भुगतान की जाँच कर, रकम वापस कर दी जाती है।"]
+      ],
+      "offNote": "यह सुविधा अभी चालू हो रही है और कुछ ही दिन में यहाँ से कलाकारों को सम्मान दिया जा सकेगा। तब तक वीडियो देखिए और शेयर कीजिए: यही सबसे बड़ा सम्मान है।"
+    }
+  },
+  "en": {
+    "title": "Enjoyed the videos? Honour the artists",
+    "text": "If you have enjoyed PICHCHRAPA's videos, you can give the artists anything you like, from your side, as a mark of respect. Watching is free and always will be; giving is entirely your choice, and no amount is too small or too large.",
+    "episodeTitle": "Enjoyed this video? Honour the artists",
+    "episodeText": "If you liked it, give the artists in this video anything you like as a mark of respect. If you do not, watching is still free.",
+    "nameLabel": "Your name (optional)",
+    "msgLabel": "A few words for the artists (optional)",
+    "otherLabel": "or your own amount",
+    "btn": "Honour the artists",
+    "payInfo": "Payment happens on Razorpay's secure page.",
+    "fine": "This is a voluntary mark of respect, not a donation; it is not eligible for income-tax exemption (80G), and amounts given are non-refundable.",
+    "termsLink": "Refund policy",
+    "short": "Enjoyed the videos? Honour the artists",
+    "nav": "Honour the artists",
+    "opening": "Opening the payment page…",
+    "verifying": "Confirming your payment…",
+    "thanks": "Thank you! Your respect has reached the artists.",
+    "failed": "Something went wrong. If money was deducted from your account, please email us and we will look into it.",
+    "offline": "This is being switched on. Please try again in a little while.",
+    "amountErr": "Please enter an amount of at least ₹20.",
+    "desc": "Honouring the PICHCHRAPA artists",
+    "page": {
+      "title": "Honour the artists",
+      "lede": "PICHCHRAPA videos are free and will stay free. If you have enjoyed them, you can give the artists anything you like, from your side, as a mark of respect.",
+      "qa": [
+        ["Where does the money go?", "The amount goes to PICHCHRAPA's account and is used to honour the artists and the team, and to make new videos."],
+        ["Do I have to pay to watch a video?", "No. Every video will always be free on YouTube and on this website. Giving is entirely your choice."],
+        ["Is this a donation?", "No. It is a mark of respect given of your own free will, and nothing is sold in return, no goods and no services. It is not eligible for income-tax exemption (80G)."],
+        ["Is my payment safe?", "Payment happens on Razorpay's secure page. Your card, UPI or bank details stay with Razorpay; this website neither sees nor stores them."],
+        ["What if something goes wrong?", "Email or call us with your payment ID. If you were charged twice or a failed payment was debited, we check and refund it."]
+      ],
+      "offNote": "This is being switched on and artists can be honoured from here within a few days. Until then, watching and sharing the videos is the greatest respect you can show."
+    }
+  },
+  "policies": {
+    "hi": {
+      "labels": { "terms": "नियम और शर्तें", "refund": "रद्द करना और वापसी", "shipping": "शिपिंग और डिलीवरी", "pricing": "कीमत की जानकारी", "contact": "संपर्क" },
+      "terms": {
+        "title": "नियम और शर्तें",
+        "desc": "pichchrapa.com के उपयोग के नियम और शर्तें, कॉपीराइट और सम्मान-राशि की शर्तें।",
+        "paras": [
+          ["यह वेबसाइट", "pichchrapa.com PICHCHRAPA (प्रोप्राइटरशिप फ़र्म, गोमती नगर, लखनऊ, उत्तर प्रदेश) की वेबसाइट है। इसका मक़सद मनोरंजन और जानकारी देना है। वीडियो YouTube पर चलते हैं और यहाँ सिर्फ़ दिखाए जाते हैं।"],
+          ["कॉपीराइट", "इस वेबसाइट का टेक्स्ट, डिज़ाइन, फ़ोटो और वीडियो PICHCHRAPA और संबंधित कलाकारों का है। इसे बिना अनुमति कॉपी करना, बदलना या अपने नाम से चलाना मना है। वीडियो का लिंक शेयर करना हमेशा स्वागत योग्य है।"],
+          ["सम्मान-राशि", "'सम्मान दीजिए' से मिलने वाली राशि दर्शक की अपनी मर्ज़ी से दी गई राशि है। न्यूनतम ₹20 और अधिकतम ₹50,000 तक की राशि दी जा सकती है। इसके बदले कोई सामान या सेवा नहीं दी जाती। वीडियो देखने के लिए कुछ देना ज़रूरी नहीं है। भुगतान Razorpay के सुरक्षित पेज पर होता है। वापसी के नियम 'रद्द करना और वापसी' पेज पर हैं।"],
+          ["ज़िम्मेदारी की सीमा", "वेबसाइट जैसी है वैसी उपलब्ध कराई जाती है। YouTube या दूसरी वेबसाइटों की सामग्री और उपलब्धता पर हमारा नियंत्रण नहीं है।"],
+          ["बदलाव", "ज़रूरत पड़ने पर ये नियम बदले जा सकते हैं। नया रूप इसी पेज पर दिखेगा।"],
+          ["संपर्क", "ईमेल: {email}, फ़ोन: {phone}।"],
+          ["क़ानूनी क्षेत्र", "इन नियमों पर भारत का क़ानून लागू होगा। किसी भी विवाद का क्षेत्राधिकार लखनऊ की अदालतों का होगा।"]
+        ]
+      },
+      "refund": {
+        "title": "रद्द करना और वापसी",
+        "desc": "PICHCHRAPA की सम्मान-राशि के भुगतान की रद्द करने और वापसी की नीति।",
+        "paras": [
+          ["रद्द करना", "भुगतान पेज बंद कर देने या बीच में छोड़ देने पर कोई रकम नहीं कटती। भुगतान पूरा हो जाने के बाद उसे रद्द नहीं किया जा सकता, क्योंकि वह अपनी मर्ज़ी से दिया गया सम्मान है।"],
+          ["वापसी (रिफ़ंड)", "स्वेच्छा से दी गई राशि वापस नहीं होती। पर अगर किसी भूल से आपके खाते से दो बार पैसे कटे हों, या भुगतान फ़ेल हुआ हो और पैसे कट गए हों, तो 7 दिन के भीतर पेमेंट आईडी के साथ हमें ईमेल कीजिए। जाँच के बाद रकम उसी माध्यम में लौटा दी जाती है, जिससे भुगतान हुआ था। बैंक के हिसाब से इसमें आम तौर पर 5 से 7 कार्य-दिवस लगते हैं।"],
+          ["कैसे बताएँ", "ईमेल: {email}, फ़ोन: {phone}। संदेश में पेमेंट आईडी (pay_ से शुरू होने वाली), भुगतान की तारीख़ और राशि लिखिए।"]
+        ]
+      },
+      "shipping": {
+        "title": "शिपिंग और डिलीवरी",
+        "desc": "PICHCHRAPA की वेबसाइट पर कोई सामान नहीं भेजा जाता, इसलिए शिपिंग और डिलीवरी लागू नहीं है।",
+        "paras": [
+          ["कोई सामान नहीं भेजा जाता", "pichchrapa.com पर कोई सामान नहीं बिकता और 'सम्मान दीजिए' के बदले कोई सामान नहीं भेजा जाता। इसलिए शिपिंग, डिलीवरी या पता देने की कोई ज़रूरत नहीं है।"],
+          ["वीडियो", "सारे वीडियो ऑनलाइन, YouTube और इस वेबसाइट पर तुरंत और मुफ़्त देखे जा सकते हैं।"]
+        ]
+      },
+      "pricing": {
+        "title": "कीमत की जानकारी",
+        "desc": "PICHCHRAPA के वीडियो मुफ़्त हैं। सम्मान-राशि अपनी मर्ज़ी की, ₹20 से ₹50,000 तक।",
+        "paras": [
+          ["वीडियो: मुफ़्त", "PICHCHRAPA के सारे वीडियो देखना मुफ़्त है और हमेशा मुफ़्त रहेगा। कोई सब्सक्रिप्शन या सदस्यता शुल्क नहीं है।"],
+          ["सम्मान-राशि: अपनी मर्ज़ी की", "राशि आप ख़ुद चुनते हैं: ₹20 से ₹50,000 तक। सुझाई गई राशियाँ ₹51, ₹101, ₹251, ₹501 और ₹1100 हैं। आपने जो राशि चुनी, वही कटती है; उसके ऊपर हम कुछ नहीं जोड़ते।"]
+        ]
+      }
+    },
+    "en": {
+      "labels": { "terms": "Terms and conditions", "refund": "Cancellation and refunds", "shipping": "Shipping and delivery", "pricing": "Pricing", "contact": "Contact" },
+      "terms": {
+        "title": "Terms and conditions",
+        "desc": "The terms of using pichchrapa.com, copyright, and the terms for honour payments.",
+        "paras": [
+          ["This website", "pichchrapa.com is the website of PICHCHRAPA (a proprietorship firm in Gomti Nagar, Lucknow, Uttar Pradesh). It exists to entertain and inform. The videos play from YouTube and are only shown here."],
+          ["Copyright", "The text, design, photos and videos on this website belong to PICHCHRAPA and the artists concerned. Copying, changing or passing them off as your own without permission is not allowed. Sharing a link to a video is always welcome."],
+          ["Honour payments", "The amount received through 'Honour the artists' is an amount given by the viewer of their own free will. Any amount from ₹20 to ₹50,000 can be given. Nothing, no goods and no services, is provided in return. You do not have to give anything to watch a video. Payment happens on Razorpay's secure page. The rules for refunds are on the 'Cancellation and refunds' page."],
+          ["Limits of responsibility", "The website is provided as it is. We do not control the content or availability of YouTube or other websites."],
+          ["Changes", "These terms may change when needed. The new version will appear on this page."],
+          ["Contact", "Email: {email}, phone: {phone}."],
+          ["Jurisdiction", "These terms are governed by the law of India. The courts at Lucknow have jurisdiction over any dispute."]
+        ]
+      },
+      "refund": {
+        "title": "Cancellation and refunds",
+        "desc": "The cancellation and refund policy for honour payments made to PICHCHRAPA.",
+        "paras": [
+          ["Cancellation", "Nothing is charged if you close the payment page or leave midway. Once a payment is complete it cannot be cancelled, because it is given of your own free will."],
+          ["Refunds", "An amount given voluntarily is not refunded. But if, by mistake, you were charged twice, or a payment failed and money was still deducted, email us within 7 days with the payment ID. After checking, the amount is returned by the same method used to pay. Depending on your bank this usually takes 5 to 7 working days."],
+          ["How to tell us", "Email: {email}, phone: {phone}. In the message, give the payment ID (it starts with pay_), the date of payment and the amount."]
+        ]
+      },
+      "shipping": {
+        "title": "Shipping and delivery",
+        "desc": "Nothing is shipped from the PICHCHRAPA website, so shipping and delivery do not apply.",
+        "paras": [
+          ["Nothing is shipped", "No goods are sold on pichchrapa.com, and nothing is sent in return for 'Honour the artists'. So there is no shipping, no delivery and no need to give an address."],
+          ["Videos", "Every video can be watched online, immediately and free, on YouTube and on this website."]
+        ]
+      },
+      "pricing": {
+        "title": "Pricing",
+        "desc": "PICHCHRAPA videos are free. Honour payments are any amount you choose, from ₹20 to ₹50,000.",
+        "paras": [
+          ["Videos: free", "Watching every PICHCHRAPA video is free and always will be. There is no subscription or membership fee."],
+          ["Honour payments: any amount you choose", "You choose the amount yourself, from ₹20 to ₹50,000. Suggested amounts are ₹51, ₹101, ₹251, ₹501 and ₹1100. You are charged exactly the amount you chose; we add nothing on top."]
+        ]
+      }
+    }
+  }
+}

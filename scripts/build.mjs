@@ -352,6 +352,7 @@ ${body}
       <ul>
         <li><a href="${esc(site.channelUrl)}">YouTube: @gapistaan</a></li>
         <li><a href="${esc(site.instagramUrl)}">Instagram: @gapistaan</a></li>
+        ${site.facebookUrl ? `<li><a href="${esc(site.facebookUrl)}">Facebook</a></li>` : ''}
         ${(site.brands || []).map((x) => `<li><a href="${esc(x.url || x.youtube)}">${esc(x.name)}</a></li>`).join('\n        ')}
       </ul>
     </div>
@@ -571,6 +572,27 @@ const crumbNav = (...parts) => `<nav class="crumbs" aria-label="${T('आप य�
 const homeCrumb = () => `<a href="/">${T('गैपिस्तान', 'Gapistaan')}</a>`;
 
 // ---------- home ----------
+let socN = 0;
+const socIcon = (k) => {
+  const id = `sg${++socN}`;
+  if (k === 'instagram') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><radialGradient id="${id}" cx=".3" cy="1.05" r="1.2"><stop offset="0" stop-color="#ffd776"/><stop offset=".25" stop-color="#f9873a"/><stop offset=".55" stop-color="#e1306c"/><stop offset=".8" stop-color="#833ab4"/><stop offset="1" stop-color="#405de6"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#${id})"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.3" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg>`;
+  if (k === 'youtube') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#f00"/><rect x="8" y="14" width="32" height="20" rx="6" fill="#fff"/><path d="M20 19.5v9l8-4.5z" fill="#f00"/></svg>`;
+  return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#1877f2"/><path d="M26.6 41V26.4h4.9l.8-5.7h-5.7v-3.6c0-1.6.5-2.8 2.8-2.8h3V9.2c-.5-.1-2.3-.2-4.3-.2-4.3 0-7.2 2.6-7.2 7.4v4.3h-4.9v5.7h4.9V41z" fill="#fff"/></svg>`;
+};
+// Follow cards: big Instagram, YouTube and Facebook tiles. A card appears only when its link is filled in content/site.json.
+const socials = () => [
+  ['instagram', 'Instagram', '@gapistaan', site.instagramUrl, T('फ़ॉलो कीजिए', 'Follow')],
+  ['youtube', 'YouTube', '@gapistaan', site.channelUrl, T('सब्सक्राइब कीजिए', 'Subscribe')],
+  ['facebook', 'Facebook', 'Gapistaan', site.facebookUrl, T('पेज फ़ॉलो कीजिए', 'Follow the page')],
+].filter((x) => x[3]);
+const socialSection = () => `<section class="sec" aria-labelledby="social-h">
+  <div class="wrap">
+    <h2 class="h2" id="social-h">${T('हमसे जुड़िए', 'Follow Gapistaan')}</h2>
+    <p class="lede">${T('नया एपिसोड, क्लिप और पर्दे के पीछे की झलक सबसे पहले यहाँ।', 'New episodes, clips and behind-the-scenes, first, right here.')}</p>
+    <div class="socials">${socials().map(([k, name, handle, url, cta]) => `<a class="soc soc-${k}" href="${esc(url)}" target="_blank" rel="noopener"><span class="soc-ic">${socIcon(k)}</span><span class="soc-t"><b>${name}</b><span class="soc-h">${esc(handle)}</span><span class="soc-go">${esc(cta)}</span></span></a>`).join('')}</div>
+  </div>
+</section>`;
+
 function homePage() {
   const latest = newestFirst[0];
   const b = biz();
@@ -709,6 +731,7 @@ ${GIFT_ON ? `<section class="sec" aria-label="${esc(G().short)}">
     ${giftBox({ variant: 'home', id: 'gift', pageName: 'home' })}
   </div>
 </section>` : ''}
+${socialSection()}
 ${boards ? `<section class="sec sec-alt" aria-labelledby="brands-h">
   <div class="wrap">
     <h2 class="h2" id="brands-h">${T(`${esc(site.presents)} परिवार`, `The ${esc(site.presents)} family`)}</h2>
@@ -732,7 +755,7 @@ ${contactHtml}
           alternateName: 'गैपिस्तान',
           url: A('/'),
           logo: abs('/img/logo-520.webp'),
-          sameAs: [site.channelUrl, site.instagramUrl],
+          sameAs: [site.channelUrl, site.instagramUrl, site.facebookUrl].filter(Boolean),
           parentOrganization: { ...production, sameAs: (site.brands || []).filter((x) => x.name === site.presents).map((x) => x.youtube) },
           ...(email ? { email } : {}),
         },

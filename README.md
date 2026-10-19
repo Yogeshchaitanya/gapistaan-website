@@ -23,7 +23,7 @@ YouTube चैनल [@gapistaan](https://www.youtube.com/@gapistaan) की ऑ
 - किसी एपिसोड पर अपना लिखा टेक्स्ट: `content/episodes/<videoId>.md` (हिंदी) और `<videoId>.en.md` (English); सादे पैराग्राफ़, बीच में खाली लाइन
 - English वर्ज़न (`/en/`): टेक्स्ट `content/en.json` में (नाम, बायोडाटा, FAQ, होम पेज के वाक्य)। बाक़ी बटन और लेबल `scripts/build.mjs` में `T('हिंदी', 'English')` के रूप में हैं।
 - "तालियाँ भेजें" बॉक्स का टेक्स्ट, राशियाँ, और नीति-पेजों (Terms, Refund, Shipping, Pricing, Contact) के टेक्स्ट: `content/gift.json`
-  - `"enabled": false` होने पर बॉक्स, मेन्यू/फ़ुटर का गिफ़्ट लिंक और /support/ का फ़ॉर्म साइट से हटे रहते हैं। Razorpay से gapistaan.com की मंज़ूरी मिलने के बाद इसे `true` करके push कीजिए।
+  - `"enabled": true` (अब चालू)। बॉक्स, मेन्यू/फ़ुटर का गिफ़्ट लिंक और /support/ का फ़ॉर्म ब्राउज़र में तब तक छिपे रहते हैं जब तक `/api/status` `{"payments":"on"}` न दे, यानी Worker में `RZP_KEY_ID` और `RZP_KEY_SECRET` Secret न हों। बंद करना हो तो `false` करके push कीजिए।
 - डिज़ाइन: `src/styles.css`
 - कैश और सुरक्षा headers: `public/_headers` (fonts/images के लिए) और `src/worker.js` (पेजों के लिए)
 - लोगो, चाचा की तस्वीर, Gen Gap लोगो और शेयर इमेज: `public/img/`

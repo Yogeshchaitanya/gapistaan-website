@@ -360,18 +360,30 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Gapistaan | गैपिस्तान","alternateName":["Gapistaan","Gapistan","गैपिस्तान","Gen Gap"],"url":"https://gapistaan.com/","inLanguage":"hi"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Gapistaan","alternateName":"गैपिस्तान","url":"https://gapistaan.com/","logo":"https://gapistaan.com/img/logo-520.webp","sameAs":["https://www.youtube.com/@gapistaan","https://www.instagram.com/gapistaan/"],"parentOrganization":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com","sameAs":["https://www.youtube.com/@pichchrapa"]},"email":"Pichchrapa@gmail.com"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TVSeries","name":"Gen Gap","alternateName":["Gapistaan","गैपिस्तान","जेन गैप"],"url":"https://gapistaan.com/","inLanguage":"hi","genre":["Comedy","Satire"],"description":"Gapistaan (गैपिस्तान) is the home of Gen Gap, a Hindi comedy web series by PICHCHRAPA, Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.","numberOfEpisodes":7,"creator":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"director":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"actor":[{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},{"@type":"Person","name":"Ayushi Tiwari","alternateName":["आयुषी तिवारी","Aayushi Dutt Tiwari"],"url":"https://gapistaan.com/cast/ayushi-tiwari/"},{"@type":"Person","name":"Saanviya","alternateName":["सान्विया"],"url":"https://gapistaan.com/cast/saanviya/"},{"@type":"Person","name":"Sarita Vyas","alternateName":["सरिता व्यास"],"url":"https://gapistaan.com/cast/sarita-vyas/"},{"@type":"Person","name":"Ravi Dev Rai","alternateName":["रवि देव राय","Ravi Yadav"],"url":"https://gapistaan.com/cast/ravi-dev-rai/"},{"@type":"Person","name":"Shubham Kumar Singh","alternateName":["शुभम कुमार सिंह","Shubham Singh"],"url":"https://gapistaan.com/cast/shubham-kumar-singh/"},{"@type":"Person","name":"Rohit Daas","alternateName":["रोहित दास","Rohit Das"],"url":"https://gapistaan.com/cast/rohit-das/"},{"@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/"}],"productionCompany":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com"},"image":"https://gapistaan.com/img/og-home.jpg"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"गैपिस्तान (Gapistaan) क्या है?","acceptedAnswer":{"@type":"Answer","text":"गैपिस्तान एक YouTube चैनल है और हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर। लखनऊ के एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज के Gen Z लड़कों की रोज़ की नोकझोंक इसकी कहानी है। ये PICHCHRAPA की पेशकश है।"}},{"@type":"Question","name":"Gen Gap का नया एपिसोड कब आता है?","acceptedAnswer":{"@type":"Answer","text":"नया एपिसोड हर दूसरे दिन, शाम 6:30 से 7:30 के बीच। हर एपिसोड पहले YouTube चैनल @gapistaan पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी।"}},{"@type":"Question","name":"क्या Gen Gap की कोई स्क्रिप्ट होती है?","acceptedAnswer":{"@type":"Answer","text":"नहीं। सिर्फ़ सिचुएशन तय होती है, डायलॉग कलाकार मौके पर ख़ुद बनाते हैं। पूरी सीरीज़ improvised है।"}},{"@type":"Question","name":"गैपिस्तान किसने बनाया है?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।"}},{"@type":"Question","name":"गैपिस्तान में कौन-कौन से कलाकार हैं?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।"}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?","acceptedAnswer":{"@type":"Answer","text":"हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।"}},{"@type":"Question","name":"ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?","acceptedAnswer":{"@type":"Answer","text":"ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"गैपिस्तान (Gapistaan) क्या है?","acceptedAnswer":{"@type":"Answer","text":"गैपिस्तान एक YouTube चैनल है और हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर। लखनऊ के एक एक्टिंग इंस्टीट्यूट में पुरानी पीढ़ी के चाचा और आज के Gen Z लड़कों की रोज़ की नोकझोंक इसकी कहानी है। ये PICHCHRAPA की पेशकश है।"}},{"@type":"Question","name":"Gen Gap का नया एपिसोड कब आता है?","acceptedAnswer":{"@type":"Answer","text":"नया एपिसोड हर दूसरे दिन, शाम 6:30 से 7:30 के बीच। हर एपिसोड पहले YouTube चैनल @gapistaan पर आता है और लगभग एक घंटे में इस वेबसाइट पर भी।"}},{"@type":"Question","name":"क्या Gen Gap की कोई स्क्रिप्ट होती है?","acceptedAnswer":{"@type":"Answer","text":"नहीं। सिर्फ़ सिचुएशन तय होती है, डायलॉग कलाकार मौके पर ख़ुद बनाते हैं। पूरी सीरीज़ improvised है।"}},{"@type":"Question","name":"गैपिस्तान किसने बनाया है?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।"}},{"@type":"Question","name":"गैपिस्तान में कौन-कौन से कलाकार हैं?","acceptedAnswer":{"@type":"Answer","text":"योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।"}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?","acceptedAnswer":{"@type":"Answer","text":"हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।"}},{"@type":"Question","name":"कलाकारों को तालियाँ (गिफ़्ट) कैसे भेज सकते हैं?","acceptedAnswer":{"@type":"Answer","text":"अगर आपका मन करे, तो gapistaan.com/support/ पर अपनी मर्ज़ी की राशि चुनिए। यह पूरी तरह स्वैच्छिक है और सारे एपिसोड हमेशा मुफ़्त रहेंगे।"}},{"@type":"Question","name":"ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?","acceptedAnswer":{"@type":"Answer","text":"ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">सीधे मुख्य हिस्से पर जाएँ</a>
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
     <a class="lang" href="/en/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
@@ -530,7 +542,31 @@ html.gift-on .gift-off-note{display:none}
 </ul>
   </div>
 </section>
-
+<section class="sec" aria-label="सीन पसंद आया? कलाकारों को तालियाँ भेजिए">
+  <div class="wrap">
+    <aside class="gift gift-home" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;भुगतान का पेज खुल रहा है…&quot;,&quot;verifying&quot;:&quot;भुगतान की पुष्टि हो रही है…&quot;,&quot;thanks&quot;:&quot;शुक्रिया! आपकी तालियाँ पूरी टीम तक पहुँच गईं।&quot;,&quot;failed&quot;:&quot;कुछ गड़बड़ हुई। अगर आपके पैसे कट गए हों तो हमें ईमेल कीजिए, हम जाँचकर बताएँगे।&quot;,&quot;offline&quot;:&quot;तालियाँ भेजने की सुविधा अभी चालू हो रही है। थोड़ी देर बाद फिर कोशिश कीजिए।&quot;,&quot;amountErr&quot;:&quot;कम से कम ₹20 की राशि लिखिए।&quot;,&quot;desc&quot;:&quot;गैपिस्तान के कलाकारों के लिए तालियाँ&quot;,&quot;min&quot;:20}" data-who="" data-page="home">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">सीन पसंद आया? कलाकारों को तालियाँ भेजिए</h2>
+    <p class="gift-text">गैपिस्तान का हर सीन बिना स्क्रिप्ट के, उसी पल बनता है। कलाकार अपने दम पर डायलॉग गढ़ते हैं, और आपकी हँसी ही उनकी सबसे बड़ी कमाई है। एपिसोड देखना मुफ़्त है और हमेशा मुफ़्त रहेगा। पर अगर किसी सीन ने आपका दिन बना दिया, तो अपनी मर्ज़ी से एक गिफ़्ट भेजकर टीम को बता दीजिए कि मेहनत आप तक पहुँची।</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>एक ताली</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>तालियाँ</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>वाह-वाह</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>दिल से शाबाशी</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>स्टैंडिंग ओवेशन</span></button></li></ul>
+    <div class="gift-fields">
+      <label>आपका नाम (चाहें तो)<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>कलाकारों के लिए दो शब्द (चाहें तो)<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>
+    <p class="gift-own"><label>या अपनी राशि <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="या अपनी राशि"></span></label><button type="button" class="btn btn-gold gift-go">तालियाँ भेजें</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">भुगतान Razorpay के सुरक्षित पेज पर होता है। यह अपनी मर्ज़ी से दिया गया गिफ़्ट है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और भेजी गई राशि वापस नहीं होती। <a href="/refund-policy/">वापसी नीति</a></p>
+  </div>
+</aside>
+  </div>
+</section>
+<section class="sec" aria-labelledby="social-h">
+  <div class="wrap">
+    <h2 class="h2" id="social-h">हमसे जुड़िए</h2>
+    <p class="lede">नया एपिसोड, क्लिप और पर्दे के पीछे की झलक सबसे पहले यहाँ।</p>
+    <div class="socials"><a class="soc soc-instagram" href="https://www.instagram.com/gapistaan/" target="_blank" rel="noopener"><span class="soc-ic"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><radialGradient id="sg3" cx=".3" cy="1.05" r="1.2"><stop offset="0" stop-color="#ffd776"/><stop offset=".25" stop-color="#f9873a"/><stop offset=".55" stop-color="#e1306c"/><stop offset=".8" stop-color="#833ab4"/><stop offset="1" stop-color="#405de6"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#sg3)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.3" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span><span class="soc-t"><b>Instagram</b><span class="soc-h">@gapistaan</span><span class="soc-go">फ़ॉलो कीजिए</span></span></a><a class="soc soc-youtube" href="https://www.youtube.com/@gapistaan" target="_blank" rel="noopener"><span class="soc-ic"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#f00"/><rect x="8" y="14" width="32" height="20" rx="6" fill="#fff"/><path d="M20 19.5v9l8-4.5z" fill="#f00"/></svg></span><span class="soc-t"><b>YouTube</b><span class="soc-h">@gapistaan</span><span class="soc-go">सब्सक्राइब कीजिए</span></span></a></div>
+  </div>
+</section>
 <section class="sec sec-alt" aria-labelledby="brands-h">
   <div class="wrap">
     <h2 class="h2" id="brands-h">PICHCHRAPA परिवार</h2>
@@ -561,6 +597,7 @@ html.gift-on .gift-off-note{display:none}
       <details><summary>गैपिस्तान किसने बनाया है?</summary><p>योगेश चैतन्य ने, जिन्हें फ़िल्मों में योगेश राज मिश्रा के नाम से जाना जाता है। वे इसके क्रिएटर, डायरेक्टर और एडिटर हैं, और चाचा का किरदार भी ख़ुद निभाते हैं।</p></details>
       <details><summary>गैपिस्तान में कौन-कौन से कलाकार हैं?</summary><p>योगेश चैतन्य (चाचा), आयुषी तिवारी, सान्विया, सरिता व्यास, रवि देव राय, शुभम कुमार सिंह, रोहित दास और दीपक मंडल। सभी कलाकार Indian Films Academy, लखनऊ से प्रशिक्षित हैं।</p></details>
       <details><summary>Gapistaan, Gapistan, गैपिस्तान और गपिस्तान: क्या ये सब एक ही हैं?</summary><p>हाँ। नाम कई तरह से लिखा जाता है, पर चैनल और सीरीज़ एक ही है: YouTube पर @gapistaan और वेबसाइट gapistaan.com।</p></details>
+      <details><summary>कलाकारों को तालियाँ (गिफ़्ट) कैसे भेज सकते हैं?</summary><p>अगर आपका मन करे, तो gapistaan.com/support/ पर अपनी मर्ज़ी की राशि चुनिए। यह पूरी तरह स्वैच्छिक है और सारे एपिसोड हमेशा मुफ़्त रहेंगे।</p></details>
       <details><summary>ब्रांड कोलैब या स्पॉन्सरशिप के लिए किससे बात करें?</summary><p>ईमेल Pichchrapa@gmail.com पर लिखिए या 077540 00121 पर कॉल कीजिए।</p></details>
     </div>
     <p class="more-link"><a href="/about/">गैपिस्तान कैसे बनता है, पूरी कहानी पढ़ें</a></p>
@@ -596,7 +633,7 @@ html.gift-on .gift-off-note{display:none}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
-        
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/contact/">संपर्क करें</a></li>
       </ul>
     </div>
@@ -615,6 +652,7 @@ html.gift-on .gift-off-note{display:none}
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

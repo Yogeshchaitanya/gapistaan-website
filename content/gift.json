@@ -130,7 +130,7 @@
       "offNote": "Sending applause is being switched on and will be here within a few days. Until then, watching and sharing the episodes is the biggest encouragement you can give."
     }
   },
-  "enabled": false,
+  "enabled": true,
   "policies": {
     "hi": {
       "labels": {

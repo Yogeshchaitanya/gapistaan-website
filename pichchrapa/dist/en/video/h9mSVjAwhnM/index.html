@@ -519,6 +519,60 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
   .camrow.in .cam .reel,.camrow.in .cam .rec,.camrow.in .cam .glint,.soc:hover .soc-ic svg{animation:none!important}
   .soc{transition:none}.soc:hover{transform:none}
 }
+
+/* ---- Honour the artists (pay what you want): a brass cinema ticket on the teal wall ---- */
+html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only,html:not(.gift-on) .gift-sec{display:none}
+html.gift-on .gift-off-note{display:none}
+.topnav a.gift-link{color:var(--brass-hi)}
+.topnav a.gift-link:hover,.topnav a.gift-link[aria-current=page]{color:#fff}
+.gift-sec{padding-top:0}
+.sec.gift-sec{padding-top:0}
+.gift{position:relative;max-width:64rem;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#0d5754,#073a38 64%);box-shadow:0 0 0 1px var(--line),0 24px 50px -28px rgba(0,0,0,.7)}
+.gift::before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:repeating-linear-gradient(180deg,var(--brass) 0 12px,transparent 12px 22px)}
+.gift-body{padding:1.6rem 1.3rem 1.4rem 2rem}
+@media (min-width:48rem){.gift-body{padding:2.2rem 2.6rem 2rem 3.2rem}}
+.gift-h{margin:0 0 .5rem;font:700 clamp(1.9rem,4.4vw,2.8rem)/1.05 var(--display);letter-spacing:.01em;color:#fff}
+.gift-text{margin:0 0 1.3rem;max-width:62ch;color:#cfe2dd}
+.stubs{list-style:none;margin:0 0 1.2rem;padding:0;display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(10.4rem,1fr))}
+.stubs li{border-radius:8px}
+.stubs li:has(.stub:focus-visible){outline:2px solid var(--brass-hi);outline-offset:3px}
+.stub{--n:9px;display:flex;align-items:center;justify-content:center;gap:.75rem;width:100%;min-height:4.2rem;padding:.5rem 1.1rem;border:0;border-radius:6px;background:rgba(205,164,90,.17);color:var(--ivory);font:inherit;cursor:pointer;
+  -webkit-mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat;
+  mask:radial-gradient(circle var(--n) at 0 50%,#0000 97%,#000) left/51% 100% no-repeat,radial-gradient(circle var(--n) at 100% 50%,#0000 97%,#000) right/51% 100% no-repeat}
+.stub:focus-visible{outline:none}
+.stub b{font:700 1.9rem/1 var(--display);letter-spacing:.02em;color:var(--brass-hi)}
+.stub span{padding-left:.75rem;border-left:2px dashed rgba(240,210,142,.5);font-size:.85rem;font-weight:600;color:var(--mist);line-height:1.25;text-align:left}
+.stub:hover{background:rgba(205,164,90,.3)}
+.stub.is-on{background:linear-gradient(180deg,#f0d28e,#c79a4a)}
+.stub.is-on b,.stub.is-on span{color:#1c1405}
+.stub.is-on span{border-left-color:rgba(28,20,5,.45)}
+.gift-fields{display:grid;gap:.9rem;max-width:40rem;margin:0 0 1.1rem}
+.gift label{display:grid;gap:.3rem;font-weight:600;font-size:.95rem}
+.gift input,.gift textarea{width:100%;font:400 1rem/1.5 var(--body);color:var(--ivory);background:rgba(2,24,25,.55);border:1.5px solid var(--line);border-radius:10px;padding:.6rem .8rem}
+.gift textarea{resize:vertical;min-height:4.2rem}
+.gift input:focus,.gift textarea:focus{outline:2px solid var(--brass-hi);outline-offset:1px}
+.gift-own{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.8rem 1.1rem;margin:0}
+.gift-own label{display:flex;align-items:center;gap:.6rem}
+.rs{display:inline-flex;align-items:center;gap:.4rem;font:700 1.6rem/1 var(--display);color:var(--brass-hi)}
+.rs input{width:7.5rem;font:600 1.1rem/1.3 var(--body);color:var(--ivory)}
+.pay-status{min-height:1.6em;margin:.9rem 0 0;font-weight:600;color:var(--brass-hi)}
+.gift.is-thanked .pay-status{color:#9be3b0}
+.gift .fine{margin:.5rem 0 0;max-width:64ch;color:var(--mist);font-size:.85rem;line-height:1.6}
+.gift .fine a{color:var(--mist)}
+.gift-episode .gift-body{padding-block:1.3rem}
+.gift-episode .gift-h{font-size:1.9rem}
+.gift-episode .gift-text{margin-bottom:1rem}
+.block.gift-sec{margin-top:2.2rem}
+.foot-pol{display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;margin-top:2rem;font-size:.92rem}
+.foot-pol a{color:var(--mist)}
+@media (prefers-reduced-motion:reduce){.stub{transition:none}}
+@media (max-width:40rem){
+  .stubs{grid-template-columns:repeat(2,1fr)}
+  .stubs li:last-child:nth-child(odd){grid-column:1/-1}
+  .stub{flex-direction:column;gap:.1rem;min-height:4.6rem;padding:.5rem .6rem}
+  .stub span{padding:.25rem 0 0;border-left:0;border-top:2px dashed rgba(240,210,142,.5);text-align:center}
+  .stub.is-on span{border-top-color:rgba(28,20,5,.45)}
+}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/en/"},{"@type":"ListItem","position":2,"name":"Filmy Adalat","item":"https://pichchrapa.com/en/filmy-adalat/"},{"@type":"ListItem","position":3,"name":"Pati Patni Aur Wo (Episode 1)","item":"https://pichchrapa.com/en/video/h9mSVjAwhnM/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Pati Patni Aur Wo (Episode 1)","description":"🎬 Filmy Adalat | Episode 1 - Pati Ka Murder | A Hilarious Courtroom Comedy Show! ⚖️😂 Filmy Adalat is a full-fledged comedy show, created entirely by the talented students of the Indian Film Academy. All the actors in this series are newcomers, and the primary goal of this show is pure entertainment. It is not intended to be taken seriously or associated with real-life events or individuals. Get ready for endless laughter as we bring you the most quirky courtroom battles, unexpected twists, and hilarious characters. If you love content like TVF, Mani Miraj, and Bollywood-style humor, then you’ll enjoy this! 🎭🤣","thumbnailUrl":["https://i.ytimg.com/vi/h9mSVjAwhnM/maxresdefault.jpg","https://i.ytimg.com/vi/h9mSVjAwhnM/hqdefault.jpg"],"uploadDate":"2025-01-21T06:06:06Z","duration":"PT34M56S","embedUrl":"https://www.youtube.com/embed/h9mSVjAwhnM","contentUrl":"https://www.youtube.com/watch?v=h9mSVjAwhnM","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"partOfSeries":{"@type":"TVSeries","name":"Filmy Adalat","url":"https://pichchrapa.com/en/filmy-adalat/"},"keywords":"bollywood gossip, celebrity cases, courtroom drama, entertainment news, film court, filmi adalat, indian cinema, legal drama, movie court, star gossip"}</script>
@@ -527,12 +581,12 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
 <a class="skip" href="#main">Skip to main content</a>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="/en/" aria-label="PICHCHRAPA home"><span class="brand-mark"><svg class="clap clap-live" viewBox="0 0 72 60" aria-hidden="true" focusable="false"><defs><clipPath id="cm146a"><rect x="4" y="13" width="64" height="11" rx="2"/></clipPath><clipPath id="cm146b"><rect x="4" y="26" width="64" height="10" rx="2"/></clipPath></defs>
+    <a class="brand" href="/en/" aria-label="PICHCHRAPA home"><span class="brand-mark"><svg class="clap clap-live" viewBox="0 0 72 60" aria-hidden="true" focusable="false"><defs><clipPath id="cm151a"><rect x="4" y="13" width="64" height="11" rx="2"/></clipPath><clipPath id="cm151b"><rect x="4" y="26" width="64" height="10" rx="2"/></clipPath></defs>
 <rect x="5" y="37" width="62" height="21" rx="2.5" fill="#0b1313" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/><path d="M10 45h52M10 51h52M41 45v6M25 51v5" stroke="#f0d28e" stroke-width=".9" fill="none"/>
-<rect x="4" y="26" width="64" height="10" rx="2" fill="#0b1313"/><g clip-path="url(#cm146b)" fill="#cda45a"><path d="M5 36h5l6-10h-5z"/><path d="M15.5 36h5l6-10h-5z"/><path d="M26 36h5l6-10h-5z"/><path d="M36.5 36h5l6-10h-5z"/><path d="M47 36h5l6-10h-5z"/><path d="M57.5 36h5l6-10h-5z"/></g><rect x="4" y="26" width="64" height="10" rx="2" fill="none" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/>
-<g class="clap-arm"><rect x="4" y="13" width="64" height="11" rx="2" fill="#0b1313"/><g clip-path="url(#cm146a)" fill="#f0d28e"><path d="M10 24h5l6-11h-5z"/><path d="M20.5 24h5l6-11h-5z"/><path d="M31 24h5l6-11h-5z"/><path d="M41.5 24h5l6-11h-5z"/><path d="M52 24h5l6-11h-5z"/><path d="M62.5 24h5l6-11h-5z"/></g><rect x="4" y="13" width="64" height="11" rx="2" fill="none" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/></g>
+<rect x="4" y="26" width="64" height="10" rx="2" fill="#0b1313"/><g clip-path="url(#cm151b)" fill="#cda45a"><path d="M5 36h5l6-10h-5z"/><path d="M15.5 36h5l6-10h-5z"/><path d="M26 36h5l6-10h-5z"/><path d="M36.5 36h5l6-10h-5z"/><path d="M47 36h5l6-10h-5z"/><path d="M57.5 36h5l6-10h-5z"/></g><rect x="4" y="26" width="64" height="10" rx="2" fill="none" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/>
+<g class="clap-arm"><rect x="4" y="13" width="64" height="11" rx="2" fill="#0b1313"/><g clip-path="url(#cm151a)" fill="#f0d28e"><path d="M10 24h5l6-11h-5z"/><path d="M20.5 24h5l6-11h-5z"/><path d="M31 24h5l6-11h-5z"/><path d="M41.5 24h5l6-11h-5z"/><path d="M52 24h5l6-11h-5z"/><path d="M62.5 24h5l6-11h-5z"/></g><rect x="4" y="13" width="64" height="11" rx="2" fill="none" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/></g>
 <circle cx="9" cy="25" r="2.3" fill="#f0d28e"/></svg><img class="brand-logo" src="/img/logo-200.webp" width="200" height="157" alt=""></span><span class="brand-name">PICHCHRAPA</span></a>
-    <nav class="topnav" aria-label="Main menu"><a href="/en/filmy-adalat/">Filmy Adalat</a><a href="/en/raja-ka-baja/">Raja Ka Baja</a><a href="/en/about/">Our story</a><a href="/en/contact/">Contact</a></nav>
+    <nav class="topnav" aria-label="Main menu"><a href="/en/raja-ka-baja/">Raja Ka Baja</a><a href="/en/filmy-adalat/">Filmy Adalat</a><a href="/en/about/">Our story</a><a href="/en/contact/">Contact</a><a href="/en/support/" class="gift-link">Honour the artists</a></nav>
     <a class="lang" href="/video/h9mSVjAwhnM/" hreflang="hi" lang="hi" title="यह पेज हिंदी में पढ़ें">हिंदी</a>
     <a class="btn btn-gold btn-sm" href="https://www.youtube.com/@pichchrapa?sub_confirmation=1" target="_blank" rel="noopener"><span class="hide-sm">Watch on </span>YouTube</a>
   </div>
@@ -548,6 +602,17 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
 <p>Get ready for endless laughter as we bring you the most quirky courtroom battles, unexpected twists, and hilarious characters. If you love content like TVF, Mani Miraj, and Bollywood-style humor, then you’ll enjoy this! 🎭🤣</p>
 <p>For more videos like this, <a href="https://www.youtube.com/@pichchrapa?sub_confirmation=1" target="_blank" rel="noopener">subscribe to PICHCHRAPA on YouTube</a>.</p>
 </section>
+<div class="block gift-sec"><aside class="gift gift-episode" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;Opening the payment page…&quot;,&quot;verifying&quot;:&quot;Confirming your payment…&quot;,&quot;thanks&quot;:&quot;Thank you! Your respect has reached the artists.&quot;,&quot;failed&quot;:&quot;Something went wrong. If money was deducted from your account, please email us and we will look into it.&quot;,&quot;offline&quot;:&quot;This is being switched on. Please try again in a little while.&quot;,&quot;amountErr&quot;:&quot;Please enter an amount of at least ₹20.&quot;,&quot;desc&quot;:&quot;Honouring the PICHCHRAPA artists&quot;,&quot;min&quot;:20}" data-page="video h9mSVjAwhnM">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">Enjoyed this video? Honour the artists</h2>
+    <p class="gift-text">If you liked it, give the artists in this video anything you like as a mark of respect. If you do not, watching is still free.</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>Salute</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>Well done</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>Bravo</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>Heartfelt honour</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>The King&#39;s reward</span></button></li></ul>
+    
+    <p class="gift-own"><label>or your own amount <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="or your own amount"></span></label><button type="button" class="btn btn-gold gift-go">Honour the artists</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">Payment happens on Razorpay&#39;s secure page. This is a voluntary mark of respect, not a donation; it is not eligible for income-tax exemption (80G), and amounts given are non-refundable. <a href="/en/refund-policy/">Refund policy</a></p>
+  </div>
+</aside></div>
 <div class="pn"><a href="/en/video/HQa9ZVHcHCI/"><small>Previous</small>Pati Ka Murder (Trailer)</a><span></span></div>
 <h2 class="h3" style="margin-top:2.4rem">More videos from this case</h2><div class="grid" style="margin-top:1rem"><article class="vcard">
   <a class="thumb" href="/en/video/HQa9ZVHcHCI/" tabindex="-1" aria-hidden="true"><img src="https://i.ytimg.com/vi/HQa9ZVHcHCI/maxresdefault.jpg" width="320" height="180" loading="lazy" decoding="async" alt=""><span class="play"></span><span class="dur">2:38</span></a>
@@ -565,8 +630,8 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
       <div>
         <h2>Series</h2>
         <ul>
-          <li><a href="/en/filmy-adalat/">Filmy Adalat</a></li>
           <li><a href="/en/raja-ka-baja/">Raja Ka Baja</a></li>
+          <li><a href="/en/filmy-adalat/">Filmy Adalat</a></li>
           <li><a href="https://gapistaan.com/en/">Gapistaan</a></li>
           <li><a href="https://www.youtube.com/@pichchrapa" target="_blank" rel="noopener">YouTube channel</a></li>
           <li><a href="https://www.instagram.com/pichchrapa/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://www.facebook.com/pichchrapa" target="_blank" rel="noopener">Facebook</a></li>
@@ -578,7 +643,7 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
           <li><a href="/en/about/">Our story</a></li>
           <li><a href="/en/contact/">Contact</a></li>
           <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
-          <li><a href="/en/privacy/">Privacy policy</a></li>
+          <li class="gift-only"><a href="/en/support/">Honour the artists</a></li>
         </ul>
       </div>
       <div>
@@ -590,6 +655,7 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
         </ul>
       </div>
     </div>
+    <nav class="foot-pol" aria-label="Policies"><a href="/en/terms/">Terms and conditions</a><a href="/en/refund-policy/">Cancellation and refunds</a><a href="/en/shipping-policy/">Shipping and delivery</a><a href="/en/pricing/">Pricing</a><a href="/en/privacy/">Privacy policy</a><a href="/en/contact/">Contact</a></nav>
     <div class="foot-base"><span>&copy; 2026 PICHCHRAPA. All rights reserved.</span><span>Videos play from YouTube and are added here automatically.</span></div>
   </div>
 </footer>
@@ -725,6 +791,49 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
       var hidden=grid.querySelectorAll('[hidden]'), n=0;
       hidden.forEach(function(el){ if(n<24){ el.hidden=false; n++; } });
       if(!grid.querySelector('[hidden]')) btn.remove();
+    });
+  });
+})();
+
+// "Honour the artists": the box, its menu link and the page text stay hidden until the server says payments are switched on.
+// Then: pick a ticket stub, Razorpay Checkout opens. The server decides nothing about the amount except the limits.
+(function(){
+  var doc=document, root=doc.documentElement;
+  if(!doc.querySelector('.gift,.gift-link')) return;
+  var on=function(){ root.classList.add('gift-on'); };
+  var cached=false; try{ cached=sessionStorage.getItem('gift-on')==='1'; }catch(e){}
+  if(cached) on();
+  fetch('/api/status').then(function(r){ return r.json(); }).then(function(j){
+    if(j&&j.payments==='on'){ on(); try{ sessionStorage.setItem('gift-on','1'); }catch(e){} }
+    else { root.classList.remove('gift-on'); try{ sessionStorage.removeItem('gift-on'); }catch(e){} }
+  }).catch(function(){});
+
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=doc.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; doc.head.appendChild(s); }); }
+  doc.querySelectorAll('.gift').forEach(function(box){
+    var T=JSON.parse(box.getAttribute('data-t')), pg=box.getAttribute('data-page')||'';
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.gift-go');
+    var nm=box.querySelector('input[name=gname]'), msg=box.querySelector('textarea[name=gmsg]');
+    var stubs=box.querySelectorAll('.stub');
+    var say=function(m){ st.textContent=m||''; };
+    function mark(){ stubs.forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-amt')===String(+input.value)); }); }
+    stubs.forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); mark(); say(''); }); });
+    input.addEventListener('input',mark);
+    function fail(m){ go.disabled=false; say(m); }
+    go.addEventListener('click',function(){
+      var a=Math.round(+input.value);
+      if(!(a>=T.min)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true; say(T.opening);
+      post('/api/order',{amount:a,name:nm?nm.value:'',message:msg?msg.value:'',page:pg,lang:root.lang}).then(function(o){
+        if(!o.order_id){ fail(o._status===503||o._status===404?T.offline:T.failed); return; }
+        return loadRzp().then(function(){
+          var paid=false;
+          var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'PICHCHRAPA', description:T.desc, image:location.origin+'/apple-touch-icon.png', prefill:{ name:nm?nm.value:'' }, notes:{ source:'website' }, theme:{ color:'#0a4644' },
+            handler:function(r){ paid=true; say(T.verifying); post('/api/verify',r).then(function(v){ if(v.ok){ go.disabled=false; box.classList.add('is-thanked'); say(T.thanks); } else fail(T.failed); },function(){ fail(T.failed); }); },
+            modal:{ ondismiss:function(){ if(!paid) fail(''); } } });
+          rz.open();
+        },function(){ fail(T.offline); });
+      },function(){ fail(T.offline); });
     });
   });
 })();

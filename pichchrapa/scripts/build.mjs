@@ -10,6 +10,7 @@ const out = path.join(root, 'dist');
 const siteHi = JSON.parse(await readFile(path.join(root, 'content/site.json'), 'utf8'));
 const siteEnOver = JSON.parse(await readFile(path.join(root, 'content/site.en.json'), 'utf8'));
 const data = JSON.parse(await readFile(path.join(root, 'data/videos.json'), 'utf8'));
+const gift = JSON.parse(await readFile(path.join(root, 'content/gift.json'), 'utf8'));
 const css = await readFile(path.join(root, 'src/styles.css'), 'utf8');
 const appJs = await readFile(path.join(root, 'src/app.js'), 'utf8');
 
@@ -36,6 +37,10 @@ function setLang(lang) {
   S = site.series;
   B = site.business;
 }
+const G = () => gift[LANG]; // the 'honour the artists' box texts
+const GIFT_ON = gift.enabled === true; // the box stays hidden in the browser until /api/status says payments are on
+const P = () => gift.policies[LANG]; // terms, refund, shipping, pricing page texts
+const POLICIES = [['terms', 'terms'], ['refund', 'refund-policy'], ['shipping', 'shipping-policy'], ['pricing', 'pricing']];
 const siteUrl = (siteHi.siteUrl || '').replace(/\/$/, '');
 const abs = (p) => (siteUrl ? siteUrl + p : '');
 const L = (p) => (LANG === 'en' ? '/en' : '') + p; // a page path in the current language
@@ -237,18 +242,19 @@ const waLink = () => `https://wa.me/${B.whatsapp}?text=${encodeURIComponent(T('�
 const contactButtons = () => `<a class="btn btn-gold" href="mailto:${esc(B.email)}">${T('ईमेल भेजिए', 'Send an email')}</a><a class="btn btn-ghost" href="tel:${esc(B.phone)}">${T('कॉल कीजिए', 'Call us')}</a><a class="btn btn-ghost" href="${esc(waLink())}" target="_blank" rel="noopener">${T('WhatsApp पर लिखिए', 'Write on WhatsApp')}</a>`;
 
 // English pages: every link to an internal page gets the /en prefix (assets and outside links stay as they are).
-const INTERNAL = /href="(\/(?:filmy-adalat|raja-ka-baja|about|contact|privacy|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
+const INTERNAL = /href="(\/(?:filmy-adalat|raja-ka-baja|about|contact|privacy|support|terms|refund-policy|shipping-policy|pricing|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
 const localize = (html) => (LANG === 'en' ? html.replace(INTERNAL, (m, p) => `href="/en${p}"`) : html);
 
 function layout({ title, description, pathName, image, type = 'website', ld = [], body, preload = [], noindex = false, bilingual = false }) {
   const url = noindex ? '' : A(pathName);
   image = image || abs('/img/og-home.jpg');
   const nav = [
-    ['/filmy-adalat/', S.adalat.name],
     ['/raja-ka-baja/', S.raja.name],
+    ['/filmy-adalat/', S.adalat.name],
     ['/about/', T('हमारी कहानी', 'Our story')],
     ['/contact/', T('संपर्क', 'Contact')],
-  ].map(([h, l]) => `<a href="${h}"${h === pathName ? ' aria-current="page"' : ''}>${esc(l)}</a>`).join('');
+    ...(GIFT_ON ? [['/support/', G().nav, 'gift-link']] : []),
+  ].map(([h, l, c]) => `<a href="${h}"${c ? ` class="${c}"` : ''}${h === pathName ? ' aria-current="page"' : ''}>${esc(l)}</a>`).join('');
   const alternates = siteUrl && !noindex
     ? `<link rel="alternate" hreflang="hi" href="${esc(abs(pathName))}">
 <link rel="alternate" hreflang="en" href="${esc(abs('/en' + pathName))}">
@@ -308,8 +314,8 @@ ${body}
       <div>
         <h2>${T('सीरीज़', 'Series')}</h2>
         <ul>
-          <li><a href="/filmy-adalat/">${esc(S.adalat.name)}</a></li>
           <li><a href="/raja-ka-baja/">${esc(S.raja.name)}</a></li>
+          <li><a href="/filmy-adalat/">${esc(S.adalat.name)}</a></li>
           <li><a href="${esc(site.links.gapistaan)}">${T('गैपिस्तान', 'Gapistaan')}</a></li>
           <li><a href="${esc(site.channelUrl)}" target="_blank" rel="noopener">${T('YouTube चैनल', 'YouTube channel')}</a></li>
           ${footSocials().replace(/<li><a [^>]*>YouTube<\/a><\/li>/, '')}
@@ -321,7 +327,7 @@ ${body}
           <li><a href="/about/">${T('हमारी कहानी', 'Our story')}</a></li>
           <li><a href="/contact/">${T('संपर्क', 'Contact')}</a></li>
           <li><a href="${esc(site.links.ifa)}">Indian Films Academy</a></li>
-          <li><a href="/privacy/">${T('प्राइवेसी नीति', 'Privacy policy')}</a></li>
+          ${GIFT_ON ? `<li class="gift-only"><a href="/support/">${esc(G().nav)}</a></li>` : ''}
         </ul>
       </div>
       <div>
@@ -333,6 +339,7 @@ ${body}
         </ul>
       </div>
     </div>
+    <nav class="foot-pol" aria-label="${T('नीतियाँ', 'Policies')}">${[...POLICIES.map(([k, sl]) => [`/${sl}/`, P().labels[k]]), ['/privacy/', T('प्राइवेसी नीति', 'Privacy policy')], ['/contact/', T('संपर्क', 'Contact')]].map(([h, l]) => `<a href="${h}">${esc(l)}</a>`).join('')}</nav>
     <div class="foot-base"><span>&copy; ${new Date().getFullYear()} PICHCHRAPA. ${T('सर्वाधिकार सुरक्षित।', 'All rights reserved.')}</span><span>${T('वीडियो YouTube से चलते हैं और अपने-आप यहाँ जुड़ते हैं।', 'Videos play from YouTube and are added here automatically.')}</span></div>
   </div>
 </footer>
@@ -409,6 +416,35 @@ const postersHtml = () => (site.posters && site.posters.items.length
   ? `<section class="case" aria-labelledby="posters-h"><div class="case-h"><h3 id="posters-h">${esc(site.posters.title)}</h3></div>${stripHtml(site.posters.items, 'poster-strip', site.posters.title)}</section>`
   : '');
 
+// The "honour the artists" box: a pay-what-you-want ticket-stub picker that opens Razorpay Checkout.
+// variant: 'home' (full, with name and message) or 'episode' (short, for a video page).
+// The server-side code is in src/worker.js; the box stays hidden until GET /api/status answers {"payments":"on"}.
+function giftBox({ variant = 'home', id = 'gift', pageName = '' } = {}) {
+  if (!GIFT_ON) return '';
+  const g = G();
+  const title = variant === 'episode' ? g.episodeTitle : g.title;
+  const text = variant === 'episode' ? g.episodeText : g.text;
+  const msgs = { opening: g.opening, verifying: g.verifying, thanks: g.thanks, failed: g.failed, offline: g.offline, amountErr: g.amountErr, desc: g.desc, min: gift.min };
+  const first = gift.amounts[1].amt;
+  const fields = variant === 'episode'
+    ? ''
+    : `<div class="gift-fields">
+      <label>${esc(g.nameLabel)}<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>${esc(g.msgLabel)}<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>`;
+  return `<aside class="gift gift-${variant}" id="${id}" aria-labelledby="${id}-h" data-t="${esc(JSON.stringify(msgs))}" data-page="${esc(pageName)}">
+  <div class="gift-body">
+    <h2 class="gift-h" id="${id}-h">${esc(title)}</h2>
+    <p class="gift-text">${esc(text)}</p>
+    <ul class="stubs">${gift.amounts.map((a) => `<li><button type="button" class="stub${a.amt === first ? ' is-on' : ''}" data-amt="${a.amt}"><b>₹${a.amt}</b><span>${esc(a[LANG])}</span></button></li>`).join('')}</ul>
+    ${fields}
+    <p class="gift-own"><label>${esc(g.otherLabel)} <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="${first}" aria-label="${esc(g.otherLabel)}"></span></label><button type="button" class="btn btn-gold gift-go">${esc(g.btn)}</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">${esc(g.payInfo)} ${esc(g.fine)} <a href="/refund-policy/">${esc(g.termsLink)}</a></p>
+  </div>
+</aside>`;
+}
+
 function homePage() {
   const latest = rajaEps[0];
   const homeCases = caseOrder.filter((c) => c.id !== 'general').slice(0, 4);
@@ -419,7 +455,7 @@ function homePage() {
     <div class="hero-text">
       <h1 class="hero-h1"><span class="rack">${esc(site.hero.h1a)}</span><span class="rack b">${esc(site.hero.h1b)}</span></h1>
       <p class="hero-lead">${esc(site.hero.lead)}</p>
-      <div class="actions"><a class="btn btn-gold" href="#adalat">${T(`${esc(S.adalat.name)} देखिए`, `Watch ${esc(S.adalat.name)}`)}</a><a class="btn btn-ghost" href="#raja">${T(`${esc(S.raja.name)} देखिए`, `Watch ${esc(S.raja.name)}`)}</a></div>
+      <div class="actions"><a class="btn btn-gold" href="#raja">${T(`${esc(S.raja.name)} देखिए`, `Watch ${esc(S.raja.name)}`)}</a><a class="btn btn-ghost" href="#adalat">${T(`${esc(S.adalat.name)} देखिए`, `Watch ${esc(S.adalat.name)}`)}</a></div>
       <p class="hero-fine">${esc(site.hero.fine)}</p>
     </div>
     <div class="hero-screen">
@@ -452,20 +488,7 @@ function homePage() {
   </div>
 </section>
 
-<section class="sec sec-alt adalat" id="adalat" aria-labelledby="adalat-h">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <div class="hrow" data-fx="once"><h2 class="h2 hrow-t" id="adalat-h"><span class="accent">${esc(S.adalat.name)}</span> <span class="muted subname">${esc(S.adalat.sub)}</span></h2>${gavelHtml}</div>
-        <p>${esc(S.adalat.intro)}</p>
-      </div>
-      <a class="btn btn-ghost" href="/filmy-adalat/">${T('सारे केस देखिए', 'See all cases')}</a>
-    </div>
-    ${homeCases.map((c) => caseBlock(c, { limit: 8 })).join('\n')}
-  </div>
-</section>
-
-<section class="sec raja" id="raja" aria-labelledby="raja-h">
+<section class="sec sec-alt raja" id="raja" aria-labelledby="raja-h">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -490,6 +513,23 @@ function homePage() {
     <p class="more"><a class="btn btn-ghost" href="${esc(site.shortsUrl)}" target="_blank" rel="noopener">${T('YouTube पर और शॉर्ट्स', 'More Shorts on YouTube')}</a></p>` : ''}
   </div>
 </section>
+
+<section class="sec adalat" id="adalat" aria-labelledby="adalat-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="hrow" data-fx="once"><h2 class="h2 hrow-t" id="adalat-h"><span class="accent">${esc(S.adalat.name)}</span> <span class="muted subname">${esc(S.adalat.sub)}</span></h2>${gavelHtml}</div>
+        <p>${esc(S.adalat.intro)}</p>
+      </div>
+      <a class="btn btn-ghost" href="/filmy-adalat/">${T('सारे केस देखिए', 'See all cases')}</a>
+    </div>
+    ${homeCases.map((c) => caseBlock(c, { limit: 8 })).join('\n')}
+  </div>
+</section>
+
+${GIFT_ON ? `<section class="sec gift-sec" aria-label="${esc(G().short)}">
+  <div class="wrap">${giftBox({ variant: 'home', id: 'gift', pageName: 'home' })}</div>
+</section>` : ''}
 
 <section class="sec sec-alt" aria-labelledby="social-h">
   <div class="wrap">${socialInner()}</div>
@@ -623,6 +663,7 @@ ${crumbNav(['PICHCHRAPA', '/'], [seriesName, seriesPath], [trunc(title, 60)])}
 ${v.paras.length ? v.paras.map((p) => `<p>${esc(p)}</p>`).join('\n') : `<p>${esc(title)}${T(`, ${seriesName} का एपिसोड। पूरा वीडियो ऊपर चलाइए।`, `, an episode of ${seriesName}. Play the full video above.`)}</p>`}
 <p>${T('ऐसे और वीडियो के लिए ', 'For more videos like this, ')}<a href="${esc(site.subscribeUrl)}" target="_blank" rel="noopener">${T('YouTube पर PICHCHRAPA को सब्सक्राइब कीजिए', 'subscribe to PICHCHRAPA on YouTube')}</a>${T('।', '.')}</p>
 </section>
+${GIFT_ON ? `<div class="block gift-sec">${giftBox({ variant: 'episode', id: 'gift', pageName: `video ${v.id}` })}</div>` : ''}
 ${prev || next ? `<div class="pn">${prev ? `<a href="/video/${prev.id}/"><small>${v.series === 'adalat' ? T('पिछला', 'Previous') : T('पुराना', 'Older')}</small>${esc(trunc(vt(prev), 70))}</a>` : '<span></span>'}${next ? `<a href="/video/${next.id}/"><small>${v.series === 'adalat' ? T('अगला', 'Next') : T('नया', 'Newer')}</small>${esc(trunc(vt(next), 70))}</a>` : '<span></span>'}</div>` : ''}
 ${mates.length ? `<h2 class="h3" style="margin-top:2.4rem">${v.series === 'adalat' ? T('इसी केस के और वीडियो', 'More videos from this case') : T(`${esc(seriesName)} के और एपिसोड`, `More episodes of ${esc(seriesName)}`)}</h2><div class="grid" style="margin-top:1rem">${mates.slice(0, 3).map((x) => card(x)).join('\n')}</div>` : ''}
 </main>`;
@@ -705,13 +746,61 @@ ${crumbNav(['PICHCHRAPA', '/'], [T('संपर्क', 'Contact')])}
   });
 }
 
+function supportPage() {
+  const g = G();
+  const crumb = ['PICHCHRAPA', '/'];
+  const body = `<main id="main" class="wrap page">
+${crumbNav(crumb, [g.nav])}
+<h1 class="page-h1">${esc(g.page.title)}</h1>
+<p class="lede gift-off-note">${esc(g.page.offNote)}</p>
+<p class="lede gift-only">${esc(g.page.lede)}</p>
+<div class="block">${giftBox({ variant: 'home', id: 'gift', pageName: 'support page' })}</div>
+<section class="prose gift-only" aria-label="${T('सवाल-जवाब', 'Questions and answers')}">
+${g.page.qa.map(([q, a]) => `  <h2>${esc(q)}</h2>\n  <p>${esc(a)}</p>`).join('\n')}
+  <p><a href="/refund-policy/">${esc(g.termsLink)}</a></p>
+</section>
+<p class="actions gift-off-note"><a class="btn btn-gold" href="/raja-ka-baja/">${T(`${esc(S.raja.name)} देखिए`, `Watch ${esc(S.raja.name)}`)}</a><a class="btn btn-ghost" href="/filmy-adalat/">${T(`${esc(S.adalat.name)} देखिए`, `Watch ${esc(S.adalat.name)}`)}</a></p>
+</main>`;
+  return layout({
+    title: `${g.page.title} | PICHCHRAPA`,
+    description: g.page.lede,
+    pathName: '/support/',
+    ld: crumbs([['PICHCHRAPA', '/'], [g.nav, '/support/']]),
+    body,
+  });
+}
+
+// The pages Razorpay asks every website to have: terms, cancellation and refunds, shipping, pricing (contact is /contact/).
+function policyPage(key, slug) {
+  const tt = P()[key];
+  const fill = (x) => x.replace(/\{email\}/g, B.email).replace(/\{phone\}/g, B.phoneLabel || B.phone);
+  const body = `<main id="main" class="wrap page">
+${crumbNav(['PICHCHRAPA', '/'], [tt.title])}
+<h1 class="page-h1">${esc(tt.title)}</h1>
+<section class="prose">
+${tt.paras.map(([h, text]) => `<h2>${esc(h)}</h2>\n<p>${esc(fill(text))}</p>`).join('\n')}
+<h2>${T('हमारा पता', 'Our address')}</h2>
+<p>PICHCHRAPA, ${esc(B.address || B.city)}</p>
+<p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${esc(hiDate(new Date().toISOString()))}</p>
+</section>
+</main>`;
+  return layout({
+    title: `${tt.title} | PICHCHRAPA`,
+    description: tt.desc,
+    pathName: `/${slug}/`,
+    ld: crumbs([['PICHCHRAPA', '/'], [tt.title, `/${slug}/`]]),
+    body,
+  });
+}
+
 function privacyPage() {
   const body = `<main id="main" class="wrap page">
 ${crumbNav(['PICHCHRAPA', '/'], [T('प्राइवेसी', 'Privacy')])}
 <h1 class="page-h1">${T('प्राइवेसी नीति', 'Privacy policy')}</h1>
 <section class="prose">
-<p>${T('pichchrapa.com पर हम आपसे नाम, फ़ोन या ईमेल जैसी कोई निजी जानकारी नहीं माँगते और न जमा करते हैं।', 'On pichchrapa.com we do not ask for or collect any personal information such as your name, phone number or email.')}</p>
+<p>${T('pichchrapa.com पर हम आपसे नाम, फ़ोन या ईमेल जैसी कोई निजी जानकारी नहीं माँगते और न जमा करते हैं (सम्मान दीजिए में अपनी मर्ज़ी से लिखा नाम और संदेश छोड़कर)।', 'On pichchrapa.com we do not ask for or collect any personal information such as your name, phone number or email (apart from a name and message you choose to write in "Honour the artists").')}</p>
 <p>${T('वीडियो के थंबनेल YouTube के सर्वर (i.ytimg.com) से आते हैं, इसलिए पेज खुलने पर YouTube को आपका IP एड्रेस दिख सकता है। वीडियो या शॉर्ट पर दबाने से पहले YouTube का प्लेयर लोड नहीं होता। दबाने के बाद वीडियो youtube-nocookie.com के प्लेयर में चलता है, और YouTube (Google) अपनी नीति के अनुसार जानकारी इस्तेमाल कर सकता है।', 'Video thumbnails come from YouTube\'s servers (i.ytimg.com), so YouTube may see your IP address when a page opens. The YouTube player does not load until you press a video or a Short. After you press, the video plays in a youtube-nocookie.com player, and YouTube (Google) may use information as per its own policy.')}</p>
+${GIFT_ON ? `<p>${T('अगर आप "सम्मान दीजिए" से कुछ देते हैं, तो आपका नाम और संदेश सिर्फ़ तभी लिया जाता है जब आप ख़ुद लिखें, और वह भुगतान के रिकॉर्ड में हमें दिखता है। कार्ड, UPI या बैंक की जानकारी हमारे पास नहीं आती; वह Razorpay के पास रहती है।', 'If you give something through "Honour the artists", your name and message are taken only if you write them yourself, and they appear to us in the payment record. Your card, UPI or bank details never reach us; they stay with Razorpay.')}</p>` : ''}
 <p>${T('ईमेल, फ़ोन या WhatsApp के बटन सिर्फ़ आपका ईमेल ऐप, फ़ोन या WhatsApp खोलते हैं। आप जो भेजते हैं, वह सीधे हमारे पास आता है और सिर्फ़ आपको जवाब देने के लिए इस्तेमाल होता है।', 'The email, phone and WhatsApp buttons only open your email app, phone or WhatsApp. Whatever you send comes straight to us and is used only to reply to you.')}</p>
 <p>${T('किसी भी सवाल के लिए लिखिए', 'For any question, write to')}: <a href="mailto:${esc(B.email)}">${esc(B.email)}</a></p>
 <p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${esc(hiDate(new Date().toISOString()))}</p>
@@ -757,6 +846,8 @@ async function buildLang(lang) {
   await page(`${pre}about`, aboutPage());
   await page(`${pre}contact`, contactPage());
   await page(`${pre}privacy`, privacyPage());
+  await page(`${pre}support`, supportPage());
+  for (const [key, slug] of POLICIES) await page(`${pre}${slug}`, policyPage(key, slug));
   for (const [i, v] of pageVids.entries()) await page(`${pre}video/${v.id}`, videoPage(v, i, pageVids));
 }
 await buildLang('en');
@@ -773,6 +864,8 @@ if (siteUrl) {
     { p: '/contact/' },
     ...pageVids.map((v) => ({ p: `/video/${v.id}/`, lastmod: v.publishedAt })),
     { p: '/privacy/' },
+    ...(GIFT_ON ? [{ p: '/support/' }] : []),
+    ...POLICIES.map(([, sl]) => ({ p: `/${sl}/` })),
   ];
   // Each page is listed in both languages, each entry pointing at its alternate (hreflang).
   const entry = (u, lang) => {

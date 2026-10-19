@@ -360,6 +360,18 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TVSeries","name":"Gen Gap","alternateName":["Gapistaan","गैपिस्तान","जेन गैप"],"url":"https://gapistaan.com/","inLanguage":"hi","genre":["Comedy","Satire"],"description":"Gapistaan (गैपिस्तान) is the home of Gen Gap, a Hindi comedy web series by PICHCHRAPA, Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.","numberOfEpisodes":7,"creator":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"director":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"actor":[{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},{"@type":"Person","name":"Ayushi Tiwari","alternateName":["आयुषी तिवारी","Aayushi Dutt Tiwari"],"url":"https://gapistaan.com/cast/ayushi-tiwari/"},{"@type":"Person","name":"Saanviya","alternateName":["सान्विया"],"url":"https://gapistaan.com/cast/saanviya/"},{"@type":"Person","name":"Sarita Vyas","alternateName":["सरिता व्यास"],"url":"https://gapistaan.com/cast/sarita-vyas/"},{"@type":"Person","name":"Ravi Dev Rai","alternateName":["रवि देव राय","Ravi Yadav"],"url":"https://gapistaan.com/cast/ravi-dev-rai/"},{"@type":"Person","name":"Shubham Kumar Singh","alternateName":["शुभम कुमार सिंह","Shubham Singh"],"url":"https://gapistaan.com/cast/shubham-kumar-singh/"},{"@type":"Person","name":"Rohit Daas","alternateName":["रोहित दास","Rohit Das"],"url":"https://gapistaan.com/cast/rohit-das/"},{"@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/"}],"productionCompany":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com"},"image":"https://gapistaan.com/img/og-home.jpg","episode":[{"@type":"TVEpisode","name":"घटिया है Protest Chacha की Chachi ने बोला ऐसा क्यो","episodeNumber":7,"url":"https://gapistaan.com/video/02k4tNgjOrc/","datePublished":"2026-10-17T15:30:10Z"},{"@type":"TVEpisode","name":"धरम परिवर्तन क्यों ?","episodeNumber":6,"url":"https://gapistaan.com/video/Nv7F5v-9Rz0/","datePublished":"2026-10-15T13:50:43Z"},{"@type":"TVEpisode","name":"लड़की के आने से | नमस्ते CHACHA","episodeNumber":5,"url":"https://gapistaan.com/video/AxfOesoA96Y/","datePublished":"2026-10-13T12:51:13Z"},{"@type":"TVEpisode","name":"Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂","episodeNumber":4,"url":"https://gapistaan.com/video/A5cMhST_od4/","datePublished":"2026-10-09T13:00:26Z"},{"@type":"TVEpisode","name":"Hostel Ka साबुन चोर","episodeNumber":3,"url":"https://gapistaan.com/video/2hVUS2mVNRk/","datePublished":"2026-10-09T06:23:05Z"},{"@type":"TVEpisode","name":"बिहारी हो का | Gapistaan का नया धमाका","episodeNumber":2,"url":"https://gapistaan.com/video/TN8aYgNz2uA/","datePublished":"2026-10-07T11:42:03Z"},{"@type":"TVEpisode","name":"YouTube ने फँसाया या Cinema ने? चाचा vs Gen Z","episodeNumber":1,"url":"https://gapistaan.com/video/PrSjBCuwvy8/","datePublished":"2026-10-06T14:40:24Z"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"गैपिस्तान","item":"https://gapistaan.com/"},{"@type":"ListItem","position":2,"name":"सारे एपिसोड","item":"https://gapistaan.com/episodes/"}]}</script>
@@ -369,7 +381,7 @@ html.gift-on .gift-off-note{display:none}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/" aria-current="page">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/" aria-current="page">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
     <a class="lang" href="/en/episodes/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
@@ -437,7 +449,7 @@ html.gift-on .gift-off-note{display:none}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
-        
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/contact/">संपर्क करें</a></li>
       </ul>
     </div>
@@ -456,6 +468,7 @@ html.gift-on .gift-off-note{display:none}
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

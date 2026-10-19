@@ -360,6 +360,18 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"लड़की के आने से | नमस्ते CHACHA","description":"एकेडमी में चाचा एक डायलॉग की रिहर्सल कर रहे हैं, \"मैं मानता हूँ, मैं कुछ बातों में अच्छा नहीं\", पर 50 टेक के बाद भी आगे की लाइन याद नहीं आ रही। Gen Z…","thumbnailUrl":["https://i.ytimg.com/vi/AxfOesoA96Y/maxresdefault.jpg","https://i.ytimg.com/vi/AxfOesoA96Y/hqdefault.jpg"],"uploadDate":"2026-10-13T12:51:13Z","duration":"PT11M45S","embedUrl":"https://www.youtube.com/embed/AxfOesoA96Y","inLanguage":"hi","partOfSeries":{"@type":"TVSeries","name":"Gen Gap","alternateName":"Gapistaan"},"director":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},"actor":[{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/creator/"},{"@type":"Person","name":"Ayushi Tiwari","alternateName":["आयुषी तिवारी","Aayushi Dutt Tiwari"],"url":"https://gapistaan.com/cast/ayushi-tiwari/"},{"@type":"Person","name":"Ravi Dev Rai","alternateName":["रवि देव राय","Ravi Yadav"],"url":"https://gapistaan.com/cast/ravi-dev-rai/"},{"@type":"Person","name":"Shubham Kumar Singh","alternateName":["शुभम कुमार सिंह","Shubham Singh"],"url":"https://gapistaan.com/cast/shubham-kumar-singh/"},{"@type":"Person","name":"Rohit Daas","alternateName":["रोहित दास","Rohit Das"],"url":"https://gapistaan.com/cast/rohit-das/"},{"@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/"}],"productionCompany":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com"},"keywords":"Gapistaan, गैपिस्तान, Gapistan, Hindi comedy, comedy web series, Gen Z comedy, generation gap, Yogesh Chaitanya, namsate chccha, gapistaan namaste chacha, gengap new episode, namaste chcha, wo chcha wala comedy video"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"गैपिस्तान","item":"https://gapistaan.com/"},{"@type":"ListItem","position":2,"name":"एपिसोड","item":"https://gapistaan.com/episodes/"},{"@type":"ListItem","position":3,"name":"लड़की के आने से | नमस्ते CHACHA","item":"https://gapistaan.com/video/AxfOesoA96Y/"}]}</script>
@@ -369,7 +381,7 @@ html.gift-on .gift-off-note{display:none}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
     <a class="lang" href="/en/video/AxfOesoA96Y/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
@@ -417,7 +429,17 @@ html.gift-on .gift-off-note{display:none}
   <span class="person-body"><span class="person-name">दीपक मंडल</span><span class="person-en" lang="en">Deepak Mandal</span><span class="person-role">कलाकार</span></span>
 </a></li>
 </ul></section>
-
+<div class="block"><aside class="gift gift-episode" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;भुगतान का पेज खुल रहा है…&quot;,&quot;verifying&quot;:&quot;भुगतान की पुष्टि हो रही है…&quot;,&quot;thanks&quot;:&quot;शुक्रिया! आपकी तालियाँ पूरी टीम तक पहुँच गईं।&quot;,&quot;failed&quot;:&quot;कुछ गड़बड़ हुई। अगर आपके पैसे कट गए हों तो हमें ईमेल कीजिए, हम जाँचकर बताएँगे।&quot;,&quot;offline&quot;:&quot;तालियाँ भेजने की सुविधा अभी चालू हो रही है। थोड़ी देर बाद फिर कोशिश कीजिए।&quot;,&quot;amountErr&quot;:&quot;कम से कम ₹20 की राशि लिखिए।&quot;,&quot;desc&quot;:&quot;गैपिस्तान के कलाकारों के लिए तालियाँ&quot;,&quot;min&quot;:20}" data-who="" data-page="episode EP 05">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">एपिसोड पसंद आया? तालियाँ भेजिए</h2>
+    <p class="gift-text">इस एपिसोड का हर डायलॉग कलाकारों ने उसी पल गढ़ा है। अच्छा लगा हो तो अपनी मर्ज़ी से एक गिफ़्ट भेजकर उनका हौसला बढ़ाइए।</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>एक ताली</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>तालियाँ</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>वाह-वाह</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>दिल से शाबाशी</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>स्टैंडिंग ओवेशन</span></button></li></ul>
+    
+    <p class="gift-own"><label>या अपनी राशि <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="या अपनी राशि"></span></label><button type="button" class="btn btn-gold gift-go">तालियाँ भेजें</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">भुगतान Razorpay के सुरक्षित पेज पर होता है। यह अपनी मर्ज़ी से दिया गया गिफ़्ट है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और भेजी गई राशि वापस नहीं होती। <a href="/refund-policy/">वापसी नीति</a></p>
+  </div>
+</aside></div>
 <section class="block prose" aria-labelledby="desc-h"><h2 class="h2" id="desc-h">एपिसोड के बारे में</h2><p>Gapistaan | गैपिस्तान — हिंदी कॉमेडी-सटायर सीरीज़<br>Created  by: Yogesh Chaitanya (Yogesh Raj Mishra)<br>Cast: Yogesh Chaitanya, Ravi Yadav, Shubham Singh, Deepak Mandal, Rohit Das, Aayushi Dutt Tiwari<br>Edit &amp; DI: Yogesh Chaitanya<br>Production: PICHCHRAPA</p></section>
 <nav class="prevnext" aria-label="पिछला और अगला एपिसोड">
   <a class="pn" href="/video/A5cMhST_od4/"><span class="pn-k">पिछला एपिसोड</span><span class="pn-t">Hostel की अदालत | फ़्लश किसने नहीं किया? चाचा जज का फ़ैसला 😂</span></a>
@@ -456,7 +478,7 @@ html.gift-on .gift-off-note{display:none}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
-        
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/contact/">संपर्क करें</a></li>
       </ul>
     </div>
@@ -475,6 +497,7 @@ html.gift-on .gift-off-note{display:none}
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

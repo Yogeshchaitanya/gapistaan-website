@@ -360,6 +360,18 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"गैपिस्तान","item":"https://gapistaan.com/"},{"@type":"ListItem","position":2,"name":"रद्द करना और वापसी (रिफ़ंड)","item":"https://gapistaan.com/refund-policy/"}]}</script>
 </head>
@@ -368,7 +380,7 @@ html.gift-on .gift-off-note{display:none}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a></nav>
+    <nav class="topnav" aria-label="मुख्य मेन्यू"><a href="/episodes/">एपिसोड</a><a href="/cast/">कलाकार</a><a href="/creator/">क्रिएटर</a><a href="/about/">बारे में</a><a href="/#contact">संपर्क</a><a class="gift-link" href="/support/">तालियाँ भेजें</a></nav>
     <a class="lang" href="/en/refund-policy/" hreflang="en" lang="en" title="Read this page in English">English</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">सब्सक्राइब करें</a>
   </div>
@@ -400,7 +412,7 @@ html.gift-on .gift-off-note{display:none}
         <li><a href="/cast/">कलाकार</a></li>
         <li><a href="/creator/">क्रिएटर: योगेश चैतन्य</a></li>
         <li><a href="/about/">गैपिस्तान के बारे में</a></li>
-        
+        <li class="gift-only"><a href="/support/">तालियाँ भेजें</a></li>
         <li><a href="/contact/">संपर्क करें</a></li>
       </ul>
     </div>
@@ -419,6 +431,7 @@ html.gift-on .gift-off-note{display:none}
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

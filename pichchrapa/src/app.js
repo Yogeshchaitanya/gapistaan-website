@@ -133,3 +133,46 @@
     });
   });
 })();
+
+// "Honour the artists": the box, its menu link and the page text stay hidden until the server says payments are switched on.
+// Then: pick a ticket stub, Razorpay Checkout opens. The server decides nothing about the amount except the limits.
+(function(){
+  var doc=document, root=doc.documentElement;
+  if(!doc.querySelector('.gift,.gift-link')) return;
+  var on=function(){ root.classList.add('gift-on'); };
+  var cached=false; try{ cached=sessionStorage.getItem('gift-on')==='1'; }catch(e){}
+  if(cached) on();
+  fetch('/api/status').then(function(r){ return r.json(); }).then(function(j){
+    if(j&&j.payments==='on'){ on(); try{ sessionStorage.setItem('gift-on','1'); }catch(e){} }
+    else { root.classList.remove('gift-on'); try{ sessionStorage.removeItem('gift-on'); }catch(e){} }
+  }).catch(function(){});
+
+  function post(u,b){ return fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ j._status=r.status; return j; }); }); }
+  function loadRzp(){ return new Promise(function(ok,no){ if(window.Razorpay) return ok(); var s=doc.createElement('script'); s.src='https://checkout.razorpay.com/v1/checkout.js'; s.onload=ok; s.onerror=no; doc.head.appendChild(s); }); }
+  doc.querySelectorAll('.gift').forEach(function(box){
+    var T=JSON.parse(box.getAttribute('data-t')), pg=box.getAttribute('data-page')||'';
+    var input=box.querySelector('input[name=amt]'), st=box.querySelector('.pay-status'), go=box.querySelector('.gift-go');
+    var nm=box.querySelector('input[name=gname]'), msg=box.querySelector('textarea[name=gmsg]');
+    var stubs=box.querySelectorAll('.stub');
+    var say=function(m){ st.textContent=m||''; };
+    function mark(){ stubs.forEach(function(b){ b.classList.toggle('is-on', b.getAttribute('data-amt')===String(+input.value)); }); }
+    stubs.forEach(function(b){ b.addEventListener('click',function(){ input.value=b.getAttribute('data-amt'); mark(); say(''); }); });
+    input.addEventListener('input',mark);
+    function fail(m){ go.disabled=false; say(m); }
+    go.addEventListener('click',function(){
+      var a=Math.round(+input.value);
+      if(!(a>=T.min)){ say(T.amountErr); input.focus(); return; }
+      go.disabled=true; say(T.opening);
+      post('/api/order',{amount:a,name:nm?nm.value:'',message:msg?msg.value:'',page:pg,lang:root.lang}).then(function(o){
+        if(!o.order_id){ fail(o._status===503||o._status===404?T.offline:T.failed); return; }
+        return loadRzp().then(function(){
+          var paid=false;
+          var rz=new window.Razorpay({ key:o.key, amount:o.amount, currency:o.currency, order_id:o.order_id, name:'PICHCHRAPA', description:T.desc, image:location.origin+'/apple-touch-icon.png', prefill:{ name:nm?nm.value:'' }, notes:{ source:'website' }, theme:{ color:'#0a4644' },
+            handler:function(r){ paid=true; say(T.verifying); post('/api/verify',r).then(function(v){ if(v.ok){ go.disabled=false; box.classList.add('is-thanked'); say(T.thanks); } else fail(T.failed); },function(){ fail(T.failed); }); },
+            modal:{ ondismiss:function(){ if(!paid) fail(''); } } });
+          rz.open();
+        },function(){ fail(T.offline); });
+      },function(){ fail(T.offline); });
+    });
+  });
+})();

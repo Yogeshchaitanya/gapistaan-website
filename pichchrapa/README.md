@@ -24,3 +24,11 @@
 ## Cloudflare
 
 Workers & Pages > Create > Import a repository > gapistaan-website, Project name `pichchrapa-website`, Root directory `/pichchrapa`, Build command खाली, Deploy command `npx wrangler deploy`। फिर Settings > Domains & Routes में `pichchrapa.com` जोड़ें। `src/worker.js` बाक़ी पतों (www आदि) को 301 से pichchrapa.com पर भेजता है।
+
+## सम्मान दीजिए (पेमेंट, Razorpay)
+
+- बॉक्स और पेज का टेक्स्ट: `content/gift.json` (हिंदी और English, राशियाँ, न्यूनतम ₹20 और अधिकतम ₹50,000, और terms/refund/shipping/pricing पेजों का टेक्स्ट)। बंद करना हो तो `"enabled": false`।
+- सर्वर: `src/worker.js` (`/api/order`, `/api/verify`, `/api/status`)। Cloudflare में Workers > `pichchrapa-website` > Settings > Variables and Secrets में दो **Secret** चाहिए: `RZP_KEY_ID` और `RZP_KEY_SECRET` (वही Razorpay live keys जो IFA और गैपिस्तान में हैं)। इन्हें चैट या रेपो में कभी न डालें।
+- जब तक दोनों Secret नहीं हैं, `https://pichchrapa.com/api/status` `{"payments":"off"}` देता है और बॉक्स, मेन्यू का लिंक और /support/ का फ़ॉर्म साइट पर दिखते ही नहीं। Secret डालते ही (`"payments":"on"`) अपने-आप दिखने लगते हैं, दोबारा deploy की ज़रूरत नहीं।
+- देने वाले का नाम और संदेश Razorpay Dashboard > Payments > भुगतान > Notes में दिखता है।
+- Razorpay को वेबसाइट दिखाते समय ये पेज चाहिए: /terms/, /refund-policy/, /shipping-policy/, /pricing/, /contact/, /privacy/ (सब फ़ुटर में जुड़े हैं)।

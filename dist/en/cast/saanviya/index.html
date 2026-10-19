@@ -360,6 +360,18 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Saanviya","alternateName":["सान्विया"],"url":"https://gapistaan.com/en/cast/saanviya/","jobTitle":"Actor","alumniOf":{"@type":"EducationalOrganization","name":"Indian Films Academy","url":"https://indianfilmsacademy.com/"},"image":"https://gapistaan.com/img/cast/p03.webp"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Gapistaan","item":"https://gapistaan.com/en/"},{"@type":"ListItem","position":2,"name":"Cast","item":"https://gapistaan.com/en/cast/"},{"@type":"ListItem","position":3,"name":"Saanviya","item":"https://gapistaan.com/en/cast/saanviya/"}]}</script>
@@ -369,7 +381,7 @@ html.gift-on .gift-off-note{display:none}
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/en/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="Main menu"><a href="/en/episodes/">Episodes</a><a href="/en/cast/">Cast</a><a href="/en/creator/">Creator</a><a href="/en/about/">About</a><a href="/en/#contact">Contact</a></nav>
+    <nav class="topnav" aria-label="Main menu"><a href="/en/episodes/">Episodes</a><a href="/en/cast/">Cast</a><a href="/en/creator/">Creator</a><a href="/en/about/">About</a><a href="/en/#contact">Contact</a><a class="gift-link" href="/en/support/">Send applause</a></nav>
     <a class="lang" href="/cast/saanviya/" hreflang="hi" lang="hi" title="यह पेज हिंदी में पढ़ें">हिंदी</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">Subscribe</a>
   </div>
@@ -398,7 +410,20 @@ html.gift-on .gift-off-note{display:none}
   <ul class="gallery"><li><img src="/img/cast/p04-s.webp" srcset="/img/cast/p04-s.webp 400w, /img/cast/p04.webp 800w" sizes="(min-width: 44rem) 22vw, 45vw" alt="Saanviya, photo 2" width="400" height="500" loading="lazy" decoding="async"></li></ul>
 </section>
 <section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">Episodes with Saanviya</h2><p class="muted">Episode details will be added soon.</p></section>
-
+<div class="block"><aside class="gift gift-cast" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;Opening the payment page…&quot;,&quot;verifying&quot;:&quot;Confirming your payment…&quot;,&quot;thanks&quot;:&quot;Thank you! Your applause has reached the whole team.&quot;,&quot;failed&quot;:&quot;Something went wrong. If money was deducted from your account, please email us and we will look into it.&quot;,&quot;offline&quot;:&quot;Sending applause is being switched on. Please try again in a little while.&quot;,&quot;amountErr&quot;:&quot;Please enter an amount of at least ₹20.&quot;,&quot;desc&quot;:&quot;Applause for the Gapistaan cast&quot;,&quot;min&quot;:20}" data-who="Saanviya" data-page="cast Saanviya">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">Loved Saanviya&#39;s acting? Send some applause</h2>
+    <p class="gift-text">Whatever you choose to send lifts the spirits of the whole Gapistaan team. If you like, write a few words for Saanviya; we read every one.</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>One clap</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>Applause</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>Bravo</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>From the heart</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>Standing ovation</span></button></li></ul>
+    <div class="gift-fields">
+      <label>Your name (optional)<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>A few words for the cast (optional)<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>
+    <p class="gift-own"><label>or your own amount <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="or your own amount"></span></label><button type="button" class="btn btn-gold gift-go">Send applause</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">Payment happens on Razorpay&#39;s secure page. This is a voluntary gift, not a donation; it is not eligible for income-tax exemption (80G), and amounts sent are non-refundable. <a href="/en/refund-policy/">Refund policy</a></p>
+  </div>
+</aside></div>
 <section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">The rest of the team</h2><ul class="people"><li><a class="person" href="/en/creator/">
   <span class="pic"><img src="/img/cast/p16-s.webp" srcset="/img/cast/p16-s.webp 400w, /img/cast/p16.webp 800w" sizes="(min-width: 76rem) 24rem, (min-width: 44rem) 30vw, 45vw" alt="Yogesh Chaitanya" width="400" height="500" loading="lazy" decoding="async"></span>
   <span class="person-body"><span class="person-name">Yogesh Chaitanya</span><span class="person-en" lang="hi">योगेश चैतन्य</span><span class="person-role">Creator, Director and Chacha</span></span>
@@ -441,7 +466,7 @@ html.gift-on .gift-off-note{display:none}
         <li><a href="/en/cast/">Cast</a></li>
         <li><a href="/en/creator/">Creator: Yogesh Chaitanya</a></li>
         <li><a href="/en/about/">About Gapistaan</a></li>
-        
+        <li class="gift-only"><a href="/en/support/">Send applause</a></li>
         <li><a href="/en/contact/">Contact us</a></li>
       </ul>
     </div>
@@ -460,6 +485,7 @@ html.gift-on .gift-off-note{display:none}
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

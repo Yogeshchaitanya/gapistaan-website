@@ -360,18 +360,30 @@ a{color:var(--accent)}
 }
 html:not(.gift-on) .gift,html:not(.gift-on) .gift-link,html:not(.gift-on) .gift-only{display:none}
 html.gift-on .gift-off-note{display:none}
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(15.5rem,1fr));gap:clamp(.9rem,2vw,1.3rem);margin-top:1.2rem}
+.soc{display:flex;align-items:center;gap:1.1rem;padding:clamp(1rem,2.2vw,1.5rem);border:1px solid var(--line-2);border-radius:var(--r);background:var(--surface);text-decoration:none;color:var(--text);transition:transform .25s,border-color .25s}
+.soc:hover{transform:translateY(-4px);border-color:var(--gold);color:var(--text)}
+.soc-ic{flex:none;width:clamp(64px,8vw,92px)}
+.soc-ic svg{display:block;width:100%;height:auto;border-radius:22%;box-shadow:0 12px 24px -14px #000}
+.soc:hover .soc-ic svg{animation:socpop .5s cubic-bezier(.3,.6,.2,1)}
+@keyframes socpop{0%{transform:scale(1)}40%{transform:scale(1.14) rotate(-5deg)}100%{transform:scale(1)}}
+.soc-t{display:flex;flex-direction:column;gap:.15rem;min-width:0}
+.soc-t b{font:400 clamp(1.5rem,3vw,2rem)/1 var(--latin);letter-spacing:.02em}
+.soc-h{color:var(--muted);font-weight:800;font-size:1rem;overflow-wrap:anywhere}
+.soc-go{margin-top:.3rem;color:var(--gold);font-weight:800;font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.soc{transition:none}.soc:hover{transform:none}.soc:hover .soc-ic svg{animation:none}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Gapistaan | गैपिस्तान","alternateName":["Gapistaan","Gapistan","गैपिस्तान","Gen Gap"],"url":"https://gapistaan.com/en/","inLanguage":"en"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Gapistaan","alternateName":"गैपिस्तान","url":"https://gapistaan.com/en/","logo":"https://gapistaan.com/img/logo-520.webp","sameAs":["https://www.youtube.com/@gapistaan","https://www.instagram.com/gapistaan/"],"parentOrganization":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com","sameAs":["https://www.youtube.com/@pichchrapa"]},"email":"Pichchrapa@gmail.com"}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"TVSeries","name":"Gen Gap","alternateName":["Gapistaan","गैपिस्तान","जेन गैप"],"url":"https://gapistaan.com/en/","inLanguage":"hi","genre":["Comedy","Satire"],"description":"Gapistaan (गैपिस्तान) is the home of Gen Gap, a Hindi comedy web series by PICHCHRAPA, Lucknow. In an acting institute, old-school Chacha takes on Gen Z every episode, fully improvised, no script.","numberOfEpisodes":7,"creator":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/en/creator/"},"director":{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/en/creator/"},"actor":[{"@type":"Person","name":"Yogesh Chaitanya","alternateName":["योगेश चैतन्य","Yogesh Raj Mishra","योगेश राज मिश्रा"],"url":"https://gapistaan.com/en/creator/"},{"@type":"Person","name":"Ayushi Tiwari","alternateName":["आयुषी तिवारी","Aayushi Dutt Tiwari"],"url":"https://gapistaan.com/en/cast/ayushi-tiwari/"},{"@type":"Person","name":"Saanviya","alternateName":["सान्विया"],"url":"https://gapistaan.com/en/cast/saanviya/"},{"@type":"Person","name":"Sarita Vyas","alternateName":["सरिता व्यास"],"url":"https://gapistaan.com/en/cast/sarita-vyas/"},{"@type":"Person","name":"Ravi Dev Rai","alternateName":["रवि देव राय","Ravi Yadav"],"url":"https://gapistaan.com/en/cast/ravi-dev-rai/"},{"@type":"Person","name":"Shubham Kumar Singh","alternateName":["शुभम कुमार सिंह","Shubham Singh"],"url":"https://gapistaan.com/en/cast/shubham-kumar-singh/"},{"@type":"Person","name":"Rohit Daas","alternateName":["रोहित दास","Rohit Das"],"url":"https://gapistaan.com/en/cast/rohit-das/"},{"@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/en/cast/deepak-mandal/"}],"productionCompany":{"@type":"Organization","name":"PICHCHRAPA","url":"https://pichchrapa.com"},"image":"https://gapistaan.com/img/og-home.jpg"}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Gapistaan is a YouTube channel and the home of Gen Gap, a Hindi comedy-satire series. Its story is the daily bickering between Chacha from the older generation and today's Gen Z boys in a Lucknow acting institute. It is presented by PICHCHRAPA."}},{"@type":"Question","name":"When does a new episode of Gen Gap come out?","acceptedAnswer":{"@type":"Answer","text":"A new episode every alternate day, between 6:30 and 7:30 PM IST. Every episode comes out first on the YouTube channel @gapistaan and on this website about an hour later."}},{"@type":"Question","name":"Does Gen Gap have a script?","acceptedAnswer":{"@type":"Answer","text":"No. Only the situation is fixed; the actors make up the dialogue on the spot. The whole series is improvised."}},{"@type":"Question","name":"Who made Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Yogesh Chaitanya, known in films as Yogesh Raj Mishra. He is its creator, director and editor, and he plays Chacha himself."}},{"@type":"Question","name":"Who is in the cast of Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Yogesh Chaitanya (Chacha), Ayushi Tiwari, Saanviya, Sarita Vyas, Ravi Dev Rai, Shubham Kumar Singh, Rohit Daas and Deepak Mandal. All of them are trained at Indian Films Academy, Lucknow."}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान and गपिस्तान: are they all the same?","acceptedAnswer":{"@type":"Answer","text":"Yes. The name is spelled in many ways, but the channel and the series are the same: @gapistaan on YouTube and gapistaan.com."}},{"@type":"Question","name":"Whom do I talk to about brand collaborations or sponsorship?","acceptedAnswer":{"@type":"Answer","text":"Write to Pichchrapa@gmail.com or call 077540 00121."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Gapistaan is a YouTube channel and the home of Gen Gap, a Hindi comedy-satire series. Its story is the daily bickering between Chacha from the older generation and today's Gen Z boys in a Lucknow acting institute. It is presented by PICHCHRAPA."}},{"@type":"Question","name":"When does a new episode of Gen Gap come out?","acceptedAnswer":{"@type":"Answer","text":"A new episode every alternate day, between 6:30 and 7:30 PM IST. Every episode comes out first on the YouTube channel @gapistaan and on this website about an hour later."}},{"@type":"Question","name":"Does Gen Gap have a script?","acceptedAnswer":{"@type":"Answer","text":"No. Only the situation is fixed; the actors make up the dialogue on the spot. The whole series is improvised."}},{"@type":"Question","name":"Who made Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Yogesh Chaitanya, known in films as Yogesh Raj Mishra. He is its creator, director and editor, and he plays Chacha himself."}},{"@type":"Question","name":"Who is in the cast of Gapistaan?","acceptedAnswer":{"@type":"Answer","text":"Yogesh Chaitanya (Chacha), Ayushi Tiwari, Saanviya, Sarita Vyas, Ravi Dev Rai, Shubham Kumar Singh, Rohit Daas and Deepak Mandal. All of them are trained at Indian Films Academy, Lucknow."}},{"@type":"Question","name":"Gapistaan, Gapistan, गैपिस्तान and गपिस्तान: are they all the same?","acceptedAnswer":{"@type":"Answer","text":"Yes. The name is spelled in many ways, but the channel and the series are the same: @gapistaan on YouTube and gapistaan.com."}},{"@type":"Question","name":"Can I send the actors a gift?","acceptedAnswer":{"@type":"Answer","text":"Yes, if you want to. Choose any amount on gapistaan.com/en/support/. It is completely voluntary and every episode stays free to watch."}},{"@type":"Question","name":"Whom do I talk to about brand collaborations or sponsorship?","acceptedAnswer":{"@type":"Answer","text":"Write to Pichchrapa@gmail.com or call 077540 00121."}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to the main content</a>
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/en/"><img src="/img/logo-96.webp" alt="" width="40" height="40"><span class="brand-name">Gapistaan</span></a>
-    <nav class="topnav" aria-label="Main menu"><a href="/en/episodes/">Episodes</a><a href="/en/cast/">Cast</a><a href="/en/creator/">Creator</a><a href="/en/about/">About</a><a href="/en/#contact">Contact</a></nav>
+    <nav class="topnav" aria-label="Main menu"><a href="/en/episodes/">Episodes</a><a href="/en/cast/">Cast</a><a href="/en/creator/">Creator</a><a href="/en/about/">About</a><a href="/en/#contact">Contact</a><a class="gift-link" href="/en/support/">Send applause</a></nav>
     <a class="lang" href="/" hreflang="hi" lang="hi" title="यह पेज हिंदी में पढ़ें">हिंदी</a>
     <a class="btn btn-primary btn-sm" href="https://www.youtube.com/@gapistaan?sub_confirmation=1">Subscribe</a>
   </div>
@@ -530,7 +542,31 @@ All episodes: https://gapistaan.com/en/">Share elsewhere</button>
 </ul>
   </div>
 </section>
-
+<section class="sec" aria-label="Loved the scene? Send the cast some applause">
+  <div class="wrap">
+    <aside class="gift gift-home" id="gift" aria-labelledby="gift-h" data-t="{&quot;opening&quot;:&quot;Opening the payment page…&quot;,&quot;verifying&quot;:&quot;Confirming your payment…&quot;,&quot;thanks&quot;:&quot;Thank you! Your applause has reached the whole team.&quot;,&quot;failed&quot;:&quot;Something went wrong. If money was deducted from your account, please email us and we will look into it.&quot;,&quot;offline&quot;:&quot;Sending applause is being switched on. Please try again in a little while.&quot;,&quot;amountErr&quot;:&quot;Please enter an amount of at least ₹20.&quot;,&quot;desc&quot;:&quot;Applause for the Gapistaan cast&quot;,&quot;min&quot;:20}" data-who="" data-page="home">
+  <div class="gift-body">
+    <h2 class="gift-h" id="gift-h">Loved the scene? Send the cast a round of applause</h2>
+    <p class="gift-text">Every Gapistaan scene is made on the spot with no script. The actors invent the dialogue on their own, and your laughter is the biggest reward they get. Watching is free and always will be. But if a scene made your day, send a gift of any size, only if you want to, and let the team know the work reached you.</p>
+    <ul class="stubs"><li><button type="button" class="stub" data-amt="51"><b>₹51</b><span>One clap</span></button></li><li><button type="button" class="stub is-on" data-amt="101"><b>₹101</b><span>Applause</span></button></li><li><button type="button" class="stub" data-amt="251"><b>₹251</b><span>Bravo</span></button></li><li><button type="button" class="stub" data-amt="501"><b>₹501</b><span>From the heart</span></button></li><li><button type="button" class="stub" data-amt="1100"><b>₹1100</b><span>Standing ovation</span></button></li></ul>
+    <div class="gift-fields">
+      <label>Your name (optional)<input name="gname" maxlength="60" autocomplete="name"></label>
+      <label>A few words for the cast (optional)<textarea name="gmsg" rows="2" maxlength="200"></textarea></label>
+    </div>
+    <p class="gift-own"><label>or your own amount <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="101" aria-label="or your own amount"></span></label><button type="button" class="btn btn-gold gift-go">Send applause</button></p>
+    <p class="pay-status" role="status" aria-live="polite"></p>
+    <p class="fine">Payment happens on Razorpay&#39;s secure page. This is a voluntary gift, not a donation; it is not eligible for income-tax exemption (80G), and amounts sent are non-refundable. <a href="/en/refund-policy/">Refund policy</a></p>
+  </div>
+</aside>
+  </div>
+</section>
+<section class="sec" aria-labelledby="social-h">
+  <div class="wrap">
+    <h2 class="h2" id="social-h">Follow Gapistaan</h2>
+    <p class="lede">New episodes, clips and behind-the-scenes, first, right here.</p>
+    <div class="socials"><a class="soc soc-instagram" href="https://www.instagram.com/gapistaan/" target="_blank" rel="noopener"><span class="soc-ic"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><radialGradient id="sg1" cx=".3" cy="1.05" r="1.2"><stop offset="0" stop-color="#ffd776"/><stop offset=".25" stop-color="#f9873a"/><stop offset=".55" stop-color="#e1306c"/><stop offset=".8" stop-color="#833ab4"/><stop offset="1" stop-color="#405de6"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#sg1)"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.3" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg></span><span class="soc-t"><b>Instagram</b><span class="soc-h">@gapistaan</span><span class="soc-go">Follow</span></span></a><a class="soc soc-youtube" href="https://www.youtube.com/@gapistaan" target="_blank" rel="noopener"><span class="soc-ic"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#f00"/><rect x="8" y="14" width="32" height="20" rx="6" fill="#fff"/><path d="M20 19.5v9l8-4.5z" fill="#f00"/></svg></span><span class="soc-t"><b>YouTube</b><span class="soc-h">@gapistaan</span><span class="soc-go">Subscribe</span></span></a></div>
+  </div>
+</section>
 <section class="sec sec-alt" aria-labelledby="brands-h">
   <div class="wrap">
     <h2 class="h2" id="brands-h">The PICHCHRAPA family</h2>
@@ -561,6 +597,7 @@ All episodes: https://gapistaan.com/en/">Share elsewhere</button>
       <details><summary>Who made Gapistaan?</summary><p>Yogesh Chaitanya, known in films as Yogesh Raj Mishra. He is its creator, director and editor, and he plays Chacha himself.</p></details>
       <details><summary>Who is in the cast of Gapistaan?</summary><p>Yogesh Chaitanya (Chacha), Ayushi Tiwari, Saanviya, Sarita Vyas, Ravi Dev Rai, Shubham Kumar Singh, Rohit Daas and Deepak Mandal. All of them are trained at Indian Films Academy, Lucknow.</p></details>
       <details><summary>Gapistaan, Gapistan, गैपिस्तान and गपिस्तान: are they all the same?</summary><p>Yes. The name is spelled in many ways, but the channel and the series are the same: @gapistaan on YouTube and gapistaan.com.</p></details>
+      <details><summary>Can I send the actors a gift?</summary><p>Yes, if you want to. Choose any amount on gapistaan.com/en/support/. It is completely voluntary and every episode stays free to watch.</p></details>
       <details><summary>Whom do I talk to about brand collaborations or sponsorship?</summary><p>Write to Pichchrapa@gmail.com or call 077540 00121.</p></details>
     </div>
     <p class="more-link"><a href="/en/about/">How Gapistaan is made: read the full story</a></p>
@@ -596,7 +633,7 @@ All episodes: https://gapistaan.com/en/">Share elsewhere</button>
         <li><a href="/en/cast/">Cast</a></li>
         <li><a href="/en/creator/">Creator: Yogesh Chaitanya</a></li>
         <li><a href="/en/about/">About Gapistaan</a></li>
-        
+        <li class="gift-only"><a href="/en/support/">Send applause</a></li>
         <li><a href="/en/contact/">Contact us</a></li>
       </ul>
     </div>
@@ -615,6 +652,7 @@ All episodes: https://gapistaan.com/en/">Share elsewhere</button>
       <ul>
         <li><a href="https://www.youtube.com/@gapistaan">YouTube: @gapistaan</a></li>
         <li><a href="https://www.instagram.com/gapistaan/">Instagram: @gapistaan</a></li>
+        
         <li><a href="https://pichchrapa.com">PICHCHRAPA</a></li>
         <li><a href="https://indianfilmsacademy.com">Indian Films Academy</a></li>
       </ul>

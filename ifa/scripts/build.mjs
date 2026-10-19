@@ -152,6 +152,26 @@ function buildLang(lang) {
     addr: `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.pin}`,
     founders: L.founders.map((f) => f.name).join(lang === 'hi' ? ' और ' : ' and '),
   };
+  // Follow cards (home page): big Instagram, YouTube and Facebook tiles. A tile appears only when its link is filled in content/site.json.
+  let socN = 0;
+  const socIcon = (k) => {
+    const id = `sg${++socN}`;
+    if (k === 'instagram') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><radialGradient id="${id}" cx=".3" cy="1.05" r="1.2"><stop offset="0" stop-color="#ffd776"/><stop offset=".25" stop-color="#f9873a"/><stop offset=".55" stop-color="#e1306c"/><stop offset=".8" stop-color="#833ab4"/><stop offset="1" stop-color="#405de6"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#${id})"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.3" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg>`;
+    if (k === 'youtube') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#f00"/><rect x="8" y="14" width="32" height="20" rx="6" fill="#fff"/><path d="M20 19.5v9l8-4.5z" fill="#f00"/></svg>`;
+    return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#1877f2"/><path d="M26.6 41V26.4h4.9l.8-5.7h-5.7v-3.6c0-1.6.5-2.8 2.8-2.8h3V9.2c-.5-.1-2.3-.2-4.3-.2-4.3 0-7.2 2.6-7.2 7.4v4.3h-4.9v5.7h4.9V41z" fill="#fff"/></svg>`;
+  };
+  const socialSection = () => {
+    const cards = [
+      ['instagram', 'Instagram', site.instagramUrl, lang === 'hi' ? 'फ़ॉलो कीजिए' : 'Follow'],
+      ['youtube', 'YouTube', site.youtubeUrl, lang === 'hi' ? 'सब्सक्राइब कीजिए' : 'Subscribe'],
+      ['facebook', 'Facebook', site.facebookUrl, lang === 'hi' ? 'पेज फ़ॉलो कीजिए' : 'Follow the page'],
+    ].filter((x) => x[2]);
+    return `<section class="sec" aria-labelledby="social-h"><div class="wrap">
+  <h2 class="h2" id="social-h">${lang === 'hi' ? 'एकेडमी से जुड़िए' : 'Follow the academy'}</h2>
+  <p class="lede">${lang === 'hi' ? 'फ़्री क्लास, बैच की ख़बर और विद्यार्थियों का काम, सबसे पहले यहाँ।' : 'Free classes, batch news and our students\' work, first, right here.'}</p>
+  <div class="socials">${cards.map(([k, name, url, cta]) => `<a class="soc soc-${k}" href="${esc(url)}" target="_blank" rel="noopener"><span class="soc-ic">${socIcon(k)}</span><span class="soc-t"><b>${name}</b><span class="soc-go">${esc(cta)}</span></span></a>`).join('')}</div>
+</div></section>`;
+  };
   const glance = () => `<dl class="glance">${L.glance.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(fmt(v, feeVars))}</dd></div>`).join('')}</dl>`;
   const practical = () => `<aside class="practical"><strong>${esc(L.practical.title)}</strong><p>${esc(L.practical.text)}</p></aside>`;
 
@@ -445,6 +465,7 @@ ${igPosts.length ? `<section class="sec" aria-labelledby="ig-h"><div class="wrap
   <div class="sec-head"><div><p class="eyebrow">${esc(L.igEyebrow)}</p><h2 class="h2" id="ig-h">${esc(L.igTitle)}</h2></div>${site.instagramUrl ? `<a class="chip-link" href="${esc(site.instagramUrl)}">${esc(L.follow)}</a>` : ''}</div>
   ${rail(igPosts.slice(0, 12).map((p) => `<li><a class="igcard" href="${esc(p.permalink)}"><img src="${esc(p.img)}" alt="${esc((p.caption || 'Instagram').slice(0, 90))}" loading="lazy" decoding="async" width="320" height="320">${p.type === 'reel' || p.type === 'video' ? '<span class="ig-reel" aria-hidden="true">▶</span>' : ''}</a></li>`).join(''), 'igrail', L.igTitle)}
 </div></section>` : ''}
+${socialSection()}
 <section class="sec"><div class="wrap"><div class="online-band">
   <div><p class="eyebrow">${esc(L.onlineEyebrow)}</p><h2 class="h2">${esc(L.onlineTitle)}</h2><p>${esc(L.onlineText)}</p></div>
   <a class="btn btn-gold" href="${u('/online/')}">${esc(L.onlineCta)}</a>
