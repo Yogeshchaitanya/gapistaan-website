@@ -1,0 +1,47 @@
+##### pichchrapa.com
+-- NS
+lou.ns.cloudflare.com.
+poppy.ns.cloudflare.com.
+-- A
+-- AAAA
+-- CNAME
+##### www.pichchrapa.com
+-- NS
+-- A
+172.67.175.4
+104.21.80.65
+-- AAAA
+2606:4700:3033::6815:5041
+2606:4700:3037::ac43:af04
+-- CNAME
+-- NS via 1.1.1.1
+lou.ns.cloudflare.com.
+poppy.ns.cloudflare.com.
+##### GET https://pichchrapa.com/
+curl: (6) Could not resolve host: pichchrapa.com
+
+HTTP 000 ssl_verify=0
+head: cannot open '/tmp/body.txt' for reading: No such file or directory
+
+##### GET https://www.pichchrapa.com/
+HTTP/2 301 
+date: Mon, 19 Oct 2026 14:07:31 GMT
+content-length: 0
+location: https://pichchrapa.com/
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=am10pp72TtQDemZURzHQZ6jmKQIG7%2ByjlwSUD7TLsyk8RN0o8RifgYo4jW%2B4r1NUHENiP8Ff4OR0CD6uU%2BAFL3iSkqUrTEwhN6OVOulsyYvRk0LhnAF%2BBsVCSk138rxsTWqx6EU%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a4d0597c1960b8ff-MEM
+alt-svc: h3=":443"; ma=86400
+
+
+HTTP 301 ssl_verify=0
+
+##### GET http://pichchrapa.com/
+curl: (6) Could not resolve host: pichchrapa.com
+
+HTTP 000 ssl_verify=0
+
+##### cert
+Could not read certificate from <stdin>
+Unable to load certificate
