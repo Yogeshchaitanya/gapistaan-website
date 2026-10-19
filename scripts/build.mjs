@@ -11,7 +11,8 @@ const out = path.join(root, 'dist');
 const site = JSON.parse(await readFile(path.join(root, 'content/site.json'), 'utf8'));
 const en = JSON.parse(await readFile(path.join(root, 'content/en.json'), 'utf8'));
 const gift = JSON.parse(await readFile(path.join(root, 'content/gift.json'), 'utf8'));
-const data = JSON.parse(await readFile(path.join(root, 'data/videos.json'), 'utf8'));
+// The YouTube descriptions are synced as they are; `respell` in content/site.json fixes a name's spelling in them for this website.
+const data = JSON.parse((site.respell || []).reduce((txt, [from, to]) => txt.split(from).join(to), await readFile(path.join(root, 'data/videos.json'), 'utf8')));
 const css = (await readFile(path.join(root, 'src/styles.css'), 'utf8')).replace(/\/\*[\s\S]*?\*\//g, '').replace(/\n+/g, '\n');
 const siteUrl = (process.env.SITE_URL || site.siteUrl || '').trim().replace(/\/+$/, '');
 const abs = (p) => (siteUrl ? siteUrl + p : '');

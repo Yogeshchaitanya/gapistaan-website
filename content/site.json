@@ -7,6 +7,9 @@
   "subscribeUrl": "https://www.youtube.com/@gapistaan?sub_confirmation=1",
   "instagramUrl": "https://www.instagram.com/gapistaan/",
   "facebookUrl": "",
+  "respell": [
+    ["Rohit Das", "Roheet Das"]
+  ],
   "homeTitle": "Gapistaan | गैपिस्तान: Gen Gap हिंदी कॉमेडी सीरीज़, चाचा बनाम Gen Z",
   "homeDescription": "गैपिस्तान (Gapistaan) PICHCHRAPA की हिंदी कॉमेडी-सटायर सीरीज़ Gen Gap का घर है। लखनऊ के एक एक्टिंग इंस्टीट्यूट में चाचा बनाम Gen Z, बिना स्क्रिप्ट की improvised कॉमेडी। सारे एपिसोड यहाँ देखें।",
   "heroLine": "एक एक्टिंग इंस्टीट्यूट। एक तरफ़ चाचा, दूसरी तरफ़ Gen Z।",
@@ -252,9 +255,9 @@
       ]
     },
     {
-      "slug": "rohit-das",
+      "slug": "roheet-das",
       "name": "रोहित दास",
-      "nameEn": "Rohit Daas",
+      "nameEn": "Roheet Das",
       "role": "कलाकार",
       "photos": [
         "p10",
@@ -284,7 +287,7 @@
       ],
       "instagram": "",
       "match": [
-        "Rohit Das"
+        "Roheet Das"
       ]
     },
     {
