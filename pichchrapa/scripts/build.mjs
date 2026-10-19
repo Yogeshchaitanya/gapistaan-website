@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir, rm, cp, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { stuntLane } from './stunt.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist');
@@ -174,7 +175,7 @@ function reelStrips() {
   const cell = (v, hide) => `<a class="cell" href="${esc(hrefOf(v))}"${hide ? ' tabindex="-1" aria-hidden="true"' : ''}><img src="${esc(smallThumb(v))}" width="210" height="118" loading="lazy" decoding="async" alt="${hide ? '' : esc(vt(v))}"></a>`;
   const row = (items, cls, dur) => `<div class="strip${cls}" style="--dur:${dur}s"><div class="strip-track">${items.map((v) => cell(v, false)).join('')}${items.map((v) => cell(v, true)).join('')}</div></div>`;
   const label = (cls, name, href, n) => `<div class="wrap reel-label ${cls}"><a href="${href}">${esc(name)}</a><span>${n} ${T('वीडियो', 'videos')}</span></div>`;
-  return `<div class="reels" aria-label="${T('PICHCHRAPA की रील', 'PICHCHRAPA reels')}">${label('rl-raja', S.raja.name, '/raja-ka-baja/', top.length)}${row(top, '', Math.round(top.length * 5.5))}${label('rl-adalat', `${S.adalat.name} ${T('और बाक़ी', 'and more')}`, '/filmy-adalat/', rest.length)}${row(rest, ' rev', Math.round(rest.length * 5.5))}</div>`;
+  return `<div class="reels" aria-label="${T('PICHCHRAPA की रील', 'PICHCHRAPA reels')}">${label('rl-raja', S.raja.name, '/raja-ka-baja/', top.length)}${stuntLane()}${row(top, '', Math.round(top.length * 5.5))}${label('rl-adalat', `${S.adalat.name} ${T('और बाक़ी', 'and more')}`, '/filmy-adalat/', rest.length)}${row(rest, ' rev', Math.round(rest.length * 5.5))}</div>`;
 }
 
 // The logo, drawn flat and level. The clapper is closed at rest, so it sits straight; in the header it claps once on load and again on hover.
