@@ -238,6 +238,8 @@
       ]
     ],
     "apply": "ऑनलाइन एडमिशन",
+    "freeNav": "फ्री ऑनलाइन क्लासेस",
+    "supportChip": "सहयोग करें",
     "skip": "सीधे मुख्य हिस्से पर जाएँ",
     "home": "होम",
     "hero": {
@@ -733,8 +735,8 @@
     "galleryTitle": "गैलरी",
     "galleryLede": "किसी भी तस्वीर पर क्लिक करके उसे बड़ा देखें।",
     "galleryAcademy": "हमारे छात्र",
-    "videosPageTitle": "कक्षाएँ और वीडियो",
-    "videosPageLede": "Indian Films Academy के YouTube चैनल से। नई कक्षाएँ अपने-आप यहाँ जुड़ती हैं।",
+    "videosPageTitle": "फ्री ऑनलाइन क्लासेस",
+    "videosPageLede": "एक्टिंग की मुफ़्त कक्षाएँ, सीधे यहीं देखिए। कोई फ़ीस नहीं, कोई लॉगिन नहीं। नई कक्षाएँ अपने-आप सबसे ऊपर जुड़ती हैं। कक्षा अच्छी लगे तो ज़रूरतमंद छात्रों की पढ़ाई के लिए अपनी मर्ज़ी से सहयोग भी यहीं कर सकते हैं।",
     "onlinePage": {
       "eyebrow": "घर से, अपनी गति से",
       "h1": "ऑनलाइन अभिनय पाठ्यक्रम (हिंदी में)",
@@ -801,8 +803,8 @@
       "description": "Indian Films Academy, लखनऊ की गैलरी: फ़िल्म जगत के दिग्गजों और एकेडमी में आए मार्गदर्शकों के साथ।"
     },
     "videosPage": {
-      "title": "अभिनय कक्षाएँ (हिंदी में) | Indian Films Academy, लखनऊ",
-      "description": "Indian Films Academy के YouTube चैनल की अभिनय कक्षाएँ: कैमरा अभिनय, Observation, Feel and React, Yogesh CineAct।"
+      "title": "फ्री ऑनलाइन एक्टिंग क्लासेस (हिंदी में) | Indian Films Academy, लखनऊ",
+      "description": "Indian Films Academy की फ्री ऑनलाइन एक्टिंग क्लासेस: कैमरा एक्टिंग, Observation, Feel and React, Yogesh CineAct। बिना फ़ीस, बिना लॉगिन, हिंदी में।"
     },
     "privacy": {
       "title": "प्राइवेसी नीति | Indian Films Academy",
@@ -1167,6 +1169,8 @@
       ]
     ],
     "apply": "Apply online",
+    "freeNav": "Free Online Classes",
+    "supportChip": "Support a student",
     "skip": "Skip to main content",
     "home": "Home",
     "hero": {
@@ -1662,8 +1666,8 @@
     "galleryTitle": "Gallery",
     "galleryLede": "Click any photograph to view it larger.",
     "galleryAcademy": "Our students",
-    "videosPageTitle": "Classes and videos",
-    "videosPageLede": "From the Indian Films Academy YouTube channel. New classes appear here automatically.",
+    "videosPageTitle": "Free Online Classes",
+    "videosPageLede": "Free acting classes, to watch right here. No fees, no login. New classes appear at the top automatically. If a class helps you, you can also support students who cannot afford fees, right on this page and by any amount you choose.",
     "onlinePage": {
       "eyebrow": "From home, at your own pace",
       "h1": "Online acting course (in Hindi)",
@@ -1730,8 +1734,8 @@
       "description": "Photographs from Indian Films Academy, Lucknow: with legends of Indian cinema and the mentors who have visited the academy."
     },
     "videosPage": {
-      "title": "Acting Classes (in Hindi) | Indian Films Academy, Lucknow",
-      "description": "Acting classes from the Indian Films Academy YouTube channel: camera acting, observation, Feel and React and Yogesh CineAct."
+      "title": "Free Online Acting Classes (in Hindi) | Indian Films Academy, Lucknow",
+      "description": "Free online acting classes from Indian Films Academy: camera acting, observation, Feel and React and Yogesh CineAct. No fees, no login, in Hindi."
     },
     "privacy": {
       "title": "Privacy Policy | Indian Films Academy",

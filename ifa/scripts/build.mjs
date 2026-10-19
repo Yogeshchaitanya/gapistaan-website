@@ -147,7 +147,8 @@ function buildLang(lang) {
     const url = abs(u(pathName));
     const altHi = abs(pathName), altEn = abs('/en' + pathName);
     const switchHref = (other === 'hi' ? '' : '/en') + pathName;
-    const nav = L.nav.map(([h, l]) => `<a href="${u(h)}"${pathName.startsWith(h) ? ' aria-current="page"' : ''}>${esc(l)}</a>`).join('');
+    const nav = `<a class="nav-free" href="${u('/videos/')}"${pathName.startsWith('/videos/') ? ' aria-current="page"' : ''}><span class="live-dot" aria-hidden="true"></span>${esc(L.freeNav)}</a>`
+      + L.nav.map(([h, l]) => `<a href="${u(h)}"${pathName.startsWith(h) ? ' aria-current="page"' : ''}>${esc(l)}</a>`).join('');
     const socials = [site.youtubeUrl && ['YouTube', site.youtubeUrl], site.instagramUrl && ['Instagram', site.instagramUrl], site.facebookUrl && ['Facebook', site.facebookUrl]].filter(Boolean);
     const F = L.foot;
     const script = lang === 'hi' ? 'devanagari' : 'latin';
@@ -205,6 +206,7 @@ ${body}
         ${tracks.map((t) => `<li><a href="${u(`/${t.slug}/`)}">${esc(t.seo)}</a></li>`).join('\n        ')}
         <li><a href="${u('/courses/')}">${esc(F.cinekar)}</a></li>
         <li><a href="${u('/admission/')}">${esc(F.admission)}</a></li>
+        <li><a href="${u('/videos/')}">${esc(L.freeNav)}</a></li>
         <li><a href="${u('/online/')}">${esc(F.online)}</a></li>
       </ul>
     </div>
@@ -655,8 +657,8 @@ ${viewer}
     ld: [crumbsLd([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])],
     body: `<main id="main" class="page"><div class="wrap page-head">
 ${crumbs([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])}
-<div class="sec-head"><div><h1 class="page-h1">${esc(L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div>
-<div class="vid-layout"><ul class="vgrid">${videos.map(videoCard).join('\n')}</ul>${donate()}</div>
+<div class="sec-head"><div><h1 class="page-h1">${esc(L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><div class="link-row"><a class="chip-link chip-gold" href="#support">${esc(L.supportChip)}</a><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div></div>
+<div class="vid-layout"><div class="vid-main"><ul class="vgrid">${videos.map(videoCard).join('\n')}</ul><a class="support-bar" href="#support"><span>${esc(DN.short)}</span><b>${esc(DN.btn)}</b></a></div>${donate()}</div>
 </div></main>`,
   });
 

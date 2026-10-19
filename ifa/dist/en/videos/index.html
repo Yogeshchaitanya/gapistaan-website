@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Acting Classes (in Hindi) | Indian Films Academy, Lucknow</title>
-<meta name="description" content="Acting classes from the Indian Films Academy YouTube channel: camera acting, observation, Feel and React and Yogesh CineAct.">
+<title>Free Online Acting Classes (in Hindi) | Indian Films Academy, Lucknow</title>
+<meta name="description" content="Free online acting classes from Indian Films Academy: camera acting, observation, Feel and React and Yogesh CineAct. No fees, no login, in Hindi.">
 <link rel="canonical" href="https://indianfilmsacademy.com/en/videos/">
 <link rel="alternate" hreflang="hi" href="https://indianfilmsacademy.com/videos/">
 <link rel="alternate" hreflang="en" href="https://indianfilmsacademy.com/en/videos/">
@@ -18,8 +18,8 @@
 <meta property="og:site_name" content="Indian Films Academy">
 <meta property="og:locale" content="en_IN">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Acting Classes (in Hindi) | Indian Films Academy, Lucknow">
-<meta property="og:description" content="Acting classes from the Indian Films Academy YouTube channel: camera acting, observation, Feel and React and Yogesh CineAct.">
+<meta property="og:title" content="Free Online Acting Classes (in Hindi) | Indian Films Academy, Lucknow">
+<meta property="og:description" content="Free online acting classes from Indian Films Academy: camera acting, observation, Feel and React and Yogesh CineAct. No fees, no login, in Hindi.">
 <meta property="og:url" content="https://indianfilmsacademy.com/en/videos/">
 <meta property="og:image" content="https://indianfilmsacademy.com/img/hero-group-1600.webp">
 <meta name="twitter:card" content="summary_large_image">
@@ -94,7 +94,7 @@ a:hover{color:var(--indigo)}
 .topnav a{color:var(--slate);text-decoration:none;font-weight:800;font-size:.97rem;white-space:nowrap;padding-block:.2rem;border-bottom:2px solid transparent}
 .topnav a:hover{color:var(--indigo)}
 .topnav a[aria-current]{color:var(--indigo);border-bottom-color:var(--marigold)}
-@media (min-width:66rem){.topbar-in{grid-template-columns:auto 1fr auto}.topnav{grid-column:2;grid-row:1;justify-content:center;gap:1.2rem}.top-actions{grid-column:3}}
+@media (min-width:40rem){.topnav{justify-content:safe center}}
 .hero{position:relative;overflow:hidden;isolation:isolate;color:#fff;background:radial-gradient(50% 70% at 76% 45%,rgba(212,166,74,.22),rgba(212,166,74,0) 70%),radial-gradient(40% 50% at 8% 0%,rgba(21,106,108,.55),rgba(21,106,108,0) 70%),linear-gradient(165deg,var(--indigo) 0%,var(--deep) 75%)}
 .hero-grid{display:grid;gap:2rem;padding-block:clamp(2.4rem,7vw,4rem) clamp(2.4rem,6vw,3.5rem)}
 @media (min-width:60rem){.hero-grid{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:3rem;align-items:center;min-height:min(88vh,780px);padding-block:1.5rem}}
@@ -271,8 +271,19 @@ a:hover{color:var(--indigo)}
 .donate-line{margin:.7rem 0 0}
 .donate-line a{color:var(--marigold-ink);font-weight:800}
 .vid-layout{display:grid;gap:1.4rem}
-.vid-layout .donate{order:-1;margin-top:1rem}
-@media (min-width:64rem){.vid-layout{grid-template-columns:1fr 330px;align-items:start}.vid-layout .vgrid{grid-template-columns:repeat(2,1fr)}.vid-layout .donate{order:0;position:sticky;top:5.5rem;grid-template-columns:1fr}}
+.vid-main{min-width:0}
+.vid-layout .donate{margin-top:.5rem;scroll-margin-top:8rem}
+.support-bar{position:sticky;bottom:.7rem;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:.8rem;margin-top:1rem;padding:.55rem .6rem .55rem 1rem;border-radius:999px;background:var(--deep);color:#fff;text-decoration:none;font-weight:800;font-size:.9rem;line-height:1.3;box-shadow:0 8px 24px rgba(1,42,44,.35)}
+.support-bar b{flex:none;padding:.45rem 1rem;border-radius:999px;background:var(--marigold);color:var(--deep)}
+.support-bar:hover b{background:var(--marigold-2)}
+@media (min-width:64rem){.vid-layout{grid-template-columns:1fr 330px;align-items:start}.vid-layout .vgrid{grid-template-columns:repeat(2,1fr)}.vid-layout .donate{position:sticky;top:7rem;max-height:calc(100vh - 7.5rem);overflow-y:auto;grid-template-columns:1fr}.support-bar{display:none}}.chip-gold{background:var(--marigold);border-color:var(--marigold);color:var(--deep)}
+.chip-gold:hover{background:var(--marigold-2);border-color:var(--marigold-2)}
+.topnav a.nav-free{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .95rem;border:0;border-radius:999px;background:var(--marigold);color:var(--deep);box-shadow:0 2px 0 rgba(1,42,44,.18)}
+.topnav a.nav-free:hover,.topnav a.nav-free[aria-current]{background:var(--marigold-2);color:var(--deep)}
+.live-dot{position:relative;flex:none;width:.6rem;height:.6rem;border-radius:50%;background:#C0392B}
+.live-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#C0392B;animation:livepulse 1.8s ease-out infinite}
+@keyframes livepulse{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.live-dot::after{animation:none}}
 .admit{display:grid;gap:1.4rem;max-width:58rem;margin-bottom:4rem}
 .astep{margin:0;padding:1.3rem 1.5rem 1.5rem;border-radius:var(--r);background:var(--white);border:1px solid var(--line);min-width:0}
 .astep legend{display:flex;align-items:center;gap:.6rem;padding:0 .4rem;color:var(--indigo);font-weight:800;font-size:1.15rem}
@@ -481,14 +492,14 @@ a:hover{color:var(--indigo)}
 .paid .actions{justify-content:center}
 .paid .btn-ghost{color:#fff;border-color:rgba(255,255,255,.55)}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indianfilmsacademy.com/en/"},{"@type":"ListItem","position":2,"name":"Classes and videos","item":"https://indianfilmsacademy.com/en/videos/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://indianfilmsacademy.com/en/"},{"@type":"ListItem","position":2,"name":"Free Online Classes","item":"https://indianfilmsacademy.com/en/videos/"}]}</script>
 </head>
 <body class="lang-en">
 <a class="skip" href="#main">Skip to main content</a>
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="/en/"><img src="/img/logo-emblem-96.webp" alt="" width="44" height="44"><span><span class="brand-name">Indian Films Academy</span><span class="brand-sub">Lucknow · Since 2019</span></span></a>
-    <nav class="topnav" aria-label="Menu"><a href="/en/cinematic-acting-course/">Cinematic Acting</a><a href="/en/film-direction-course/">Film Direction</a><a href="/en/film-editing-course/">Film Editing</a><a href="/en/yogesh-cineact/">Yogesh CineAct</a><a href="/en/about/">Academy</a><a href="/en/contact/">Contact</a></nav>
+    <nav class="topnav" aria-label="Menu"><a class="nav-free" href="/en/videos/" aria-current="page"><span class="live-dot" aria-hidden="true"></span>Free Online Classes</a><a href="/en/cinematic-acting-course/">Cinematic Acting</a><a href="/en/film-direction-course/">Film Direction</a><a href="/en/film-editing-course/">Film Editing</a><a href="/en/yogesh-cineact/">Yogesh CineAct</a><a href="/en/about/">Academy</a><a href="/en/contact/">Contact</a></nav>
     <div class="top-actions">
       <a class="lang-switch" href="/videos/" hreflang="hi" lang="hi">हिंदी</a>
       <a class="btn btn-primary btn-sm" href="/en/admission/">Apply online</a>
@@ -496,9 +507,9 @@ a:hover{color:var(--indigo)}
   </div>
 </header>
 <main id="main" class="page"><div class="wrap page-head">
-<nav class="crumbs" aria-label="breadcrumb"><a href="/en/">Home</a><span aria-hidden="true"> / </span><span>Classes and videos</span></nav>
-<div class="sec-head"><div><h1 class="page-h1">Classes and videos</h1><p class="lede">From the Indian Films Academy YouTube channel. New classes appear here automatically.</p><p class="hint">Hover over a video to preview it. Click to watch in full.</p></div><a class="chip-link" href="https://www.youtube.com/@indianfilmsacademyy?sub_confirmation=1">Subscribe on YouTube</a></div>
-<div class="vid-layout"><ul class="vgrid"><li><a class="vcard" href="https://www.youtube.com/watch?v=ShXF6p3AiF4" data-id="ShXF6p3AiF4" data-title="Class 4: Inside the Yogesh CineAct System">
+<nav class="crumbs" aria-label="breadcrumb"><a href="/en/">Home</a><span aria-hidden="true"> / </span><span>Free Online Classes</span></nav>
+<div class="sec-head"><div><h1 class="page-h1">Free Online Classes</h1><p class="lede">Free acting classes, to watch right here. No fees, no login. New classes appear at the top automatically. If a class helps you, you can also support students who cannot afford fees, right on this page and by any amount you choose.</p><p class="hint">Hover over a video to preview it. Click to watch in full.</p></div><div class="link-row"><a class="chip-link chip-gold" href="#support">Support a student</a><a class="chip-link" href="https://www.youtube.com/@indianfilmsacademyy?sub_confirmation=1">Subscribe on YouTube</a></div></div>
+<div class="vid-layout"><div class="vid-main"><ul class="vgrid"><li><a class="vcard" href="https://www.youtube.com/watch?v=ShXF6p3AiF4" data-id="ShXF6p3AiF4" data-title="Class 4: Inside the Yogesh CineAct System">
   <span class="thumb"><img src="https://i.ytimg.com/vi/ShXF6p3AiF4/mqdefault.jpg" srcset="https://i.ytimg.com/vi/ShXF6p3AiF4/mqdefault.jpg 320w, https://i.ytimg.com/vi/ShXF6p3AiF4/hqdefault.jpg 480w, https://i.ytimg.com/vi/ShXF6p3AiF4/sddefault.jpg 640w" sizes="(min-width: 64rem) 24rem, 80vw" alt="" width="320" height="180" loading="lazy" decoding="async"><span class="play-dot" aria-hidden="true"></span><span class="dur" aria-hidden="true">4:07</span></span>
   <span class="vtitle">Class 4: Inside the Yogesh CineAct System</span>
 </a></li>
@@ -733,7 +744,7 @@ a:hover{color:var(--indigo)}
 <li><a class="vcard" href="https://www.youtube.com/watch?v=g3bI6e855nE" data-id="g3bI6e855nE" data-title="With Actor Manoj Tiger: Anyone Can Act, Part 5">
   <span class="thumb"><img src="https://i.ytimg.com/vi/g3bI6e855nE/mqdefault.jpg" srcset="https://i.ytimg.com/vi/g3bI6e855nE/mqdefault.jpg 320w, https://i.ytimg.com/vi/g3bI6e855nE/hqdefault.jpg 480w, https://i.ytimg.com/vi/g3bI6e855nE/sddefault.jpg 640w" sizes="(min-width: 64rem) 24rem, 80vw" alt="" width="320" height="180" loading="lazy" decoding="async"><span class="play-dot" aria-hidden="true"></span><span class="dur" aria-hidden="true">10:46</span></span>
   <span class="vtitle">With Actor Manoj Tiger: Anyone Can Act, Part 5</span>
-</a></li></ul><aside class="donate" id="support" aria-labelledby="dn-h">
+</a></li></ul><a class="support-bar" href="#support"><span>Liked the class? Support students who can&#39;t afford the fees</span><b>Support</b></a></div><aside class="donate" id="support" aria-labelledby="dn-h">
   <div class="donate-text"><p class="eyebrow">Free classes, for everyone</p><h2 id="dn-h">Liked the class? Help someone else learn</h2><p>These classes are free and will stay free. But many students have the talent and not the fees. If a video gave you something, send any amount you like. Your support goes into teaching students like them.</p>
   <p class="amts"><button type="button" class="amt" data-amt="101">₹101</button><button type="button" class="amt" data-amt="251">₹251</button><button type="button" class="amt" data-amt="501">₹501</button><button type="button" class="amt" data-amt="1100">₹1,100</button></p>
   <p class="donate-own"><label>or your own amount <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" placeholder="2100" aria-label="or your own amount"></span></label><button type="button" class="btn btn-gold donate-go">Support</button></p>
@@ -757,6 +768,7 @@ a:hover{color:var(--indigo)}
         <li><a href="/en/film-editing-course/">Film Editing Course in Lucknow</a></li>
         <li><a href="/en/courses/">Compare the three courses</a></li>
         <li><a href="/en/admission/">Apply online</a></li>
+        <li><a href="/en/videos/">Free Online Classes</a></li>
         <li><a href="/en/online/">Online acting course</a></li>
       </ul>
     </div>
