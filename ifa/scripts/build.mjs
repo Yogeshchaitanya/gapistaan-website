@@ -102,7 +102,7 @@ const orgLd = (lang) => ({
   alternateName: ['इंडियन फिल्म्स एकेडमी', 'IFA Lucknow', 'Indian Film Academy Lucknow', 'Indian Films Academy Gomti Nagar'],
   areaServed: [{ '@type': 'City', name: 'Lucknow' }, { '@type': 'AdministrativeArea', name: 'Uttar Pradesh' }],
   knowsAbout: ['Cinematic acting', 'Camera acting', 'Film direction', 'Film editing', 'Yogesh CineAct method', 'YouTube and Instagram content creation'],
-  contactPoint: { '@type': 'ContactPoint', contactType: 'admissions', telephone: site.phone, email: site.email, areaServed: 'IN', availableLanguage: ['Hindi', 'English'] },
+  contactPoint: [site.phone, site.phone2].filter(Boolean).map((tel) => ({ '@type': 'ContactPoint', contactType: 'admissions', telephone: tel, email: site.email, areaServed: 'IN', availableLanguage: ['Hindi', 'English'] })),
   ...(site.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng } } : {}),
   ...(site.mapUrl ? { hasMap: site.mapUrl } : {}),
   url: abs('/'),
@@ -110,7 +110,7 @@ const orgLd = (lang) => ({
   image: abs('/img/hero-group-1600.webp'),
   description: site.en.about[0],
   foundingDate: String(site.since),
-  telephone: site.phone,
+  telephone: [site.phone, site.phone2].filter(Boolean),
   email: site.email,
   address: { '@type': 'PostalAddress', streetAddress: site.address.street, addressLocality: site.address.city, addressRegion: site.address.region, postalCode: site.address.pin, addressCountry: 'IN' },
   founder: site.founderMeta.map((f, i) => ({ '@type': 'Person', name: f.nameEn, jobTitle: site.en.founders[i].role, ...(f.links.length ? { sameAs: f.links.map(([, h]) => (h.startsWith('/') ? abs(h) : h)) } : {}) })),
@@ -148,7 +148,7 @@ function buildLang(lang) {
   const li = (x) => `<li>${esc(x)}</li>`;
   const feeVars = {
     i1: money(site.installments[0]), i2: money(site.installments[1]), total: money(site.installments.reduce((a, b) => a + b, 0)), pct: site.scholarshipPct,
-    fee: money(site.fee), phone: site.phoneLabel, email: site.email,
+    fee: money(site.fee), phone: [site.phoneLabel, site.phone2Label].filter(Boolean).join(lang === 'hi' ? ' या ' : ' or '), email: site.email,
     addr: `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.pin}`,
     founders: L.founders.map((f) => f.name).join(lang === 'hi' ? ' और ' : ' and '),
   };
@@ -239,6 +239,7 @@ ${body}
       <h2>${esc(F.contact)}</h2>
       <ul>
         <li><a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></li>
+        ${site.phone2 ? `<li><a href="tel:${esc(site.phone2)}">${esc(site.phone2Label)}</a></li>` : ''}
         <li><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></li>
         <li><a href="${mapsUrl}">${esc(L.contact.directions)}</a></li>
         <li><a href="${switchHref}" lang="${other}">${esc(L.switchLabel)}</a></li>
@@ -370,7 +371,7 @@ ${site.cfAnalyticsToken ? `<script defer src="https://static.cloudflareinsights.
   <div class="contact-card">
     <h3>${esc(C.address)}</h3><p>${esc(L.addressText)}</p>
     <p><a class="chip-link" href="${mapsUrl}">${esc(C.directions)}</a></p>
-    <h3>${esc(C.phone)}</h3><p><a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a></p>
+    <h3>${esc(C.phone)}</h3><p><a href="tel:${esc(site.phone)}">${esc(site.phoneLabel)}</a>${site.phone2 ? `<br><a href="tel:${esc(site.phone2)}">${esc(site.phone2Label)}</a>` : ''}</p>
     <h3>${esc(C.email)}</h3><p><a href="mailto:${esc(site.email)}">${esc(site.email)}</a></p>
   </div>
   <form class="apply js-wa" id="apply" action="https://wa.me/${site.whatsapp}" method="get" data-intro="${esc(C.msgIntro)}">
