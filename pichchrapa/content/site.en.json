@@ -204,7 +204,8 @@
         "cap": "A group photo from the set"
       }
     ],
-    "portraitsTitle": "The family's artists"
+    "portraitsTitle": "Old members",
+    "portraitsLead": "Artists of the family who worked with us earlier."
   },
   "posters": {
     "title": "Posters",
@@ -236,10 +237,14 @@
     ]
   },
   "artists": {
-    "title": "Gapistaan artists",
-    "lead": "The cast of Gapistaan's comedy series Gen Gap. All trained at Indian Films Academy and part of this family.",
+    "title": "Present members",
+    "lead": "The artists working with this family today: all seven artists of Gapistaan's comedy series Gen Gap, and founder Yogesh Chaitanya.",
     "cta": "See the profile on Gapistaan",
     "items": [
+      {
+        "name": "Yogesh Chaitanya",
+        "note": "Founder, acting teacher"
+      },
       {
         "name": "Ayushi Tiwari"
       },

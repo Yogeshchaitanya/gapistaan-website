@@ -356,7 +356,6 @@ function behindHtml({ heading = true } = {}) {
     ${heading && st ? `<div class="studio-head"><h2 class="h2" id="studio-h">${esc(st.title)}</h2><p>${esc(st.lead)}</p></div>` : ''}
     ${tm && tm.main ? `<div class="team-grid">${tm.main.map((p, i) => `<figure class="sf t${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
     ${tm && tm.strip ? `<h3 class="h3 strip-h">${esc(tm.stripTitle)}</h3>${stripHtml(tm.strip, 'set-strip', tm.stripTitle)}` : ''}
-    ${tm && tm.portraits ? `<h3 class="h3 strip-h">${esc(tm.portraitsTitle)}</h3>${stripHtml(tm.portraits.map((p) => ({ ...p, alt: p.name ? T(p.name, p.nameEn || p.name) : T('परिवार के एक कलाकार का पोर्ट्रेट', "Portrait of one of the family's artists"), cap: p.name ? T(p.name, p.nameEn || p.name) : '' })), 'face-strip', tm.portraitsTitle)}` : ''}
     ${st && st.photos ? `<h3 class="h3 strip-h">${esc(st.subTitle)}</h3>
     <div class="studio-grid">${st.photos.map((p, i) => `<figure class="sf sf-${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
   </div>`;
@@ -367,8 +366,15 @@ function artistsInner() {
   const a = site.artists;
   if (!a || !a.items.length) return '';
   return `<div class="studio-head"><h2 class="h2" id="artists-h">${esc(a.title)}</h2><p>${esc(a.lead)}</p></div>
-  <ul class="artists">${a.items.map((x) => `<li><a class="artist" href="${esc(gapUrl('/cast/' + x.slug + '/'))}"><img src="${esc(x.photo)}" width="400" height="500" loading="lazy" decoding="async" alt=""><span class="a-name">${esc(x.name)}</span>${x.note ? `<span class="a-note">${esc(x.note)}</span>` : ''}</a></li>`).join('')}</ul>
+  <ul class="artists">${a.items.map((x) => `<li><a class="artist" href="${esc(x.href || gapUrl('/cast/' + x.slug + '/'))}"><img src="${esc(x.photo)}" width="400" height="500" loading="lazy" decoding="async" alt=""><span class="a-name">${esc(x.name)}</span>${x.note ? `<span class="a-note">${esc(x.note)}</span>` : ''}</a></li>`).join('')}</ul>
   <p class="more" style="text-align:left"><a class="btn btn-ghost" href="${esc(gapUrl('/cast/'))}">${esc(a.cta)}</a></p>`;
+}
+
+function oldMembersInner() {
+  const tm = site.team;
+  if (!tm || !tm.portraits || !tm.portraits.length) return '';
+  const items = tm.portraits.map((p) => ({ ...p, alt: p.name ? T(p.name, p.nameEn || p.name) : T('परिवार के एक पुराने कलाकार का पोर्ट्रेट', "Portrait of one of the family's earlier artists"), cap: p.name ? T(p.name, p.nameEn || p.name) : '' }));
+  return `<div class="studio-head old-members"><h2 class="h2" id="old-h">${esc(tm.portraitsTitle)}</h2>${tm.portraitsLead ? `<p>${esc(tm.portraitsLead)}</p>` : ''}</div>${stripHtml(items, 'face-strip', tm.portraitsTitle)}`;
 }
 
 const postersHtml = () => (site.posters && site.posters.items.length
@@ -462,7 +468,7 @@ function homePage() {
 </section>
 
 <section class="sec sec-alt" aria-labelledby="artists-h">
-  <div class="wrap">${artistsInner()}</div>
+  <div class="wrap">${artistsInner()}${oldMembersInner()}</div>
 </section>
 
 <section class="sec" aria-labelledby="brands-h">
@@ -636,7 +642,7 @@ ${crumbNav(['PICHCHRAPA', '/'], [T('हमारी कहानी', 'Our story
   <div>${creditsHtml()}</div>
 </div>
 <section style="margin-top:2.2rem" aria-label="${T('स्टूडियो की तस्वीरें', 'Studio photos')}">${behindHtml({ heading: false })}</section>
-<section style="margin-top:2.4rem" aria-labelledby="artists-h">${artistsInner()}</section>
+<section style="margin-top:2.4rem" aria-labelledby="artists-h">${artistsInner()}${oldMembersInner()}</section>
 <section class="prose" style="margin-top:2.4rem"><h2>${esc(site.company.title)}</h2><p>${esc(site.company.lead)}</p>${companyFacts()}</section>
 <div class="actions" style="margin-top:2rem"><a class="btn btn-gold" href="/filmy-adalat/">${T(`${esc(S.adalat.name)} देखिए`, `Watch ${esc(S.adalat.name)}`)}</a><a class="btn btn-ghost" href="/raja-ka-baja/">${T(`${esc(S.raja.name)} देखिए`, `Watch ${esc(S.raja.name)}`)}</a><a class="btn btn-ghost" href="/contact/">${T('संपर्क कीजिए', 'Get in touch')}</a></div>
 </main>`;

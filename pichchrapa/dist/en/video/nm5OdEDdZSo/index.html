@@ -447,6 +447,14 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
   .js .case-no[data-fx]:not(.in){opacity:1}
   .artist{transition:none}.artist:hover{transform:none}
 }
+
+/* पुराने सदस्य: प्रेजेंट मेंबर के नीचे अलग हिस्सा */
+.old-members{margin-top:clamp(2.8rem,6vw,4.4rem)}
+
+/* प्रेजेंट मेंबर: 8 कार्ड कभी अकेले दूसरी पंक्ति में न गिरें */
+.artists{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.artists{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:76rem){.artists{grid-template-columns:repeat(8,minmax(0,1fr))}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/en/"},{"@type":"ListItem","position":2,"name":"More short films","item":"https://pichchrapa.com/en/filmy-adalat/"},{"@type":"ListItem","position":3,"name":"भाईचारा Vs GF","item":"https://pichchrapa.com/en/video/nm5OdEDdZSo/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"भाईचारा Vs GF","description":"दो रूममेट्स एक ही रूम में पढ़ाई कर रहे होते हैं — एक शरीफ और दूसरा पूरी तरह 'दुराचारी' 😂 लेकिन कहानी तब पलट जाती है जब शरीफ वाले की GF आ जाती है... और उसी वक्त उसके पापा आ धमकते हैं! अब क्या होगा जब 'भाईचारा' टकराएगा 'GF' से? देखिए इस मजेदार और तगड़ी हॉस्टल कॉमेडी को —","thumbnailUrl":["https://i.ytimg.com/vi/nm5OdEDdZSo/maxresdefault.jpg","https://i.ytimg.com/vi/nm5OdEDdZSo/hqdefault.jpg"],"uploadDate":"2025-06-13T14:15:49Z","duration":"PT7M45S","embedUrl":"https://www.youtube.com/embed/nm5OdEDdZSo","contentUrl":"https://www.youtube.com/watch?v=nm5OdEDdZSo","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"keywords":"boyfriend girlfriend, college comedy, comedy shorts, desi vibe, funny story, hindi comedy, hostel comedy, hostel life, indian funny, indian shorts, love drama, relationship drama"}</script>

@@ -447,6 +447,14 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
   .js .case-no[data-fx]:not(.in){opacity:1}
   .artist{transition:none}.artist:hover{transform:none}
 }
+
+/* पुराने सदस्य: प्रेजेंट मेंबर के नीचे अलग हिस्सा */
+.old-members{margin-top:clamp(2.8rem,6vw,4.4rem)}
+
+/* प्रेजेंट मेंबर: 8 कार्ड कभी अकेले दूसरी पंक्ति में न गिरें */
+.artists{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.artists{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:76rem){.artists{grid-template-columns:repeat(8,minmax(0,1fr))}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/en/"},{"@type":"ListItem","position":2,"name":"More short films","item":"https://pichchrapa.com/en/filmy-adalat/"},{"@type":"ListItem","position":3,"name":"नौकरानी का हीरोइन बनने का सपना!","item":"https://pichchrapa.com/en/video/2dWR29v6cG4/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"नौकरानी का हीरोइन बनने का सपना!","description":"मैं भी ACTRESS — एक कॉमेडी स्ट्रगलर स्टोरी! इस मजेदार वीडियो में देखिए कैसे एक बिल्डिंग की मालिकन और उसकी नौकरानी — दोनों ही हीरोइन बनने के सपने देखती हैं! जहाँ मालिकन खुद को सुपरस्टार मानती है, वहीं नौकरानी भी उसी के फ्लैट में रहकर चोरी-चुपके हीरोइन बनने की तैयारी करती है।","thumbnailUrl":["https://i.ytimg.com/vi/2dWR29v6cG4/maxresdefault.jpg","https://i.ytimg.com/vi/2dWR29v6cG4/hqdefault.jpg"],"uploadDate":"2025-06-15T08:35:36Z","duration":"PT13M41S","embedUrl":"https://www.youtube.com/embed/2dWR29v6cG4","contentUrl":"https://www.youtube.com/watch?v=2dWR29v6cG4","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"keywords":"mei bhi actress, कॉमेडी फिल्म, मैं भी Actress"}</script>

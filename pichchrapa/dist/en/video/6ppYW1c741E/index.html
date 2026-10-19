@@ -447,6 +447,14 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
   .js .case-no[data-fx]:not(.in){opacity:1}
   .artist{transition:none}.artist:hover{transform:none}
 }
+
+/* पुराने सदस्य: प्रेजेंट मेंबर के नीचे अलग हिस्सा */
+.old-members{margin-top:clamp(2.8rem,6vw,4.4rem)}
+
+/* प्रेजेंट मेंबर: 8 कार्ड कभी अकेले दूसरी पंक्ति में न गिरें */
+.artists{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.artists{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:76rem){.artists{grid-template-columns:repeat(8,minmax(0,1fr))}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/en/"},{"@type":"ListItem","position":2,"name":"Filmy Adalat","item":"https://pichchrapa.com/en/filmy-adalat/"},{"@type":"ListItem","position":3,"name":"Filmy Adaalat: A Lawyer's Life - Behind the Scenes","item":"https://pichchrapa.com/en/video/6ppYW1c741E/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Filmy Adaalat: A Lawyer's Life - Behind the Scenes","description":"Filmy Adaalat की दुनिया के पर्दे के पीछे का असली मज़ा देखिए! 🎬 ये है “Pakhi Ka Swayamvar” एपिसोड की behind the scenes making – जहां हंसी, मस्ती, ड्रामा और खूब सारा action है! 🎭 किरदारों की तैयारी","thumbnailUrl":["https://i.ytimg.com/vi/6ppYW1c741E/maxresdefault.jpg","https://i.ytimg.com/vi/6ppYW1c741E/hqdefault.jpg"],"uploadDate":"2025-05-16T13:04:43Z","duration":"PT3M47S","embedUrl":"https://www.youtube.com/embed/6ppYW1c741E","contentUrl":"https://www.youtube.com/watch?v=6ppYW1c741E","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"partOfSeries":{"@type":"TVSeries","name":"Filmy Adalat","url":"https://pichchrapa.com/en/filmy-adalat/"},"keywords":"behind scenes, case study, courtroom drama, drama series, filmy adalat behind the scenes, filmy adalat making, indian law, lawyer comedy, legal drama, making of, movie making, on set"}</script>

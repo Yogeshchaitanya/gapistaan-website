@@ -308,14 +308,8 @@
         "cap": "सेट से एक ग्रुप फ़ोटो"
       }
     ],
-    "portraitsTitle": "परिवार के कलाकार",
+    "portraitsTitle": "ओल्ड मेंबर",
     "portraits": [
-      {
-        "src": "/img/people/p-01.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
       {
         "src": "/img/people/p-02.webp",
         "w": 480,
@@ -401,25 +395,7 @@
         "name": ""
       },
       {
-        "src": "/img/people/p-16.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-17.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
         "src": "/img/people/p-18.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-19.webp",
         "w": 480,
         "h": 600,
         "name": ""
@@ -466,7 +442,8 @@
         "h": 600,
         "name": ""
       }
-    ]
+    ],
+    "portraitsLead": "परिवार के वे कलाकार जो पहले हमारे साथ काम कर चुके हैं।"
   },
   "posters": {
     "title": "पोस्टर",
@@ -516,10 +493,17 @@
     ]
   },
   "artists": {
-    "title": "गैपिस्तान के कलाकार",
-    "lead": "गैपिस्तान की कॉमेडी सीरीज़ Gen Gap के कलाकार। सब Indian Films Academy में तैयार हुए हैं और इसी परिवार का हिस्सा हैं।",
+    "title": "प्रेजेंट मेंबर",
+    "lead": "आज इसी परिवार के साथ काम कर रहे कलाकार: गैपिस्तान की कॉमेडी सीरीज़ Gen Gap के सातों कलाकार और संस्थापक योगेश चैतन्य।",
     "cta": "गैपिस्तान पर प्रोफ़ाइल देखिए",
     "items": [
+      {
+        "slug": "yogesh-chaitanya",
+        "name": "योगेश चैतन्य",
+        "photo": "/img/cast/yogesh-s.webp",
+        "note": "संस्थापक, अभिनय-गुरु",
+        "href": "/about/"
+      },
       {
         "slug": "ayushi-tiwari",
         "name": "आयुषी तिवारी",

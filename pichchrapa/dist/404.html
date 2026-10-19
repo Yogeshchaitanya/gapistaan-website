@@ -445,6 +445,14 @@ html:not([lang=en]) .subname{letter-spacing:.08em}
   .js .case-no[data-fx]:not(.in){opacity:1}
   .artist{transition:none}.artist:hover{transform:none}
 }
+
+/* पुराने सदस्य: प्रेजेंट मेंबर के नीचे अलग हिस्सा */
+.old-members{margin-top:clamp(2.8rem,6vw,4.4rem)}
+
+/* प्रेजेंट मेंबर: 8 कार्ड कभी अकेले दूसरी पंक्ति में न गिरें */
+.artists{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.artists{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (min-width:76rem){.artists{grid-template-columns:repeat(8,minmax(0,1fr))}}
 </style>
 
 </head>
