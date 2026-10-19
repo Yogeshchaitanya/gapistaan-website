@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>दीपक मंडल (Deepak Mandal) | Gen Gap कलाकार | Gapistaan गैपिस्तान</title>
-<meta name="description" content="दीपक मंडल (Deepak Mandal), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार। उनके सारे एपिसोड यहाँ देखें।">
+<meta name="description" content="दीपक मंडल (Deepak Mandal), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के पेशेवर कलाकार। Indian Films Academy, लखनऊ से सिनेमैटिक एक्टिंग का दो साल का कोर्स; काम: फ़िल्मी अदालत।">
 <link rel="canonical" href="https://gapistaan.com/cast/deepak-mandal/">
 
 <meta name="theme-color" content="#0B1D24">
@@ -19,7 +19,7 @@
 <meta property="og:locale" content="hi_IN">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="दीपक मंडल (Deepak Mandal) | Gen Gap कलाकार | Gapistaan गैपिस्तान">
-<meta property="og:description" content="दीपक मंडल (Deepak Mandal), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार। उनके सारे एपिसोड यहाँ देखें।">
+<meta property="og:description" content="दीपक मंडल (Deepak Mandal), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के पेशेवर कलाकार। Indian Films Academy, लखनऊ से सिनेमैटिक एक्टिंग का दो साल का कोर्स; काम: फ़िल्मी अदालत।">
 <meta property="og:url" content="https://gapistaan.com/cast/deepak-mandal/">
 <meta property="og:image" content="https://gapistaan.com/img/og-home.jpg">
 <meta name="twitter:image" content="https://gapistaan.com/img/og-home.jpg">
@@ -207,18 +207,25 @@ a{color:var(--accent)}
 .prod-note{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--line);color:var(--muted);font-size:.98rem}
 .prod-note strong{color:var(--text)}
 .chacha{width:100%;max-width:470px;height:auto;justify-self:center;border-radius:24px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
-.people{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
-.person{display:flex;align-items:center;gap:1rem;height:100%;padding:1rem;border-radius:var(--r);background:var(--surface);box-shadow:0 0 0 1px var(--line);text-decoration:none;color:inherit}
-.person:hover{background:var(--surface-2)}
-.avatar{flex:none;display:grid;place-items:center;width:64px;height:64px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#F26A3D,#E9B44C);color:#1b0b04;font:800 1.35rem/1 var(--hindi)}
-.avatar img{width:100%;height:100%;object-fit:cover}
+.people{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.people{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}}
+.person{display:flex;flex-direction:column;height:100%;border-radius:var(--r);background:var(--surface);box-shadow:0 0 0 1px var(--line);text-decoration:none;color:inherit;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease}
+.person:hover{background:var(--surface-2);box-shadow:0 0 0 1px var(--line-2),0 16px 36px rgba(0,0,0,.35);transform:translateY(-3px)}
+.pic{display:block;aspect-ratio:4/5;overflow:hidden;background:var(--bg-2)}
+.pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.person:hover .pic img{transform:scale(1.04)}
+.pic-init{display:grid;place-items:center;height:100%;background:linear-gradient(135deg,#F26A3D,#E9B44C);color:#1b0b04;font:800 3.4rem/1 var(--hindi)}
+.person-body{display:block;padding:.8rem .95rem 1rem}
 .person-name{display:block;font-weight:800;font-size:1.1rem;line-height:1.35}
 .person-en{display:block;color:var(--muted);font-size:.9rem}
 .person-role{display:block;color:var(--accent);font-weight:800;font-size:.9rem;margin-top:.15rem}
-.person.lead{grid-column:1/-1;align-items:center;padding:1.2rem 1.3rem;background:linear-gradient(120deg,#183F49,#13313B)}
-.person.lead .avatar{width:84px;height:84px;font-size:1.7rem;background:#F8451A}
-.person.lead .person-name{font-size:1.35rem}
-@media (min-width:44rem){.person.lead{grid-column:span 2}}
+.lead-li{grid-column:1/-1}
+.person.lead{flex-direction:row;background:linear-gradient(120deg,#183F49,#13313B)}
+.person.lead .pic{flex:none;width:40%}
+.person.lead .person-body{align-self:center;padding:1.2rem 1.4rem}
+.person.lead .person-name{font-size:1.45rem}
+@media (min-width:44rem){.lead-li{grid-column:span 2}.person.lead .pic{width:62%}}
+@media (prefers-reduced-motion:reduce){.person,.pic img{transition:none}.person:hover{transform:none}.person:hover .pic img{transform:none}}
 .boards{list-style:none;margin:0;padding:0;display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(18rem,1fr))}
 .board{display:grid;grid-template-columns:auto 1fr;gap:.15rem 1rem;align-items:center;padding:1.1rem 1.2rem;border-radius:var(--r);background:var(--surface);box-shadow:0 0 0 1px var(--line)}
 .board-logo{grid-row:span 3;width:60px;height:60px;border-radius:50%;box-shadow:0 0 0 1px var(--line-2)}
@@ -268,8 +275,9 @@ a{color:var(--accent)}
 .pn:hover{background:var(--surface-2)}
 .profile{display:grid;gap:2rem;align-items:center;margin-bottom:2.5rem}
 @media (min-width:52rem){.profile{grid-template-columns:auto 1fr;gap:3rem}}
-.profile-pic{width:min(70vw,260px);height:auto;aspect-ratio:1;object-fit:cover;border-radius:24px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
-.profile-initials{display:grid;place-items:center;width:min(60vw,200px);aspect-ratio:1;border-radius:24px;background:linear-gradient(135deg,#F26A3D,#E9B44C);color:#1b0b04;font:800 4rem/1 var(--hindi)}
+.profile-pic{width:min(78vw,20rem);height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:22px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.profile-art{aspect-ratio:1;width:min(70vw,260px);border-radius:24px}
+.profile-initials{display:grid;place-items:center;width:min(78vw,20rem);aspect-ratio:4/5;border-radius:22px;background:linear-gradient(135deg,#F26A3D,#E9B44C);color:#1b0b04;font:800 5rem/1 var(--hindi)}
 .aka{margin:0 0 .4rem;color:var(--muted)}
 .role-line{margin:0 0 1rem;color:var(--accent);font-weight:800;font-size:1.1rem}
 .facts{display:grid;gap:0;margin:0;max-width:52rem;border-top:1px solid var(--line)}
@@ -278,6 +286,11 @@ a{color:var(--accent)}
 .facts dt{color:var(--muted);font-weight:800}
 .facts dd{margin:0}
 .link-row{display:flex;flex-wrap:wrap;gap:.6rem}
+.credits{display:flex;flex-wrap:wrap;gap:.5rem;list-style:none;margin:0 0 1.1rem;padding:0}
+.credits li{padding:.25rem .85rem;border-radius:99px;background:rgba(233,180,76,.12);color:var(--gold);font-weight:700;font-size:.92rem;line-height:1.5;box-shadow:0 0 0 1px rgba(233,180,76,.35)}
+.gallery{list-style:none;margin:0;padding:0;display:grid;gap:.8rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:44rem){.gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.gallery img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:14px;box-shadow:0 0 0 1px var(--line)}
 .lost{padding-block:4rem 5rem;text-align:center}
 .lost img{width:160px;height:auto;margin:0 auto 1.5rem}
 .lost p{max-width:40ch;margin-inline:auto}
@@ -292,7 +305,7 @@ a{color:var(--accent)}
 .ep-list{margin:0;padding-left:1.4rem;line-height:2}
 .ep-list a{color:var(--text)}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/","jobTitle":"Actor"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Deepak Mandal","alternateName":["दीपक मंडल"],"url":"https://gapistaan.com/cast/deepak-mandal/","jobTitle":"Actor","alumniOf":{"@type":"EducationalOrganization","name":"Indian Films Academy","url":"https://indianfilmsacademy.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"गैपिस्तान","item":"https://gapistaan.com/"},{"@type":"ListItem","position":2,"name":"कलाकार","item":"https://gapistaan.com/cast/"},{"@type":"ListItem","position":3,"name":"दीपक मंडल","item":"https://gapistaan.com/cast/deepak-mandal/"}]}</script>
 </head>
 <body>
@@ -312,10 +325,18 @@ a{color:var(--accent)}
     <h1 class="page-h1">दीपक मंडल</h1>
     <p class="aka" lang="en">Deepak Mandal</p>
     <p class="role-line">कलाकार, Gen Gap</p>
+    <ul class="credits" aria-label="चुनिंदा काम"><li>IFA से 2 साल का सिनेमैटिक एक्टिंग कोर्स</li><li>फ़िल्मी अदालत</li></ul>
     
   </div>
 </div>
-<section class="prose"><p>दीपक मंडल गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार हैं, जहाँ हर सीन बिना स्क्रिप्ट के, improvisation से बनता है। वे लखनऊ के Indian Films Academy से प्रशिक्षित हैं।</p></section>
+<section class="prose" aria-label="परिचय"><p>दीपक मंडल पेशेवर अभिनेता हैं और गैपिस्तान की सीरीज़ Gen Gap के कलाकार हैं।</p>
+<p>उन्होंने Indian Films Academy, लखनऊ से दो साल का सिनेमैटिक एक्टिंग कोर्स किया है। वे ‘फ़िल्मी अदालत’ में अभिनय कर चुके हैं और कई वेब सीरीज़ और फ़िल्मों में भी काम किया है।</p>
+<p>बिना स्क्रिप्ट की कॉमेडी में किरदार को पल भर में पकड़ना पड़ता है। कैमरे के सामने यह पकड़ उसी ट्रेनिंग से आती है जो उन्होंने एकेडमी में ली है।</p></section>
+<section class="block" aria-labelledby="cf-h">
+  <h2 class="h2" id="cf-h">एक नज़र में</h2>
+  <dl class="facts"><div><dt>प्रशिक्षण</dt><dd>Indian Films Academy, लखनऊ से दो साल का सिनेमैटिक एक्टिंग कोर्स</dd></div><div><dt>अनुभव</dt><dd>कई वेब सीरीज़ और फ़िल्मों में अभिनय</dd></div><div><dt>चुनिंदा काम</dt><dd>‘फ़िल्मी अदालत’</dd></div><div><dt>गैपिस्तान में</dt><dd>कलाकार, Gen Gap (बिना स्क्रिप्ट की improvised कॉमेडी)</dd></div></dl>
+</section>
+
 <section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">दीपक मंडल के एपिसोड</h2><ul class="grid"><li><a class="ep" href="/video/02k4tNgjOrc/">
   <span class="thumb"><img src="https://i.ytimg.com/vi/02k4tNgjOrc/sddefault.jpg" srcset="https://i.ytimg.com/vi/02k4tNgjOrc/mqdefault.jpg 320w, https://i.ytimg.com/vi/02k4tNgjOrc/hqdefault.jpg 480w, https://i.ytimg.com/vi/02k4tNgjOrc/sddefault.jpg 640w, https://i.ytimg.com/vi/02k4tNgjOrc/maxresdefault.jpg 1280w" sizes="(min-width: 72rem) 19rem, (min-width: 40rem) 45vw, 80vw" alt="" width="640" height="360" loading="lazy" decoding="async"><span class="dur">13:08</span></span>
   <span class="ep-meta"><span class="chip">EP 07</span></span>
@@ -353,23 +374,31 @@ a{color:var(--accent)}
   <span class="date">7 अक्टूबर 2026</span>
 </a></li></ul><p class="more-link"><a href="/episodes/">सारे एपिसोड देखें</a></p></section>
 <section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">बाकी टीम</h2><ul class="people"><li><a class="person" href="/creator/">
-  <span class="avatar"><img src="/img/logo-160.webp" alt="" width="84" height="84" loading="lazy"></span>
-  <span><span class="person-name">योगेश चैतन्य</span><span class="person-en" lang="en">Yogesh Chaitanya</span><span class="person-role">क्रिएटर, डायरेक्टर और चाचा</span></span>
-</a></li><li><a class="person" href="/cast/ravi-yadav/">
-  <span class="avatar">र</span>
-  <span><span class="person-name">रवि यादव</span><span class="person-en" lang="en">Ravi Yadav</span><span class="person-role">कलाकार</span></span>
+  <span class="pic"><img src="/img/chacha-560.webp" alt="" width="560" height="560" loading="lazy" decoding="async"></span>
+  <span class="person-body"><span class="person-name">योगेश चैतन्य</span><span class="person-en" lang="en">Yogesh Chaitanya</span><span class="person-role">क्रिएटर, डायरेक्टर और चाचा</span></span>
+</a></li><li><a class="person" href="/cast/ayushi-tiwari/">
+  <span class="pic"><span class="pic-init">आ</span></span>
+  <span class="person-body"><span class="person-name">आयुषी तिवारी</span><span class="person-en" lang="en">Ayushi Tiwari</span><span class="person-role">कलाकार</span></span>
 </a></li>
-<li><a class="person" href="/cast/shubham-singh/">
-  <span class="avatar">श</span>
-  <span><span class="person-name">शुभम सिंह</span><span class="person-en" lang="en">Shubham Singh</span><span class="person-role">कलाकार</span></span>
+<li><a class="person" href="/cast/saanviya/">
+  <span class="pic"><span class="pic-init">स</span></span>
+  <span class="person-body"><span class="person-name">सान्विया</span><span class="person-en" lang="en">Saanviya</span><span class="person-role">कलाकार</span></span>
+</a></li>
+<li><a class="person" href="/cast/sarita-vyas/">
+  <span class="pic"><span class="pic-init">स</span></span>
+  <span class="person-body"><span class="person-name">सरिता व्यास</span><span class="person-en" lang="en">Sarita Vyas</span><span class="person-role">कलाकार</span></span>
+</a></li>
+<li><a class="person" href="/cast/ravi-dev-rai/">
+  <span class="pic"><span class="pic-init">र</span></span>
+  <span class="person-body"><span class="person-name">रवि देव राय</span><span class="person-en" lang="en">Ravi Dev Rai</span><span class="person-role">कलाकार</span></span>
+</a></li>
+<li><a class="person" href="/cast/shubham-kumar-singh/">
+  <span class="pic"><span class="pic-init">श</span></span>
+  <span class="person-body"><span class="person-name">शुभम कुमार सिंह</span><span class="person-en" lang="en">Shubham Kumar Singh</span><span class="person-role">कलाकार</span></span>
 </a></li>
 <li><a class="person" href="/cast/rohit-das/">
-  <span class="avatar">र</span>
-  <span><span class="person-name">रोहित दास</span><span class="person-en" lang="en">Rohit Das</span><span class="person-role">कलाकार</span></span>
-</a></li>
-<li><a class="person" href="/cast/aayushi-dutt-tiwari/">
-  <span class="avatar">आ</span>
-  <span><span class="person-name">आयुषी दत्त तिवारी</span><span class="person-en" lang="en">Aayushi Dutt Tiwari</span><span class="person-role">कलाकार</span></span>
+  <span class="pic"><span class="pic-init">र</span></span>
+  <span class="person-body"><span class="person-name">रोहित दास</span><span class="person-en" lang="en">Rohit Daas</span><span class="person-role">कलाकार</span></span>
 </a></li></ul></section>
 </main>
 <footer class="foot">

@@ -124,11 +124,32 @@ for (const ep of episodes) {
 const creator = { ...site.creator, path: '/creator/' };
 const cast = (site.cast || []).map((c) => ({ ...c, path: `/cast/${c.slug}/` }));
 for (const c of cast) {
-  const full = c.nameEn.toLowerCase();
-  c.episodes = newestFirst.filter((ep) => (ep.description || '').toLowerCase().includes(full));
+  // YouTube credits may use an older spelling of the name, so every spelling in `match` counts too.
+  const names = [c.nameEn, ...(c.match || [])].map((n) => n.toLowerCase());
+  c.episodes = newestFirst.filter((ep) => names.some((n) => (ep.description || '').toLowerCase().includes(n)));
 }
 creator.episodes = newestFirst;
 const initials = (p) => [...p.name][0];
+const photoSet = (p) => (p.photos || []).map((id) => ({ src: `/img/cast/${id}.webp`, small: `/img/cast/${id}-s.webp` }));
+for (const p of [creator, ...cast]) {
+  p.pics = photoSet(p);
+  if (!p.photo && p.pics.length) p.photo = p.pics[0].src;
+}
+const imgTag = (pic, alt, sizes, extra = '') =>
+  `<img src="${esc(pic.small)}" srcset="${esc(pic.small)} 400w, ${esc(pic.src)} 800w" sizes="${sizes}" alt="${esc(alt)}" width="400" height="500" ${extra || 'loading="lazy" decoding="async"'}>`;
+const creditList = (p) => (p.credits?.length ? `<ul class="credits" aria-label="चुनिंदा काम">${p.credits.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : '');
+const factsBlock = (p, title, id) =>
+  p.facts?.length ? `<section class="block" aria-labelledby="${id}">
+  <h2 class="h2" id="${id}">${title}</h2>
+  <dl class="facts">${p.facts.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+</section>` : '';
+const galleryBlock = (p) =>
+  p.pics.length > 1 ? `<section class="block" aria-labelledby="gal-h">
+  <h2 class="h2" id="gal-h">तस्वीरें</h2>
+  <ul class="gallery">${p.pics.slice(1).map((x, i) => `<li>${imgTag(x, `${p.name}, तस्वीर ${i + 2}`, '(min-width: 44rem) 22vw, 45vw')}</li>`).join('')}</ul>
+</section>` : '';
+const portrait = (p, fallback) =>
+  p.pics.length ? imgTag(p.pics[0], p.name, '(min-width: 52rem) 20rem, 78vw', 'fetchpriority="high"').replace('<img ', '<img class="profile-pic" ') : fallback;
 
 const epLabel = (n) => `EP ${String(n).padStart(2, '0')}`;
 
@@ -142,7 +163,7 @@ const production = { '@type': 'Organization', name: site.presents || site.produc
 const personLd = (p, extra = {}) => ({
   '@type': 'Person',
   name: p.nameEn,
-  alternateName: [p.name, ...(p.aka || [])],
+  alternateName: [p.name, ...(p.aka || []), ...(p.match || [])],
   ...(siteUrl ? { url: abs(p.path) } : {}),
   ...extra,
 });
@@ -382,14 +403,14 @@ function card(ep, { pick = null } = {}) {
 }
 
 function personCard(p, { lead = false } = {}) {
-  const pic = p.photo
-    ? `<img src="${esc(p.photo)}" alt="" width="84" height="84" loading="lazy">`
+  const pic = p.pics?.length
+    ? imgTag(p.pics[0], p.name, lead ? '12rem' : '(min-width: 76rem) 24rem, (min-width: 44rem) 30vw, 45vw')
     : p.slug === creator.slug
-      ? '<img src="/img/logo-160.webp" alt="" width="84" height="84" loading="lazy">'
-      : esc(initials(p));
-  return `<li><a class="person${lead ? ' lead' : ''}" href="${p.path}">
-  <span class="avatar">${pic}</span>
-  <span><span class="person-name">${esc(p.name)}</span><span class="person-en" lang="en">${esc(p.nameEn)}</span><span class="person-role">${esc(p.role)}</span></span>
+      ? '<img src="/img/chacha-560.webp" alt="" width="560" height="560" loading="lazy" decoding="async">'
+      : `<span class="pic-init">${esc(initials(p))}</span>`;
+  return `<li${lead ? ' class="lead-li"' : ''}><a class="person${lead ? ' lead' : ''}" href="${p.path}">
+  <span class="pic">${pic}</span>
+  <span class="person-body"><span class="person-name">${esc(p.name)}</span><span class="person-en" lang="en">${esc(p.nameEn)}</span><span class="person-role">${esc(p.role)}</span></span>
 </a></li>`;
 }
 
@@ -528,7 +549,7 @@ ${shortsHtml}
 <section class="sec sec-alt" id="cast" aria-labelledby="cast-h">
   <div class="wrap">
     <h2 class="h2" id="cast-h">कलाकार और टीम</h2>
-    <p class="lede">किसी भी नाम पर दबाइए और उनके बारे में पढ़िए।</p>
+    <p class="lede">किसी की भी फ़ोटो या नाम पर दबाइए और उनके बारे में पढ़िए।</p>
     ${peopleList()}
   </div>
 </section>
@@ -711,9 +732,7 @@ function episodeMiniList(list) {
 
 function creatorPage() {
   const p = creator;
-  const pic = p.photo
-    ? `<img class="profile-pic" src="${esc(p.photo)}" alt="${esc(p.name)}" width="260" height="260">`
-    : `<img class="profile-pic" src="/img/chacha-560.webp" alt="${esc(p.name)}, चाचा के रूप में (इलस्ट्रेशन)" width="260" height="260">`;
+  const pic = portrait(p, `<img class="profile-pic profile-art" src="/img/chacha-560.webp" alt="${esc(p.name)}, चाचा के रूप में (इलस्ट्रेशन)" width="560" height="560">`);
   const body = `<main id="main" class="wrap page">
 <nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / क्रिएटर</nav>
 <div class="profile">
@@ -722,14 +741,13 @@ function creatorPage() {
     <h1 class="page-h1">${esc(p.name)}</h1>
     <p class="aka">${esc(p.nameEn)}. फ़िल्मों में: ${esc((p.aka || [])[0] || '')}</p>
     <p class="role-line">${esc(p.role)}</p>
+    ${creditList(p)}
     <div class="link-row">${(p.links || []).map(([l, u]) => `<a class="btn btn-ghost btn-sm" href="${esc(u)}">${esc(l)}</a>`).join('')}</div>
   </div>
 </div>
 <section class="prose" aria-label="परिचय">${renderParagraphs(p.bio || [])}</section>
-<section class="block" aria-labelledby="facts-h">
-  <h2 class="h2" id="facts-h">एक नज़र में</h2>
-  <dl class="facts">${(p.facts || []).map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
-</section>
+${factsBlock(p, 'बायोडाटा', 'facts-h')}
+${galleryBlock(p)}
 <section class="block" aria-labelledby="pe-h"><h2 class="h2" id="pe-h">गैपिस्तान के ताज़ा एपिसोड</h2>${episodeMiniList(p.episodes)}</section>
 <section class="block" aria-labelledby="team-h"><h2 class="h2" id="team-h">गैपिस्तान की टीम</h2><ul class="people">${cast.map((c) => personCard(c)).join('\n')}</ul></section>
 </main>`;
@@ -737,7 +755,8 @@ function creatorPage() {
     title: `${p.name} (${p.nameEn}, ${(p.aka || [])[0] || ''}) | Gapistaan के क्रिएटर और डायरेक्टर`,
     description: `${p.name} उर्फ़ ${(p.aka || [])[0] || ''}: गैपिस्तान (Gen Gap) के क्रिएटर, डायरेक्टर और चाचा। दबंग सरकार और विद्यापीठ के निर्देशक, Indian Films Academy और PICHCHRAPA के संस्थापक।`,
     pathName: p.path,
-    image: siteUrl ? abs('/img/chacha-1040.webp') : null,
+    image: siteUrl ? abs(p.photo || '/img/chacha-1040.webp') : null,
+    preloadImage: p.pics[0]?.src,
     type: 'profile',
     ld: [
       {
@@ -748,7 +767,7 @@ function creatorPage() {
           founder: [production, { '@type': 'EducationalOrganization', name: 'Indian Films Academy', url: 'https://indianfilmsacademy.com/' }],
           homeLocation: { '@type': 'Place', name: 'Lucknow, Uttar Pradesh, India' },
           sameAs: (p.links || []).map(([, u]) => u),
-          image: siteUrl ? abs('/img/chacha-1040.webp') : undefined,
+          image: siteUrl ? abs(p.photo || '/img/chacha-1040.webp') : undefined,
         }),
       },
       ...crumbsLd([['गैपिस्तान', '/'], ['क्रिएटर', '/creator/']]),
@@ -761,7 +780,7 @@ function castIndexPage() {
   const body = `<main id="main" class="wrap page">
 <nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / कलाकार</nav>
 <h1 class="page-h1">गैपिस्तान के कलाकार और टीम</h1>
-<p class="lede">Gen Gap के सारे कलाकार Indian Films Academy, लखनऊ से तैयार हुए हैं। हर एपिसोड improvised होता है, यानी हर डायलॉग इन्हीं का।</p>
+<p class="lede">Gen Gap के सारे कलाकार पेशेवर अभिनेता हैं और Indian Films Academy, लखनऊ से दो साल का सिनेमैटिक एक्टिंग कोर्स करके आए हैं। हर एपिसोड improvised होता है, यानी हर डायलॉग इन्हीं का। किसी की भी फ़ोटो पर क्लिक करके उनका पूरा परिचय पढ़िए।</p>
 ${peopleList()}
 </main>`;
   return layout({
@@ -775,10 +794,11 @@ ${peopleList()}
 }
 
 function castPage(c) {
-  const pic = c.photo ? `<img class="profile-pic" src="${esc(c.photo)}" alt="${esc(c.name)}" width="260" height="260">` : `<div class="profile-initials" aria-hidden="true">${esc(initials(c))}</div>`;
+  const pic = portrait(c, `<div class="profile-initials" aria-hidden="true">${esc(initials(c))}</div>`);
   const bio = c.bio?.length
     ? c.bio
     : [`${c.name} गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार हैं, जहाँ हर सीन बिना स्क्रिप्ट के, improvisation से बनता है। वे लखनऊ के Indian Films Academy से प्रशिक्षित हैं।`];
+  const work = (c.credits || []).filter((x) => !x.startsWith('IFA')).join(', ');
   const body = `<main id="main" class="wrap page">
 <nav class="crumbs" aria-label="आप यहाँ हैं"><a href="/">गैपिस्तान</a> / <a href="/cast/">कलाकार</a> / ${esc(c.name)}</nav>
 <div class="profile">
@@ -787,21 +807,33 @@ function castPage(c) {
     <h1 class="page-h1">${esc(c.name)}</h1>
     <p class="aka" lang="en">${esc(c.nameEn)}</p>
     <p class="role-line">${esc(c.role)}, Gen Gap</p>
+    ${creditList(c)}
     ${c.instagram ? `<div class="link-row"><a class="btn btn-ghost btn-sm" href="${esc(c.instagram)}">Instagram</a></div>` : ''}
   </div>
 </div>
-<section class="prose">${renderParagraphs(bio)}</section>
+<section class="prose" aria-label="परिचय">${renderParagraphs(bio)}</section>
+${factsBlock(c, 'एक नज़र में', 'cf-h')}
+${galleryBlock(c)}
 <section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">${esc(c.name)} के एपिसोड</h2>${episodeMiniList(c.episodes)}</section>
 <section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">बाकी टीम</h2><ul class="people">${personCard(creator)}${cast.filter((x) => x !== c).map((x) => personCard(x)).join('\n')}</ul></section>
 </main>`;
   return layout({
     title: `${c.name} (${c.nameEn}) | Gen Gap कलाकार | Gapistaan गैपिस्तान`,
-    description: `${c.name} (${c.nameEn}), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के कलाकार। उनके सारे एपिसोड यहाँ देखें।`,
+    description: `${c.name} (${c.nameEn}), गैपिस्तान की हिंदी कॉमेडी सीरीज़ Gen Gap के पेशेवर कलाकार। Indian Films Academy, लखनऊ से सिनेमैटिक एक्टिंग का दो साल का कोर्स${work ? `; काम: ${work}` : ''}।`,
     pathName: c.path,
-    image: c.photo || (siteUrl ? abs('/img/og-home.jpg') : null),
+    image: c.photo ? (siteUrl ? abs(c.photo) : c.photo) : siteUrl ? abs('/img/og-home.jpg') : null,
+    preloadImage: c.pics[0]?.src,
     type: 'profile',
     ld: [
-      { '@context': 'https://schema.org', ...personLd(c, { jobTitle: 'Actor', ...(c.instagram ? { sameAs: [c.instagram] } : {}), ...(c.photo ? { image: c.photo } : {}) }) },
+      {
+        '@context': 'https://schema.org',
+        ...personLd(c, {
+          jobTitle: 'Actor',
+          alumniOf: { '@type': 'EducationalOrganization', name: 'Indian Films Academy', url: 'https://indianfilmsacademy.com/' },
+          ...(c.instagram ? { sameAs: [c.instagram] } : {}),
+          ...(c.photo && siteUrl ? { image: abs(c.photo) } : {}),
+        }),
+      },
       ...crumbsLd([['गैपिस्तान', '/'], ['कलाकार', '/cast/'], [c.name, c.path]]),
     ],
     body,
