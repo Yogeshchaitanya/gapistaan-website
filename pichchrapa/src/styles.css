@@ -91,11 +91,15 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .hero-lead{font-size:1.18rem;color:#d6e6e2;margin-bottom:1.5rem}
 .hero-fine{margin-top:1.3rem;color:var(--mist);font-size:.95rem}
 .hero-screen{perspective:1500px;min-width:0}
-.screen{position:relative;transform:rotateY(var(--ry,-5deg)) rotateX(var(--rx,1deg));transform-style:preserve-3d;transition:transform .25s ease-out;border-radius:14px;background:#050b0b;padding:0 30px;
+.screen{position:relative;transform:rotateY(var(--ry,-5deg)) rotateX(var(--rx,1deg));transform-style:preserve-3d;transition:transform .25s ease-out;--pf:30px;border-radius:14px;background:#050b0b;padding:var(--pf);
   box-shadow:0 40px 70px -30px rgba(0,0,0,.8),0 0 0 1px rgba(205,164,90,.35),0 0 90px -20px rgba(116,227,207,.35)}
-.perf{position:absolute;top:0;bottom:0;width:30px;background:#050b0b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='36'%3E%3Crect x='8' y='9' width='14' height='18' rx='4' fill='%23a9efe0' fill-opacity='.8'/%3E%3C/svg%3E") repeat-y center top/30px 36px}
-.perf-l{left:0;border-radius:14px 0 0 14px}
-.perf-r{right:0;border-radius:0 14px 14px 0}
+.perf{position:absolute;background-color:#050b0b;background-repeat:repeat-y;background-position:center}
+.perf-l,.perf-r{top:var(--pf);bottom:var(--pf);width:var(--pf);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='36'%3E%3Crect x='8' y='9' width='14' height='18' rx='4' fill='%23a9efe0' fill-opacity='.8'/%3E%3C/svg%3E");background-size:var(--pf) calc(var(--pf)*1.2)}
+.perf-l{left:0}
+.perf-r{right:0}
+.perf-t,.perf-b{left:var(--pf);right:var(--pf);height:var(--pf);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='30'%3E%3Crect x='9' y='8' width='18' height='14' rx='4' fill='%23a9efe0' fill-opacity='.8'/%3E%3C/svg%3E");background-repeat:repeat-x;background-position:center;background-size:calc(var(--pf)*1.2) var(--pf)}
+.perf-t{top:0}
+.perf-b{bottom:0}
 .frame{position:relative;aspect-ratio:1100/803;background:#000;overflow:hidden}
 .frame video{width:100%;height:100%;object-fit:cover}
 .vf{position:absolute;inset:0;pointer-events:none;color:#fff;font:500 .95rem/1 var(--display);letter-spacing:.12em}
@@ -109,13 +113,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 @keyframes rec{50%{opacity:.15}}
 .vf .tc{position:absolute;right:46px;top:17px;font-variant-numeric:tabular-nums}
 .vf .spec{position:absolute;left:46px;bottom:17px;opacity:.8}
-.replay{position:absolute;right:46px;bottom:46px;display:none;z-index:2}
+.replay{position:absolute;right:46px;bottom:calc(var(--pf) + 46px);display:none;z-index:2}
 .replay.on{display:inline-flex}
 @media (max-width:56rem){
   .hero-in{grid-template-columns:1fr}
   .hero-screen{order:-1;max-width:34rem}
-  .screen{--ry:-2deg;padding:0 22px}
-  .perf{width:22px;background-size:22px 28px}
+  .screen{--ry:-2deg;--pf:22px}
 }
 
 /* the reel: two film strips that move opposite ways and lean into scroll speed */
