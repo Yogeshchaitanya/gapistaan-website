@@ -15,11 +15,11 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: node pichchrapa/scripts/discover.mjs
+      - run: node pichchrapa/scripts/fetch-videos.mjs
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add pichchrapa/discover-out
+          git add pichchrapa/data
           git commit -m "PICHCHRAPA discovery output" || echo nothing
           git push

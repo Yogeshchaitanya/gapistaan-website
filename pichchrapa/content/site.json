@@ -1,0 +1,8 @@
+{
+  "sources": [
+    { "channelId": "UCd5W9zrvUYmXbqQPR6kq4_w", "label": "PICHCHRAPA" },
+    { "channelId": "UC3bkPW-ExDf7J9CShIR329Q", "label": "Filmy Adaalat (candidate)" },
+    { "channelId": "UCOGpxTcO3GdnaM4wHfMI4Qw", "label": "Filmi Adalat 2023 (candidate)" },
+    { "channelId": "UCy1JejEhMtQl191XRConeIg", "label": "Indian Films Academy (only Filmy Adaalat)", "filter": "adaalat|adalat|अदालत" }
+  ]
+}
