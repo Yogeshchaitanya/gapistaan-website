@@ -141,7 +141,7 @@ const orgLd = () => ({
   description: 'PICHCHRAPA लखनऊ का फ़िल्म और वेब-सीरीज़ प्रोडक्शन है, जिसे Indian Films Academy के अभिनेताओं का परिवार चलाता है। फ़िल्मी अदालत और राजा का बाजा इसकी सीरीज़ हैं।',
   email: B.email,
   telephone: B.phone,
-  address: { '@type': 'PostalAddress', ...(B.address ? { streetAddress: B.address } : {}), addressLocality: 'Lucknow', addressRegion: 'Uttar Pradesh', addressCountry: 'IN' },
+  address: { '@type': 'PostalAddress', ...(B.street || B.address ? { streetAddress: B.street || B.address } : {}), addressLocality: 'Lucknow', addressRegion: 'Uttar Pradesh', ...(B.pin ? { postalCode: B.pin } : {}), addressCountry: 'IN' },
   founder: personLd,
   ...(B.gstin ? { taxID: B.gstin } : {}),
   sameAs: [site.channelUrl, site.links.gapistaan, site.links.ifa, site.links.instagram].filter(Boolean),
@@ -397,7 +397,7 @@ function homePage() {
 function companyFacts() {
   const rows = [
     ['फ़र्म का नाम', 'PICHCHRAPA'],
-    B.legalName ? ['विधिक नाम', B.legalName] : null,
+    B.legalName ? ['विधिक नाम (GST के अनुसार)', B.legalName] : null,
     ['स्वरूप', B.form],
     ['GST', B.gstRegistered ? (B.gstin ? `पंजीकृत, GSTIN ${B.gstin}` : 'पंजीकृत') : null],
     ['संस्थापक', B.founder],

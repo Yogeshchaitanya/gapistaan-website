@@ -25,17 +25,19 @@
     "name": "PICHCHRAPA",
     "form": "प्रोप्राइटरशिप फ़र्म",
     "gstRegistered": true,
-    "gstin": "",
-    "legalName": "",
+    "gstin": "09BOLPM2496E2ZJ",
+    "legalName": "Yogesh Mishrra",
     "founder": "योगेश चैतन्य",
     "email": "Pichchrapa@gmail.com",
     "phone": "+917754000121",
     "phoneLabel": "077540 00121",
     "whatsapp": "917754000121",
-    "address": "",
+    "address": "1/192 Vardaan Khand, Gomti Nagar, Lucknow, Uttar Pradesh – 226010",
     "city": "गोमती नगर, लखनऊ, उत्तर प्रदेश",
     "locality": "Gomti Nagar, Lucknow",
-    "region": "Uttar Pradesh"
+    "region": "Uttar Pradesh",
+    "street": "1/192 Vardaan Khand, Gomti Nagar",
+    "pin": "226010"
   },
   "links": {
     "gapistaan": "https://gapistaan.com",
