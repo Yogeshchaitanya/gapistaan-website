@@ -6,7 +6,7 @@
 - कंपनी का GST नंबर, विधिक नाम और पूरा पता: `content/site.json` में `business.gstin`, `business.legalName`, `business.address`। भरते ही फ़ुटर, About, Contact और Google के JSON-LD में दिखने लगते हैं।
 - YouTube वीडियो: हर घंटे `scripts/fetch-videos.mjs` से `data/videos.json`। स्रोत चैनल `content/site.json` के `sources` में हैं:
   - PICHCHRAPA (@pichchrapa), मुख्य चैनल (सब वीडियो और शॉर्ट्स)
-  - Filmy Adaalat (@filmyadaalat) और Indian Films Academy (@indianfilmsacademy): सिर्फ़ वे वीडियो जिनके शीर्षक में `filter` मिलता है
+  - Filmy Adaalat (@filmyadaalat) और Indian Films Academy (@indianfilmsacademyy): सिर्फ़ वे वीडियो जिनके शीर्षक में `filter` मिलता है
 - कौन सा वीडियो किस सीरीज़ में जाता है (अपने-आप):
   - शीर्षक में अदालत, Jinn, Pakhi, Jija Sale, Pati Patni जैसे शब्द: **फ़िल्मी अदालत**, और उसके केस (`series.adalat.cases`) के हिसाब से
   - मुख्य चैनल पर 8 जून 2026 के बाद का बाक़ी सब: **राजा का बाजा** (शॉर्ट्स समेत)
