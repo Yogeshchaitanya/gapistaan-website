@@ -23,9 +23,24 @@
     if(tc) tc.textContent='00:'+pad(m)+':'+pad(s)+':'+pad(f);
   }
   if(vid){
-    var tick=function(){ showTc(vid.currentTime||0); if(!vid.paused&&!vid.ended) requestAnimationFrame(tick); };
+    // the clip loops for ever; its last second dips to black and its first fades up, so the seam does not jump
+    var tick=function(){
+      var t=vid.currentTime||0, d=vid.duration;
+      showTc(t);
+      if(d&&!calm){ var o=Math.min(1,t/.3,(d-t)/.6); vid.style.opacity=o<1?Math.max(0,o).toFixed(2):''; }
+      if(!vid.paused&&!vid.ended) requestAnimationFrame(tick);
+    };
     vid.addEventListener('play',function(){ if(replay) replay.classList.remove('on'); tick(); });
+    vid.addEventListener('pause',function(){ vid.style.opacity=''; });
     vid.addEventListener('ended',function(){ showTc(vid.duration||0); if(replay) replay.classList.add('on'); });
+    if(!calm&&'IntersectionObserver' in window){
+      var held=false;
+      new IntersectionObserver(function(es){
+        var on=es[0].isIntersecting;
+        if(!on&&!vid.paused){ vid.pause(); held=true; }
+        else if(on&&held){ held=false; var q=vid.play(); if(q&&q.catch) q.catch(function(){}); }
+      },{threshold:.05}).observe(vid);
+    }
     if(replay) replay.addEventListener('click',function(){ vid.currentTime=0; var p=vid.play(); if(p&&p.catch) p.catch(function(){}); });
     if(calm){
       vid.removeAttribute('autoplay'); vid.pause();
@@ -34,6 +49,32 @@
       var p=vid.play();
       if(p&&p.catch) p.catch(function(){ if(replay){ replay.textContent=replay.getAttribute('data-play'); replay.classList.add('on'); } });
     }
+  }
+
+  // the film-strip holes around the hero screen turn into marquee bulbs (teal, orange, blue) with a light running round the frame
+  if(screen){
+    var strips={t:screen.querySelector('.perf-t'),r:screen.querySelector('.perf-r'),b:screen.querySelector('.perf-b'),l:screen.querySelector('.perf-l')};
+    var drawn='';
+    var bulbs=function(){
+      var pf=parseFloat(getComputedStyle(screen).getPropertyValue('--pf'))||30, pitch=pf*1.05;
+      var nx=Math.max(4,Math.round((screen.offsetWidth-2*pf)/pitch)), ny=Math.max(3,Math.round((screen.offsetHeight-2*pf)/pitch));
+      if((nx+ny)%2) ny++;
+      if(drawn===nx+'x'+ny) return;
+      drawn=nx+'x'+ny;
+      var i=0;
+      var fill=function(el,n,across,back){
+        var h='';
+        for(var k=0;k<n;k++,i++){
+          var pos=((back?n-1-k:k)+.5)/n*100;
+          h+='<i class="c'+(i%3)+'" style="'+(across?'left':'top')+':'+pos.toFixed(2)+'%;animation-delay:'+((i%4)*.25-1).toFixed(2)+'s"></i>';
+        }
+        el.innerHTML=h;
+      };
+      fill(strips.t,nx,true,false); fill(strips.r,ny,false,false); fill(strips.b,nx,true,true); fill(strips.l,ny,false,true);
+      screen.classList.add('bulbs-on');
+    };
+    bulbs();
+    if('ResizeObserver' in window) new ResizeObserver(bulbs).observe(screen); else window.addEventListener('resize',bulbs);
   }
 
   // the reel strips lean into the scroll speed

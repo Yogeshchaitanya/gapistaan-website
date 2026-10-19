@@ -462,7 +462,7 @@ function homePage() {
       <div class="screen" id="screen">
         <span class="perf perf-t" aria-hidden="true"></span><span class="perf perf-b" aria-hidden="true"></span><span class="perf perf-l" aria-hidden="true"></span><span class="perf perf-r" aria-hidden="true"></span>
         <div class="frame">
-          <video id="intro" muted playsinline autoplay preload="auto" poster="/media/intro-poster.jpg" width="1100" height="803" disablepictureinpicture aria-label="${T('PICHCHRAPA का क्लैपर-बोर्ड इंट्रो', 'PICHCHRAPA clapperboard intro')}"><source src="/media/intro.mp4" type="video/mp4"></video>
+          <video id="intro" muted playsinline autoplay loop preload="auto" poster="/media/intro-poster.jpg" width="1100" height="803" disablepictureinpicture aria-label="${T('PICHCHRAPA का क्लैपर-बोर्ड इंट्रो', 'PICHCHRAPA clapperboard intro')}"><source src="/media/intro.mp4" type="video/mp4"></video>
           <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="rec"><b></b>REC</span><span class="tc" id="tc">00:00:00:00</span><span class="spec">24 FPS</span></div>
           <button class="btn btn-gold btn-sm replay" id="replay" type="button" data-play="${T('इंट्रो चलाइए', 'Play the intro')}">${T('फिर से देखिए', 'Watch again')}</button>
         </div>
