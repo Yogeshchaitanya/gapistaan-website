@@ -42,7 +42,8 @@
   "links": {
     "gapistaan": "https://gapistaan.com",
     "ifa": "https://indianfilmsacademy.com",
-    "instagram": ""
+    "instagram": "https://www.instagram.com/pichchrapa/",
+    "facebook": "https://www.facebook.com/pichchrapa"
   },
   "hero": {
     "h1a": "कलाकारों का",
@@ -311,136 +312,95 @@
     "portraitsTitle": "ओल्ड मेंबर",
     "portraits": [
       {
-        "src": "/img/people/p-02.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-03.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
         "src": "/img/people/p-04.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "किशन कनौजिया",
+        "nameEn": "Kishan Kanaujia"
       },
       {
         "src": "/img/people/p-05.webp",
         "w": 480,
         "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-06.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-07.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-08.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-09.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-10.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
+        "name": "ममता जायसवाल",
+        "nameEn": "Mamta Jaiswal"
       },
       {
         "src": "/img/people/p-11.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "अभिनव",
+        "nameEn": "Abhinav"
       },
       {
         "src": "/img/people/p-12.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "अविनाश बांदे",
+        "nameEn": "Avinash Bande"
       },
       {
         "src": "/img/people/p-13.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "अमरेंद्र पटेल",
+        "nameEn": "Amarendra Patel"
       },
       {
         "src": "/img/people/p-14.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "लक्की",
+        "nameEn": "Lucky"
       },
       {
         "src": "/img/people/p-15.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "अजय यादव",
+        "nameEn": "Ajay Yadav"
       },
       {
         "src": "/img/people/p-18.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "कन्हैया",
+        "nameEn": "Kanhaiya"
       },
       {
         "src": "/img/people/p-20.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "अभिषेक महाजन",
+        "nameEn": "Abhishek Mahajan"
       },
       {
         "src": "/img/people/p-21.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "शुभम साहनी",
+        "nameEn": "Shubham Sahani"
       },
       {
         "src": "/img/people/p-22.webp",
         "w": 480,
         "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-23.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
+        "name": "महानंद यादव",
+        "nameEn": "Mahanand Yadav"
       },
       {
         "src": "/img/people/p-24.webp",
         "w": 480,
         "h": 600,
-        "name": ""
-      },
-      {
-        "src": "/img/people/p-25.webp",
-        "w": 480,
-        "h": 600,
-        "name": ""
+        "name": "प्रिंस यादव",
+        "nameEn": "Prince Yadav"
       },
       {
         "src": "/img/people/p-26.webp",
         "w": 480,
         "h": 600,
-        "name": ""
+        "name": "विशाल सिंह",
+        "nameEn": "Vishal Singh"
       }
     ],
     "portraitsLead": "परिवार के वे कलाकार जो पहले हमारे साथ काम कर चुके हैं।"
@@ -547,5 +507,9 @@
         "note": "फ़िल्मी अदालत"
       }
     ]
+  },
+  "social": {
+    "title": "हमसे जुड़िए",
+    "lead": "नए वीडियो और शॉर्ट्स सबसे पहले देखने के लिए हमें इन तीनों जगह फ़ॉलो कीजिए।"
   }
 }

@@ -75,7 +75,7 @@
 
   // rails: arrow buttons
   doc.querySelectorAll('.rail-wrap').forEach(function(w){
-    var rail=w.querySelector('.rail'); if(!rail) return;
+    var rail=w.querySelector('.rail')||w.querySelector('.shorts'); if(!rail) return;
     var nav=w.querySelector('.rail-nav');
     var check=function(){ if(nav) nav.hidden = rail.scrollWidth<=rail.clientWidth+4; };
     check(); window.addEventListener('resize',check); window.addEventListener('load',check);

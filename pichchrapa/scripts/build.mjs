@@ -122,7 +122,7 @@ const pageVids = vids.filter((v) => v.hasPage);
 const adalatEps = vids.filter((v) => v.series === 'adalat' && !v.isShort);
 const rajaEps = vids.filter((v) => v.series === 'raja' && !v.isShort && v.primary);
 const rajaShorts = vids.filter((v) => v.series === 'raja' && v.isShort && v.primary);
-const hitShorts = [...rajaShorts].filter((v) => !MILESTONE.test(v.title)).sort((a, b) => b.views - a.views).slice(0, 12);
+const hitShorts = [...rajaShorts].filter((v) => !MILESTONE.test(v.title)).sort((a, b) => b.views - a.views).slice(0, 40);
 const otherEps = vids.filter((v) => v.series === 'other' && !v.isShort && v.primary);
 
 const cases = siteHi.series.adalat.cases.map((c) => ({ ...c, re: new RegExp(c.match, 'i'), items: [] }));
@@ -159,6 +159,9 @@ const rail = (items, label) => `<div class="rail-wrap">
 </div>`;
 const shortCard = (v) => `<div class="short" role="listitem"><img src="${esc(thumbOf(v))}" width="320" height="180" loading="lazy" decoding="async" alt=""><span class="play"></span><span class="cap">${esc(trunc(vt(v), 48))}<small>${esc(count(v.views))} ${T('व्यू', 'views')}</small></span><button class="hit" type="button" data-yt="${esc(v.id)}" data-short data-title="${esc(vt(v))}" aria-label="${T('शॉर्ट चलाइए', 'Play Short')}: ${esc(trunc(vt(v), 60))}"></button></div>`;
 
+const navBtns = `<div class="rail-nav" hidden><button type="button" data-dir="prev" aria-label="${T('पीछे', 'Previous')}">&#8249;</button><button type="button" data-dir="next" aria-label="${T('आगे', 'Next')}">&#8250;</button></div>`;
+const shortsRow = () => `<div class="rail-wrap shorts-wrap">${navBtns}<div class="shorts" role="list" aria-label="${T('हिट शॉर्ट्स', 'Hit Shorts')}" tabindex="0">${hitShorts.map(shortCard).join('')}</div></div>`;
+
 // The hero reel: top strip = every Raja Ka Baja episode, bottom strip = everything else (Filmy Adalat and the older short films).
 function reelStrips() {
   const top = rajaEps;
@@ -181,6 +184,30 @@ function clapMark(cls = '') {
 <g class="clap-arm"><rect x="4" y="13" width="64" height="11" rx="2" fill="#0b1313"/><g clip-path="url(#${id}a)" fill="#f0d28e">${arm}</g><rect x="4" y="13" width="64" height="11" rx="2" fill="none" stroke="#cda45a" stroke-opacity=".55" stroke-width=".8"/></g>
 <circle cx="9" cy="25" r="2.3" fill="#f0d28e"/></svg>`;
 }
+// Social links: Instagram, YouTube and Facebook, all under the same name.
+let socN = 0;
+const socIcon = (k) => {
+  const id = `sg${++socN}`;
+  if (k === 'instagram') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><radialGradient id="${id}" cx=".3" cy="1.05" r="1.2"><stop offset="0" stop-color="#ffd776"/><stop offset=".25" stop-color="#f9873a"/><stop offset=".55" stop-color="#e1306c"/><stop offset=".8" stop-color="#833ab4"/><stop offset="1" stop-color="#405de6"/></radialGradient></defs><rect width="48" height="48" rx="12" fill="url(#${id})"/><rect x="11" y="11" width="26" height="26" rx="8" fill="none" stroke="#fff" stroke-width="3"/><circle cx="24" cy="24" r="6.3" fill="none" stroke="#fff" stroke-width="3"/><circle cx="32" cy="16" r="2" fill="#fff"/></svg>`;
+  if (k === 'youtube') return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#f00"/><rect x="8" y="14" width="32" height="20" rx="6" fill="#fff"/><path d="M20 19.5v9l8-4.5z" fill="#f00"/></svg>`;
+  return `<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect width="48" height="48" rx="12" fill="#1877f2"/><path d="M26.6 41V26.4h4.9l.8-5.7h-5.7v-3.6c0-1.6.5-2.8 2.8-2.8h3V9.2c-.5-.1-2.3-.2-4.3-.2-4.3 0-7.2 2.6-7.2 7.4v4.3h-4.9v5.7h4.9V41z" fill="#fff"/></svg>`;
+};
+const socials = () => [
+  ['instagram', 'Instagram', '@pichchrapa', site.links.instagram, T('फ़ॉलो कीजिए', 'Follow')],
+  ['youtube', 'YouTube', '@pichchrapa', site.channelUrl, T('सब्सक्राइब कीजिए', 'Subscribe')],
+  ['facebook', 'Facebook', 'PICHCHRAPA', site.links.facebook, T('पेज फ़ॉलो कीजिए', 'Follow the page')],
+].filter((x) => x[3]);
+function socialInner() {
+  const sc = site.social;
+  return `<div class="studio-head"><h2 class="h2" id="social-h">${esc(sc.title)}</h2><p>${esc(sc.lead)}</p></div>
+  <div class="socials">${socials().map(([k, name, handle, url, cta]) => `<a class="soc soc-${k}" href="${esc(url)}" target="_blank" rel="noopener"><span class="soc-ic">${socIcon(k)}</span><span class="soc-t"><b>${name}</b><span class="soc-h">${esc(handle)}</span><span class="soc-go">${esc(cta)}</span></span></a>`).join('')}</div>`;
+}
+const footSocials = () => socials().map(([, name, , url]) => `<li><a href="${esc(url)}" target="_blank" rel="noopener">${name}</a></li>`).join('');
+
+// Behind the scenes: a cinema camera whose reels turn and whose REC light blinks while it is on screen.
+const reel = (cx, cy, cls) => `<g class="reel ${cls}"><circle cx="${cx}" cy="${cy}" r="22" fill="#0b1313" stroke="#cda45a" stroke-width="2"/>${[0, 1, 2, 3, 4].map((i) => `<circle cx="${(cx + 12 * Math.cos((i * 72 - 90) * Math.PI / 180)).toFixed(1)}" cy="${(cy + 12 * Math.sin((i * 72 - 90) * Math.PI / 180)).toFixed(1)}" r="4.6" fill="#021819"/>`).join('')}<circle cx="${cx}" cy="${cy}" r="3.6" fill="#cda45a"/></g>`;
+const camHtml = `<span class="cam" aria-hidden="true"><svg viewBox="0 0 150 104" focusable="false">${reel(44, 26, 'r1')}${reel(94, 26, 'r2')}<rect x="14" y="48" width="96" height="46" rx="7" fill="#0b1313" stroke="#cda45a" stroke-width="2"/><path d="M26 62h42M26 71h42M26 80h30" stroke="#f0d28e" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/><rect x="2" y="58" width="14" height="26" rx="3" fill="#142222" stroke="#cda45a" stroke-width="1.6"/><rect x="110" y="56" width="26" height="30" rx="4" fill="#142222" stroke="#cda45a" stroke-width="2"/><rect x="136" y="52" width="10" height="38" rx="2" fill="#0b1313" stroke="#cda45a" stroke-width="1.8"/><circle cx="123" cy="71" r="9" fill="#052b2b" stroke="#74e3cf" stroke-width="1.6"/><circle class="glint" cx="120" cy="68" r="2.4" fill="#74e3cf"/><circle class="rec" cx="98" cy="58" r="3.6" fill="#ff4d4d"/></svg></span>`;
+
 // Filmy Adalat: a gavel that strikes twice when the heading scrolls into view. Raja Ka Baja: sound bars that move while it is on screen.
 const gavelHtml = `<span class="gv" aria-hidden="true"><svg viewBox="0 0 120 96" focusable="false"><g class="gv-rings"><ellipse cx="70" cy="88" rx="9" ry="2.6"/><ellipse cx="70" cy="88" rx="9" ry="2.6"/></g><rect class="gv-block" x="46" y="84" width="76" height="9" rx="2"/><g class="gv-arm"><rect class="gv-handle" x="12" y="62" width="62" height="7" rx="3.5"/><rect class="gv-head" x="58" y="44" width="24" height="40" rx="5"/><rect class="gv-band" x="58" y="58" width="24" height="4"/></g></svg></span>`;
 const eqHtml = `<span class="eq" aria-hidden="true">${'<i></i>'.repeat(7)}</span>`;
@@ -201,7 +228,7 @@ const orgLd = () => ({
   address: { '@type': 'PostalAddress', ...(B.street || B.address ? { streetAddress: B.street || B.address } : {}), addressLocality: 'Lucknow', addressRegion: 'Uttar Pradesh', ...(B.pin ? { postalCode: B.pin } : {}), addressCountry: 'IN' },
   founder: personLd(),
   ...(B.gstin ? { taxID: B.gstin } : {}),
-  sameAs: [site.channelUrl, site.links.gapistaan, site.links.ifa, site.links.instagram].filter(Boolean),
+  sameAs: [site.channelUrl, site.links.gapistaan, site.links.ifa, site.links.instagram, site.links.facebook].filter(Boolean),
 });
 const crumbs = (items) => (siteUrl ? [{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: A(p) })) }] : []);
 const crumbNav = (...items) => `<nav class="crumbs" aria-label="${T('आप यहाँ हैं', 'You are here')}">${items.map(([n, p]) => (p ? `<a href="${p}">${esc(n)}</a>` : esc(n))).join(' / ')}</nav>`;
@@ -263,7 +290,7 @@ ${ld.map(jsonLd).join('\n')}
 <a class="skip" href="#main">${T('सीधे मुख्य हिस्से पर जाएँ', 'Skip to main content')}</a>
 <header class="topbar">
   <div class="wrap topbar-in">
-    <a class="brand" href="/" aria-label="${T('PICHCHRAPA होम', 'PICHCHRAPA home')}">${clapMark('clap-live')}<span class="brand-name">PICHCHRAPA</span></a>
+    <a class="brand" href="/" aria-label="${T('PICHCHRAPA होम', 'PICHCHRAPA home')}"><span class="brand-mark">${clapMark('clap-live')}<img class="brand-logo" src="/img/logo-200.webp" width="200" height="157" alt=""></span><span class="brand-name">PICHCHRAPA</span></a>
     <nav class="topnav" aria-label="${T('मुख्य मेन्यू', 'Main menu')}">${nav}</nav>
     ${langSwitch}
     <a class="btn btn-gold btn-sm" href="${esc(site.subscribeUrl)}" target="_blank" rel="noopener">${T('YouTube<span class="hide-sm"> पर देखिए</span>', '<span class="hide-sm">Watch on </span>YouTube')}</a>
@@ -274,7 +301,7 @@ ${body}
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">${clapMark('clap-foot')}<span class="brand-name">PICHCHRAPA</span></div>
+        <div class="foot-brand"><img class="foot-logo" src="/img/logo-200.webp" width="200" height="157" loading="lazy" alt=""><span class="brand-name">PICHCHRAPA</span></div>
         <p>${T('अभिनेताओं के परिवार का स्टूडियो।', 'A studio run by a family of actors.')} ${esc(B.city)}${T('।', '.')}</p>
         <p>${esc(B.form)}${B.gstRegistered ? T(', GST पंजीकृत', ', GST registered') : ''}${B.gstin ? `${T('। ', '. ')}GSTIN: ${esc(B.gstin)}` : ''}</p>
       </div>
@@ -285,6 +312,7 @@ ${body}
           <li><a href="/raja-ka-baja/">${esc(S.raja.name)}</a></li>
           <li><a href="${esc(site.links.gapistaan)}">${T('गैपिस्तान', 'Gapistaan')}</a></li>
           <li><a href="${esc(site.channelUrl)}" target="_blank" rel="noopener">${T('YouTube चैनल', 'YouTube channel')}</a></li>
+          ${footSocials().replace(/<li><a [^>]*>YouTube<\/a><\/li>/, '')}
         </ul>
       </div>
       <div>
@@ -353,7 +381,7 @@ function behindHtml({ heading = true } = {}) {
   const st = site.studio, tm = site.team;
   if (!st && !tm) return '';
   return `<div class="studio">
-    ${heading && st ? `<div class="studio-head"><h2 class="h2" id="studio-h">${esc(st.title)}</h2><p>${esc(st.lead)}</p></div>` : ''}
+    ${heading && st ? `<div class="studio-head"><div class="hrow camrow" data-fx="live"><h2 class="h2 hrow-t" id="studio-h">${esc(st.title)}</h2>${camHtml}</div><p>${esc(st.lead)}</p></div>` : ''}
     ${tm && tm.main ? `<div class="team-grid">${tm.main.map((p, i) => `<figure class="sf t${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
     ${tm && tm.strip ? `<h3 class="h3 strip-h">${esc(tm.stripTitle)}</h3>${stripHtml(tm.strip, 'set-strip', tm.stripTitle)}` : ''}
     ${st && st.photos ? `<h3 class="h3 strip-h">${esc(st.subTitle)}</h3>
@@ -383,7 +411,6 @@ const postersHtml = () => (site.posters && site.posters.items.length
 
 function homePage() {
   const latest = rajaEps[0];
-  const side = rajaEps.slice(1, 6);
   const homeCases = caseOrder.filter((c) => c.id !== 'general').slice(0, 4);
   const body = `<main id="main">
 <section class="hero" id="top">
@@ -452,15 +479,20 @@ function homePage() {
         <div class="thumb"><img src="${esc(thumbOf(latest))}" width="640" height="360" alt="" decoding="async"><span class="play"></span><span class="live">${T('सबसे नया', 'Latest')}</span><span class="dur">${clock(latest.sec)}</span><a href="${esc(hrefOf(latest))}" style="position:absolute;inset:0;z-index:3" aria-label="${esc(vt(latest))}"></a></div>
         <div class="vbody"><a class="vtitle" href="${esc(hrefOf(latest))}">${esc(vt(latest))}</a><span class="vmeta">${esc(hiDate(latest.publishedAt))}</span></div>
       </article>
-      <div class="latest" aria-label="${T('पिछले एपिसोड', 'Previous episodes')}">
-        ${side.map((v) => `<a class="mini" href="${esc(hrefOf(v))}"><span class="thumb"><img src="${esc(smallThumb(v))}" width="128" height="72" loading="lazy" decoding="async" alt=""></span><span><b>${esc(trunc(vt(v), 70))}</b><span>${esc(hiDate(v.publishedAt))}</span></span></a>`).join('\n        ')}
+      <div class="latest latest-scroll" role="region" tabindex="0" aria-label="${T('सारे एपिसोड, ऊपर-नीचे स्क्रॉल कीजिए', 'All episodes, scroll up and down')}">
+        <p class="latest-h"><b>${T('सारे एपिसोड', 'All episodes')} (${rajaEps.length})</b><span>${T('ऊपर-नीचे सरकाइए', 'Scroll up and down')}</span></p>
+        ${rajaEps.slice(1).map((v) => `<a class="mini" href="${esc(hrefOf(v))}"><span class="thumb"><img src="${esc(smallThumb(v))}" width="128" height="72" loading="lazy" decoding="async" alt=""></span><span><b>${esc(trunc(vt(v), 70))}</b><span>${esc(hiDate(v.publishedAt))}</span></span></a>`).join('\n        ')}
       </div>
     </div>` : ''}
     ${hitShorts.length ? `<h3 class="h3 shorts-h">${T('हिट शॉर्ट्स', 'Hit Shorts')}</h3>
-    <p class="muted">${T('सबसे ज़्यादा देखे गए शॉर्ट्स। किसी पर दबाइए, यहीं चल जाएगा।', 'The most-watched Shorts. Press one and it plays right here.')}</p>
-    <div class="shorts" role="list" aria-label="${T('हिट शॉर्ट्स', 'Hit Shorts')}">${hitShorts.map(shortCard).join('')}</div>
+    <p class="muted">${T('सबसे ज़्यादा देखे गए शॉर्ट्स। किसी पर दबाइए, यहीं चल जाएगा। आगे देखने के लिए तीर दबाइए या उँगली से सरकाइए।', 'The most-watched Shorts. Press one and it plays right here. Use the arrows or swipe to see more.')}</p>
+    ${shortsRow()}
     <p class="more"><a class="btn btn-ghost" href="${esc(site.shortsUrl)}" target="_blank" rel="noopener">${T('YouTube पर और शॉर्ट्स', 'More Shorts on YouTube')}</a></p>` : ''}
   </div>
+</section>
+
+<section class="sec sec-alt" aria-labelledby="social-h">
+  <div class="wrap">${socialInner()}</div>
 </section>
 
 <section class="sec" aria-labelledby="studio-h">
@@ -555,7 +587,7 @@ ${crumbNav(['PICHCHRAPA', '/'], [S.raja.name])}
 <div class="hrow eqrow" data-fx="live">${eqHtml}<h1 class="page-h1 hrow-t"><span class="accent">${esc(S.raja.name)}</span></h1></div>
 <p class="lede">${esc(S.raja.pageIntro)}</p>
 <p class="muted">${T(`${rajaEps.length} एपिसोड और ${rajaShorts.length} शॉर्ट्स, ${hiMonth(rajaEps[rajaEps.length - 1].publishedAt)} से।`, `${rajaEps.length} episodes and ${rajaShorts.length} Shorts, since ${hiMonth(rajaEps[rajaEps.length - 1].publishedAt)}.`)}</p>
-${hitShorts.length ? `<h2 class="h3 shorts-h">${T('हिट शॉर्ट्स', 'Hit Shorts')}</h2><div class="shorts" role="list" aria-label="${T('हिट शॉर्ट्स', 'Hit Shorts')}">${hitShorts.map(shortCard).join('')}</div>` : ''}
+${hitShorts.length ? `<h2 class="h3 shorts-h">${T('हिट शॉर्ट्स', 'Hit Shorts')}</h2>${shortsRow()}` : ''}
 <h2 class="h2" style="margin-top:2.4rem">${T('सारे एपिसोड', 'All episodes')}</h2>
 <div class="grid" id="eps" style="margin-top:1.2rem">${rajaEps.map((v, i) => card(v).replace('<article class="vcard">', `<article class="vcard"${i >= 24 ? ' hidden' : ''}>`)).join('\n')}</div>
 ${rajaEps.length > 24 ? `<p class="more"><button class="btn btn-gold" type="button" data-more="#eps">${T('और एपिसोड दिखाइए', 'Show more episodes')}</button></p>` : ''}
@@ -661,6 +693,7 @@ ${crumbNav(['PICHCHRAPA', '/'], [T('संपर्क', 'Contact')])}
 <h1 class="page-h1">${T('संपर्क', 'Contact')}</h1>
 <p class="lede">${esc(site.contact.lead)}</p>
 <div class="actions">${contactButtons()}</div>
+<section style="margin-top:2.2rem" aria-labelledby="social-h">${socialInner()}</section>
 <section class="prose" style="margin-top:2rem"><h2>PICHCHRAPA</h2>${companyFacts()}</section>
 </main>`;
   return layout({
