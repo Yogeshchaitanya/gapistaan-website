@@ -99,7 +99,12 @@ const orgLd = (lang) => ({
   '@type': ['EducationalOrganization', 'LocalBusiness'],
   '@id': orgId,
   name: 'Indian Films Academy',
-  alternateName: ['इंडियन फिल्म्स एकेडमी', 'IFA Lucknow', 'Indian Film Academy Lucknow'],
+  alternateName: ['इंडियन फिल्म्स एकेडमी', 'IFA Lucknow', 'Indian Film Academy Lucknow', 'Indian Films Academy Gomti Nagar'],
+  areaServed: [{ '@type': 'City', name: 'Lucknow' }, { '@type': 'AdministrativeArea', name: 'Uttar Pradesh' }],
+  knowsAbout: ['Cinematic acting', 'Camera acting', 'Film direction', 'Film editing', 'Yogesh CineAct method', 'YouTube and Instagram content creation'],
+  contactPoint: { '@type': 'ContactPoint', contactType: 'admissions', telephone: site.phone, email: site.email, areaServed: 'IN', availableLanguage: ['Hindi', 'English'] },
+  ...(site.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng } } : {}),
+  ...(site.mapUrl ? { hasMap: site.mapUrl } : {}),
   url: abs('/'),
   logo: abs('/img/logo-emblem-512.webp'),
   image: abs('/img/hero-group-1600.webp'),
@@ -141,7 +146,14 @@ function buildLang(lang) {
   const guideList = () => `<ul class="guide-list">${guides.map((g) => `<li><a class="guide-card" href="${u(`/guides/${g.slug}/`)}"><strong>${esc(g[lang].h1)}</strong><span>${esc(g[lang].lede)}</span><span class="more">${esc(GH.read)}</span></a></li>`).join('')}</ul>`;
   const TP = L.trackPage, CPG = L.coursesPage, DN = L.donate, AD = L.admit, CA = L.cineact, CH = L.cineactHome;
   const li = (x) => `<li>${esc(x)}</li>`;
-  const feeVars = { i1: money(site.installments[0]), i2: money(site.installments[1]), total: money(site.installments.reduce((a, b) => a + b, 0)), pct: site.scholarshipPct };
+  const feeVars = {
+    i1: money(site.installments[0]), i2: money(site.installments[1]), total: money(site.installments.reduce((a, b) => a + b, 0)), pct: site.scholarshipPct,
+    fee: money(site.fee), phone: site.phoneLabel, email: site.email,
+    addr: `${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.pin}`,
+    founders: L.founders.map((f) => f.name).join(lang === 'hi' ? ' और ' : ' and '),
+  };
+  const glance = () => `<dl class="glance">${L.glance.rows.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(fmt(v, feeVars))}</dd></div>`).join('')}</dl>`;
+  const practical = () => `<aside class="practical"><strong>${esc(L.practical.title)}</strong><p>${esc(L.practical.text)}</p></aside>`;
 
   function layout({ title, description, pathName, image, ld = [], body, type = 'website', noindex = false }) {
     const url = abs(u(pathName));
@@ -440,6 +452,7 @@ ${guides.length ? `<section class="sec" aria-labelledby="gd-h"><div class="wrap"
   <div class="sec-head"><div><p class="eyebrow">${esc(GH.eyebrow)}</p><h2 class="h2" id="gd-h">${esc(GH.title)}</h2><p class="lede">${esc(GH.lede)}</p></div><a class="chip-link" href="${u('/guides/')}">${esc(GH.all)}</a></div>
   ${guideList()}
 </div></section>` : ''}
+<section class="sec" aria-labelledby="gl-h"><div class="wrap"><h2 class="h2" id="gl-h">${esc(L.glance.title)}</h2>${glance()}</div></section>
 <section class="sec sec-alt" aria-labelledby="faq-h"><div class="wrap"><h2 class="h2" id="faq-h">${esc(L.faqTitle)}</h2>${faq(L.faq)}</div></section>
 <section class="sec" id="contact" aria-labelledby="contact-h"><div class="wrap"><h2 class="h2" id="contact-h">${esc(L.contactTitle)}</h2>${contactBlock()}</div></section>
 ${viewer}
@@ -546,7 +559,7 @@ ${reels.length ? `<section class="sec sec-dark" aria-labelledby="tb-h"><div clas
 <section class="sec sec-dark" aria-labelledby="qt-h"><div class="wrap"><h2 class="h2" id="qt-h">${esc(L.quotesTitle)}</h2><div class="quote-pair">${quoteFig('transform')}${quoteFig('behave')}</div></div></section>
 <section class="sec sec-alt" aria-labelledby="pr-h"><div class="wrap"><h2 class="h2" id="pr-h">${esc(CA.principlesTitle)}</h2>${tiles(CA.principles, 'principles')}</div></section>
 <section class="sec" aria-labelledby="tech-h"><div class="wrap"><h2 class="h2" id="tech-h">${esc(CA.techTitle)}</h2><p class="lede">${esc(CA.techLede)}</p><ul class="tech">${CA.tech.map(li).join('')}</ul></div></section>
-${caVideos.length ? `<section class="sec sec-alt" id="classes" aria-labelledby="cl-h"><div class="wrap"><h2 class="h2" id="cl-h">${esc(CA.classesTitle)}</h2><p class="lede">${esc(CA.classesLede)}</p>${rail(caVideos.map(videoCard).join(''), 'vrail', CA.classesTitle)}${donate()}</div></section>` : ''}
+${caVideos.length ? `<section class="sec sec-alt" id="classes" aria-labelledby="cl-h"><div class="wrap"><h2 class="h2" id="cl-h">${esc(CA.classesTitle)}</h2><p class="lede">${esc(CA.classesLede)}</p>${practical()}${rail(caVideos.map(videoCard).join(''), 'vrail', CA.classesTitle)}${donate()}</div></section>` : ''}
 <section class="sec"><div class="wrap"><div class="online-band"><h2 class="h2">${esc(CA.cta)}</h2><a class="btn btn-gold" href="${applyUrl}">${esc(L.hero.cta)}</a></div></div></section>
 </main>`,
   });
@@ -628,7 +641,8 @@ ${crumbs([[L.home, u('/')], [L.foot.about, u('/about/')]])}
   <div class="prose">${L.about.map((p) => `<p>${esc(p)}</p>`).join('\n')}</div>
   ${img('founders', 640, 'Indian Films Academy', { widths: [640, 1000], sizes: '(min-width: 64rem) 460px, 92vw', cls: 'rounded', width: 640, height: 640 })}
 </div></section>
-<section class="sec"><div class="wrap"><h2 class="h2">${esc(L.foundersTitle)}</h2>${founders()}</div></section>
+<section class="sec"><div class="wrap"><h2 class="h2">${esc(L.glance.title)}</h2>${glance()}</div></section>
+<section class="sec sec-alt"><div class="wrap"><h2 class="h2">${esc(L.foundersTitle)}</h2>${founders()}</div></section>
 <section class="sec sec-alt"><div class="wrap"><h2 class="h2 cine">${esc(L.methodTitle)}</h2><div class="prose">${L.method.map((p) => `<p>${esc(p)}</p>`).join('')}</div><p class="more-link"><a href="${u('/yogesh-cineact/')}">${esc(CH.cta)}</a></p></div></section>
 <section class="sec"><div class="wrap"><h2 class="h2">${esc(L.guestsTitle)}</h2><p class="lede">${esc(L.guestsLede)}</p>${grid(visitors.slice(0, 8))}<p class="more-link"><a href="${u('/gallery/')}">${esc(L.allPhotos)}</a></p></div></section>
 ${viewer}
@@ -658,6 +672,7 @@ ${viewer}
     body: `<main id="main" class="page"><div class="wrap page-head">
 ${crumbs([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])}
 <div class="sec-head"><div><h1 class="page-h1">${esc(L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><div class="link-row"><a class="chip-link chip-gold" href="#support">${esc(L.supportChip)}</a><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div></div>
+${practical()}
 <div class="vid-layout"><div class="vid-main"><ul class="vgrid">${videos.map(videoCard).join('\n')}</ul><a class="support-bar" href="#support"><span>${esc(DN.short)}</span><b>${esc(DN.btn)}</b></a></div>${donate()}</div>
 </div></main>`,
   });
@@ -739,7 +754,7 @@ ${crumbs(trail)}
 <h1 class="page-h1">${esc(G.h1)}</h1>
 <p class="byline">${esc(GH.by)} · Indian Films Academy · <time datetime="${g.date}">${esc(new Date(g.date).toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'long', year: 'numeric' }))}</time></p>
 <p class="lede">${esc(G.lede)}</p>
-${G.sections.map((sec) => `<h2>${esc(sec.h)}</h2>${(sec.p || []).map((x) => `<p>${esc(x)}</p>`).join('')}${sec.list ? `<ul class="ticks big">${sec.list.map(li).join('')}</ul>` : ''}`).join('\n')}
+${G.sections.map((sec) => `<h2>${esc(sec.h)}</h2>${(sec.p || []).map((x) => `<p>${esc(fmt(x, feeVars))}</p>`).join('')}${sec.list ? `<ul class="ticks big">${sec.list.map((x) => li(fmt(x, feeVars))).join('')}</ul>` : ''}`).join('\n')}
 <aside class="guide-cta"><p class="eyebrow">${esc(GH.related)}</p><p class="guide-cta-t">${esc(lang === 'hi' ? `${t.local} कोर्स · 90 दिन` : `${t.name} course · 90 days`)}</p><div class="actions"><a class="btn btn-gold" href="${u(`/${t.slug}/`)}">${esc(L.courseMore)}</a><a class="btn btn-ghost-light" href="${applyUrl}">${esc(L.hero.cta)}</a></div></aside>
 <h2>${esc(GH.all)}</h2>
 <ul class="ticks big">${guides.filter((x) => x !== g).map((x) => `<li><a href="${u(`/guides/${x.slug}/`)}">${esc(x[lang].h1)}</a></li>`).join('')}</ul>
