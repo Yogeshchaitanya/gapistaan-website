@@ -1,0 +1,40 @@
+name: PICHCHRAPA diag (one-off)
+on:
+  push:
+    branches: [pichchrapa-discover]
+    paths: [.github/workflows/pichchrapa-diag.yml]
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Probe
+        run: |
+          mkdir -p pichchrapa/discover-out
+          {
+            for h in pichchrapa.com www.pichchrapa.com; do
+              echo "##### $h"
+              echo "-- NS";  dig +short NS $h || true
+              echo "-- A";   dig +short A $h || true
+              echo "-- AAAA"; dig +short AAAA $h || true
+              echo "-- CNAME"; dig +short CNAME $h || true
+            done
+            echo "-- NS via 1.1.1.1"; dig +short NS pichchrapa.com @1.1.1.1 || true
+            for u in https://pichchrapa.com/ https://www.pichchrapa.com/ http://pichchrapa.com/; do
+              echo "##### GET $u"
+              curl -sS -m 25 -o /tmp/body.txt -D - -w "\nHTTP %{http_code} ssl_verify=%{ssl_verify_result}\n" "$u" 2>&1 | head -25
+              head -c 400 /tmp/body.txt; echo
+            done
+            echo "##### cert"
+            echo | openssl s_client -connect pichchrapa.com:443 -servername pichchrapa.com 2>/dev/null | openssl x509 -noout -issuer -subject -dates 2>&1 | head -6
+          } > pichchrapa/discover-out/diag.txt 2>&1
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pichchrapa/discover-out/diag.txt
+          git commit -m "diag output" || echo nothing
+          git pull --rebase origin pichchrapa-discover || true
+          git push origin HEAD:pichchrapa-discover
