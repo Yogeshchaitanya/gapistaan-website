@@ -11,8 +11,8 @@
     hero.addEventListener('pointermove',function(e){
       var r=hero.getBoundingClientRect();
       var x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
-      screen.style.setProperty('--ry',(-8+x*10).toFixed(2)+'deg');
-      screen.style.setProperty('--rx',(2-y*8).toFixed(2)+'deg');
+      screen.style.setProperty('--ry',(-5+x*8).toFixed(2)+'deg');
+      screen.style.setProperty('--rx',(1-y*6).toFixed(2)+'deg');
     });
     hero.addEventListener('pointerleave',function(){screen.style.removeProperty('--ry');screen.style.removeProperty('--rx');});
   }
@@ -54,6 +54,23 @@
   if(big&&!calm){
     var turn=function(){ big.style.transform='rotate('+(window.scrollY*.12).toFixed(1)+'deg)'; };
     window.addEventListener('scroll',turn,{passive:true}); turn();
+  }
+
+  // moments: the gavel, the stamps and the sound bars start when they scroll into view
+  var fx=[].slice.call(doc.querySelectorAll('[data-fx]'));
+  if(fx.length){
+    if(calm||!('IntersectionObserver' in window)){
+      fx.forEach(function(e){e.classList.add('in');});
+    } else {
+      var io=new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          var el=en.target, live=el.getAttribute('data-fx')==='live';
+          if(en.isIntersecting){ el.classList.add('in'); if(!live) io.unobserve(el); }
+          else if(live){ el.classList.remove('in'); }
+        });
+      },{threshold:.35});
+      fx.forEach(function(e){io.observe(e);});
+    }
   }
 
   // rails: arrow buttons

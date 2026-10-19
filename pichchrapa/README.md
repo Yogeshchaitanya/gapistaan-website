@@ -3,6 +3,10 @@
 अभिनेताओं के परिवार के स्टूडियो PICHCHRAPA की साइट। यह gapistaan.com की तरह ही बनती और चलती है, बस Cloudflare पर अलग Worker (`pichchrapa-website`) से, जिसका Root directory `pichchrapa` है।
 
 - साइट का टेक्स्ट (हीरो, परिवार, कंपनी, संपर्क, सीरीज़ के परिचय, केस-फ़ाइलें): `content/site.json`
+- दो भाषाएँ: हिंदी `/` पर, English `/en/` पर। English टेक्स्ट `content/site.en.json` में है (वही ढाँचा; जो कुंजी वहाँ नहीं है, वह हिंदी से आती है)। पन्नों के बाक़ी छोटे शब्द `scripts/build.mjs` में `T('हिंदी', 'English')` से हैं। हर पन्ने पर हिंदी↔English बटन, hreflang और दोनों भाषाओं वाला sitemap अपने-आप बनता है। वीडियो के शीर्षक और विवरण YouTube जैसे हैं, उन्हें अनुवाद नहीं किया जाता।
+- गैपिस्तान के कलाकार: `content/site.json` के `artists` में (फ़ोटो `public/img/cast/`)। हर कार्ड गैपिस्तान की प्रोफ़ाइल से जुड़ा है।
+- होम की ऊपर की रील: ऊपर की पट्टी में राजा का बाजा के सारे एपिसोड, नीचे की पट्टी में फ़िल्मी अदालत और बाक़ी वीडियो (`reelStrips()` in `scripts/build.mjs`)।
+- लोगो और एनिमेशन: हेडर का क्लैपर `clapMark()` से बनता है (बंद हालत में सीधा; लोड पर और होवर पर एक बार क्लैप)। फ़िल्मी अदालत में हथौड़ा और केस-नंबर की मुहर, राजा का बाजा में साउंड-बार और बीट। सब `src/styles.css` में; `prefers-reduced-motion` में बंद।
 - कंपनी का GST नंबर, विधिक नाम और पूरा पता: `content/site.json` में `business.gstin`, `business.legalName`, `business.address`। भरते ही फ़ुटर, About, Contact और Google के JSON-LD में दिखने लगते हैं।
 - YouTube वीडियो: हर घंटे `scripts/fetch-videos.mjs` से `data/videos.json`। स्रोत चैनल `content/site.json` के `sources` में हैं:
   - PICHCHRAPA (@pichchrapa), मुख्य चैनल (सब वीडियो और शॉर्ट्स)
