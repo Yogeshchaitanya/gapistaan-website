@@ -281,6 +281,26 @@ function studioHtml({ heading = true } = {}) {
   </div>`;
 }
 
+const figImg = (p) => `<img src="${esc(p.src)}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async" alt="${esc(p.alt)}">`;
+const stripHtml = (items, cls, label) => `<div class="pstrip ${cls}" role="list" aria-label="${esc(label)}" tabindex="0">${items.map((p) => `<figure class="sp" role="listitem">${figImg(p)}${p.cap ? `<figcaption>${esc(p.cap)}</figcaption>` : ''}</figure>`).join('')}</div>`;
+
+function behindHtml({ heading = true } = {}) {
+  const st = site.studio, tm = site.team;
+  if (!st && !tm) return '';
+  return `<div class="studio">
+    ${heading && st ? `<div class="studio-head"><h2 class="h2" id="studio-h">${esc(st.title)}</h2><p>${esc(st.lead)}</p></div>` : ''}
+    ${tm && tm.main ? `<div class="team-grid">${tm.main.map((p, i) => `<figure class="sf t${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
+    ${tm && tm.strip ? `<h3 class="h3 strip-h">${esc(tm.stripTitle || 'सेट से')}</h3>${stripHtml(tm.strip, 'set-strip', tm.stripTitle || 'सेट से')}` : ''}
+    ${tm && tm.portraits ? `<h3 class="h3 strip-h">${esc(tm.portraitsTitle || 'कलाकार')}</h3>${stripHtml(tm.portraits, 'face-strip', tm.portraitsTitle || 'कलाकार')}` : ''}
+    ${st && st.photos ? `<h3 class="h3 strip-h">${esc(st.subTitle || 'एडिटिंग और कलर')}</h3>
+    <div class="studio-grid">${st.photos.map((p, i) => `<figure class="sf sf-${i + 1}">${figImg(p)}<figcaption>${esc(p.cap)}</figcaption></figure>`).join('')}</div>` : ''}
+  </div>`;
+}
+
+const postersHtml = () => (site.posters && site.posters.items.length
+  ? `<section class="case" aria-labelledby="posters-h"><div class="case-h"><h3 id="posters-h">${esc(site.posters.title)}</h3></div>${stripHtml(site.posters.items, 'poster-strip', site.posters.title)}</section>`
+  : '');
+
 function homePage() {
   const latest = rajaEps[0];
   const side = rajaEps.slice(1, 6);
@@ -364,7 +384,7 @@ function homePage() {
 </section>
 
 <section class="sec" aria-labelledby="studio-h">
-  <div class="wrap">${studioHtml()}</div>
+  <div class="wrap">${behindHtml()}</div>
 </section>
 
 <section class="sec sec-alt" aria-labelledby="brands-h">
@@ -430,6 +450,7 @@ ${crumbNav(['PICHCHRAPA', '/'], [S.adalat.name])}
 <p class="muted">${adalatEps.length} वीडियो, ${liveCases.filter((c) => c.no).length} केस${first ? `, पहला केस ${esc(hiMonth(first.publishedAt))} में` : ''}।</p>
 ${caseOrder.map((c) => caseBlock(c, { grid: true })).join('\n')}
 ${otherEps.length ? `<section class="case" aria-labelledby="other-h"><div class="case-h"><h3 id="other-h">${esc(S.other.name)}</h3><span class="muted">${otherEps.length} वीडियो</span></div><p class="muted" style="margin-top:.6rem">${esc(S.other.intro)}</p><div class="grid" style="margin-top:1.2rem">${otherEps.map((v) => card(v)).join('\n')}</div></section>` : ''}
+${postersHtml()}
 </main>`;
   return layout({
     title: `${S.adalat.name} (Filmy Adalat) | कोर्टरूम कॉमेडी वेब सीरीज़ | PICHCHRAPA`,
@@ -534,7 +555,7 @@ ${crumbNav(['PICHCHRAPA', '/'], ['हमारी कहानी'])}
   </div>
   <div>${creditsHtml()}</div>
 </div>
-<section style="margin-top:2.2rem" aria-label="स्टूडियो की तस्वीरें">${studioHtml({ heading: false })}</section>
+<section style="margin-top:2.2rem" aria-label="स्टूडियो की तस्वीरें">${behindHtml({ heading: false })}</section>
 <section class="prose" style="margin-top:2.4rem"><h2>${esc(site.company.title)}</h2><p>${esc(site.company.lead)}</p>${companyFacts()}</section>
 <div class="actions" style="margin-top:2rem"><a class="btn btn-gold" href="/filmy-adalat/">${esc(S.adalat.name)} देखिए</a><a class="btn btn-ghost" href="/raja-ka-baja/">${esc(S.raja.name)} देखिए</a><a class="btn btn-ghost" href="/contact/">संपर्क कीजिए</a></div>
 </main>`;

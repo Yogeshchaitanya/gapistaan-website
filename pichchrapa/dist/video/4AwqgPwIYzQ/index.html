@@ -339,6 +339,20 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opa
 .sf figcaption{position:absolute;inset:auto 0 0 0;padding:1.6rem .9rem .7rem;background:linear-gradient(to top,rgba(2,24,25,.92),rgba(2,24,25,0));color:#fff;font-size:.9rem}
 @media (max-width:52rem){.studio-grid{grid-template-columns:1fr}.sf-1{grid-row:auto}}
 @media (prefers-reduced-motion:reduce){.sf img{transition:none}.sf:hover img{transform:none}}
+
+/* team photos and strips */
+.team-grid{display:grid;grid-template-columns:2fr 3fr;grid-template-rows:1fr 1fr;gap:clamp(.7rem,1.6vw,1.1rem);margin-bottom:2rem}
+.team-grid .t1{grid-row:1 / span 2}
+.strip-h{margin:2rem 0 .2rem}
+.pstrip{display:flex;gap:.9rem;overflow-x:auto;scroll-snap-type:x proximity;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='22'%3E%3Crect x='10' y='5' width='14' height='12' rx='3' fill='%23a9efe0' fill-opacity='.75'/%3E%3C/svg%3E") repeat-x left top/34px 22px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='22'%3E%3Crect x='10' y='5' width='14' height='12' rx='3' fill='%23a9efe0' fill-opacity='.75'/%3E%3C/svg%3E") repeat-x left bottom/34px 22px,#050b0b;background-attachment:local;border-block:1px solid rgba(205,164,90,.25);padding:30px 1rem;margin:.8rem 0 1.4rem}
+.sp{margin:0;flex:0 0 auto;scroll-snap-align:start}
+.sp img{display:block;height:clamp(220px,30vw,330px);width:auto;border-radius:6px;border:1px solid var(--line);box-shadow:0 14px 30px -20px #000}
+.poster-strip .sp img{height:clamp(260px,36vw,420px)}
+.sp figcaption{padding-top:.45rem;color:var(--mist);font-size:.88rem;max-width:22rem}
+.pstrip:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+@media (max-width:52rem){.team-grid{grid-template-columns:1fr;grid-template-rows:auto}.team-grid .t1{grid-row:auto}}
+
+.face-strip .sp img{height:clamp(240px,32vw,380px)}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"PICHCHRAPA","item":"https://pichchrapa.com/"},{"@type":"ListItem","position":2,"name":"राजा का बाजा","item":"https://pichchrapa.com/raja-ka-baja/"},{"@type":"ListItem","position":3,"name":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama","item":"https://pichchrapa.com/video/4AwqgPwIYzQ/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama","description":"Sadak Par Gir Ke Raja Ne Kiya Full Comedy Drama Raja ji beech sadak par gir gaye aur wahin lete-lete drama shuru kar diya. Aas-paas khade logon ki halat dekhne layak thi — kisi ko samajh hi nahi aaya ki ye sach hai ya natak. Raja Ka Baja ek desi comedy series hai jismein Kaling Desh ka Raja apne mantri ke saath sadak par nikalta hai aur aam logon ke beech hangama karta hai. Poora episode bina script, bina retake — sirf asli reactions.","thumbnailUrl":["https://i.ytimg.com/vi/4AwqgPwIYzQ/maxresdefault.jpg","https://i.ytimg.com/vi/4AwqgPwIYzQ/hqdefault.jpg"],"uploadDate":"2026-06-22T13:31:16Z","duration":"PT6M8S","embedUrl":"https://www.youtube.com/embed/4AwqgPwIYzQ","contentUrl":"https://www.youtube.com/watch?v=4AwqgPwIYzQ","inLanguage":"hi","isFamilyFriendly":true,"publisher":{"@id":"https://pichchrapa.com/#org"},"partOfSeries":{"@type":"TVSeries","name":"राजा का बाजा","url":"https://pichchrapa.com/raja-ka-baja/"},"keywords":"Raja Ka Baja, Raja Ka baja Deepak mandal, Raja ka Baja Shubham, comedy show, comedy sketch, couple comedy, couple vlog, daily vlog, daily vlogs, entertainment, entertainment video, family vlog"}</script>
