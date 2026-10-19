@@ -41,7 +41,7 @@
     "btn": "तालियाँ भेजें",
     "payInfo": "भुगतान Razorpay के सुरक्षित पेज पर होता है।",
     "fine": "यह अपनी मर्ज़ी से दिया गया गिफ़्ट है, दान नहीं; इस पर आयकर छूट (80G) नहीं मिलती, और भेजी गई राशि वापस नहीं होती।",
-    "termsLink": "नियम और वापसी नीति",
+    "termsLink": "वापसी नीति",
     "short": "सीन पसंद आया? कलाकारों को तालियाँ भेजिए",
     "nav": "तालियाँ भेजें",
     "opening": "भुगतान का पेज खुल रहा है…",
@@ -92,7 +92,7 @@
     "btn": "Send applause",
     "payInfo": "Payment happens on Razorpay's secure page.",
     "fine": "This is a voluntary gift, not a donation; it is not eligible for income-tax exemption (80G), and amounts sent are non-refundable.",
-    "termsLink": "Terms and refund policy",
+    "termsLink": "Refund policy",
     "short": "Loved the scene? Send the cast some applause",
     "nav": "Send applause",
     "opening": "Opening the payment page…",
@@ -130,64 +130,231 @@
       "offNote": "Sending applause is being switched on and will be here within a few days. Until then, watching and sharing the episodes is the biggest encouragement you can give."
     }
   },
-  "terms": {
+  "enabled": false,
+  "policies": {
     "hi": {
-      "title": "नियम और वापसी नीति",
-      "paras": [
-        [
-          "हम कौन हैं",
-          "gapistaan.com गैपिस्तान (Gen Gap) की वेबसाइट है, जो PICHCHRAPA (गोमती नगर, लखनऊ, उत्तर प्रदेश) की पेशकश है।"
-        ],
-        [
-          "यहाँ क्या लिया जाता है",
-          "वेबसाइट पर कुछ बेचा नहीं जाता। एपिसोड मुफ़्त हैं। 'तालियाँ भेजें' से मिलने वाली राशि दर्शकों का अपनी मर्ज़ी से दिया गया गिफ़्ट है। इसके बदले कोई सामान नहीं भेजा जाता और कोई सेवा नहीं दी जाती, इसलिए डिलीवरी या शिपिंग जैसी कोई चीज़ यहाँ लागू नहीं है।"
-        ],
-        [
-          "वापसी (रिफ़ंड) नीति",
-          "स्वेच्छा से भेजा गया गिफ़्ट वापस नहीं होता। पर अगर किसी भूल से आपके खाते से दो बार पैसे कटे हों, या भुगतान फ़ेल हुआ हो और पैसे कट गए हों, तो 7 दिन के भीतर पेमेंट आईडी के साथ हमें ईमेल कीजिए। जाँच के बाद रकम उसी माध्यम में लौटा दी जाती है, जिससे भुगतान हुआ था। बैंक के हिसाब से इसमें आम तौर पर 5 से 7 कार्य-दिवस लगते हैं।"
-        ],
-        [
-          "भुगतान की सुरक्षा",
-          "सारे भुगतान Razorpay के सुरक्षित पेज पर होते हैं। कार्ड, UPI या बैंक की जानकारी हमारे पास नहीं आती।"
-        ],
-        [
-          "संपर्क",
-          "ईमेल: {email}, फ़ोन: {phone}।"
-        ],
-        [
-          "क़ानूनी क्षेत्र",
-          "इन नियमों पर भारत का क़ानून लागू होगा। किसी भी विवाद का क्षेत्राधिकार लखनऊ की अदालतों का होगा।"
+      "labels": {
+        "policies": "नीतियाँ",
+        "terms": "नियम और शर्तें",
+        "refund": "रद्द करना और वापसी (रिफ़ंड)",
+        "shipping": "शिपिंग और डिलीवरी",
+        "pricing": "कीमत की जानकारी",
+        "contact": "संपर्क करें"
+      },
+      "terms": {
+        "title": "नियम और शर्तें",
+        "desc": "gapistaan.com के उपयोग के नियम और शर्तें, कॉपीराइट और तालियाँ (गिफ़्ट) की शर्तें।",
+        "paras": [
+          [
+            "यह वेबसाइट",
+            "gapistaan.com गैपिस्तान (Gen Gap) की वेबसाइट है, जो PICHCHRAPA (गोमती नगर, लखनऊ, उत्तर प्रदेश) की पेशकश है। इसका मक़सद मनोरंजन और जानकारी देना है। एपिसोड YouTube पर चलते हैं और यहाँ सिर्फ़ दिखाए जाते हैं।"
+          ],
+          [
+            "कॉपीराइट",
+            "इस वेबसाइट का टेक्स्ट, डिज़ाइन, फ़ोटो और वीडियो PICHCHRAPA और संबंधित कलाकारों का है। इसे बिना अनुमति कॉपी करना, बदलना या अपने नाम से चलाना मना है। एपिसोड का लिंक शेयर करना हमेशा स्वागत योग्य है।"
+          ],
+          [
+            "तालियाँ (गिफ़्ट)",
+            "'तालियाँ भेजें' से मिलने वाली राशि दर्शक का अपनी मर्ज़ी से दिया गया गिफ़्ट है। न्यूनतम ₹20 और अधिकतम ₹50,000 तक की राशि भेजी जा सकती है। इसके बदले कोई सामान या सेवा नहीं दी जाती। एपिसोड देखने के लिए कुछ देना ज़रूरी नहीं है। भुगतान Razorpay के सुरक्षित पेज पर होता है। वापसी के नियम 'रद्द करना और वापसी' पेज पर हैं।"
+          ],
+          [
+            "ज़िम्मेदारी की सीमा",
+            "वेबसाइट जैसी है वैसी उपलब्ध कराई जाती है। YouTube या दूसरी वेबसाइटों की सामग्री और उपलब्धता पर हमारा नियंत्रण नहीं है।"
+          ],
+          [
+            "बदलाव",
+            "ज़रूरत पड़ने पर ये नियम बदले जा सकते हैं। नया रूप इसी पेज पर दिखेगा।"
+          ],
+          [
+            "संपर्क",
+            "ईमेल: {email}, फ़ोन: {phone}।"
+          ],
+          [
+            "क़ानूनी क्षेत्र",
+            "इन नियमों पर भारत का क़ानून लागू होगा। किसी भी विवाद का क्षेत्राधिकार लखनऊ की अदालतों का होगा।"
+          ]
         ]
-      ]
+      },
+      "refund": {
+        "title": "रद्द करना और वापसी (रिफ़ंड)",
+        "desc": "गैपिस्तान की तालियाँ (गिफ़्ट) के भुगतान की रद्द करने और वापसी की नीति।",
+        "paras": [
+          [
+            "रद्द करना",
+            "भुगतान पेज बंद कर देने या बीच में छोड़ देने पर कोई रकम नहीं कटती। भुगतान पूरा हो जाने के बाद उसे रद्द नहीं किया जा सकता, क्योंकि वह अपनी मर्ज़ी से दिया गया गिफ़्ट है।"
+          ],
+          [
+            "वापसी (रिफ़ंड)",
+            "स्वेच्छा से भेजा गया गिफ़्ट वापस नहीं होता। पर अगर किसी भूल से आपके खाते से दो बार पैसे कटे हों, या भुगतान फ़ेल हुआ हो और पैसे कट गए हों, तो 7 दिन के भीतर पेमेंट आईडी के साथ हमें ईमेल कीजिए। जाँच के बाद रकम उसी माध्यम में लौटा दी जाती है, जिससे भुगतान हुआ था। बैंक के हिसाब से इसमें आम तौर पर 5 से 7 कार्य-दिवस लगते हैं।"
+          ],
+          [
+            "कैसे बताएँ",
+            "ईमेल: {email}, फ़ोन: {phone}। संदेश में पेमेंट आईडी (pay_ से शुरू होने वाली), भुगतान की तारीख़ और राशि लिखिए।"
+          ]
+        ]
+      },
+      "shipping": {
+        "title": "शिपिंग और डिलीवरी",
+        "desc": "गैपिस्तान की वेबसाइट पर कोई सामान नहीं भेजा जाता, इसलिए शिपिंग और डिलीवरी लागू नहीं है।",
+        "paras": [
+          [
+            "कोई सामान नहीं भेजा जाता",
+            "gapistaan.com पर कोई सामान नहीं बिकता और 'तालियाँ भेजें' के बदले कोई सामान नहीं भेजा जाता। इसलिए शिपिंग, डिलीवरी या पता देने की कोई ज़रूरत नहीं है।"
+          ],
+          [
+            "एपिसोड",
+            "सारे एपिसोड ऑनलाइन, YouTube और इस वेबसाइट पर तुरंत और मुफ़्त देखे जा सकते हैं।"
+          ]
+        ]
+      },
+      "pricing": {
+        "title": "कीमत की जानकारी",
+        "desc": "गैपिस्तान के एपिसोड मुफ़्त हैं। तालियाँ (गिफ़्ट) अपनी मर्ज़ी की राशि का, ₹20 से ₹50,000 तक।",
+        "paras": [
+          [
+            "एपिसोड: मुफ़्त",
+            "गैपिस्तान के सारे एपिसोड देखना मुफ़्त है और हमेशा मुफ़्त रहेगा। कोई सब्सक्रिप्शन या सदस्यता शुल्क नहीं है।"
+          ],
+          [
+            "तालियाँ (गिफ़्ट): अपनी मर्ज़ी की राशि",
+            "राशि आप ख़ुद चुनते हैं: ₹20 से ₹50,000 तक। सुझाई गई राशियाँ ₹51, ₹101, ₹251, ₹501 और ₹1100 हैं। आपने जो राशि चुनी, वही कटती है; उसके ऊपर हम कुछ नहीं जोड़ते।"
+          ]
+        ]
+      },
+      "contact": {
+        "title": "संपर्क करें",
+        "desc": "गैपिस्तान (PICHCHRAPA) से संपर्क: ईमेल, फ़ोन और पता।",
+        "paras": [
+          [
+            "PICHCHRAPA (गैपिस्तान)",
+            "गोमती नगर, लखनऊ, उत्तर प्रदेश, भारत"
+          ],
+          [
+            "ईमेल",
+            "{email}"
+          ],
+          [
+            "फ़ोन",
+            "{phone}"
+          ],
+          [
+            "कब जवाब मिलता है",
+            "ईमेल और फ़ोन का जवाब आम तौर पर 1 से 2 कार्य-दिवस में दिया जाता है। भुगतान से जुड़ी किसी भी समस्या में पेमेंट आईडी ज़रूर बताइए।"
+          ]
+        ]
+      }
     },
     "en": {
-      "title": "Terms and refund policy",
-      "paras": [
-        [
-          "Who we are",
-          "gapistaan.com is the website of Gapistaan (Gen Gap), presented by PICHCHRAPA (Gomti Nagar, Lucknow, Uttar Pradesh)."
-        ],
-        [
-          "What is collected here",
-          "Nothing is sold on this website. Episodes are free. The amount received through “Send applause” is a gift that viewers give of their own free will. No goods are sent and no service is provided in return, so delivery or shipping does not apply here."
-        ],
-        [
-          "Refund policy",
-          "A gift sent voluntarily is not refundable. But if money was deducted twice from your account by mistake, or a payment failed and the money was still deducted, email us within 7 days with the payment ID. After checking, the amount is returned to the same method used for the payment. Depending on your bank this usually takes 5 to 7 working days."
-        ],
-        [
-          "Payment security",
-          "All payments happen on Razorpay's secure page. Your card, UPI or bank details never reach us."
-        ],
-        [
-          "Contact",
-          "Email: {email}, phone: {phone}."
-        ],
-        [
-          "Governing law",
-          "These terms are governed by the laws of India. Any dispute is subject to the jurisdiction of the courts at Lucknow."
+      "labels": {
+        "policies": "Policies",
+        "terms": "Terms and conditions",
+        "refund": "Cancellation and refunds",
+        "shipping": "Shipping and delivery",
+        "pricing": "Pricing",
+        "contact": "Contact us"
+      },
+      "terms": {
+        "title": "Terms and conditions",
+        "desc": "Terms and conditions for using gapistaan.com, copyright, and the terms for applause gifts.",
+        "paras": [
+          [
+            "This website",
+            "gapistaan.com is the website of Gapistaan (Gen Gap), presented by PICHCHRAPA (Gomti Nagar, Lucknow, Uttar Pradesh). Its purpose is entertainment and information. Episodes play on YouTube and are only shown here."
+          ],
+          [
+            "Copyright",
+            "The text, design, photos and videos of this website belong to PICHCHRAPA and the respective artists. Copying, altering or passing them off as your own without permission is not allowed. Sharing an episode link is always welcome."
+          ],
+          [
+            "Applause (gifts)",
+            "The amount received through “Send applause” is a gift that a viewer gives of their own free will. Any amount from ₹20 to ₹50,000 can be sent. Nothing is provided in return, no goods and no service. You never have to pay to watch an episode. Payment happens on Razorpay's secure page. The rules for returns are on the Cancellation and refunds page."
+          ],
+          [
+            "Limit of liability",
+            "The website is provided as it is. We have no control over the content or availability of YouTube or other websites."
+          ],
+          [
+            "Changes",
+            "These terms may be changed when needed. The new version will appear on this page."
+          ],
+          [
+            "Contact",
+            "Email: {email}, phone: {phone}."
+          ],
+          [
+            "Governing law",
+            "These terms are governed by the laws of India. Any dispute is subject to the jurisdiction of the courts at Lucknow."
+          ]
         ]
-      ]
+      },
+      "refund": {
+        "title": "Cancellation and refunds",
+        "desc": "The cancellation and refund policy for Gapistaan applause (gift) payments.",
+        "paras": [
+          [
+            "Cancellation",
+            "If you close the payment page or leave it halfway, no money is deducted. Once a payment is complete it cannot be cancelled, because it is a gift given of your own free will."
+          ],
+          [
+            "Refunds",
+            "A gift sent voluntarily is not refundable. But if money was deducted twice from your account by mistake, or a payment failed and the money was still deducted, email us within 7 days with the payment ID. After checking, the amount is returned to the same method used for the payment. Depending on your bank this usually takes 5 to 7 working days."
+          ],
+          [
+            "How to tell us",
+            "Email: {email}, phone: {phone}. In your message include the payment ID (it starts with pay_), the date of payment and the amount."
+          ]
+        ]
+      },
+      "shipping": {
+        "title": "Shipping and delivery",
+        "desc": "Nothing is shipped from the Gapistaan website, so shipping and delivery do not apply.",
+        "paras": [
+          [
+            "Nothing is shipped",
+            "No goods are sold on gapistaan.com and nothing is sent in return for “Send applause”. So there is no shipping, delivery or address to give."
+          ],
+          [
+            "Episodes",
+            "Every episode can be watched online, instantly and for free, on YouTube and on this website."
+          ]
+        ]
+      },
+      "pricing": {
+        "title": "Pricing",
+        "desc": "Gapistaan episodes are free. Applause (gifts) are any amount you choose, from ₹20 to ₹50,000.",
+        "paras": [
+          [
+            "Episodes: free",
+            "Watching every Gapistaan episode is free and always will be. There is no subscription or membership fee."
+          ],
+          [
+            "Applause (gifts): any amount you choose",
+            "You pick the amount: anything from ₹20 to ₹50,000. The suggested amounts are ₹51, ₹101, ₹251, ₹501 and ₹1100. Exactly the amount you choose is charged; we add nothing on top."
+          ]
+        ]
+      },
+      "contact": {
+        "title": "Contact us",
+        "desc": "Contact Gapistaan (PICHCHRAPA): email, phone and address.",
+        "paras": [
+          [
+            "PICHCHRAPA (Gapistaan)",
+            "Gomti Nagar, Lucknow, Uttar Pradesh, India"
+          ],
+          [
+            "Email",
+            "{email}"
+          ],
+          [
+            "Phone",
+            "{phone}"
+          ],
+          [
+            "When you will hear back",
+            "Emails and calls are usually answered within 1 to 2 working days. For any payment problem, please mention your payment ID."
+          ]
+        ]
+      }
     }
   }
 }

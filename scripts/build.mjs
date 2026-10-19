@@ -23,6 +23,8 @@ const T = (hi, eng) => (LANG === 'en' ? eng : hi);
 const lp = (p) => (LANG === 'en' ? '/en' + p : p); // path of a page in the current language
 const A = (p) => abs(lp(p));
 const G = () => gift[LANG];
+const GIFT_ON = gift.enabled === true; // content/gift.json: flip to true only after Razorpay has approved gapistaan.com
+const P = () => gift.policies[LANG]; // policy page texts
 let S = site; // site texts in the current language
 
 // ---------- helpers ----------
@@ -193,7 +195,7 @@ function setLang(lang) {
     ep.paras = lang === 'en' ? ep.paragraphs.filter((x) => !/[\u0900-\u097F]/.test(x)) : ep.paragraphs;
     ep.summary = summary(ep, lang === 'en' ? ep.custom : [...ep.custom, ...ep.paragraphs]);
   }
-  faq = (S.faq || []).map(([q, a]) => [q, fillTokens(a)]);
+  faq = (S.faq || []).filter(([, a]) => GIFT_ON || !/\/support\//.test(a)).map(([q, a]) => [q, fillTokens(a)]); // the gift question waits until the gift box is on
 }
 
 const imgTag = (pic, alt, sizes, extra = '') =>
@@ -257,11 +259,11 @@ const navItems = () => [
   ['/creator/', T('क्रिएटर', 'Creator')],
   ['/about/', T('बारे में', 'About')],
   ['/#contact', T('संपर्क', 'Contact')],
-  ['/support/', G().nav, 'gift-link'],
+  ...(GIFT_ON ? [['/support/', G().nav, 'gift-link']] : []),
 ];
 
 // English pages: every link to an internal page gets the /en prefix (assets and the YouTube links stay as they are).
-const INTERNAL = /href="(\/(?:episodes|cast|creator|about|privacy|terms|support|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
+const INTERNAL = /href="(\/(?:episodes|cast|creator|about|privacy|terms|refund-policy|shipping-policy|pricing|contact|support|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
 const localize = (html) => (LANG === 'en' ? html.replace(INTERNAL, (m, p) => `href="/en${p}"`) : html);
 
 function layout({ title, description, pathName, image, type = 'website', ld = [], body, preloadImage, noindex = false, bilingual = false }) {
@@ -331,9 +333,18 @@ ${body}
         <li><a href="/cast/">${T('कलाकार', 'Cast')}</a></li>
         <li><a href="/creator/">${T('क्रिएटर', 'Creator')}: ${esc(creator.name)}</a></li>
         <li><a href="/about/">${T('गैपिस्तान के बारे में', 'About Gapistaan')}</a></li>
-        <li class="gift-only"><a href="/support/">${esc(G().nav)}</a></li>
-        <li><a href="/privacy/">${T('प्राइवेसी', 'Privacy')}</a></li>
-        <li><a href="/terms/">${T('नियम और वापसी नीति', 'Terms and refunds')}</a></li>
+        ${GIFT_ON ? `<li class="gift-only"><a href="/support/">${esc(G().nav)}</a></li>` : ''}
+        <li><a href="/contact/">${esc(P().labels.contact)}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>${esc(P().labels.policies)}</h2>
+      <ul>
+        <li><a href="/privacy/">${T('प्राइवेसी नीति', 'Privacy policy')}</a></li>
+        <li><a href="/terms/">${esc(P().labels.terms)}</a></li>
+        <li><a href="/refund-policy/">${esc(P().labels.refund)}</a></li>
+        <li><a href="/shipping-policy/">${esc(P().labels.shipping)}</a></li>
+        <li><a href="/pricing/">${esc(P().labels.pricing)}</a></li>
       </ul>
     </div>
     <div>
@@ -378,6 +389,7 @@ function shareButtons(ep, { stage = false } = {}) {
 // The applause box: a ticket-stub amount picker that opens Razorpay Checkout.
 // variant: 'home' (full), 'episode' (short, no form fields), 'cast' (for one actor).
 function giftBox({ variant = 'home', person = null, id = 'gift', pageName = '' } = {}) {
+  if (!GIFT_ON) return '';
   const g = G();
   const fill = (s) => s.replace(/\{name\}/g, person ? person.name : '');
   const title = variant === 'cast' ? fill(g.castTitle) : variant === 'episode' ? g.episodeTitle : g.title;
@@ -398,7 +410,7 @@ function giftBox({ variant = 'home', person = null, id = 'gift', pageName = '' }
     ${fields}
     <p class="gift-own"><label>${esc(g.otherLabel)} <span class="rs">₹<input name="amt" inputmode="numeric" pattern="[0-9]*" value="${first}" aria-label="${esc(g.otherLabel)}"></span></label><button type="button" class="btn btn-gold gift-go">${esc(g.btn)}</button></p>
     <p class="pay-status" role="status" aria-live="polite"></p>
-    <p class="fine">${esc(g.payInfo)} ${esc(g.fine)} <a href="/terms/">${esc(g.termsLink)}</a></p>
+    <p class="fine">${esc(g.payInfo)} ${esc(g.fine)} <a href="/refund-policy/">${esc(g.termsLink)}</a></p>
   </div>
 </aside>`;
 }
@@ -692,11 +704,11 @@ ${shortsHtml}
     ${peopleList()}
   </div>
 </section>
-<section class="sec" aria-label="${esc(G().short)}">
+${GIFT_ON ? `<section class="sec" aria-label="${esc(G().short)}">
   <div class="wrap">
     ${giftBox({ variant: 'home', id: 'gift', pageName: 'home' })}
   </div>
-</section>
+</section>` : ''}
 ${boards ? `<section class="sec sec-alt" aria-labelledby="brands-h">
   <div class="wrap">
     <h2 class="h2" id="brands-h">${T(`${esc(site.presents)} परिवार`, `The ${esc(site.presents)} family`)}</h2>
@@ -791,7 +803,7 @@ ${shareButtons(ep)}
 ${customHtml}
 ${chaptersHtml}
 ${castHtml}
-<div class="block">${giftBox({ variant: 'episode', id: 'gift', pageName: `episode ${epLabel(ep.n)}` })}</div>
+${GIFT_ON ? `<div class="block">${giftBox({ variant: 'episode', id: 'gift', pageName: `episode ${epLabel(ep.n)}` })}</div>` : ''}
 ${descHtml}
 ${prevNext}
 ${more.length ? `<section class="block" aria-labelledby="more-h"><h2 class="h2" id="more-h">${T('और एपिसोड', 'More episodes')}</h2><ul class="grid">${more.map((e) => card(e)).join('\n')}</ul></section>` : ''}
@@ -958,7 +970,7 @@ ${crumbNav(homeCrumb(), `<a href="/cast/">${T('कलाकार', 'Cast')}</a>
 ${factsBlock(c, T('एक नज़र में', 'At a glance'), 'cf-h')}
 ${galleryBlock(c)}
 <section class="block" aria-labelledby="ce-h"><h2 class="h2" id="ce-h">${T(`${esc(c.name)} के एपिसोड`, `Episodes with ${esc(c.name)}`)}</h2>${episodeMiniList(c.episodes)}</section>
-<div class="block">${giftBox({ variant: 'cast', person: c, id: 'gift', pageName: `cast ${c.nameEn}` })}</div>
+${GIFT_ON ? `<div class="block">${giftBox({ variant: 'cast', person: c, id: 'gift', pageName: `cast ${c.nameEn}` })}</div>` : ''}
 <section class="block" aria-labelledby="ot-h"><h2 class="h2" id="ot-h">${T('बाकी टीम', 'The rest of the team')}</h2><ul class="people">${personCard(creator)}${cast.filter((x) => x !== c).map((x) => personCard(x)).join('\n')}</ul></section>
 </main>`;
   return layout({
@@ -1042,7 +1054,8 @@ ${episodes.map((ep) => `    <li><a href="${ep.path}">${epLabel(ep.n)}: ${esc(ep.
 
 function supportPage() {
   const g = G();
-  const body = `<main id="main" class="wrap page">
+  const body = GIFT_ON
+    ? `<main id="main" class="wrap page">
 ${crumbNav(homeCrumb(), esc(g.nav))}
 <h1 class="page-h1">${esc(g.page.title)}</h1>
 <p class="lede gift-off-note">${esc(g.page.offNote)}</p>
@@ -1050,37 +1063,55 @@ ${crumbNav(homeCrumb(), esc(g.nav))}
 <div class="block">${giftBox({ variant: 'home', id: 'gift', pageName: 'support page' })}</div>
 <section class="block prose gift-only" aria-label="${T('सवाल-जवाब', 'Questions and answers')}">
 ${g.page.qa.map(([q, a]) => `  <h2 class="h3">${esc(q)}</h2>\n  <p>${esc(a)}</p>`).join('\n')}
-  <p><a href="/terms/">${esc(g.termsLink)}</a></p>
+  <p><a href="/refund-policy/">${esc(g.termsLink)}</a></p>
 </section>
+</main>`
+    : `<main id="main" class="wrap page">
+${crumbNav(homeCrumb(), esc(g.nav))}
+<h1 class="page-h1">${esc(g.page.title)}</h1>
+<p class="lede">${esc(g.page.offNote)}</p>
+<p class="actions"><a class="btn btn-primary" href="/episodes/">${T('एपिसोड देखिए', 'Watch the episodes')}</a></p>
 </main>`;
   return layout({
     title: `${g.page.title} | Gapistaan`,
     description: g.page.lede,
     pathName: '/support/',
     image: siteUrl ? abs('/img/og-home.jpg') : null,
-    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [g.nav, '/support/']]),
+    ld: GIFT_ON ? crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [g.nav, '/support/']]) : [],
+    noindex: !GIFT_ON,
     body,
   });
 }
 
-function termsPage() {
-  const tt = gift.terms[LANG];
-  const b = site.business || {};
+// The pages Razorpay asks every website to have: terms, cancellation and refunds, shipping, pricing, contact.
+function policyPage(key, slug) {
+  const tt = P()[key];
+  const b = biz();
   const email = site.contactEmail || b.email || '';
-  const fill = (s) => s.replace(/\{email\}/g, email).replace(/\{phone\}/g, b.phoneLabel || b.phone || '');
+  const phone = b.phoneLabel || b.phone || '';
+  const fill = (x) => x.replace(/\{email\}/g, email).replace(/\{phone\}/g, phone);
+  const addr = b.address || b.city || '';
+  const paraHtml = ([h, text]) => {
+    const t = fill(text);
+    let inner = esc(t);
+    if (key === 'contact' && t === email && email) inner = `<a href="mailto:${esc(email)}">${esc(email)}</a>`;
+    else if (key === 'contact' && t === phone && phone) inner = `<a href="tel:${esc(b.phone || phone)}">${esc(phone)}</a>`;
+    else if (key === 'contact' && /\bLucknow\b|लखनऊ/.test(t)) inner = esc(addr || t);
+    return `<h2 class="h3">${esc(h)}</h2>\n<p>${inner}</p>`;
+  };
   const body = `<main id="main" class="wrap page">
 ${crumbNav(homeCrumb(), esc(tt.title))}
 <h1 class="page-h1">${esc(tt.title)}</h1>
 <section class="prose">
-${tt.paras.map(([h, p]) => `<h2 class="h3">${esc(h)}</h2>\n<p>${esc(fill(p))}</p>`).join('\n')}
-<p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${hiDate(new Date().toISOString())}</p>
+${tt.paras.map(paraHtml).join('\n')}
+${key === 'contact' ? '' : `<p class="muted">${T('आख़िरी बदलाव', 'Last updated')}: ${hiDate(new Date().toISOString())}</p>`}
 </section>
 </main>`;
   return layout({
     title: `${tt.title} | Gapistaan`,
-    description: T('गैपिस्तान की वेबसाइट के नियम, तालियाँ (गिफ़्ट) की वापसी नीति और भुगतान की सुरक्षा।', 'Terms of the Gapistaan website, the refund policy for applause gifts, and payment security.'),
-    pathName: '/terms/',
-    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [tt.title, '/terms/']]),
+    description: tt.desc,
+    pathName: `/${slug}/`,
+    ld: crumbsLd([[T('गैपिस्तान', 'Gapistaan'), '/'], [tt.title, `/${slug}/`]]),
     body,
   });
 }
@@ -1133,6 +1164,7 @@ await rm(out, { recursive: true, force: true });
 await mkdir(out, { recursive: true });
 if (existsSync(path.join(root, 'public'))) await cp(path.join(root, 'public'), out, { recursive: true });
 
+const POLICIES = [['terms', 'terms'], ['refund', 'refund-policy'], ['shipping', 'shipping-policy'], ['pricing', 'pricing'], ['contact', 'contact']];
 async function buildLang(lang) {
   setLang(lang);
   const pre = lang === 'en' ? 'en/' : '';
@@ -1144,7 +1176,7 @@ async function buildLang(lang) {
   for (const c of cast) await page(`${pre}cast/${c.slug}`, castPage(c));
   await page(`${pre}about`, aboutPage());
   await page(`${pre}support`, supportPage());
-  await page(`${pre}terms`, termsPage());
+  for (const [key, slug] of POLICIES) await page(`${pre}${slug}`, policyPage(key, slug));
   await page(`${pre}privacy`, privacyPage());
 }
 await buildLang('en');
@@ -1159,11 +1191,11 @@ if (siteUrl) {
     { p: '/creator/', lastmod: latestDate },
     { p: '/cast/', lastmod: latestDate },
     { p: '/about/', lastmod: latestDate },
-    { p: '/support/' },
+    ...(GIFT_ON ? [{ p: '/support/' }] : []),
     ...cast.map((c) => ({ p: c.path, lastmod: c.episodes[0]?.publishedAt || latestDate })),
     ...episodes.map((ep) => ({ p: ep.path, lastmod: ep.publishedAt })),
     { p: '/privacy/' },
-    { p: '/terms/' },
+    ...POLICIES.map(([, slug]) => ({ p: `/${slug}/` })),
   ];
   // Each page is listed in both languages, each entry pointing at its alternate (hreflang).
   const entry = (u, lang) => {
