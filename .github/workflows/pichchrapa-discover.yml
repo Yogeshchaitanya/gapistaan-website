@@ -1,0 +1,25 @@
+name: PICHCHRAPA discover (one-off)
+on:
+  push:
+    branches: [pichchrapa-discover]
+    paths: [.github/workflows/pichchrapa-discover.yml]
+permissions:
+  contents: write
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    env:
+      YT_API_KEY: ${{ secrets.YT_API_KEY }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - run: node pichchrapa/scripts/discover.mjs
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add pichchrapa/discover-out
+          git commit -m "PICHCHRAPA discovery output" || echo nothing
+          git push
