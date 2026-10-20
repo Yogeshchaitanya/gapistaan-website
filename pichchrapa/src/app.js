@@ -161,6 +161,7 @@
   doc.addEventListener('click',function(e){
     var b=e.target.closest('[data-yt]'); if(!b) return;
     e.preventDefault();
+    doc.dispatchEvent(new Event('pp:video'));     // a YouTube video is starting: the title song steps aside
     embed(b.getAttribute('data-yt'),b.hasAttribute('data-short'),b);
   });
 
@@ -188,6 +189,76 @@
       new IntersectionObserver(function(es){ show=es[0].isIntersecting; if(show) boot(); sync(); },{rootMargin:'200px 0px'}).observe(lane);
       doc.addEventListener('visibilitychange',sync);
     }
+  }
+
+  // Raja Ka Baja title song: plays while the Raja Ka Baja reel is on screen and fades out when it scrolls away.
+  // Browsers allow sound only after the visitor has touched the page, so until then the speaker glows and the first
+  // tap, click or key anywhere starts it. The speaker turns the song off or on, and the choice is remembered on this device.
+  var snd=doc.querySelector('.snd'), zone=doc.querySelector('.reels .strip'), zlabel=snd&&snd.closest('.reel-label');
+  if(snd&&zone&&zlabel&&'IntersectionObserver' in window&&window.Audio){
+    var KEY='pp-raja-song', pref=null; try{ pref=localStorage.getItem(KEY); }catch(e){}
+    var saveData=navigator.connection&&navigator.connection.saveData;
+    var au=null, inView=false, want=pref?pref!=='off':!saveData, yielded=false, blocked=false, fadeRaf=0, VOL=.8;
+    var word=snd.querySelector('b');
+    var paint=function(){
+      var on=!!(au&&!au.paused);
+      snd.setAttribute('aria-pressed',on?'true':'false');
+      snd.classList.toggle('is-on',on);
+      snd.classList.toggle('is-wait',!on&&want&&blocked&&inView&&!yielded);
+      word.textContent=snd.getAttribute(on?'data-off':'data-on');
+    };
+    var get=function(){
+      if(!au){
+        au=new Audio(); au.preload='auto'; au.loop=true;
+        au.src=snd.getAttribute(au.canPlayType('audio/mp4; codecs="mp4a.40.2"')?'data-src':'data-src-alt');   // AAC almost everywhere, Opus where AAC is missing
+        au.addEventListener('play',paint); au.addEventListener('pause',paint);
+      }
+      return au;
+    };
+    var fade=function(to,ms,done){            // a timer, not animation frames: frames stall in some cases and the fade must always finish
+      clearInterval(fadeRaf);
+      var a=get(), from=a.volume, t0=Date.now();
+      fadeRaf=setInterval(function(){
+        var k=Math.min(1,(Date.now()-t0)/ms);
+        try{ a.volume=Math.max(0,Math.min(1,from+(to-from)*k)); }catch(e){}
+        if(k>=1){ clearInterval(fadeRaf); if(done) done(); }
+      },30);
+    };
+    var pending=false;
+    var should=function(){ return want&&!yielded&&inView&&!doc.hidden; };
+    var start=function(){
+      var a=get();
+      if(pending) return;
+      if(!a.paused){ fade(VOL,400); return; }          // was fading out: bring it back up
+      try{ a.volume=0; }catch(e){}
+      pending=true;
+      var p=a.play();
+      if(p&&p.then) p.then(function(){ pending=false; blocked=false; if(should()) fade(VOL,700); else a.pause(); paint(); },
+                           function(){ pending=false; blocked=true; paint(); });
+      else { pending=false; fade(VOL,700); }
+    };
+    var stop=function(){ if(!au||au.paused) return; fade(0,350,function(){ if(!should()) au.pause(); else fade(VOL,300); }); };
+    var sync=function(){ if(should()) start(); else stop(); paint(); };
+    // "on screen" = the Raja Ka Baja label or its film strip is inside the middle three quarters of the window
+    var seen={};
+    var zio=new IntersectionObserver(function(es){
+      es.forEach(function(en){ seen[en.target===zone?'z':'l']=en.isIntersecting; });
+      inView=!!(seen.z||seen.l); if(inView) get(); sync();
+    },{rootMargin:'-12% 0px -12% 0px'});
+    zio.observe(zone); zio.observe(zlabel);
+    doc.addEventListener('visibilitychange',sync);
+    var unlock=function(e){ if(e.target&&e.target.closest&&e.target.closest('.snd')) return; if(blocked) sync(); };
+    ['click','keydown','touchend'].forEach(function(t){ doc.addEventListener(t,unlock,true); });
+    snd.addEventListener('click',function(){
+      var on=!!(au&&!au.paused);
+      want=!on; yielded=false; blocked=false;
+      try{ localStorage.setItem(KEY,want?'on':'off'); }catch(e){}
+      if(want){ var a=get(); clearInterval(fadeRaf); try{ a.volume=VOL; }catch(e){} var p=a.play(); if(p&&p.catch) p.catch(function(){}); }
+      else if(au){ clearInterval(fadeRaf); au.pause(); }
+      paint();
+    });
+    doc.addEventListener('pp:video',function(){ yielded=true; stop(); });
+    snd.hidden=false; paint();
   }
 })();
 
