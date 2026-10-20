@@ -17,7 +17,7 @@
     "title": "One family, one unit",
     "paras": [
       "A family of actors trained at Indian Films Academy, run by their own teacher. PICHCHRAPA is this family's studio.",
-      "What makes it special: the actors are also the writers, the directors, the editors, the DI colourists and the music-makers. At the moment no outside person is brought in for any of the work."
+      "What makes it special: the actors are also the writers, the directors, the editors, the DI colourists and the music-makers."
     ],
     "why": "This platform exists so that after learning acting, no artist has to run from door to door or beg for work. They stand on their own feet, make their own work and show it to the world.",
     "creditsTitle": "Credits",
@@ -204,7 +204,7 @@
         "cap": "A group photo from the set"
       }
     ],
-    "portraitsTitle": "Old members",
+    "portraitsTitle": "Artists who worked with us",
     "portraitsLead": "Artists of the family who worked with us earlier."
   },
   "posters": {
@@ -237,7 +237,7 @@
     ]
   },
   "artists": {
-    "title": "Present members",
+    "title": "Our team today",
     "lead": "The artists working with this family today: all seven artists of Gapistaan's comedy series Gen Gap, and founder Yogesh Chaitanya.",
     "cta": "See the profile on Gapistaan",
     "items": [
@@ -250,11 +250,11 @@
       },
       {
         "name": "Saanviya",
-        "note": "Acted in Salman Ali's big songs"
+        "note": "Acted in Salman Ali's songs"
       },
       {
         "name": "Sarita Vyas",
-        "note": "‘Filmi Adalat’"
+        "note": "Filmy Adalat"
       },
       {
         "name": "Ravi Dev Rai",
@@ -262,14 +262,14 @@
       },
       {
         "name": "Shubham Kumar Singh",
-        "note": "Film ‘Vidyapeeth’"
+        "note": "Raja in Raja Ka Baja, film ‘Vidyapeeth’"
       },
       {
         "name": "Roheet Das"
       },
       {
         "name": "Deepak Mandal",
-        "note": "‘Filmi Adalat’"
+        "note": "Mantri in Raja Ka Baja, Filmy Adalat"
       }
     ]
   },

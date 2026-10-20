@@ -698,7 +698,7 @@ function aboutPage() {
   const body = `<main id="main" class="wrap page">
 ${crumbNav(['PICHCHRAPA', '/'], [T('हमारी कहानी', 'Our story')])}
 <h1 class="page-h1">${T('हमारी कहानी', 'Our story')}</h1>
-<p class="lede">${T('PICHCHRAPA अभिनेताओं के एक परिवार का स्टूडियो है। यहाँ कलाकार सिर्फ़ पर्दे पर नहीं, कैमरे के पीछे भी वही हैं।', 'PICHCHRAPA is the studio of a family of actors. Here the artists are not only on screen; behind the camera, they are the same people.')}</p>
+<p class="lede">${T('PICHCHRAPA अभिनेताओं के एक परिवार का स्टूडियो है। यहाँ कलाकार सिर्फ़ पर्दे पर नहीं, कैमरे के पीछे भी वही हैं।', 'PICHCHRAPA is the studio of a family of actors. The same artists work in front of the camera and behind it.')}</p>
 <div class="family" style="margin-top:2rem">
   <div class="prose">
     <h2>${esc(site.family.title)}</h2>

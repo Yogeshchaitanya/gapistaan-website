@@ -73,3 +73,21 @@ export function makeStar(color = 0xffe14a) {
   m.scale.set(0.07, 0.07, 0.025);
   return m;
 }
+
+// Raja's talwar, as in the episodes: red grip, gold guard and pommel, a curved steel blade. Hangs from the hand along -y.
+// The flat of the blade lies in the y-z plane, the plane the figures are seen in, so it reads as a sword and not a stick.
+export function makeTalwar() {
+  const g = new THREE.Group();
+  put(g, ell(GOLD, 0.045, 0.045, 0.045, 0, 0.09, 0));                                  // pommel
+  const grip = mk(G.cyl, 0xc8202f); grip.scale.set(0.03, 0.15, 0.03); put(g, grip, 0, 0.0, 0);
+  const guard = mk(G.box, GOLD); guard.scale.set(0.05, 0.035, 0.2); put(g, guard, 0, -0.08, 0);
+  // one curved blade: drawn as a flat outline (u = toward the edge, v = down) and given a little thickness
+  const L = 0.74, bend = 0.16, sh = new THREE.Shape();
+  sh.moveTo(0, 0);
+  for (let i = 1; i <= 12; i++) { const t = i / 12; sh.lineTo(bend * t * t, -L * t); }               // back of the blade
+  for (let i = 12; i >= 0; i--) { const t = i / 12; sh.lineTo(bend * t * t + 0.065 * (1 - t * t * t) + (i === 12 ? 0.012 : 0), -L * t + (i === 12 ? 0.03 : 0)); }  // edge
+  const geo = new THREE.ExtrudeGeometry(sh, { depth: 0.014, bevelEnabled: false });
+  geo.translate(-0.03, 0, -0.007);
+  const blade = mk(geo, 0xe3ecee); blade.rotation.y = -Math.PI / 2; g.add(blade); blade.position.set(0, -0.1, 0);
+  return g;
+}

@@ -1,10 +1,10 @@
 // Seven short comedy scenes. Each one is built facing +x inside its own group; the engine slides the group across the lane
 // and mirrors it (scale.x = -1) for the scenes that run right to left. Local x is "along the way".
 import { THREE, ell, put, grp } from './gfx.js';
-import { makeRaja, makeMantri, setFace, look } from './chars.js';
+import { makeRaja, makeMantri, setFace, look, flutter } from './chars.js';
 import { run, sit, legIK, resetPose } from './poses.js';
 import { makeCar, makeScooter, makeRickshaw } from './vehicles.js';
-import { makeGada, makeBow, makeArrow, makeScroll, makeMoneyBag, makeJalebi, makeStar } from './props.js';
+import { makeTalwar, makeBow, makeArrow, makeScroll, makeMoneyBag, makeJalebi, makeStar } from './props.js';
 
 const TAU = Math.PI * 2;
 const YAW = Math.PI / 2 - 0.45;      // three-quarter view: facing the way they travel, turned a little toward the viewer
@@ -43,11 +43,11 @@ function sweat(ctx, S, c, st, T, every = 0.14) {
 }
 const shout = (T, k = 15) => 0.55 + 0.4 * Math.sin(T * k);
 
-// ---------------------------------------------------------------- 1. Raja swings his mace and chases the Mantri
-function gadaChase(ctx) {
+// ---------------------------------------------------------------- 1. Raja waves his talwar and chases the Mantri
+function swordChase(ctx) {
   const S = newScene(ctx, 1, 1.0, 3.2, 2.7), g = S.g;
   const R = actor(g, makeRaja(), RS, 0.2), M = actor(g, makeMantri(), MS, 2.2);
-  const gada = makeGada(); gada.scale.setScalar(1.7); R.handR.add(gada);
+  const sword = makeTalwar(); sword.scale.setScalar(1.6); R.handR.add(sword);
   blob(g, 0.8, 0.2); const bm = blob(g, 0.7, 2.2); void bm;
   const st = { r: {}, m: {} };
   S.update = (T, dt) => {
@@ -85,14 +85,14 @@ function carFlee(ctx) {
     R.armR.rotation.x += Math.max(0, Math.sin(T * 5.5)) * -0.5;    // honks
     R.head.rotation.z = Math.sin(T * 8) * 0.06;
     setFace(R, { angry: 0.2, mouth: 0.6 + 0.35 * Math.sin(T * 11), wide: 0.2 });
-    R.hat.rotation.z = -0.35 + Math.sin(T * 17) * 0.1; R.mus.rotation.z = -0.3 + Math.sin(T * 25) * 0.1;
+    R.hat.rotation.z = -0.3 + Math.sin(T * 17) * 0.08; flutter(R, 1, T);
     // the Mantri: arms up on the bumper, body streaming out behind
     resetPose(M);
     hang.rotation.z = -Math.PI / 2 + Math.sin(T * 13) * 0.22 + 0.15;
     M.armL.rotation.x = M.armR.rotation.x = Math.PI - 0.08; M.armL.rotation.z = 0.08; M.armR.rotation.z = -0.08;
     M.legL.rotation.x = Math.sin(T * 15) * 0.7; M.legR.rotation.x = -Math.sin(T * 15) * 0.7;
     M.shinL.rotation.x = 0.5 + Math.sin(T * 15 + 1) * 0.4; M.shinR.rotation.x = 0.5 - Math.sin(T * 15 + 1) * 0.4;
-    M.head.rotation.x = -0.3; M.hat.rotation.z = 0.5 + Math.sin(T * 20) * 0.15; M.feather.rotation.z = -1 + Math.sin(T * 18) * 0.3;
+    M.head.rotation.x = -0.3; M.hat.rotation.z = 0.5 + Math.sin(T * 20) * 0.15; flutter(M, 1.2, T);
     setFace(M, { wide: 1, mouth: 1 }); look(M, 0, 0.3);
     if (T - (st.t ?? -1) > 0.05) { st.t = T; ctx.fx.puff(S.wx(car.tail.x - 0.05), 0.2, 0.1, { vx: -S.dir * 0.9, vy: 0.35, s0: 0.04, s1: 0.2, life: 0.55, a: 0.38, color: 0xc9d4d4 }); }
   };
@@ -143,7 +143,7 @@ function archery(ctx) {
   const FLIGHT = 0.5, HAT_Y = 1.1;
   const st = { r: {}, m: {} };
   let hatOff = false;
-  const reset = () => { for (const a of arrows) a.visible = false; if (hatOff) { M.head.add(M.hat); M.hat.position.set(0, 0.21, 0); M.hat.rotation.set(0, 0, 0); M.hat.scale.set(1, 1, 1); hatOff = false; } };
+  const reset = () => { for (const a of arrows) a.visible = false; if (hatOff) { M.head.add(M.hat); M.hat.position.set(0, M.hatY, 0); M.hat.rotation.set(0, 0, 0); M.hat.scale.set(1, 1, 1); hatOff = false; } };
   S.enter = reset; S.exit = reset;
   S.update = (T, dt) => {
     const ph = T * FREQ * TAU;
@@ -210,11 +210,11 @@ function scooterWheelie(ctx) {
     sc.body.position.y = -0.2 + Math.sin(T * 24) * 0.01;
     sit(R, { lean: -0.05 - lift * 0.1 });
     R.armL.rotation.x = R.armR.rotation.x = -1.0; R.foreL.rotation.x = R.foreR.rotation.x = -0.6;
-    R.hat.rotation.z = -0.4 + Math.sin(T * 17) * 0.1; R.mus.rotation.z = -0.3 + Math.sin(T * 23) * 0.12;
+    R.hat.rotation.z = -0.35 + Math.sin(T * 17) * 0.08; flutter(R, 1, T);
     setFace(R, { angry: 0, mouth: 0.7 + 0.25 * Math.sin(T * 9), wide: 0.1 }); look(R, 1, 0);
     sit(M, { lean: 0.02 });
     M.armL.rotation.x = M.armR.rotation.x = -1.35; M.foreL.rotation.x = M.foreR.rotation.x = -0.9; M.armL.rotation.z = 0.25; M.armR.rotation.z = -0.25;
-    M.hat.rotation.z = -0.5 + Math.sin(T * 19) * 0.12; M.feather.rotation.z = -1.1 + Math.sin(T * 21) * 0.25;
+    M.hat.rotation.z = -0.45 + Math.sin(T * 19) * 0.1; flutter(M, 1.1, T);
     M.head.rotation.x = -0.15;
     setFace(M, { wide: 1, mouth: 1 }); look(M, 0, 0.1);
     if (T - (st.t ?? -1) > 0.05) { st.t = T; ctx.fx.puff(S.wx(-1.1), 0.22 + lift * 0.3, 0.1, { vx: -S.dir * 0.8, vy: 0.3, s0: 0.04, s1: 0.2, life: 0.5, a: 0.36, color: 0xc7d0d0 }); }
@@ -323,5 +323,5 @@ function flips(ctx) {
 }
 
 export function buildScenes(ctx) {
-  return [gadaChase(ctx), carFlee(ctx), taxChase(ctx), archery(ctx), scooterWheelie(ctx), rickshawBait(ctx), flips(ctx)];
+  return [swordChase(ctx), carFlee(ctx), taxChase(ctx), archery(ctx), scooterWheelie(ctx), rickshawBait(ctx), flips(ctx)];
 }

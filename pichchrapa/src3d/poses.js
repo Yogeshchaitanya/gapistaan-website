@@ -1,5 +1,5 @@
 // Poses are plain functions of time. Rotation signs for a figure that faces +z: a negative x-rotation swings a limb forward.
-import { resetPose, setFace, look } from './chars.js';
+import { resetPose, setFace, look, flutter } from './chars.js';
 
 const TAU = Math.PI * 2;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -27,11 +27,9 @@ export function run(c, ph, o = {}) {
     c.armL.rotation.z = -0.35; c.armR.rotation.z = 0.35;
     c.foreL.rotation.x = -0.25 + Math.sin(ph * 2) * 0.4; c.foreR.rotation.x = -0.25 + Math.sin(ph * 2 + 2) * 0.4;
   }
-  // the belly and the moustache jiggle against the bounce
-  if (c.belly) { const j = Math.cos(ph * 2 + 0.6); c.belly.scale.set(0.29, 0.25 * (1 + j * 0.06), 0.23 * (1 - j * 0.05)); }
-  if (c.hat) { c.hat.rotation.z = Math.sin(ph + 0.9) * 0.1; c.hat.position.y = (c.name === 'raja' ? 0.23 : 0.21) + Math.max(0, Math.cos(ph + 0.4)) * 0.025; }
-  if (c.feather) c.feather.rotation.z = -0.5 + Math.sin(ph * 1.3) * 0.25;
-  if (c.mus) c.mus.rotation.z = Math.sin(ph * 2) * 0.05;
+  // the crown or safa wobbles against the bounce, the stole and the safa's tail stream behind
+  if (c.hat && c.hat.parent === c.head) { c.hat.rotation.z = Math.sin(ph + 0.9) * 0.1; c.hat.position.y = c.hatY + Math.max(0, Math.cos(ph + 0.4)) * 0.025; }
+  flutter(c, 0.55 * amp, ph / 2.2);
 }
 
 export function stand(c) { resetPose(c); }
