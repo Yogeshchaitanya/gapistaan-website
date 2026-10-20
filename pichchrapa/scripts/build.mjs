@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir, rm, cp, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const out = path.join(root, 'dist');
@@ -12,7 +13,9 @@ const siteEnOver = JSON.parse(await readFile(path.join(root, 'content/site.en.js
 const data = JSON.parse(await readFile(path.join(root, 'data/videos.json'), 'utf8'));
 const gift = JSON.parse(await readFile(path.join(root, 'content/gift.json'), 'utf8'));
 const css = await readFile(path.join(root, 'src/styles.css'), 'utf8');
-const appJs = await readFile(path.join(root, 'src/app.js'), 'utf8');
+// the 3D lane module is fetched by a URL that carries its own hash, so a new bundle reaches visitors at once instead of after the /js/* cache runs out
+const laneHash = createHash('sha256').update(await readFile(path.join(root, 'public/js/stunt3d.js'))).digest('hex').slice(0, 10);
+const appJs = (await readFile(path.join(root, 'src/app.js'), 'utf8')).replace("import('/js/stunt3d.js')", `import('/js/stunt3d.js?v=${laneHash}')`);
 
 // English content is an overlay on the Hindi content: objects merge by key, arrays merge by position.
 function merge(a, b) {

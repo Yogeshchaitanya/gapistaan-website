@@ -1215,7 +1215,7 @@ html.gift-on .gift-off-note{display:none}
       var sync=function(){ if(api){ if(show&&!doc.hidden) api.play(); else api.pause(); } };
       var boot=function(){
         if(loading) return; loading=true;
-        import('/js/stunt3d.js').then(function(m){ api=m.start(lane); if(!api) lane.classList.add('off'); else sync(); },function(){ lane.classList.add('off'); });
+        import('/js/stunt3d.js?v=9629fc9112').then(function(m){ api=m.start(lane); if(!api) lane.classList.add('off'); else sync(); },function(){ lane.classList.add('off'); });
       };
       new IntersectionObserver(function(es){ show=es[0].isIntersecting; if(show) boot(); sync(); },{rootMargin:'200px 0px'}).observe(lane);
       doc.addEventListener('visibilitychange',sync);
