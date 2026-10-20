@@ -174,22 +174,20 @@
       if(!grid.querySelector('[hidden]')) btn.remove();
     });
   });
-  // 3D stunt lane above the first film strip: load the module only when the lane is near the screen, run it only while visible
-  var lane=doc.querySelector('.stunt3d');
-  if(lane){
+  // 3D stunt lane above the first film strip: the module starts loading as soon as the page opens (the page head
+  // preloads it too), and it runs while the lane is on screen. Kept in its own function so names like `sync` used by
+  // the other parts of this file can never replace the lane's own (that silently stopped the lane once before).
+  (function(){
+    var lane=doc.querySelector('.stunt3d');
+    if(!lane) return;
     var sd=navigator.connection&&navigator.connection.saveData;
-    if(calm||sd||!('IntersectionObserver' in window)){ lane.classList.add('off'); }
-    else {
-      var show=false, api=null, loading=false;
-      var sync=function(){ if(api){ if(show&&!doc.hidden) api.play(); else api.pause(); } };
-      var boot=function(){
-        if(loading) return; loading=true;
-        import('/js/stunt3d.js').then(function(m){ api=m.start(lane); if(!api) lane.classList.add('off'); else sync(); },function(){ lane.classList.add('off'); });
-      };
-      new IntersectionObserver(function(es){ show=es[0].isIntersecting; if(show) boot(); sync(); },{rootMargin:'200px 0px'}).observe(lane);
-      doc.addEventListener('visibilitychange',sync);
-    }
-  }
+    if(calm||sd||!('IntersectionObserver' in window)){ lane.classList.add('off'); return; }
+    var show=false, api=null;
+    var laneSync=function(){ if(api){ if(show&&!doc.hidden) api.play(); else api.pause(); } };
+    import('/js/stunt3d.js').then(function(m){ api=m.start(lane); if(!api) lane.classList.add('off'); else laneSync(); },function(){ lane.classList.add('off'); });
+    new IntersectionObserver(function(es){ show=es[es.length-1].isIntersecting; laneSync(); },{rootMargin:'200px 0px'}).observe(lane);
+    doc.addEventListener('visibilitychange',laneSync);
+  })();
 
   // Raja Ka Baja title song: plays while the Raja Ka Baja reel is on screen and fades out when it scrolls away.
   // Browsers allow sound only after the visitor has touched the page, so until then the speaker glows and the first

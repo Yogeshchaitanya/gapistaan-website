@@ -250,7 +250,7 @@ const contactButtons = () => `<a class="btn btn-gold" href="mailto:${esc(B.email
 const INTERNAL = /href="(\/(?:filmy-adalat|raja-ka-baja|about|contact|privacy|support|terms|refund-policy|shipping-policy|pricing|video)\/[^"]*|\/(?:#[^"]*)?)"/g;
 const localize = (html) => (LANG === 'en' ? html.replace(INTERNAL, (m, p) => `href="/en${p}"`) : html);
 
-function layout({ title, description, pathName, image, type = 'website', ld = [], body, preload = [], noindex = false, bilingual = false }) {
+function layout({ title, description, pathName, image, type = 'website', ld = [], body, preload = [], lane = false, noindex = false, bilingual = false }) {
   const url = noindex ? '' : A(pathName);
   image = image || abs('/img/og-home.jpg');
   const nav = [
@@ -284,6 +284,7 @@ ${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" cont
 <link rel="preload" href="/fonts/hind-devanagari-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/teko-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 ${preload.map((u) => `<link rel="preload" as="image" href="${esc(u)}">`).join('\n')}
+${lane ? `<link rel="modulepreload" href="/js/stunt3d.js?v=${laneHash}">` : ''}
 <meta property="og:site_name" content="PICHCHRAPA">
 <meta property="og:locale" content="${T('hi_IN', 'en_IN')}">
 ${noindex ? '' : `<meta property="og:locale:alternate" content="${T('en_IN', 'hi_IN')}">`}
@@ -583,6 +584,7 @@ ${GIFT_ON ? `<section class="sec gift-sec" aria-label="${esc(G().short)}">
     description: T('PICHCHRAPA लखनऊ का फ़िल्म और वेब-सीरीज़ प्रोडक्शन है, जिसे अभिनेताओं का परिवार चलाता है। फ़िल्मी अदालत, राजा का बाजा और शॉर्ट्स यहाँ देखिए।', 'PICHCHRAPA is a film and web-series production house in Lucknow, run by a family of actors. Watch Filmy Adalat, Raja Ka Baja and Shorts here.'),
     pathName: '/',
     preload: ['/media/intro-poster-2.jpg'],
+    lane: true,
     ld: [orgLd(), { '@context': 'https://schema.org', '@type': 'WebSite', name: 'PICHCHRAPA', url: A('/'), inLanguage: T('hi', 'en'), publisher: { '@id': abs('/#org') } }],
     body,
   });

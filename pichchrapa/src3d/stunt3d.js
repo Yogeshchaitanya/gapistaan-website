@@ -6,6 +6,8 @@ import { makeFx } from './fx.js';
 import { buildScenes } from './scenes.js';
 
 const HU = 1.9; // visible height of the lane in world units
+const PACE = 1.6; // the whole show runs this much faster than the scene timings in scenes.js
+const ENTRY = 0.22; // on first play, scene 1 starts with its leading character already this far into the lane
 
 export function start(host) {
   const canvas = document.createElement('canvas');
@@ -38,7 +40,7 @@ export function start(host) {
     cam.position.set(W / 2, cy + 10 * Math.sin(pit), 10 * Math.cos(pit)); cam.lookAt(W / 2, cy, 0);
   }
 
-  let idx = 0, T = 0, gap = 0.4, cur = null;
+  let idx = 0, T = 0, gap = 0, cur = null, fresh = true;
   function place(p) {
     const S = cur, x0 = S.dir > 0 ? -S.front : W + S.front, x1 = S.dir > 0 ? W + S.rear : -S.rear;
     S.g.position.x = x0 + (x1 - x0) * p; S.g.scale.x = S.dir;
@@ -64,23 +66,27 @@ export function start(host) {
     raf = 0;
     if (!wantRun) return;
     const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now;
-    step(dt);
+    step(dt * PACE);
     renderer.render(scene, cam);
     raf = requestAnimationFrame(frame);
   }
-  function play() { wantRun = true; if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  function play() {
+    wantRun = true;
+    if (fresh) { fresh = false; resize(); if (W) { const s = scenes[0]; jump(0, (ENTRY * W) / (W + s.rear + s.front)); renderer.render(scene, cam); } }
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+  }
   function pause() { wantRun = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } }
 
-  // jump straight to scene i at progress p (used for testing and screenshots)
-  function seek(i, p) {
-    pause(); resize();
+  // put scene i at progress p, playing its updates up to that point so props and effects are where they should be
+  function jump(i, p) {
     for (const s of scenes) { s.g.visible = false; if (s.exit) s.exit(); }
     fx.clear(); cur = null; idx = i; begin(i);
     const total = p * cur.dur;
     for (let t = 0; t < total; t += 1 / 30) { T = t; fx.update(1 / 30); place(Math.min(0.999, t / cur.dur)); cur.update(t, 1 / 30); }
     T = total; place(p); cur.update(total, 1 / 30);
-    renderer.render(scene, cam);
   }
+  // jump straight to scene i at progress p and draw it (used for testing and screenshots)
+  function seek(i, p) { pause(); resize(); fresh = false; jump(i, p); renderer.render(scene, cam); }
 
   resize();
   const ro = 'ResizeObserver' in window ? new ResizeObserver(resize) : null;
