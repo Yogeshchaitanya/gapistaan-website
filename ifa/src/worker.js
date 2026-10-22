@@ -13,7 +13,7 @@
 //   RZP_KEY_ID, RZP_KEY_SECRET, RZP_WEBHOOK_SECRET   Razorpay live keys and webhook secret
 //   ADMIN_KEY                                        any long password, for /api/admin
 //   NOTIFY_TO                                        email(s) that get every registration, comma separated
-//   SMTP_USER, SMTP_PASS (SMTP_HOST optional)        a mailbox to send from, e.g. info@ on Hostinger
+//   SMTP_USER, SMTP_PASS (SMTP_HOST optional)        a mailbox to send from, e.g. hello@ on Hostinger
 //   WA_PHONE, WA_APIKEY                              WhatsApp alert to the owner via CallMeBot
 //   WA_CLOUD_TOKEN, WA_CLOUD_PHONE_ID                WhatsApp "payment received" message to the payer
 //                                                    (Meta WhatsApp Cloud API, official number)

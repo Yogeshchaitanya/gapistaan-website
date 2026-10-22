@@ -21,7 +21,7 @@
   Object (`Registry`), so they never repeat.
 - Support box on the classes pages uses the same flow with `kind: "support"` (any amount from ₹10).
 - Notifications on every payment: WhatsApp to the owner (CallMeBot), email to the owner and a confirmation
-  email to the student (SMTP from the info@ mailbox on Hostinger), optional Telegram.
+  email to the student (SMTP from the hello@ mailbox on Hostinger), optional Telegram.
 - Registrations list: `https://indianfilmsacademy.com/api/admin?key=ADMIN_KEY` (add `&csv=1` for Excel).
   Test all notifications: `/api/admin/test?key=ADMIN_KEY&to=you@example.com`.
 - Until the Razorpay secrets are set, `/api/order` returns 503 and the form falls back to WhatsApp.
