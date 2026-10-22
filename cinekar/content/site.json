@@ -1,0 +1,79 @@
+{
+  "siteName": "Cinekar | Yogesh Chaitanya",
+  "shortName": "Cinekar",
+  "siteUrl": "https://cinekar.com",
+  "canonicalHost": "cinekar.com",
+  "channelId": "UC1Qw1z1HeMHZvvqi5f7mlcw",
+  "channelUrl": "https://www.youtube.com/@cinekarvlogs",
+  "subscribeUrl": "https://www.youtube.com/@cinekarvlogs?sub_confirmation=1",
+  "instagramUrl": "https://www.instagram.com/cinekarvlogs/",
+  "facebookUrl": "https://www.facebook.com/Cinekarvlogs/",
+  "imdbUrl": "https://www.imdb.com/name/nm8753440/",
+  "email": "yogeshcineact@gmail.com",
+  "cfAnalyticsToken": "",
+
+  "homeTitle": "Cinekar Vlogs | Yogesh Chaitanya — Film Director, Acting Guru, Lucknow",
+  "homeDescription": "Yogesh Chaitanya के daily vlogs: Lucknow की Indian Films Academy के अंदर की ज़िंदगी, शूटिंग, Raja Ka Baja के कलाकार और फिल्मी दुनिया का असली सच — हर video यहाँ।",
+
+  "hero": {
+    "eyebrow": "Cinekar Vlogs",
+    "line1": "कैमरा चलता रहता है,",
+    "line2": "जो होता है वही दिखता है।",
+    "lead": "मैं Yogesh Chaitanya — Film Director, Acting Guru और Indian Films Academy (Lucknow) का founder। ये मेरी रोज़ की ज़िंदगी का vlog है: acting school के बच्चे, शूटिंग, सज़ा-मस्ती और फिल्मी दुनिया का सच — बिना script, बिना फ़िल्टर।"
+  },
+
+  "about": {
+    "title": "Yogesh Chaitanya",
+    "sub": "Film Director · Acting Guru · Editor & DI Colorist · Founder, Indian Films Academy",
+    "paras": [
+      "सीतापुर (उत्तर प्रदेश) में जन्म, लखनऊ में काम। भारतेंदु नाट्य अकादमी और राष्ट्रीय नाट्य विद्यालय के रंगमंच वातावरण में तैयार हुए, रंगकर्मी सूर्य मोहन कुलश्रेष्ठ से प्रशिक्षण लिया।",
+      "‘दबंग सरकार’ और ‘विद्यापीठ’ जैसी फ़िल्मों का निर्देशन किया और 15 से अधिक फ़ीचर फ़िल्मों में पोस्ट-प्रोडक्शन प्रमुख, एडिटर और DI colorist रहे।",
+      "2019 में Indian Films Academy की स्थापना की, जहाँ अब तक 100 से अधिक छात्र कैमरा-अभिनय सीखकर मनोरंजन जगत में काम कर रहे हैं। अभिनय सिखाने की उनकी अपनी पद्धति है — Yogesh CineAct।",
+      "प्रोडक्शन हाउस PICHCHRAPA के ज़रिए स्ट्रीट-कॉमेडी ‘Raja Ka Baja’ और कॉमेडी सीरीज़ ‘Gen Gap’ (Gapistaan) बनाते हैं। Cinekar Vlogs इस पूरी दुनिया के पीछे का कैमरा है।"
+    ],
+    "facts": [
+      ["15+ साल", "अभिनय सिखाते हुए"],
+      ["100+", "प्रशिक्षित कलाकार"],
+      ["15+ फ़िल्में", "पोस्ट-प्रोडक्शन प्रमुख"],
+      ["2 फ़िल्में", "निर्देशन"]
+    ]
+  },
+
+  "brands": [
+    {
+      "name": "Indian Films Academy",
+      "tag": "Acting School · Lucknow · 2019 से",
+      "text": "कैमरा-अभिनय, फ़िल्म निर्देशन और एडिटिंग का प्रशिक्षण केंद्र — गुरुकुल जैसा hostel, असली शूट पर काम।",
+      "url": "https://indianfilmsacademy.com",
+      "img": "/img/brand-ifa.webp"
+    },
+    {
+      "name": "PICHCHRAPA",
+      "tag": "Production House · Raja Ka Baja",
+      "text": "कलाकारों का अपना स्टूडियो। सड़क पर राजा और मंत्री की स्ट्रीट-कॉमेडी ‘Raja Ka Baja’ यहीं से।",
+      "url": "https://pichchrapa.com",
+      "img": "/img/brand-pichchrapa.webp"
+    },
+    {
+      "name": "Gapistaan",
+      "tag": "Comedy Series · Gen Gap",
+      "text": "पुरानी पीढ़ी के चाचा बनाम Gen Z — एक acting institute के hostel में रोज़ की जंग।",
+      "url": "https://gapistaan.com",
+      "img": "/img/brand-gapistaan.webp"
+    },
+    {
+      "name": "Yogesh CineAct",
+      "tag": "Acting Method",
+      "text": "कैमरे के सामने अभिनय सीखने की Yogesh Chaitanya की अपनी पद्धति, जिससे academy के सारे कलाकार तैयार होते हैं।",
+      "url": "https://indianfilmsacademy.com/yogesh-cineact/",
+      "img": ""
+    }
+  ],
+
+  "channels": [
+    ["Cinekar Vlogs", "https://www.youtube.com/@cinekarvlogs"],
+    ["PICHCHRAPA (Raja Ka Baja)", "https://www.youtube.com/@pichchrapa"],
+    ["Gapistaan", "https://www.youtube.com/@gapistaan"],
+    ["Indian Films Academy", "https://www.youtube.com/@indianfilmsacademyy"]
+  ]
+}

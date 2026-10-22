@@ -1,0 +1,17 @@
+{
+  // Cinekar (cinekar.com): site served from cinekar/dist. src/worker.js runs for the pages listed below
+  // (sends www or any other host to https://cinekar.com and adds the security headers).
+  // Cloudflare: Workers & Pages > Create > Import a repository > Yogeshchaitanya/gapistaan-website,
+  // Root directory: cinekar, Build command: node scripts/build.mjs, Deploy command: npx wrangler deploy
+  "name": "cinekar-website",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": ["/", "/video/*", "/vlogs/*", "/shorts/*", "/about/*", "/contact/*", "/privacy/*"]
+  },
+  "observability": { "enabled": true }
+}
