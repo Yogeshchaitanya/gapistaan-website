@@ -23,6 +23,7 @@ const SECURITY = {
   'Strict-Transport-Security': 'max-age=31536000',
 };
 import { connect } from 'cloudflare:sockets';
+import { EmailMessage } from 'cloudflare:email';
 const BRAND = 'PICHCHRAPA';
 const GIFT = { min: 20, max: 50000 }; // rupees; keep in step with content/gift.json
 
@@ -46,6 +47,32 @@ function same(a, b) {
 
 const b64 = (s) => { const bytes = enc.encode(s); let bin = ''; for (const x of bytes) bin += String.fromCharCode(x); return btoa(bin); };
 const rupees = (paise) => '₹' + (Number(paise) / 100).toLocaleString('en-IN');
+// Owner alert through Cloudflare Email Routing (binding MAILER, no password needed).
+// MAIL_FROM must be an address on a domain with Email Routing on; NOTIFY_TO must be a verified destination.
+function rawMail(from, to, subject, text) {
+  const body = b64(text).replace(/.{1,76}/g, '$&\r\n');
+  return [
+    `From: =?UTF-8?B?${b64(BRAND)}?= <${from}>`,
+    `To: ${to}`,
+    `Subject: =?UTF-8?B?${b64(subject)}?=`,
+    `Date: ${new Date().toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@${from.split('@')[1]}>`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    body,
+  ].join('\r\n');
+}
+async function ownerMail(env, subject, text) {
+  const to = String(env.NOTIFY_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (env.MAILER && env.MAIL_FROM && to.length) {
+    for (const t of to) await env.MAILER.send(new EmailMessage(env.MAIL_FROM, t, rawMail(env.MAIL_FROM, t, subject, text)));
+    return 'sent';
+  }
+  return smtpSend(env, to, subject, text);
+}
+
 async function smtpSend(env, to, subject, text) {
   if (!env.SMTP_USER || !env.SMTP_PASS || !to.length) return 'skipped';
   const sock = connect({ hostname: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465) }, { secureTransport: env.SMTP_PLAIN === '1' ? 'off' : 'on' });
@@ -107,7 +134,7 @@ async function notify(env, pay) {
     `पेमेंट आईडी: ${pay.id}`, `समय: ${when}`].filter(Boolean).join('\n');
   const to = String(env.NOTIFY_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
   const out = [];
-  try { out.push('owner: ' + await smtpSend(env, to, `${BRAND}: नया पेमेंट ${rupees(pay.amount)} ${n.from || ''}`.trim(), owner)); } catch (e) { out.push('owner: ' + e.message); }
+  try { out.push('owner: ' + await ownerMail(env, `${BRAND}: नया पेमेंट ${rupees(pay.amount)} ${n.from || ''}`.trim(), owner)); } catch (e) { out.push('owner: ' + e.message); }
   if (email) {
     const text = `नमस्ते ${n.from || ''},\n\n${BRAND} को आपका ${rupees(pay.amount)} का सहयोग मिल गया है। आपकी तालियाँ सीधे कलाकारों तक पहुँचेंगी। दिल से धन्यवाद!\n\nपेमेंट आईडी: ${pay.id}\nसमय: ${when}\n\n${BRAND}\nhttps://${CANONICAL}`;
     try { out.push('payer: ' + await smtpSend(env, [email], `आपका सहयोग मिल गया: ${rupees(pay.amount)} | ${BRAND}`, text)); } catch (e) { out.push('payer: ' + e.message); }

@@ -16,5 +16,8 @@
     "bindings": [{ "name": "REGISTRY", "class_name": "Registry" }]
   },
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Registry"] }],
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Owner alerts by email through Cloudflare Email Routing (no mailbox password).
+  "send_email": [{ "name": "MAILER", "destination_address": "yogeshcineact@gmail.com" }],
+  "vars": { "MAIL_FROM": "admissions@indianfilmsacademy.com", "NOTIFY_TO": "yogeshcineact@gmail.com" }
 }

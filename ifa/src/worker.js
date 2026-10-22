@@ -24,6 +24,8 @@
 // RZP_API, SMTP_PORT, SMTP_PLAIN and WA_API exist only for local testing against mock servers.
 import { DurableObject } from 'cloudflare:workers';
 import { connect } from 'cloudflare:sockets';
+import { EmailMessage } from 'cloudflare:email';
+const BRAND = 'Indian Films Academy';
 
 const CANONICAL = 'indianfilmsacademy.com';
 const SECURITY = {
@@ -108,6 +110,32 @@ export class Registry extends DurableObject {
 const registry = (env) => env.REGISTRY.get(env.REGISTRY.idFromName('ifa'));
 
 // ---------- notifications ----------
+// Owner alert through Cloudflare Email Routing (binding MAILER, no password needed).
+// MAIL_FROM must be an address on a domain with Email Routing on; NOTIFY_TO must be a verified destination.
+function rawMail(from, to, subject, text) {
+  const body = b64(text).replace(/.{1,76}/g, '$&\r\n');
+  return [
+    `From: =?UTF-8?B?${b64(BRAND)}?= <${from}>`,
+    `To: ${to}`,
+    `Subject: =?UTF-8?B?${b64(subject)}?=`,
+    `Date: ${new Date().toUTCString()}`,
+    `Message-ID: <${crypto.randomUUID()}@${from.split('@')[1]}>`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    body,
+  ].join('\r\n');
+}
+async function ownerMail(env, subject, text) {
+  const to = String(env.NOTIFY_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
+  if (env.MAILER && env.MAIL_FROM && to.length) {
+    for (const t of to) await env.MAILER.send(new EmailMessage(env.MAIL_FROM, t, rawMail(env.MAIL_FROM, t, subject, text)));
+    return 'sent';
+  }
+  return smtpSend(env, to, subject, text);
+}
+
 async function smtpSend(env, to, subject, text) {
   if (!env.SMTP_USER || !env.SMTP_PASS || !to.length) return 'skipped';
   const sock = connect({ hostname: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465) }, { secureTransport: env.SMTP_PLAIN === '1' ? 'off' : 'on' });
@@ -140,7 +168,7 @@ async function smtpSend(env, to, subject, text) {
     await cmd('DATA', [354]);
     const body = b64(text).replace(/.{1,76}/g, '$&\r\n');
     const msg = [
-      `From: =?UTF-8?B?${b64('Indian Films Academy')}?= <${env.SMTP_USER}>`,
+      `From: =?UTF-8?B?${b64(BRAND)}?= <${env.SMTP_USER}>`,
       `To: ${to.join(', ')}`,
       `Subject: =?UTF-8?B?${b64(subject)}?=`,
       `Date: ${new Date().toUTCString()}`,
@@ -210,7 +238,7 @@ async function announce(env, e, pay = {}) {
   const owner = e.kind === 'registration'
     ? `नया रजिस्ट्रेशन ${e.reg}\nनाम: ${d.name}\nफ़ोन: ${d.phone}\nईमेल: ${d.email || '-'}\nकोर्स: ${course}\nउम्र: ${d.age || '-'} · शहर: ${d.city || '-'}\nसंदेश: ${d.note || '-'}\nराशि: ${rupees(e.amount)} · ${e.payment_id}\n${when}`
     : `नया सहयोग ${rupees(e.amount)}\n${d.name || ''} ${d.phone || ''} ${d.email || ''}\n${e.payment_id} · ${when}`;
-  const jobs = [settle('whatsapp', whatsapp(env, owner)), settle('telegram', telegram(env, owner)), settle('owner-email', smtpSend(env, ownerList(env), e.kind === 'registration' ? `नया रजिस्ट्रेशन ${e.reg}: ${d.name}` : `नया सहयोग ${rupees(e.amount)}`, owner))];
+  const jobs = [settle('whatsapp', whatsapp(env, owner)), settle('telegram', telegram(env, owner)), settle('owner-email', ownerMail(env, e.kind === 'registration' ? `नया रजिस्ट्रेशन ${e.reg}: ${d.name}` : `नया सहयोग ${rupees(e.amount)}`, owner))];
   if (e.kind === 'registration' && d.email) {
     const hi = d.lang !== 'en';
     const text = hi

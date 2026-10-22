@@ -11,5 +11,8 @@
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash",
     "run_worker_first": ["/", "/en", "/en/*", "/video/*", "/filmy-adalat/*", "/raja-ka-baja/*", "/about/*", "/contact/*", "/privacy/*", "/support/*", "/terms/*", "/refund-policy/*", "/shipping-policy/*", "/pricing/*", "/api/*"]
-  }
+  },
+  // Owner alerts by email through Cloudflare Email Routing (no mailbox password).
+  "send_email": [{ "name": "MAILER", "destination_address": "yogeshcineact@gmail.com" }],
+  "vars": { "MAIL_FROM": "contact@pichchrapa.com", "NOTIFY_TO": "yogeshcineact@gmail.com" }
 }
