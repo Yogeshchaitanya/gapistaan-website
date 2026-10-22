@@ -11,17 +11,14 @@
   "imdbUrl": "https://www.imdb.com/name/nm8753440/",
   "email": "yogeshcineact@gmail.com",
   "cfAnalyticsToken": "",
-
   "homeTitle": "Cinekar Vlogs | Yogesh Chaitanya — Film Director, Acting Guru, Lucknow",
   "homeDescription": "Yogesh Chaitanya के daily vlogs: Lucknow की Indian Films Academy के अंदर की ज़िंदगी, शूटिंग, Raja Ka Baja के कलाकार और फिल्मी दुनिया का असली सच — हर video यहाँ।",
-
   "hero": {
     "eyebrow": "Cinekar Vlogs",
     "line1": "कैमरा चलता रहता है,",
     "line2": "जो होता है वही दिखता है।",
     "lead": "मैं Yogesh Chaitanya — Film Director, Acting Guru और Indian Films Academy (Lucknow) का founder। ये मेरी रोज़ की ज़िंदगी का vlog है: acting school के बच्चे, शूटिंग, सज़ा-मस्ती और फिल्मी दुनिया का सच — बिना script, बिना फ़िल्टर।"
   },
-
   "about": {
     "title": "Yogesh Chaitanya",
     "sub": "Film Director · Acting Guru · Editor & DI Colorist · Founder, Indian Films Academy",
@@ -32,13 +29,24 @@
       "प्रोडक्शन हाउस PICHCHRAPA के ज़रिए स्ट्रीट-कॉमेडी ‘Raja Ka Baja’ और कॉमेडी सीरीज़ ‘Gen Gap’ (Gapistaan) बनाते हैं। Cinekar Vlogs इस पूरी दुनिया के पीछे का कैमरा है।"
     ],
     "facts": [
-      ["15+ साल", "अभिनय सिखाते हुए"],
-      ["100+", "प्रशिक्षित कलाकार"],
-      ["15+ फ़िल्में", "पोस्ट-प्रोडक्शन प्रमुख"],
-      ["2 फ़िल्में", "निर्देशन"]
+      [
+        "15+ साल",
+        "अभिनय सिखाते हुए"
+      ],
+      [
+        "100+",
+        "प्रशिक्षित कलाकार"
+      ],
+      [
+        "15+ फ़िल्में",
+        "पोस्ट-प्रोडक्शन प्रमुख"
+      ],
+      [
+        "2 फ़िल्में",
+        "निर्देशन"
+      ]
     ]
   },
-
   "brands": [
     {
       "name": "Indian Films Academy",
@@ -66,14 +74,25 @@
       "tag": "Acting Method",
       "text": "कैमरे के सामने अभिनय सीखने की Yogesh Chaitanya की अपनी पद्धति, जिससे academy के सारे कलाकार तैयार होते हैं।",
       "url": "https://indianfilmsacademy.com/yogesh-cineact/",
-      "img": ""
+      "img": "/img/brand-cineact.webp"
     }
   ],
-
   "channels": [
-    ["Cinekar Vlogs", "https://www.youtube.com/@cinekarvlogs"],
-    ["PICHCHRAPA (Raja Ka Baja)", "https://www.youtube.com/@pichchrapa"],
-    ["Gapistaan", "https://www.youtube.com/@gapistaan"],
-    ["Indian Films Academy", "https://www.youtube.com/@indianfilmsacademyy"]
+    [
+      "Cinekar Vlogs",
+      "https://www.youtube.com/@cinekarvlogs"
+    ],
+    [
+      "PICHCHRAPA (Raja Ka Baja)",
+      "https://www.youtube.com/@pichchrapa"
+    ],
+    [
+      "Gapistaan",
+      "https://www.youtube.com/@gapistaan"
+    ],
+    [
+      "Indian Films Academy",
+      "https://www.youtube.com/@indianfilmsacademyy"
+    ]
   ]
 }

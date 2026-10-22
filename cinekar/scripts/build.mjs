@@ -112,7 +112,7 @@ function page({ title, description, pathName, body, jsonld = [], image, type = '
 <meta property="og:locale" content="hi_IN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0d0b0b">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/icon-180.png">
 <link rel="alternate" type="application/rss+xml" title="Cinekar Vlogs" href="/feed.xml">
 <link rel="preload" href="/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -126,7 +126,7 @@ ${ld}
 <header class="top">
   <div class="wrap top-in">
     <a class="brand" href="/" aria-label="Cinekar होम">
-      <span class="brand-mark">C</span>
+      <img class="brand-mark" src="/img/logo-96.webp" alt="" width="40" height="40">
       <span class="brand-text">CINEKAR<small>Yogesh Chaitanya</small></span>
     </a>
     <nav class="nav" aria-label="मुख्य">
@@ -141,7 +141,7 @@ ${body}
 <footer class="foot">
   <div class="wrap foot-grid">
     <div>
-      <p class="foot-brand">CINEKAR</p>
+      <img src="/img/logo-96.webp" alt="Cinekar Vlogs" width="72" height="72" loading="lazy" style="margin-bottom:10px"><p class="foot-brand">CINEKAR</p>
       <p class="muted">Yogesh Chaitanya — Film Director, Acting Guru, Founder of Indian Films Academy, Lucknow. रोज़ की ज़िंदगी, बिना फ़िल्टर।</p>
       <p class="muted small">© ${new Date().getFullYear()} Yogesh Chaitanya · PICHCHRAPA, Lucknow</p>
     </div>
