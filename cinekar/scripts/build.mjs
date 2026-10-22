@@ -127,7 +127,7 @@ ${ld}
   <div class="wrap top-in">
     <a class="brand" href="/" aria-label="Cinekar होम">
       <img class="brand-mark" src="/img/logo-96.webp" alt="" width="40" height="40">
-      <span class="brand-text">CINEKAR<small>Yogesh Chaitanya</small></span>
+      <span class="brand-text">CINEKAR<small>by Yogesh Chaitanya</small></span>
     </a>
     <nav class="nav" aria-label="मुख्य">
       ${NAV.map(([p, l]) => `<a href="${p}"${p === pathName || (p !== '/' && pathName.startsWith(p)) ? ' aria-current="page"' : ''}>${l}</a>`).join('')}
@@ -209,7 +209,7 @@ const orgLd = {
   name: 'Yogesh Chaitanya',
   alternateName: ['Yogesh Mishrra', 'Yogesh Raj Mishra'],
   url: site.siteUrl,
-  image: abs('/img/yogesh-640.webp'),
+  image: abs('/img/yogesh-cut.webp'),
   jobTitle: 'Film Director, Acting Coach',
   worksFor: { '@type': 'Organization', name: 'Indian Films Academy', url: 'https://indianfilmsacademy.com' },
   address: { '@type': 'PostalAddress', addressLocality: 'Lucknow', addressRegion: 'Uttar Pradesh', addressCountry: 'IN' },
@@ -217,31 +217,65 @@ const orgLd = {
 };
 const siteLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Cinekar', url: site.siteUrl, inLanguage: 'hi' };
 
+function ventureCards() {
+  return `<div class="ventures">${site.brands.map((b) => `<a class="venture" href="${attr(b.url)}" target="_blank" rel="noopener">
+    <img class="venture-bg" src="${attr(b.bg)}" alt="" loading="lazy" decoding="async">
+    <span class="venture-shade"></span>
+    <span class="venture-in">
+      ${b.img ? `<img class="venture-logo" src="${attr(b.img)}" alt="" width="64" height="64" loading="lazy">` : ''}
+      <small>${esc(b.tag)}</small>
+      <b>${esc(b.name)}</b>
+      <span class="venture-txt">${esc(b.text)}</span>
+      <span class="venture-go">देखें →</span>
+    </span>
+  </a>`).join('')}</div>`;
+}
+const marquee = () => `<div class="marquee" aria-hidden="true"><div class="marquee-track">${[...site.credits, ...site.credits].map((c) => `<span>${esc(c)}</span><i>✦</i>`).join('')}</div></div>`;
+const statsRow = () => `<div class="stats">${site.stats.map(([n, l]) => `<div class="stat"><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div>`;
+
 function homePage() {
   const latest = vlogs[0];
   const h = site.hero;
   const body = `
 <section class="hero">
+  <img class="hero-bg" src="/img/hero-bg.webp" alt="" fetchpriority="high">
+  <div class="hero-grain"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">${esc(h.eyebrow)}</p>
-      <h1><span>${esc(h.line1)}</span><span class="accent">${esc(h.line2)}</span></h1>
-      <p class="lead">${esc(h.lead)}</p>
+      <p class="kicker"><span class="dot"></span> Film Director · Acting Guru · Lucknow</p>
+      <h1 class="hero-name">YOGESH<br><span>CHAITANYA</span></h1>
+      <p class="hero-tag">${esc(h.line1)} <em>${esc(h.line2)}</em></p>
+      <p class="hero-lead">Acting school के अंदर की असली ज़िंदगी, शूटिंग का सच और Raja Ka Baja के कलाकार — रोज़ एक नया vlog।</p>
       <div class="cta-row">
-        <a class="btn btn-yt" href="${attr(site.subscribeUrl)}" target="_blank" rel="noopener">▶ YouTube पर Subscribe</a>
-        <a class="btn btn-ghost" href="/vlogs/">सारे vlogs</a>
+        <a class="btn btn-yt btn-lg" href="${attr(site.subscribeUrl)}" target="_blank" rel="noopener">▶ YouTube पर Subscribe</a>
+        <a class="btn btn-line btn-lg" href="${latest ? videoPath(latest) : '/vlogs/'}">आज का vlog देखें</a>
       </div>
-      <p class="hero-stats"><b>${vlogs.length}</b> vlogs · <b>${shorts.length}</b> shorts · रोज़ नया</p>
     </div>
-    <div class="hero-media">
-      ${latest ? `<p class="now">ताज़ा vlog · ${dateHi(latest.publishedAt)}</p>${player(latest, { eager: true })}<h2 class="now-title"><a href="${videoPath(latest)}">${esc(latest.title)}</a></h2>` : ''}
+    <div class="hero-art">
+      <div class="hero-ring"></div>
+      <img class="hero-cut" src="/img/yogesh-cut.webp" alt="Yogesh Chaitanya" width="512" height="608" fetchpriority="high">
+      <img class="hero-badge" src="/img/logo-200.webp" alt="Cinekar Vlogs" width="150" height="150">
     </div>
   </div>
+  <div class="wrap">${statsRow()}</div>
 </section>
+${marquee()}
+
+${latest ? `<section class="sec feature">
+  <div class="wrap feature-grid">
+    <div>${player(latest)}</div>
+    <div class="feature-copy">
+      <p class="eyebrow">ताज़ा vlog · ${dateHi(latest.publishedAt)}</p>
+      <h2 class="feature-title"><a href="${videoPath(latest)}">${esc(latest.title)}</a></h2>
+      <p class="muted">${esc(shortDescription(latest, 220))}</p>
+      <div class="cta-row"><a class="btn btn-yt" href="${attr(ytWatch(latest))}" target="_blank" rel="noopener">YouTube पर देखें</a><a class="btn btn-line" href="${videoPath(latest)}">पूरा विवरण</a></div>
+    </div>
+  </div>
+</section>` : ''}
 
 <section class="sec">
   <div class="wrap">
-    ${sectionHead('Daily Vlogs', 'ताज़ा vlogs', ['/vlogs/', 'सारे vlogs'])}
+    ${sectionHead('Daily Vlogs', 'हर दिन, एक नई कहानी', ['/vlogs/', `सारे ${vlogs.length} vlogs`])}
     <div class="grid">${vlogs.slice(1, 9).map((v) => card(v)).join('')}</div>
   </div>
 </section>
@@ -253,16 +287,20 @@ ${shorts.length ? `<section class="sec sec-dark">
   </div>
 </section>` : ''}
 
-<section class="sec about-teaser" id="about">
-  <div class="wrap about-grid">
-    <img class="portrait" src="/img/yogesh-640.webp" alt="Yogesh Chaitanya" width="512" height="608" loading="lazy" decoding="async">
+<section class="sec about-band">
+  <div class="wrap about-split">
+    <figure class="frame"><img src="/img/edit-suite.webp" alt="Yogesh Chaitanya edit suite में" loading="lazy" decoding="async"><figcaption>Edit suite — जहाँ हर vlog कटता है</figcaption></figure>
     <div>
-      <p class="eyebrow">कैमरे के पीछे</p>
-      <h2>${esc(site.about.title)}</h2>
-      <p class="sub">${esc(site.about.sub)}</p>
-      <p>${esc(site.about.paras[0])} ${esc(site.about.paras[1])}</p>
-      <div class="facts">${site.about.facts.map(([n, l]) => `<div class="fact"><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div>
-      <a class="btn btn-ghost" href="/about/">पूरी कहानी →</a>
+      <p class="eyebrow">कैमरे के पीछे का आदमी</p>
+      <h2 class="big-h">20 साल से सिनेमा।<br><span>अब रोज़ आपके साथ।</span></h2>
+      <p class="muted">${esc(site.about.paras[1])} ${esc(site.about.paras[2])}</p>
+      <ul class="creds">
+        <li><b>निर्देशन</b><span>दबंग सरकार · विद्यापीठ</span></li>
+        <li><b>पोस्ट-प्रोडक्शन</b><span>15+ फ़ीचर फ़िल्में · Editor · DI Colorist</span></li>
+        <li><b>Founder</b><span>Indian Films Academy, Lucknow (2019)</span></li>
+        <li><b>पद्धति</b><span>Yogesh CineAct</span></li>
+      </ul>
+      <a class="btn btn-line" href="/about/">पूरी कहानी →</a>
     </div>
   </div>
 </section>
@@ -270,21 +308,27 @@ ${shorts.length ? `<section class="sec sec-dark">
 <section class="sec">
   <div class="wrap">
     ${sectionHead('मेरी दुनिया', 'एक आदमी, चार मोर्चे')}
-    <div class="brands">${site.brands.map((b) => `<a class="brand-card" href="${attr(b.url)}" target="_blank" rel="noopener">
-      ${b.img ? `<img src="${attr(b.img)}" alt="" width="96" height="96" loading="lazy" decoding="async">` : `<span class="brand-ini">YC</span>`}
-      <span><b>${esc(b.name)}</b><small>${esc(b.tag)}</small><p>${esc(b.text)}</p></span>
-    </a>`).join('')}</div>
+    ${ventureCards()}
   </div>
 </section>
 
 <section class="sec sec-dark">
-  <div class="wrap social">
-    <h2>रोज़ का vlog छूट न जाए</h2>
-    <p class="muted">YouTube पर subscribe करो और bell दबाओ। Instagram पर दिन भर की झलक।</p>
-    <div class="cta-row">
-      <a class="btn btn-yt" href="${attr(site.subscribeUrl)}" target="_blank" rel="noopener">▶ Subscribe</a>
-      <a class="btn btn-ghost" href="${attr(site.instagramUrl)}" target="_blank" rel="noopener">Instagram</a>
-      <a class="btn btn-ghost" href="${attr(site.facebookUrl)}" target="_blank" rel="noopener">Facebook</a>
+  <div class="wrap">
+    ${sectionHead('Behind The Scenes', 'ये है असली Cinekar परिवार')}
+    <div class="gallery">${site.gallery.map(([src, cap], i) => `<figure class="g${i}"><img src="${attr(src)}" alt="${attr(cap)}" loading="lazy" decoding="async"><figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>
+  </div>
+</section>
+
+<section class="collab">
+  <div class="wrap collab-in">
+    <div>
+      <p class="eyebrow">Brand Collab · Shoot · Admission</p>
+      <h2 class="big-h">साथ काम करना है?</h2>
+      <p class="muted">Brand integration, फ़िल्म/ad shoot, या Indian Films Academy में admission — सीधे बात कीजिए।</p>
+    </div>
+    <div class="collab-btns">
+      <a class="btn btn-yt btn-lg" href="https://wa.me/${attr(site.whatsapp)}?text=${encodeURIComponent('नमस्ते Yogesh जी, cinekar.com से संपर्क कर रहा हूँ।')}" target="_blank" rel="noopener">WhatsApp करें</a>
+      <a class="btn btn-line btn-lg" href="mailto:${attr(site.email)}">Email करें</a>
     </div>
   </div>
 </section>`;
@@ -374,28 +418,42 @@ function videoPage(v, i, list) {
 
 function aboutPage() {
   const a = site.about;
-  const body = `<section class="sec sec-first"><div class="wrap about-grid about-page">
-  <img class="portrait" src="/img/yogesh-640.webp" alt="Yogesh Chaitanya" width="512" height="608" decoding="async">
-  <div>
-    <p class="eyebrow">कैमरे के पीछे</p>
-    <h1>${esc(a.title)}</h1>
-    <p class="sub">${esc(a.sub)}</p>
-    ${a.paras.map((p) => `<p>${esc(p)}</p>`).join('')}
-    <div class="facts">${a.facts.map(([n, l]) => `<div class="fact"><b>${esc(n)}</b><span>${esc(l)}</span></div>`).join('')}</div>
-    <h2>मेरी दुनिया</h2>
-    <div class="brands brands-col">${site.brands.map((b) => `<a class="brand-card" href="${attr(b.url)}" target="_blank" rel="noopener">
-      ${b.img ? `<img src="${attr(b.img)}" alt="" width="96" height="96" loading="lazy" decoding="async">` : `<span class="brand-ini">YC</span>`}
-      <span><b>${esc(b.name)}</b><small>${esc(b.tag)}</small><p>${esc(b.text)}</p></span></a>`).join('')}</div>
-    <h2>Links</h2>
-    <p><a href="${attr(site.channelUrl)}" target="_blank" rel="noopener">YouTube</a> · <a href="${attr(site.instagramUrl)}" target="_blank" rel="noopener">Instagram</a> · <a href="${attr(site.facebookUrl)}" target="_blank" rel="noopener">Facebook</a> · <a href="${attr(site.imdbUrl)}" target="_blank" rel="noopener">IMDb</a></p>
+  const body = `<section class="hero hero-sm">
+  <img class="hero-bg" src="/img/hero-bg.webp" alt="">
+  <div class="hero-grain"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span class="dot"></span> कैमरे के पीछे</p>
+      <h1 class="hero-name">YOGESH<br><span>CHAITANYA</span></h1>
+      <p class="hero-tag">${esc(a.sub)}</p>
+    </div>
+    <div class="hero-art"><div class="hero-ring"></div><img class="hero-cut" src="/img/yogesh-cut.webp" alt="Yogesh Chaitanya" width="512" height="608"></div>
   </div>
-</div></section>`;
+  <div class="wrap">${statsRow()}</div>
+</section>
+<section class="sec"><div class="wrap about-split">
+  <figure class="frame"><img src="/img/edit-suite.webp" alt="Edit suite में Yogesh Chaitanya" decoding="async"><figcaption>Editor & DI Colorist</figcaption></figure>
+  <div class="prose">
+    <p class="eyebrow">कहानी</p>
+    <h2 class="big-h">रंगमंच से सिनेमा तक,<br><span>सिनेमा से आपकी स्क्रीन तक।</span></h2>
+    ${a.paras.map((p) => `<p>${esc(p)}</p>`).join('')}
+    <ul class="creds">
+      <li><b>निर्देशन</b><span>दबंग सरकार · विद्यापीठ</span></li>
+      <li><b>पोस्ट-प्रोडक्शन</b><span>15+ फ़ीचर फ़िल्में · Editor · DI Colorist</span></li>
+      <li><b>Founder</b><span>Indian Films Academy, Lucknow (2019)</span></li>
+      <li><b>पद्धति</b><span>Yogesh CineAct</span></li>
+    </ul>
+    <div class="cta-row"><a class="btn btn-line" href="${attr(site.imdbUrl)}" target="_blank" rel="noopener">IMDb</a><a class="btn btn-line" href="${attr(site.instagramUrl)}" target="_blank" rel="noopener">Instagram</a><a class="btn btn-yt" href="${attr(site.subscribeUrl)}" target="_blank" rel="noopener">▶ Subscribe</a></div>
+  </div>
+</div></section>
+${marquee()}
+<section class="sec"><div class="wrap">${sectionHead('मेरी दुनिया', 'एक आदमी, चार मोर्चे')}${ventureCards()}</div></section>`;
   return page({
     title: 'Yogesh Chaitanya — Film Director, Acting Guru, Founder Indian Films Academy | Cinekar',
     description: 'Yogesh Chaitanya (Yogesh Mishrra) की कहानी: Dabang Sarkar और Vidyapeeth के निर्देशक, 15+ फ़िल्मों के पोस्ट-प्रोडक्शन प्रमुख, Indian Films Academy Lucknow के founder और Yogesh CineAct पद्धति के रचनाकार।',
     pathName: '/about/',
     body,
-    image: abs('/img/yogesh-640.webp'),
+    image: abs('/img/og-home.jpg'),
     type: 'profile',
     jsonld: [orgLd],
   });

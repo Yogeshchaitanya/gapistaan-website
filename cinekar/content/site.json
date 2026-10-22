@@ -53,28 +53,32 @@
       "tag": "Acting School · Lucknow · 2019 से",
       "text": "कैमरा-अभिनय, फ़िल्म निर्देशन और एडिटिंग का प्रशिक्षण केंद्र — गुरुकुल जैसा hostel, असली शूट पर काम।",
       "url": "https://indianfilmsacademy.com",
-      "img": "/img/brand-ifa.webp"
+      "img": "/img/brand-ifa.webp",
+      "bg": "/img/ifa-group.webp"
     },
     {
       "name": "PICHCHRAPA",
       "tag": "Production House · Raja Ka Baja",
       "text": "कलाकारों का अपना स्टूडियो। सड़क पर राजा और मंत्री की स्ट्रीट-कॉमेडी ‘Raja Ka Baja’ यहीं से।",
       "url": "https://pichchrapa.com",
-      "img": "/img/brand-pichchrapa.webp"
+      "img": "/img/brand-pichchrapa.webp",
+      "bg": "/img/set-1.webp"
     },
     {
       "name": "Gapistaan",
       "tag": "Comedy Series · Gen Gap",
       "text": "पुरानी पीढ़ी के चाचा बनाम Gen Z — एक acting institute के hostel में रोज़ की जंग।",
       "url": "https://gapistaan.com",
-      "img": "/img/brand-gapistaan.webp"
+      "img": "/img/brand-gapistaan.webp",
+      "bg": "/img/gapistaan.webp"
     },
     {
       "name": "Yogesh CineAct",
       "tag": "Acting Method",
       "text": "कैमरे के सामने अभिनय सीखने की Yogesh Chaitanya की अपनी पद्धति, जिससे academy के सारे कलाकार तैयार होते हैं।",
       "url": "https://indianfilmsacademy.com/yogesh-cineact/",
-      "img": "/img/brand-cineact.webp"
+      "img": "/img/brand-cineact.webp",
+      "bg": "/img/stage-2.webp"
     }
   ],
   "channels": [
@@ -93,6 +97,61 @@
     [
       "Indian Films Academy",
       "https://www.youtube.com/@indianfilmsacademyy"
+    ]
+  ],
+  "stats": [
+    [
+      "45K+",
+      "सब्सक्राइबर, सभी चैनल"
+    ],
+    [
+      "10 लाख+",
+      "YouTube views"
+    ],
+    [
+      "2.6 करोड़",
+      "एक Raja Ka Baja reel के views"
+    ],
+    [
+      "100+",
+      "कलाकार तैयार किए"
+    ]
+  ],
+  "credits": [
+    "DABANG SARKAR",
+    "VIDYAPEETH",
+    "RAJA KA BAJA",
+    "GEN GAP",
+    "FILMY ADALAT",
+    "INDIAN FILMS ACADEMY",
+    "YOGESH CINEACT",
+    "PICHCHRAPA"
+  ],
+  "whatsapp": "917754000121",
+  "gallery": [
+    [
+      "/img/ifa-group.webp",
+      "Indian Films Academy का परिवार"
+    ],
+    [
+      "/img/edit-suite.webp",
+      "Edit suite — हर vlog यहीं कटता है"
+    ],
+    [
+      "/img/stage-2.webp",
+      "Stage पर स्टूडेंट्स"
+    ],
+    [
+      "/img/set-1.webp",
+      "PICHCHRAPA का set"
+    ],
+    [
+      "/img/campus.webp",
+      "अभिनय सूत्र — गुरुकुल"
+    ],
+    [
+      "/img/stage-1.webp",
+      "Play की रिहर्सल"
     ]
   ]
 }
