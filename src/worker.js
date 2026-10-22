@@ -8,6 +8,10 @@
 //
 // Secrets (Cloudflare dashboard > Workers > gapistaan-website > Settings > Variables and Secrets, type Secret):
 //   RZP_KEY_ID, RZP_KEY_SECRET   the same Razorpay live keys the IFA website uses
+//   NOTIFY_TO                    email(s) that get every payment, comma separated
+//   SMTP_USER, SMTP_PASS         mailbox that sends the emails (SMTP_HOST default smtp.hostinger.com, port 465;
+//                                for Gmail: SMTP_HOST=smtp.gmail.com and an App Password)
+// After every payment: full details to NOTIFY_TO, and a thank-you email to the payer if Razorpay has their email.
 // Without them /api/order answers 503 and the box says "being switched on". The name and message a viewer
 // types are stored by Razorpay as the order's notes: Razorpay Dashboard > Payments > the payment > Notes.
 // RZP_API exists only for local testing against a mock server.
@@ -18,6 +22,8 @@ const SECURITY = {
   'X-Frame-Options': 'SAMEORIGIN',
   'Strict-Transport-Security': 'max-age=31536000',
 };
+import { connect } from 'cloudflare:sockets';
+const BRAND = 'Gapistaan';
 const GIFT = { min: 20, max: 50000 }; // rupees; keep in step with content/gift.json
 
 const json = (data, status = 200) =>
@@ -36,6 +42,77 @@ function same(a, b) {
   let d = 0;
   for (let i = 0; i < a.length; i++) d |= a.charCodeAt(i) ^ b.charCodeAt(i);
   return d === 0;
+}
+
+const b64 = (s) => { const bytes = enc.encode(s); let bin = ''; for (const x of bytes) bin += String.fromCharCode(x); return btoa(bin); };
+const rupees = (paise) => '₹' + (Number(paise) / 100).toLocaleString('en-IN');
+async function smtpSend(env, to, subject, text) {
+  if (!env.SMTP_USER || !env.SMTP_PASS || !to.length) return 'skipped';
+  const sock = connect({ hostname: env.SMTP_HOST || 'smtp.hostinger.com', port: Number(env.SMTP_PORT || 465) }, { secureTransport: env.SMTP_PLAIN === '1' ? 'off' : 'on' });
+  const w = sock.writable.getWriter();
+  const r = sock.readable.getReader();
+  const dec = new TextDecoder();
+  let buf = '';
+  const reply = async () => {
+    for (;;) {
+      const lines = buf.split('\r\n');
+      for (let i = 0; i < lines.length - 1; i++) if (/^\d{3} /.test(lines[i])) { buf = lines.slice(i + 1).join('\r\n'); return +lines[i].slice(0, 3); }
+      const { value, done } = await r.read();
+      if (done) throw new Error('SMTP connection closed');
+      buf += dec.decode(value, { stream: true });
+    }
+  };
+  const cmd = async (line, ok) => {
+    if (line !== null) await w.write(enc.encode(line + '\r\n'));
+    const code = await reply();
+    if (!ok.includes(code)) throw new Error(`SMTP ${line ? line.split(' ')[0] : 'greeting'} -> ${code}`);
+  };
+  try {
+    await cmd(null, [220]);
+    await cmd('EHLO ' + CANONICAL, [250]);
+    await cmd('AUTH LOGIN', [334]);
+    await cmd(btoa(env.SMTP_USER), [334]);
+    await cmd(btoa(env.SMTP_PASS), [235]);
+    await cmd(`MAIL FROM:<${env.SMTP_USER}>`, [250]);
+    for (const t of to) await cmd(`RCPT TO:<${t}>`, [250, 251]);
+    await cmd('DATA', [354]);
+    const body = b64(text).replace(/.{1,76}/g, '$&\r\n');
+    const msg = [
+      `From: =?UTF-8?B?${b64(BRAND)}?= <${env.SMTP_USER}>`,
+      `To: ${to.join(', ')}`,
+      `Subject: =?UTF-8?B?${b64(subject)}?=`,
+      `Date: ${new Date().toUTCString()}`,
+      `Message-ID: <${crypto.randomUUID()}@${CANONICAL}>`,
+      'MIME-Version: 1.0',
+      'Content-Type: text/plain; charset=UTF-8',
+      'Content-Transfer-Encoding: base64',
+      '',
+      body,
+    ].join('\r\n');
+    await cmd(msg + '\r\n.', [250]);
+    await w.write(enc.encode('QUIT\r\n'));
+    return 'sent';
+  } finally {
+    try { await sock.close(); } catch {}
+  }
+}
+
+async function notify(env, pay) {
+  const order = await razorpay(env, 'GET', `/orders/${encodeURIComponent(pay.order_id)}`).catch(() => ({}));
+  const n = { ...(order.notes || {}) };
+  const email = pay.email && pay.email !== 'void@razorpay.com' ? pay.email : '';
+  const when = new Date((pay.created_at || Date.now() / 1000) * 1000).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  const owner = [`${BRAND}: नया पेमेंट ${rupees(pay.amount)}`, `नाम: ${n.from || '-'}`, `फ़ोन: ${pay.contact || '-'}`, `ईमेल: ${email || '-'}`,
+    n.to ? `किसके लिए: ${n.to}` : '', `संदेश: ${n.message || '-'}`, `पेज: ${n.page || '-'}`, `तरीका: ${pay.method || '-'}`,
+    `पेमेंट आईडी: ${pay.id}`, `समय: ${when}`].filter(Boolean).join('\n');
+  const to = String(env.NOTIFY_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
+  const out = [];
+  try { out.push('owner: ' + await smtpSend(env, to, `${BRAND}: नया पेमेंट ${rupees(pay.amount)} ${n.from || ''}`.trim(), owner)); } catch (e) { out.push('owner: ' + e.message); }
+  if (email) {
+    const text = `नमस्ते ${n.from || ''},\n\n${BRAND} को आपका ${rupees(pay.amount)} का सहयोग मिल गया है। आपकी तालियाँ सीधे कलाकारों तक पहुँचेंगी। दिल से धन्यवाद!\n\nपेमेंट आईडी: ${pay.id}\nसमय: ${when}\n\n${BRAND}\nhttps://${CANONICAL}`;
+    try { out.push('payer: ' + await smtpSend(env, [email], `आपका सहयोग मिल गया: ${rupees(pay.amount)} | ${BRAND}`, text)); } catch (e) { out.push('payer: ' + e.message); }
+  }
+  console.log('notify', pay.id, out.join(' | '));
 }
 
 async function razorpay(env, method, path, body) {
@@ -60,7 +137,7 @@ const sameSite = (request, url) => {
   }
 };
 
-async function api(request, env, url) {
+async function api(request, env, ctx, url) {
   const p = url.pathname;
   const ready = Boolean(env.RZP_KEY_ID && env.RZP_KEY_SECRET);
 
@@ -101,6 +178,7 @@ async function api(request, env, url) {
     if (pay.order_id !== orderId) return json({ error: 'order-mismatch' }, 400);
     if (pay.status === 'authorized') await razorpay(env, 'POST', `/payments/${encodeURIComponent(paymentId)}/capture`, { amount: pay.amount, currency: pay.currency });
     else if (pay.status !== 'captured') return json({ error: 'payment-' + pay.status }, 409);
+    ctx.waitUntil(notify(env, pay).catch((e) => console.error('notify', e.message)));
     return json({ ok: true });
   }
 
@@ -108,7 +186,7 @@ async function api(request, env, url) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const host = url.hostname;
     const keep = host === CANONICAL || host.endsWith('.workers.dev') || host === 'localhost' || host === '127.0.0.1';
@@ -120,7 +198,7 @@ export default {
     }
     if (url.pathname.startsWith('/api/')) {
       try {
-        return await api(request, env, url);
+        return await api(request, env, ctx, url);
       } catch (e) {
         console.error('api error', e.message);
         return json({ error: 'server' }, 502);
