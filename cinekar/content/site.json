@@ -153,5 +153,111 @@
       "/img/stage-1.webp",
       "Play की रिहर्सल"
     ]
-  ]
+  ],
+  "faq": [
+    [
+      "Yogesh Chaitanya कौन हैं?",
+      "Yogesh Chaitanya (पहले Yogesh Mishrra / Yogesh Raj Mishra) लखनऊ के फ़िल्म निर्देशक, एक्टिंग गुरु, एडिटर और DI colorist हैं। उन्होंने ‘दबंग सरकार’ और ‘विद्यापीठ’ का निर्देशन किया, 15+ फ़िल्मों में पोस्ट-प्रोडक्शन प्रमुख रहे और Indian Films Academy, Lucknow के founder हैं।"
+    ],
+    [
+      "Cinekar Vlogs क्या है?",
+      "Cinekar Vlogs Yogesh Chaitanya का daily vlog चैनल है, जिसमें Indian Films Academy के hostel और classes की असली ज़िंदगी, शूटिंग के पीछे का सच और Raja Ka Baja के कलाकार दिखते हैं।"
+    ],
+    [
+      "नया vlog कब आता है?",
+      "रोज़ एक नया vlog YouTube चैनल @cinekarvlogs पर आता है और एक घंटे के अंदर cinekar.com पर भी दिख जाता है।"
+    ],
+    [
+      "Indian Films Academy में admission कैसे लें?",
+      "Indian Films Academy, Vardan Khand, Gomti Nagar, Lucknow में कैमरा-अभिनय, फ़िल्म निर्देशन और एडिटिंग के कोर्स हैं। Admission की पूरी जानकारी indianfilmsacademy.com पर है।"
+    ],
+    [
+      "Brand collab या shoot के लिए संपर्क कैसे करें?",
+      "yogeshcineact@gmail.com पर email करें या इस साइट के WhatsApp बटन से सीधे बात करें।"
+    ]
+  ],
+  "en": {
+    "homeTitle": "Yogesh Chaitanya — Film Director, Acting Coach & Daily Vlogger, Lucknow | Cinekar Vlogs",
+    "homeDescription": "Official site of Yogesh Chaitanya: film director (Dabang Sarkar, Vidyapeeth), acting coach and founder of Indian Films Academy, Lucknow. Watch every Cinekar Vlogs episode — real life inside an acting school.",
+    "hero": {
+      "line1": "The camera keeps rolling,",
+      "line2": "whatever happens, you see.",
+      "lead": "Real life inside an acting school, the truth behind every shoot, and the stars of Raja Ka Baja — a new vlog every day."
+    },
+    "about": {
+      "sub": "Film Director · Acting Coach · Editor & DI Colorist · Founder, Indian Films Academy",
+      "paras": [
+        "Born in Sitapur, Uttar Pradesh, working out of Lucknow. Shaped in the theatre circles of Bhartendu Natya Academy and the National School of Drama, and trained under theatre veteran Surya Mohan Kulshreshtha.",
+        "Directed the feature films ‘Dabang Sarkar’ and ‘Vidyapeeth’, and served as post-production head, editor and DI colorist on 15+ feature films.",
+        "Founded Indian Films Academy in 2019, where 100+ students have trained in camera acting and now work in the entertainment industry. His own acting method is called Yogesh CineAct.",
+        "Through his production house PICHCHRAPA he makes the street comedy ‘Raja Ka Baja’ and the comedy series ‘Gen Gap’ (Gapistaan). Cinekar Vlogs is the camera behind this whole world."
+      ]
+    },
+    "stats": [
+      [
+        "45K+",
+        "subscribers across channels"
+      ],
+      [
+        "1M+",
+        "YouTube views"
+      ],
+      [
+        "26M",
+        "views on one Raja Ka Baja reel"
+      ],
+      [
+        "100+",
+        "actors trained"
+      ]
+    ],
+    "gallery": [
+      "The Indian Films Academy family",
+      "The edit suite — where every vlog is cut",
+      "Students on stage",
+      "On the PICHCHRAPA set",
+      "Abhinay Sutra — the gurukul",
+      "Play rehearsal"
+    ],
+    "brands": [
+      [
+        "Acting School · Lucknow · Since 2019",
+        "Training in camera acting, film direction and editing — gurukul-style hostel, work on real shoots."
+      ],
+      [
+        "Production House · Raja Ka Baja",
+        "A studio run by actors. Home of ‘Raja Ka Baja’, the street comedy of a king and his minister."
+      ],
+      [
+        "Comedy Series · Gen Gap",
+        "An old-school uncle versus Gen Z — a daily battle inside an acting institute hostel."
+      ],
+      [
+        "Acting Method",
+        "Yogesh Chaitanya's own method of acting for the camera, used to train every actor at the academy."
+      ]
+    ],
+    "faq": [
+      [
+        "Who is Yogesh Chaitanya?",
+        "Yogesh Chaitanya (formerly Yogesh Mishrra / Yogesh Raj Mishra) is a Lucknow-based film director, acting coach, editor and DI colorist. He directed ‘Dabang Sarkar’ and ‘Vidyapeeth’, headed post-production on 15+ films, and founded Indian Films Academy, Lucknow."
+      ],
+      [
+        "What is Cinekar Vlogs?",
+        "Cinekar Vlogs is Yogesh Chaitanya's daily vlog channel showing real life inside Indian Films Academy's hostel and classes, behind-the-scenes of shoots, and the actors of Raja Ka Baja."
+      ],
+      [
+        "How often are new vlogs posted?",
+        "A new vlog goes up every day on the YouTube channel @cinekarvlogs and appears on cinekar.com within an hour."
+      ],
+      [
+        "How do I join Indian Films Academy?",
+        "Indian Films Academy in Vardan Khand, Gomti Nagar, Lucknow offers courses in camera acting, film direction and film editing. Admission details are on indianfilmsacademy.com."
+      ],
+      [
+        "How can brands collaborate or book a shoot?",
+        "Email yogeshcineact@gmail.com or use the WhatsApp button on this site."
+      ]
+    ]
+  }
 }

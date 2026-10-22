@@ -164,7 +164,7 @@ p{margin:0 0 1em}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--red2);box-shadow:0 0 0 4px rgba(255,59,67,.25);animation:pulse 1.6s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,59,67,0)}}
 .hero-name{font-family:Anton,Impact,sans-serif;font-size:clamp(3.4rem,9.5vw,8.2rem);line-height:.88;letter-spacing:.01em;margin:0 0 18px;color:#fff;text-shadow:0 10px 40px rgba(0,0,0,.6)}
-.hero-name span{background:linear-gradient(180deg,#ffe29a,#f2c14e 45%,#b9862a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-name .gold-x{background:linear-gradient(180deg,#ffe29a,#f2c14e 45%,#b9862a);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero-tag{font-size:clamp(1.15rem,2.2vw,1.55rem);font-weight:800;margin:0 0 10px;color:#fff}
 .hero-tag em{font-style:normal;color:var(--red2)}
 .hero-lead{color:var(--ink2);max-width:52ch;font-size:1.05rem}
@@ -256,3 +256,14 @@ p{margin:0 0 1em}
 .gallery .g4,.gallery .g5{grid-column:span 2}
 @media (max-width:860px){.kicker{font-size:.66rem;letter-spacing:.1em;padding:6px 12px}}
 @media (max-width:760px){.gallery .g4,.gallery .g5{grid-column:span 1}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.hero-name .gold{background:linear-gradient(180deg,#ffe29a,#f2c14e 45%,#b9862a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.page-h{font:800 clamp(2rem,4.5vw,3.2rem)/1.1 var(--body)}
+.lang{border:1px solid var(--line)!important;border-radius:999px;padding:5px 12px!important;color:var(--gold)!important;font-size:.85rem}
+@media (max-width:720px){.nav a.lang{display:inline-block}}
+.faq{display:grid;gap:10px}
+.faq details{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:0 18px}
+.faq summary{cursor:pointer;font-weight:800;padding:16px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq summary::after{content:"+";color:var(--gold);font-size:1.3rem;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{color:var(--ink2);margin:0 0 16px}
