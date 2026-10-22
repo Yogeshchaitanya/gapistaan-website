@@ -29,4 +29,6 @@
 Worker secrets (Cloudflare > Workers & Pages > ifa-website > Settings > Variables and Secrets, type Secret):
 `RZP_KEY_ID`, `RZP_KEY_SECRET`, `RZP_WEBHOOK_SECRET`, `ADMIN_KEY`, `NOTIFY_TO` (comma separated emails),
 `SMTP_USER`, `SMTP_PASS` (optional `SMTP_HOST`, default smtp.hostinger.com:465), `WA_PHONE`, `WA_APIKEY`,
-optional `TG_TOKEN`, `TG_CHAT`. Never put these in the repository or in chat.
+optional `TG_TOKEN`, `TG_CHAT`, and for the payer's WhatsApp confirmation (Meta WhatsApp Cloud API)
+`WA_CLOUD_TOKEN`, `WA_CLOUD_PHONE_ID` (optional `WA_TEMPLATE`, default `payment_received`; `WA_TEMPLATE_LANG`, default `hi`).
+Test a payer WhatsApp: `/api/admin/test?key=ADMIN_KEY&phone=98XXXXXXXX`. Never put these in the repository or in chat.

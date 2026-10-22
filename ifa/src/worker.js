@@ -15,6 +15,10 @@
 //   NOTIFY_TO                                        email(s) that get every registration, comma separated
 //   SMTP_USER, SMTP_PASS (SMTP_HOST optional)        a mailbox to send from, e.g. info@ on Hostinger
 //   WA_PHONE, WA_APIKEY                              WhatsApp alert to the owner via CallMeBot
+//   WA_CLOUD_TOKEN, WA_CLOUD_PHONE_ID                WhatsApp "payment received" message to the payer
+//                                                    (Meta WhatsApp Cloud API, official number)
+//   WA_TEMPLATE (default payment_received), WA_TEMPLATE_LANG (default hi), WA_GRAPH_VERSION (default v23.0)
+//     Template body must have 4 variables: {{1}} name, {{2}} amount, {{3}} purpose, {{4}} reference number
 //   TG_TOKEN, TG_CHAT                                optional Telegram alert
 // Without the Razorpay secrets /api/order answers 503 and the site falls back to WhatsApp.
 // RZP_API, SMTP_PORT, SMTP_PLAIN and WA_API exist only for local testing against mock servers.
@@ -160,6 +164,35 @@ async function whatsapp(env, text) {
   const res = await fetch(u);
   return res.ok ? 'sent' : 'http ' + res.status;
 }
+// Indian mobile -> 91XXXXXXXXXX, anything unusable -> ''
+function waNumber(v) {
+  let n = String(v || '').replace(/\D/g, '');
+  if (n.length === 11 && n[0] === '0') n = n.slice(1);
+  if (n.length === 10) n = '91' + n;
+  return n.length >= 11 && n.length <= 15 ? n : '';
+}
+async function whatsappCloud(env, phone, params) {
+  if (!env.WA_CLOUD_TOKEN || !env.WA_CLOUD_PHONE_ID) return 'skipped';
+  const to = waNumber(phone);
+  if (!to) return 'no-number';
+  const res = await fetch(`https://graph.facebook.com/${env.WA_GRAPH_VERSION || 'v23.0'}/${env.WA_CLOUD_PHONE_ID}/messages`, {
+    method: 'POST',
+    headers: { authorization: 'Bearer ' + env.WA_CLOUD_TOKEN, 'content-type': 'application/json' },
+    body: JSON.stringify({
+      messaging_product: 'whatsapp',
+      to,
+      type: 'template',
+      template: {
+        name: env.WA_TEMPLATE || 'payment_received',
+        language: { code: env.WA_TEMPLATE_LANG || 'hi' },
+        components: [{ type: 'body', parameters: params.map((t) => ({ type: 'text', text: String(t || '-').slice(0, 200) })) }],
+      },
+    }),
+  });
+  if (res.ok) return 'sent';
+  const err = await res.json().catch(() => ({}));
+  return 'http ' + res.status + ' ' + (err.error?.message || '').slice(0, 120);
+}
 async function telegram(env, text) {
   if (!env.TG_TOKEN || !env.TG_CHAT) return 'skipped';
   const res = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/sendMessage`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ chat_id: env.TG_CHAT, text }) });
@@ -168,8 +201,10 @@ async function telegram(env, text) {
 const ownerList = (env) => String(env.NOTIFY_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
 const settle = async (label, p) => { try { return `${label}: ${await p}`; } catch (e) { return `${label}: ${e.message}`; } };
 
-async function announce(env, e) {
-  const d = e.data;
+async function announce(env, e, pay = {}) {
+  // Form details first; if the payer left something out, use what Razorpay Checkout collected.
+  const payEmail = pay.email && pay.email !== 'void@razorpay.com' ? pay.email : '';
+  const d = { ...e.data, email: e.data.email || payEmail, phone: e.data.phone || pay.contact || '' };
   const course = COURSES[d.course] ? COURSES[d.course][0] : d.course || '';
   const when = new Date(e.paid).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
   const owner = e.kind === 'registration'
@@ -183,15 +218,21 @@ async function announce(env, e) {
       : `Hello ${d.name},\n\nYour registration at Indian Films Academy, Lucknow is confirmed and your seat is booked.\n\nRegistration number: ${e.reg}\nCourse: ${course} (90 days)\nRegistration fee: ${rupees(e.amount)} (payment ID ${e.payment_id})\n\nWe will tell you the day and time of your selection audition by phone or WhatsApp within 24 hours. For any question, reply to this email or call +91 77540 00121.\n\nIndian Films Academy\nC1/192, Vardan Khand, Sector 1, Gomti Nagar, Lucknow\nhttps://${CANONICAL}`;
     jobs.push(settle('student-email', smtpSend(env, [d.email], hi ? `आपकी सीट बुक है: ${e.reg} | Indian Films Academy` : `Your seat is booked: ${e.reg} | Indian Films Academy`, text)));
   }
+  if (e.kind !== 'registration' && d.email) {
+    const text = `नमस्ते ${d.name || ''},\n\nIndian Films Academy को आपका ${rupees(e.amount)} का सहयोग मिल गया है। यह किसी ज़रूरतमंद छात्र की पढ़ाई में लगेगा। दिल से धन्यवाद!\n\nपेमेंट आईडी: ${e.payment_id}\nसमय: ${when}\n\nIndian Films Academy, लखनऊ\n+91 77540 00121 · https://${CANONICAL}`;
+    jobs.push(settle('supporter-email', smtpSend(env, [d.email], `आपका सहयोग मिल गया: ${rupees(e.amount)} | Indian Films Academy`, text)));
+  }
+  const purpose = e.kind === 'registration' ? `${COURSES[d.course] ? COURSES[d.course][1] : course} कोर्स का रजिस्ट्रेशन शुल्क, सीट बुक` : 'छात्रों की पढ़ाई के लिए सहयोग';
+  jobs.push(settle('payer-whatsapp', whatsappCloud(env, d.phone, [d.name || 'जी', rupees(e.amount), purpose, e.reg || e.payment_id])));
   const results = await Promise.all(jobs);
   console.log('notify', e.order_id, results.join(' | '));
   return results;
 }
 
 // ---------- API ----------
-async function finish(env, ctx, orderId, paymentId) {
+async function finish(env, ctx, orderId, paymentId, pay) {
   const e = await registry(env).complete(orderId, paymentId);
-  if (e && e.fresh) ctx.waitUntil(announce(env, e));
+  if (e && e.fresh) ctx.waitUntil(announce(env, e, pay));
   return e;
 }
 
@@ -234,7 +275,7 @@ async function api(request, env, ctx, url) {
     if (pay.order_id !== orderId) return json({ error: 'order-mismatch' }, 400);
     if (pay.status === 'authorized') await razorpay(env, 'POST', `/payments/${paymentId}/capture`, { amount: pay.amount, currency: pay.currency });
     else if (pay.status !== 'captured') return json({ error: 'payment-' + pay.status }, 409);
-    const e = await finish(env, ctx, orderId, paymentId);
+    const e = await finish(env, ctx, orderId, paymentId, pay);
     if (!e) return json({ error: 'unknown-order' }, 404);
     return json({ ok: true, kind: e.kind, reg: e.reg, amount: e.amount });
   }
@@ -247,7 +288,7 @@ async function api(request, env, ctx, url) {
     if ((ev.event === 'payment.captured' || ev.event === 'order.paid') && pay?.order_id && ready) {
       // Ask Razorpay itself before trusting the event (a leaked webhook secret alone can't fake a payment).
       const real = await razorpay(env, 'GET', `/payments/${encodeURIComponent(pay.id)}`);
-      if (real.order_id === pay.order_id && real.status === 'captured') await finish(env, ctx, pay.order_id, pay.id);
+      if (real.order_id === pay.order_id && real.status === 'captured') await finish(env, ctx, pay.order_id, pay.id, real);
     }
     return json({ ok: true });
   }
@@ -255,7 +296,7 @@ async function api(request, env, ctx, url) {
   if (p.startsWith('/api/admin') && request.method === 'GET') {
     if (!env.ADMIN_KEY || !same(url.searchParams.get('key'), env.ADMIN_KEY)) return new Response('Not found', { status: 404 });
     if (p === '/api/admin/test') {
-      const results = await announce(env, { kind: 'registration', reg: 'IFA-TEST-0000', amount: 50000, payment_id: 'pay_TEST', paid: new Date().toISOString(), order_id: 'test', data: { name: 'टेस्ट छात्र', phone: '9999999999', email: url.searchParams.get('to') || '', course: 'actor', lang: 'hi' } });
+      const results = await announce(env, { kind: 'registration', reg: 'IFA-TEST-0000', amount: 50000, payment_id: 'pay_TEST', paid: new Date().toISOString(), order_id: 'test', data: { name: 'टेस्ट छात्र', phone: url.searchParams.get('phone') || '', email: url.searchParams.get('to') || '', course: 'actor', lang: 'hi' } });
       return json({ results });
     }
     const rows = await registry(env).list();
