@@ -453,8 +453,8 @@
       "thumbs": {
         "medium": "https://i.ytimg.com/vi/hZeQC8flyNM/mqdefault.jpg",
         "high": "https://i.ytimg.com/vi/hZeQC8flyNM/hqdefault.jpg",
-        "standard": null,
-        "maxres": null
+        "standard": "https://i.ytimg.com/vi/hZeQC8flyNM/sddefault.jpg",
+        "maxres": "https://i.ytimg.com/vi/hZeQC8flyNM/maxresdefault.jpg"
       }
     },
     {
@@ -3738,7 +3738,7 @@
         "medium": "https://i.ytimg.com/vi/Na0_AYich-A/mqdefault.jpg",
         "high": "https://i.ytimg.com/vi/Na0_AYich-A/hqdefault.jpg",
         "standard": "https://i.ytimg.com/vi/Na0_AYich-A/sddefault.jpg",
-        "maxres": null
+        "maxres": "https://i.ytimg.com/vi/Na0_AYich-A/maxresdefault.jpg"
       }
     },
     {
