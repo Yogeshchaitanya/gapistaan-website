@@ -686,17 +686,21 @@ ${viewer}
 </main>`,
   });
 
+  const VP = L.videosPage;
   pages['/videos/'] = layout({
     title: L.videosPage.title,
     description: L.videosPage.description,
     pathName: '/videos/',
-    ld: [crumbsLd([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])],
+    ld: [crumbsLd([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])].concat(VP.faq ? [faqLd(VP.faq)] : [], [{ '@context': 'https://schema.org', '@type': 'ItemList', name: VP.h1 || L.videosPageTitle, itemListElement: videos.filter((v) => !v.isShort).slice(0, 40).map((v, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'VideoObject', name: v.clean, description: String(v.description || v.clean).split('\n').filter(Boolean).slice(0, 2).join(' ').slice(0, 300) || v.clean, thumbnailUrl: `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`, uploadDate: v.publishedAt, duration: v.duration || undefined, embedUrl: `https://www.youtube.com/embed/${v.id}`, contentUrl: `https://www.youtube.com/watch?v=${v.id}`, inLanguage: 'hi', isAccessibleForFree: true, publisher: { '@type': 'EducationalOrganization', '@id': orgId, name: 'Indian Films Academy' } } })) }]),
     body: `<main id="main" class="page"><div class="wrap page-head">
 ${crumbs([[L.home, u('/')], [L.videosPageTitle, u('/videos/')]])}
-<div class="sec-head"><div><h1 class="page-h1">${esc(L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><div class="link-row"><a class="chip-link chip-gold" href="#support">${esc(L.supportChip)}</a><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div></div>
+<div class="sec-head"><div><h1 class="page-h1">${esc(VP.h1 || L.videosPageTitle)}</h1><p class="lede">${esc(L.videosPageLede)}</p><p class="hint">${esc(L.videosHint)}</p></div><div class="link-row"><a class="chip-link chip-gold" href="#support">${esc(L.supportChip)}</a><a class="chip-link" href="${esc(site.youtubeUrl)}?sub_confirmation=1">${esc(L.subscribe)}</a></div></div>
 ${practical()}
 <div class="vid-layout"><div class="vid-main"><ul class="vgrid">${videos.map(videoCard).join('\n')}</ul><a class="support-bar" href="#support"><span>${esc(DN.short)}</span><b>${esc(DN.btn)}</b></a></div>${donate()}</div>
-</div></main>`,
+</div>
+${VP.topics ? `<section class="sec sec-alt" aria-labelledby="vt-h"><div class="wrap"><h2 class="h2" id="vt-h">${esc(VP.topicsTitle)}</h2><ul class="guide-list">${VP.topics.map(([h, p, href]) => `<li><a class="guide-card" href="${u(href)}"><strong>${esc(h)}</strong><span>${esc(p)}</span><span class="more">${esc(GH.read)}</span></a></li>`).join('')}</ul></div></section>` : ''}
+${VP.faq ? `<section class="sec" aria-labelledby="vf-h"><div class="wrap"><h2 class="h2" id="vf-h">${esc(VP.faqTitle)}</h2>${faq(VP.faq)}</div></section>` : ''}
+</main>`,
   });
 
   const OP = L.onlinePage;

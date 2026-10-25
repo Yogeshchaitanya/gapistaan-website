@@ -821,8 +821,69 @@
       "description": "Indian Films Academy, लखनऊ की गैलरी: फ़िल्म जगत के दिग्गजों और एकेडमी में आए मार्गदर्शकों के साथ।"
     },
     "videosPage": {
-      "title": "फ्री ऑनलाइन एक्टिंग क्लासेस (हिंदी में) | Indian Films Academy, लखनऊ",
-      "description": "Indian Films Academy की फ्री ऑनलाइन एक्टिंग क्लासेस: कैमरा एक्टिंग, Observation, Feel and React, Yogesh CineAct। बिना फ़ीस, बिना लॉगिन, हिंदी में।"
+      "title": "फ्री ऑनलाइन एक्टिंग क्लासेस हिंदी में | फ्री एक्टिंग और कैमरा क्लास | Indian Films Academy",
+      "description": "बिल्कुल फ्री ऑनलाइन एक्टिंग क्लासेस, हिंदी में: कैमरा एक्टिंग, ऑडिशन की तैयारी, Observation, Feel and React, Yogesh CineAct। कोई फ़ीस नहीं, कोई लॉगिन नहीं। Indian Films Academy, लखनऊ।",
+      "h1": "फ्री ऑनलाइन एक्टिंग क्लासेस (हिंदी में)",
+      "topicsTitle": "इन फ्री क्लासेस में क्या सीखेंगे",
+      "topics": [
+        [
+          "फ्री एक्टिंग क्लास, घर बैठे",
+          "योगेश मिश्रा (Yogesh CineAct) की असली कक्षाओं की रिकॉर्डिंग। एक्टिंग की शुरुआत, Observation, इमोशन, आवाज़ और बॉडी लैंग्वेज, सब हिंदी में और बिल्कुल मुफ़्त।",
+          "/guides/free-online-acting-classes/"
+        ],
+        [
+          "फ्री कैमरा एक्टिंग क्लास",
+          "कैमरे के सामने आँखें, क्लोज़-अप, आईलाइन, कंटिन्युइटी और रिएक्शन। फ़िल्म, वेब-सीरीज़ और YouTube के लिए कैमरा अभिनय की बुनियाद।",
+          "/guides/free-camera-acting-class/"
+        ],
+        [
+          "ऑडिशन की तैयारी कैसे करें",
+          "स्क्रिप्ट पढ़ना, स्लेट, सेल्फ़-टेप, सुनना और रिएक्ट करना। ऑडिशन से एक हफ़्ते पहले से ऑडिशन वाले दिन तक की पूरी तैयारी।",
+          "/guides/audition-preparation/"
+        ],
+        [
+          "भोजपुरी फ़िल्मों में काम कैसे पाएँ",
+          "भोजपुरी इंडस्ट्री में ऑडिशन, कास्टिंग, बोली और अभिनय की तैयारी, और धोखेबाज़ों से कैसे बचें।",
+          "/guides/bhojpuri-film-acting/"
+        ],
+        [
+          "हिंदी फ़िल्म और वेब-सीरीज़ में काम",
+          "एक्टर का पूरा रास्ता: पोर्टफ़ोलियो, शोरील, कास्टिंग डायरेक्टर तक पहुँच और ऑडिशन।",
+          "/guides/hindi-films-web-series/"
+        ],
+        [
+          "YouTube और Instagram एक्टिंग",
+          "फ़ोन के कैमरे के सामने अभिनय, रील और शॉर्ट वीडियो में कैरेक्टर कैसे निभाएँ।",
+          "/guides/youtube-instagram-acting/"
+        ]
+      ],
+      "faqTitle": "फ्री ऑनलाइन क्लासेस: आम सवाल",
+      "faq": [
+        [
+          "क्या ये एक्टिंग क्लासेस सच में फ्री हैं?",
+          "हाँ। इस पेज की सभी क्लासेस बिल्कुल मुफ़्त हैं, न फ़ीस, न लॉगिन, न रजिस्ट्रेशन। वीडियो पर क्लिक कीजिए और सीखना शुरू कीजिए। नई क्लास अपने-आप सबसे ऊपर जुड़ जाती है।"
+        ],
+        [
+          "फ्री ऑनलाइन एक्टिंग क्लास किस भाषा में हैं?",
+          "सभी क्लासेस हिंदी में हैं, ताकि हिंदी, भोजपुरी, अवधी या किसी भी भाषा में काम करना चाहने वाला कलाकार आसानी से समझ सके।"
+        ],
+        [
+          "क्या फ्री कैमरा क्लास भी हैं?",
+          "हाँ। कई क्लासेस कैमरे के सामने अभिनय पर हैं: क्लोज़-अप में आँखों का काम, आईलाइन, रिएक्शन और कंटिन्युइटी। घर पर फ़ोन के कैमरे से प्रैक्टिस करके ख़ुद देखिए।"
+        ],
+        [
+          "ऑडिशन की तैयारी कैसे करें?",
+          "पूरा सीन पढ़िए, किरदार की चाहत समझिए, लाइनें इतनी याद कीजिए कि सामने वाले को सुन सकें, और फ़ोन पर सेल्फ़-टेप बनाकर ख़ुद देखिए। पूरी चेकलिस्ट हमारी ऑडिशन की तैयारी वाली गाइड में है।"
+        ],
+        [
+          "भोजपुरी फ़िल्मों में काम कैसे मिलता है?",
+          "अच्छी शोरील, साफ़ फ़ोटो, सही कास्टिंग लोगों तक पहुँच और लगातार ऑडिशन से। पैसे लेकर रोल दिलाने वालों से बचिए। पूरी जानकारी भोजपुरी गाइड में है।"
+        ],
+        [
+          "क्या फ्री क्लास से सर्टिफ़िकेट मिलता है?",
+          "फ्री वीडियो क्लासेस पर सर्टिफ़िकेट नहीं मिलता। लाइव शूट, कैमरा प्रैक्टिस और सर्टिफ़िकेट के साथ पूरी ट्रेनिंग के लिए लखनऊ में हमारा 90 दिन का कोर्स है।"
+        ]
+      ]
     },
     "privacy": {
       "title": "प्राइवेसी नीति | Indian Films Academy",
@@ -1817,8 +1878,69 @@
       "description": "Photographs from Indian Films Academy, Lucknow: with legends of Indian cinema and the mentors who have visited the academy."
     },
     "videosPage": {
-      "title": "Free Online Acting Classes (in Hindi) | Indian Films Academy, Lucknow",
-      "description": "Free online acting classes from Indian Films Academy: camera acting, observation, Feel and React and Yogesh CineAct. No fees, no login, in Hindi."
+      "title": "Free Online Acting Classes in Hindi | Free Acting & Camera Classes | Indian Films Academy",
+      "description": "Completely free online acting classes in Hindi: camera acting, audition preparation, observation, feel and react, Yogesh CineAct. No fees, no login. Indian Films Academy, Lucknow.",
+      "h1": "Free Online Acting Classes (in Hindi)",
+      "topicsTitle": "What these free classes cover",
+      "topics": [
+        [
+          "Free acting classes at home",
+          "Recordings of Yogesh Mishrra's real Yogesh CineAct classes: starting out, observation, emotion, voice and body language, in Hindi and free.",
+          "/guides/free-online-acting-classes/"
+        ],
+        [
+          "Free camera acting class",
+          "Eyes in close-up, eyelines, continuity and reactions: the basics of acting for film, web series and YouTube.",
+          "/guides/free-camera-acting-class/"
+        ],
+        [
+          "How to prepare for an audition",
+          "Reading the script, the slate, self-tapes, listening and reacting: preparation from a week before to the audition day.",
+          "/guides/audition-preparation/"
+        ],
+        [
+          "How to get work in Bhojpuri films",
+          "Auditions, casting, dialect and acting preparation for the Bhojpuri industry, and how to avoid fraudsters.",
+          "/guides/bhojpuri-film-acting/"
+        ],
+        [
+          "Work in Hindi films and web series",
+          "The actor's full path: portfolio, showreel, reaching casting directors and auditions.",
+          "/guides/hindi-films-web-series/"
+        ],
+        [
+          "YouTube and Instagram acting",
+          "Acting for the phone camera and playing characters in reels and short videos.",
+          "/guides/youtube-instagram-acting/"
+        ]
+      ],
+      "faqTitle": "Free online classes: common questions",
+      "faq": [
+        [
+          "Are these acting classes really free?",
+          "Yes. Every class on this page is completely free, with no fee, login or registration. Click a video and start learning. New classes appear at the top automatically."
+        ],
+        [
+          "What language are the free online acting classes in?",
+          "All classes are in Hindi, so actors who want to work in Hindi, Bhojpuri, Awadhi or any language can follow easily."
+        ],
+        [
+          "Are there free camera classes too?",
+          "Yes. Many classes are about acting on camera: eyes in close-up, eyelines, reactions and continuity. Practise at home with your phone camera and watch yourself."
+        ],
+        [
+          "How should I prepare for an audition?",
+          "Read the whole scene, understand what the character wants, learn the lines well enough to listen to your partner, and record a self-tape on your phone to review. The full checklist is in our audition preparation guide."
+        ],
+        [
+          "How do you get work in Bhojpuri films?",
+          "With a good showreel, clear photos, access to the right casting people and steady auditions. Avoid anyone who charges money for a role. Details are in the Bhojpuri guide."
+        ],
+        [
+          "Do the free classes give a certificate?",
+          "The free video classes don't come with a certificate. For full training with live shoots, camera practice and a certificate, there is our 90-day course in Lucknow."
+        ]
+      ]
     },
     "privacy": {
       "title": "Privacy Policy | Indian Films Academy",
