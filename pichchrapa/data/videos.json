@@ -1,12 +1,12 @@
 {
- "statsAt": "2026-11-04T02:11:07.352Z",
+ "statsAt": "2026-11-04T07:27:30.290Z",
  "channels": {
   "UCd5W9zrvUYmXbqQPR6kq4_w": {
    "title": "PICHCHRAPA",
    "handle": "@pichchrapa",
    "subs": 17600,
-   "videos": 257,
-   "views": 1025635
+   "videos": 258,
+   "views": 1025836
   },
   "UC3bkPW-ExDf7J9CShIR329Q": {
    "title": "Filmy Adaalat",
@@ -24,6 +24,28 @@
   }
  },
  "videos": [
+  {
+   "id": "hxRbCQ6kEgA",
+   "title": "Kya Baat Hai #rajakabaja #funny",
+   "description": "",
+   "publishedAt": "2026-11-04T06:41:52Z",
+   "duration": "PT9S",
+   "tags": [
+    "Funny short",
+    "Raja ka baja short"
+   ],
+   "isShort": true,
+   "channelId": "UCd5W9zrvUYmXbqQPR6kq4_w",
+   "channel": "PICHCHRAPA",
+   "views": 147,
+   "likes": 1,
+   "thumbs": {
+    "medium": "https://i.ytimg.com/vi/hxRbCQ6kEgA/mqdefault.jpg",
+    "high": "https://i.ytimg.com/vi/hxRbCQ6kEgA/hqdefault.jpg",
+    "standard": "https://i.ytimg.com/vi/hxRbCQ6kEgA/sddefault.jpg",
+    "maxres": "https://i.ytimg.com/vi/hxRbCQ6kEgA/maxresdefault.jpg"
+   }
+  },
   {
    "id": "QphJa9DYb9k",
    "title": "नीले ड्रम वाली पिंजरे में! | Raja Ka Baja",
