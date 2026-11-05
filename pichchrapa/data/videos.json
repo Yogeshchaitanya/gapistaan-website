@@ -1,11 +1,11 @@
 {
- "statsAt": "2026-11-05T05:08:44.648Z",
+ "statsAt": "2026-11-05T06:10:19.900Z",
  "channels": {
   "UCd5W9zrvUYmXbqQPR6kq4_w": {
    "title": "PICHCHRAPA",
    "handle": "@pichchrapa",
    "subs": 17600,
-   "videos": 259,
+   "videos": 260,
    "views": 1026803
   },
   "UC3bkPW-ExDf7J9CShIR329Q": {
@@ -24,6 +24,25 @@
   }
  },
  "videos": [
+  {
+   "id": "2DZQpELWiW0",
+   "title": "Raja ko Goli Ya Gola #rajakabaja #funny #shorts",
+   "description": "",
+   "publishedAt": "2026-11-05T06:07:24Z",
+   "duration": "PT34S",
+   "tags": [],
+   "isShort": true,
+   "channelId": "UCd5W9zrvUYmXbqQPR6kq4_w",
+   "channel": "PICHCHRAPA",
+   "views": 0,
+   "likes": 0,
+   "thumbs": {
+    "medium": "https://i.ytimg.com/vi/2DZQpELWiW0/mqdefault.jpg",
+    "high": "https://i.ytimg.com/vi/2DZQpELWiW0/hqdefault.jpg",
+    "standard": "https://i.ytimg.com/vi/2DZQpELWiW0/sddefault.jpg",
+    "maxres": "https://i.ytimg.com/vi/2DZQpELWiW0/maxresdefault.jpg"
+   }
+  },
   {
    "id": "dXdKnPepn3Q",
    "title": "मंत्री को गोली लग गई! 😱 | Raja Ka Baja",
