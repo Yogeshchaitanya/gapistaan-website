@@ -220,17 +220,29 @@
   }
   /* किताब बंद करो / खोलो */
   let closing = false;
-  function closeBook() {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  async function waitRead(from) {   // एक पलटना पूरा होने तक रुको
+    for (let t = 0; t < 80; t++) { await sleep(25); if (pf.getState() === 'read' && pf.getCurrentPageIndex() !== from) return true; }
+    return false;
+  }
+  async function closeBook() {
     if (!pf || closing) return;
     if (cur === 0) return pf.flipNext('bottom');
-    closing = true;
-    const near = 1;
-    if (cur > near) {   // बीच के पन्ने तेज़ी से सरसराकर वापस
-      const n = Math.min(4, Math.ceil((cur - near) / 20) + 2);
-      for (let k = 0; k < n; k++) play('flip', k * 0.09);
-      pf.turnToPage(near); cur = pf.getCurrentPageIndex(); onPage();
-    }
-    setTimeout(() => { pf.flipPrev('top'); closing = false; }, cur > near ? 380 : 0);
+    closing = true; B.classList.add('busy');
+    const st = pf.getSettings(), normal = st.flippingTime;
+    try {
+      // बहुत आगे हों तो पहले चुपचाप पास आओ, फिर हर पन्ना मुड़कर (roll होकर) वापस पलटे
+      const rolls = mode === 'landscape' ? 6 : 7;
+      const start = mode === 'landscape' ? rolls * 2 - 1 : rolls;
+      if (cur > start) { pf.turnToPage(start); cur = pf.getCurrentPageIndex(); onPage(); await sleep(60); }
+      while (pf.getCurrentPageIndex() > 0) {
+        const c = pf.getCurrentPageIndex();
+        const last = mode === 'landscape' ? c <= 2 : c <= 1;          // आख़िरी: कवर, आराम से
+        st.flippingTime = last ? 820 : 300;
+        pf.flipPrev(last ? 'top' : (c % 2 ? 'bottom' : 'top'));
+        if (!(await waitRead(c))) break;
+      }
+    } finally { st.flippingTime = normal; closing = false; B.classList.remove('busy'); }
   }
   $('#bClose').onclick = closeBook;
   $('#bPrev').onclick = () => pf && pf.flipPrev('bottom');
