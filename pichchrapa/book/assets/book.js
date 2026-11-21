@@ -7,14 +7,14 @@
   const T = {
     hi: { loading: 'किताब खुल रही है…', read: 'पढ़ें', toc: 'विषय-सूची', ok: 'समझ गया',
       rhint: 'किसी भी लाइन पर टैप करें · दो उँगली से ज़ूम', cover: 'कवर', back: 'पिछला कवर', page: 'पृष्ठ',
-      hint1: 'पन्ना पलटने के लिए उँगली से खींचिए, या किनारे पर टैप कीजिए।',
+      hint1: 'पन्ना पलटने के लिए उँगली से खींचिए, या किनारे पर टैप कीजिए। नीचे 📕 बटन से किताब बंद, फिर खोल सकते हैं।',
       hint2: 'पन्ने पर टैप करें या दो उँगली से फैलाएँ: पढ़ने वाला ज़ूम खुलेगा, वहाँ किसी भी लाइन पर टैप करें, वो बड़ी होकर दिखेगी।',
-      resume: (n) => `पिछली बार ${n} पर थे`, go: 'वहीं चलें', endA: 'इंडियन फ़िल्म्स एकेडमी · लखनऊ', endB: 'PICHCHRAPA प्रस्तुति' },
+      resume: (n) => `पिछली बार ${n} पर थे`, go: 'वहीं चलें', open: 'किताब खोलें', close: 'किताब बंद करें', endA: 'इंडियन फ़िल्म्स एकेडमी · लखनऊ', endB: 'PICHCHRAPA प्रस्तुति' },
     en: { loading: 'Opening the book…', read: 'Read', toc: 'Contents', ok: 'Got it',
       rhint: 'Tap any line · pinch to zoom', cover: 'Cover', back: 'Back cover', page: 'Page',
-      hint1: 'Drag a page with your finger, or tap the edge, to turn it.',
+      hint1: 'Drag a page with your finger, or tap the edge, to turn it. The 📕 button below closes and reopens the book.',
       hint2: 'Tap a page or pinch it to open the reading zoom. There, tap any line to see it large.',
-      resume: (n) => `You were on ${n}`, go: 'Continue', endA: 'Indian Films Academy · Lucknow', endB: 'A PICHCHRAPA presentation' },
+      resume: (n) => `You were on ${n}`, go: 'Continue', open: 'Open the book', close: 'Close the book', endA: 'Indian Films Academy · Lucknow', endB: 'A PICHCHRAPA presentation' },
   }[UI];
   document.querySelectorAll('[data-t]').forEach((el) => { const v = T[el.dataset.t]; if (typeof v === 'string') { if (el.matches('a,button.ic')) el.title = v; else el.textContent = v; } });
 
@@ -37,19 +37,21 @@
     if (ac) { if (ac.state === 'suspended') ac.resume(); return; }
     const C = window.AudioContext || window.webkitAudioContext; if (!C) return;
     ac = new C();
-    ['page-flip', 'cover-flip'].forEach((n) => fetch(`../assets/${n}.mp3`).then((r) => r.arrayBuffer())
+    ['flip-1', 'flip-2', 'flip-3', 'book-open', 'book-close'].forEach((n) => fetch(`../assets/${n}.mp3`).then((r) => r.arrayBuffer())
       .then((a) => new Promise((ok, bad) => ac.decodeAudioData(a, ok, bad))).then((b) => { buf[n] = b; }).catch(() => {}));
   }
-  function play(n) {
-    if (navigator.vibrate) try { navigator.vibrate(8); } catch (e) {}
+  let lastFlip = '';
+  function play(n, delay = 0) {
+    if (n === 'flip') { const c = ['flip-1', 'flip-2', 'flip-3'].filter((x) => x !== lastFlip); n = lastFlip = c[Math.floor(Math.random() * c.length)]; }
+    if (navigator.vibrate && n !== 'book-close') try { navigator.vibrate(6); } catch (e) {}
     if (muted || !ac || !buf[n]) return;
     if (ac.state === 'suspended') ac.resume();
     const s = ac.createBufferSource(), g = ac.createGain();
-    s.buffer = buf[n]; s.playbackRate.value = 0.9 + Math.random() * 0.2; g.gain.value = n === 'cover-flip' ? 0.9 : 0.7;
-    s.connect(g); g.connect(ac.destination); s.start();
+    s.buffer = buf[n]; s.playbackRate.value = 0.98 + Math.random() * 0.04; g.gain.value = n === 'book-close' ? 1 : 0.85;
+    s.connect(g); g.connect(ac.destination); s.start(ac.currentTime + delay);
   }
   ['pointerdown', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, audioInit, { once: false, passive: true, capture: true }));
-  $('#bSound').onclick = () => { muted = !muted; B.classList.toggle('muted', muted); store.set('ycbook:muted', muted ? '1' : '0'); if (!muted) { audioInit(); setTimeout(() => play('page-flip'), 60); } };
+  $('#bSound').onclick = () => { muted = !muted; B.classList.toggle('muted', muted); store.set('ycbook:muted', muted ? '1' : '0'); if (!muted) { audioInit(); setTimeout(() => play('flip'), 60); } };
 
   /* ---------- पन्ने ---------- */
   function label(i) {
@@ -121,9 +123,20 @@
       flippingTime: 720, mobileScrollSupport: false, disableFlipByClick: true, swipeDistance: 24,
       showPageCorners: true, startPage: clamp(startAt, 0, N - 1),
     });
-    pf.on('flip', (e) => { cur = e.data; onPage(); });
+    // StPageFlip 2.0.7 की गड़बड़ी: फ़ोन (portrait) में "पिछला पन्ना" (बटन और दाएँ स्वाइप) काम नहीं करता। यहाँ ठीक किया।
+    const origPrev = pf.flipPrev.bind(pf);
+    pf.flipPrev = (corner = 'bottom') => {
+      if (pf.getOrientation() !== 'portrait') return origPrev(corner);
+      const b = pf.getBoundsRect(), st = pf.getSettings(), old = st.disableFlipByClick;
+      st.disableFlipByClick = false;
+      try { pf.getFlipController().flip({ x: b.left + b.pageWidth + 8, y: b.top + (corner === 'top' ? 2 : b.height - 2) }); } finally { st.disableFlipByClick = old; }
+    };
+    pf.on('flip', (e) => {
+      const was = cur; cur = e.data; onPage();
+      if ((cur === 0 && was > 0) || (cur >= N - 1 && was < N - 1)) play('book-close', 0.05);   // कवर बंद होने की थप
+    });
     pf.on('changeState', (e) => {
-      if (e.data === 'flipping') { const c = pf.getCurrentPageIndex(); play(c <= 1 || c >= N - 2 ? 'cover-flip' : 'page-flip'); }
+      if (e.data === 'flipping') play(pf.getCurrentPageIndex() === 0 ? 'book-open' : 'flip');
       if (e.data === 'user_fold' || e.data === 'fold_corner') loadAround(pf.getCurrentPageIndex());
     });
     pf.on('changeOrientation', () => setTimeout(() => { placeSpot(); }, 30));
@@ -163,6 +176,8 @@
     pno.textContent = right && right !== a && D.kinds[cur] === 'p' && D.kinds[cur + 1] === 'p' ? `${D.folio[cur]}–${D.folio[cur + 1]} / ${lastFolio}` : (D.kinds[cur] === 'p' ? `${D.folio[cur]} / ${lastFolio}` : a);
     slider.value = cur; slider.style.setProperty('--p', (N > 1 ? (cur / (N - 1)) * 100 : 0) + '%');
     $('#bPrev').disabled = cur <= 0; $('#bNext').disabled = cur >= N - 1;
+    B.classList.toggle('closed', cur === 0);
+    $('#bClose').title = cur === 0 ? T.open : T.close;
     store.set(KEY, String(cur));
     try { history.replaceState(null, '', cur > 0 ? '#p=' + cur : location.pathname); } catch (e) {}
     placeSpot();
@@ -191,6 +206,7 @@
     const edge = Math.min(70, v.w * 0.14);
     if (x > v.x + v.w - edge) return later(() => pf.flipNext('bottom'));
     if (x < v.x + edge && cur > 0) return later(() => pf.flipPrev('bottom'));
+    if (cur === 0) return later(() => pf.flipNext('bottom'));   // बंद किताब पर टैप = खोलो
     openReader(pageAt(x), { x, y });
   };
   stage.addEventListener('pointerup', up, true);
@@ -202,14 +218,29 @@
     if (cur >= N - 1) return cur;
     return x < v.x + v.pw ? cur : Math.min(N - 1, cur + 1);
   }
+  /* किताब बंद करो / खोलो */
+  let closing = false;
+  function closeBook() {
+    if (!pf || closing) return;
+    if (cur === 0) return pf.flipNext('bottom');
+    closing = true;
+    const near = 1;
+    if (cur > near) {   // बीच के पन्ने तेज़ी से सरसराकर वापस
+      const n = Math.min(4, Math.ceil((cur - near) / 20) + 2);
+      for (let k = 0; k < n; k++) play('flip', k * 0.09);
+      pf.turnToPage(near); cur = pf.getCurrentPageIndex(); onPage();
+    }
+    setTimeout(() => { pf.flipPrev('top'); closing = false; }, cur > near ? 380 : 0);
+  }
+  $('#bClose').onclick = closeBook;
   $('#bPrev').onclick = () => pf && pf.flipPrev('bottom');
   $('#bNext').onclick = () => pf && pf.flipNext('bottom');
   slider.addEventListener('input', () => { const i = +slider.value; pno.textContent = label(i); slider.style.setProperty('--p', (i / (N - 1)) * 100 + '%'); });
   slider.addEventListener('change', () => go(+slider.value));
-  function go(i) { i = clamp(i, 0, N - 1); play('page-flip'); pf.turnToPage(i); cur = pf.getCurrentPageIndex(); onPage(); }
+  function go(i) { i = clamp(i, 0, N - 1); play('flip'); pf.turnToPage(i); cur = pf.getCurrentPageIndex(); onPage(); }
   window.addEventListener('keydown', (e) => {
     if (!$('#reader').hidden) return readerKey(e);
-    if (e.key === 'ArrowRight' || e.key === 'PageDown') pf.flipNext(); else if (e.key === 'ArrowLeft' || e.key === 'PageUp') pf.flipPrev();
+    if (e.key === 'Home') closeBook(); else if (e.key === 'ArrowRight' || e.key === 'PageDown') pf.flipNext(); else if (e.key === 'ArrowLeft' || e.key === 'PageUp') pf.flipPrev();
   });
   $('#bRead').onclick = () => openReader(cur, null);
 
@@ -281,7 +312,7 @@
     rLines.innerHTML = (D.lines[rI] || []).map((l, k) => `<i data-k="${k}" style="left:${l[0] * 100}%;top:${l[1] * 100}%;width:${(l[2] - l[0]) * 100}%;height:${(l[3] - l[1]) * 100}%"></i>`).join('');
     $('#rPno').textContent = label(rI);
     sel = -1; strip.hidden = true;
-    if (sound) play('page-flip');
+    if (sound) play('flip');
     for (let j = rI + 1; j <= Math.min(N - 1, rI + 2); j++) { const x = new Image(); x.src = zoomSrc(j); }
   }
   function apply(anim) {

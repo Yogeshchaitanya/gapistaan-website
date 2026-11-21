@@ -163,3 +163,9 @@ body.immersive .side{opacity:.25}
   .ttl small{display:none} .ic{width:38px;height:38px} .pill{height:32px}
   #bookWrap{inset:6px 44px}
 }
+
+/* बंद/खोलें बटन */
+#bClose{color:var(--gold2)} #bClose .open{display:none}
+body.closed #bClose .shut{display:none} body.closed #bClose .open{display:block}
+body.closed #bClose{background:rgba(214,174,98,.18);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(214,174,98,.12)}}

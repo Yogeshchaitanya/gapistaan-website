@@ -1,0 +1,3 @@
+पन्ने और किताब की आवाज़ें (flip-1/2/3, book-open, book-close):
+Kenney "RPG Audio" pack (bookFlip1-3, bookOpen, bookClose), www.kenney.nl
+License: Creative Commons CC0 1.0 (public domain), commercial use allowed, credit not required.
