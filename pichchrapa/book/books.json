@@ -1,0 +1,106 @@
+{
+  "siteUrl": "https://pichchrapa.com",
+  "outDir": "../public/book",
+  "flipWidth": 900,
+  "zoomWidth": 1700,
+  "library": {
+    "title": "योगेश सिनेएक्ट",
+    "subtitle": "कैमरा एक्टिंग की पूरी किताब · योगेश चैतन्य",
+    "note": "किताब पर टैप कीजिए, पन्ने उँगली से पलटिए"
+  },
+  "books": [
+    {
+      "slug": "khand-1",
+      "title": "योगेश सिनेएक्ट · खंड 1",
+      "subtitle": "नींव से भावना तक (अध्याय 1–16)",
+      "author": "योगेश चैतन्य",
+      "description": "कैमरा एक्टिंग की पूरी किताब, खंड 1: नींव से भावना तक। योगेश चैतन्य, इंडियन फ़िल्म्स एकेडमी।",
+      "lang": "hi",
+      "ui": "hi",
+      "pdf": "pdf/hi-khand-1.pdf",
+      "bleedMm": 3,
+      "cover": {
+        "pdf": "pdf/cover-hi.pdf",
+        "front": [
+          212.1,
+          19.1,
+          368.1,
+          252.6
+        ],
+        "back": [
+          19.1,
+          19.1,
+          175.1,
+          252.6
+        ]
+      },
+      "badge": "खंड 1 · नींव से भावना तक",
+      "badgeY": 0.345,
+      "shelfLabel": "खंड 1 · हिंदी",
+      "shelfNote": "नींव से भावना तक · 220 पन्ने",
+      "badgeAlign": "right",
+      "tocLevels": 1
+    },
+    {
+      "slug": "khand-2",
+      "title": "योगेश सिनेएक्ट · खंड 2",
+      "subtitle": "मानने से परदे तक (अध्याय 17–32)",
+      "author": "योगेश चैतन्य",
+      "description": "कैमरा एक्टिंग की पूरी किताब, खंड 2: मानने से परदे तक। योगेश चैतन्य, इंडियन फ़िल्म्स एकेडमी।",
+      "lang": "hi",
+      "ui": "hi",
+      "pdf": "pdf/hi-khand-2.pdf",
+      "bleedMm": 3,
+      "cover": {
+        "pdf": "pdf/cover-hi.pdf",
+        "front": [
+          212.1,
+          19.1,
+          368.1,
+          252.6
+        ],
+        "back": [
+          19.1,
+          19.1,
+          175.1,
+          252.6
+        ]
+      },
+      "badge": "खंड 2 · मानने से परदे तक",
+      "badgeY": 0.345,
+      "shelfLabel": "खंड 2 · हिंदी",
+      "shelfNote": "मानने से परदे तक · 237 पन्ने",
+      "badgeAlign": "right",
+      "tocLevels": 1
+    },
+    {
+      "slug": "english",
+      "title": "Yogesh CineAct",
+      "subtitle": "The Complete Camera Acting Book",
+      "author": "Yogesh Chaitanya",
+      "description": "Yogesh CineAct: The Complete Camera Acting Book, from Observation to Transformation. By Yogesh Chaitanya, Indian Films Academy.",
+      "lang": "en",
+      "ui": "en",
+      "pdf": "pdf/en.pdf",
+      "bleedMm": 3,
+      "cover": {
+        "pdf": "pdf/cover-en.pdf",
+        "front": [
+          214.1,
+          19.1,
+          370.1,
+          252.6
+        ],
+        "back": [
+          19.1,
+          19.1,
+          175.1,
+          252.6
+        ]
+      },
+      "shelfLabel": "English Edition",
+      "shelfNote": "The Complete Camera Acting Book",
+      "tocLevels": 1
+    }
+  ]
+}

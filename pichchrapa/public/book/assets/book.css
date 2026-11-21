@@ -1,0 +1,165 @@
+/* Yogesh CineAct flipbook — pichchrapa.com/book */
+@font-face{font-family:Hind;font-weight:400;font-display:swap;src:url(/fonts/hind-devanagari-400-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:Hind;font-weight:400;font-display:swap;src:url(/fonts/hind-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+@font-face{font-family:Hind;font-weight:600;font-display:swap;src:url(/fonts/hind-devanagari-600-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+25CC,U+A830-A839,U+A8E0-A8FF}
+@font-face{font-family:Hind;font-weight:600;font-display:swap;src:url(/fonts/hind-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+2190-21FF}
+
+:root{
+  --gold:#d6ae62; --gold2:#f3d79b; --teal:#1f6166; --ink:#f4ede1; --mute:#b7ab98;
+  --bar:rgba(14,11,9,.72); --paper:#fbf8f1;
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{font-family:Hind,system-ui,sans-serif;color:var(--ink);background:#0d0b09;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+svg{width:22px;height:22px;fill:currentColor;display:block}
+
+/* ---------- मेज़ और रोशनी ---------- */
+body.desk{
+  background:
+    radial-gradient(120% 70% at 50% 42%, rgba(255,214,150,.20), rgba(0,0,0,0) 60%),
+    radial-gradient(160% 120% at 50% 120%, #2a1a10 0%, #160e08 45%, #0b0806 100%);
+}
+body.desk::before{ /* लकड़ी की हल्की धारियाँ */
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:overlay;
+  background:repeating-linear-gradient(92deg, rgba(255,255,255,.05) 0 2px, rgba(0,0,0,.08) 2px 7px, rgba(255,255,255,.03) 7px 11px, rgba(0,0,0,.05) 11px 19px);
+}
+body.desk::after{ /* हल्का grain */
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.9'/></svg>");
+}
+
+/* ---------- बार ---------- */
+.bar{position:fixed;left:0;right:0;z-index:20;display:flex;align-items:center;gap:6px;padding:0 8px;background:var(--bar);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:transform .35s ease,opacity .35s}
+.bar.top{top:0;height:calc(50px + var(--safe-t));padding-top:var(--safe-t);border-bottom:1px solid rgba(214,174,98,.18)}
+.bar.bottom{bottom:0;height:calc(58px + var(--safe-b));padding-bottom:var(--safe-b);border-top:1px solid rgba(214,174,98,.18);gap:10px;padding-left:14px;padding-right:10px}
+body.immersive .bar.top{transform:translateY(-105%);opacity:0}
+body.immersive .bar.bottom{transform:translateY(105%);opacity:0}
+.ic{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:var(--ink);flex:none;text-decoration:none}
+.ic:active{background:rgba(255,255,255,.1)}
+.ttl{flex:1;min-width:0;line-height:1.15;text-align:center}
+.ttl b{display:block;font-weight:600;font-size:15px;color:var(--gold2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ttl small{display:block;font-size:11.5px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bSound .off{display:none} body.muted #bSound .on{display:none} body.muted #bSound .off{display:block}
+.pill{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border-radius:19px;background:linear-gradient(180deg,#e2bd73,#b98d42);color:#1d140a;font-weight:600;font-size:14.5px;box-shadow:0 2px 10px rgba(214,174,98,.3);flex:none}
+.pill svg{width:19px;height:19px}
+#pno{font-size:13px;color:var(--mute);min-width:74px;text-align:center;font-variant-numeric:tabular-nums;flex:none}
+#slider{flex:1;min-width:60px;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:linear-gradient(90deg,var(--gold) var(--p,0%),rgba(255,255,255,.18) var(--p,0%));outline:0}
+#slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold2);border:3px solid #6e5226;box-shadow:0 1px 6px rgba(0,0,0,.6)}
+#slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--gold2);border:3px solid #6e5226}
+
+/* ---------- मंच और किताब ---------- */
+#stage{position:fixed;left:0;right:0;top:calc(50px + var(--safe-t));bottom:calc(58px + var(--safe-b));touch-action:none;transition:top .35s,bottom .35s}
+body.immersive #stage{top:var(--safe-t);bottom:var(--safe-b)}
+#bookWrap{position:absolute;inset:14px 10px;display:flex;align-items:center;justify-content:center}
+#book{width:100%;height:100%;opacity:0;transition:opacity .5s}
+#book.ready{opacity:1}
+#spot{position:absolute;pointer-events:none;border-radius:6px;transition:all .45s cubic-bezier(.3,.7,.3,1)}
+#spot::before{ /* मेज़ पर किताब की परछाईं */
+  content:"";position:absolute;inset:-2% -3% -7% -3%;border-radius:12px;
+  background:radial-gradient(closest-side,rgba(0,0,0,.75),rgba(0,0,0,0));filter:blur(14px);transform:translateY(12px)}
+#spot .edgeL,#spot .edgeR{ /* पन्नों की मोटाई */
+  position:absolute;top:.6%;bottom:.6%;width:var(--thick,6px);
+  background:repeating-linear-gradient(90deg,#efe7d6 0 1px,#cfc4ad 1px 2px);
+  box-shadow:inset 0 0 3px rgba(0,0,0,.35);border-radius:2px}
+#spot .edgeL{right:100%;transform:translateX(2px);width:var(--thickL,6px)}
+#spot .edgeR{left:100%;transform:translateX(-2px);width:var(--thickR,6px)}
+
+.page{background:var(--paper);overflow:hidden}
+.page .pg{position:absolute;inset:0;background:var(--paper)}
+.page .pg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .25s}
+.page .pg img.ok{opacity:1}
+.page .pg::before{ /* लोड होते समय */
+  content:"";position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px;border-radius:50%;
+  border:2px solid rgba(110,82,38,.25);border-top-color:#b98d42;animation:spin .8s linear infinite}
+.page .pg.loaded::before{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* बीच की सिलाई की परछाईं */
+.page .shade{position:absolute;inset:0;pointer-events:none}
+.page.--left .shade{background:linear-gradient(270deg,rgba(0,0,0,.22) 0,rgba(0,0,0,.07) 3.5%,rgba(0,0,0,0) 9%),linear-gradient(90deg,rgba(0,0,0,.06),rgba(0,0,0,0) 2%)}
+.page.--right .shade{background:linear-gradient(90deg,rgba(0,0,0,.22) 0,rgba(0,0,0,.07) 3.5%,rgba(0,0,0,0) 9%),linear-gradient(270deg,rgba(0,0,0,.06),rgba(0,0,0,0) 2%)}
+body.portrait .page .shade{background:linear-gradient(90deg,rgba(0,0,0,.18) 0,rgba(0,0,0,.05) 3%,rgba(0,0,0,0) 7%)}
+/* कवर: मोटा बोर्ड, चमक */
+.page.k-c .pg,.page.k-b .pg{background:#17110c}
+.page.k-c .shade{background:linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(255,255,255,.10) 1.6%,rgba(0,0,0,.25) 3.2%,rgba(0,0,0,0) 6%),linear-gradient(125deg,rgba(255,255,255,.10),rgba(255,255,255,0) 35%)!important}
+.page.k-b .shade{background:linear-gradient(270deg,rgba(0,0,0,.55) 0,rgba(255,255,255,.08) 1.6%,rgba(0,0,0,.25) 3.2%,rgba(0,0,0,0) 6%)!important}
+/* endpaper: CineAct teal-सुनहरा */
+.page.k-e .pg{background:
+  radial-gradient(circle at 50% 50%,rgba(214,174,98,.18) 0 2px,transparent 3px) 0 0/22px 22px,
+  radial-gradient(circle at 50% 50%,rgba(214,174,98,.10) 0 1px,transparent 2px) 11px 11px/22px 22px,
+  linear-gradient(160deg,#16484c,#0f3236 60%,#0b2427)}
+.page.k-e .pg::before{display:none}
+.page.k-e .pg .mark{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:rgba(243,215,155,.75);font-weight:600;letter-spacing:.04em}
+.page.k-e .pg .mark span{display:block;font-size:clamp(11px,2.4vmin,18px);line-height:1.5}
+.page.k-e .pg .mark b{display:block;font-size:clamp(16px,4.2vmin,34px);color:var(--gold2);margin:6px 0}
+.page.k-w .pg::before{display:none}
+
+/* किनारों के बटन */
+.side{position:absolute;top:50%;width:44px;height:72px;margin-top:-36px;display:grid;place-items:center;color:rgba(255,236,200,.75);background:rgba(0,0,0,.25);border-radius:10px;z-index:5;transition:opacity .3s}
+.side.prev{left:2px}.side.next{right:2px}
+.side:active{background:rgba(0,0,0,.5)}
+body.portrait .side{width:34px;height:60px;margin-top:-30px;background:rgba(0,0,0,.18)}
+body.immersive .side{opacity:.25}
+.side[disabled]{opacity:0!important;pointer-events:none}
+
+#loading{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:14px;color:var(--mute);font-size:14px;pointer-events:none}
+#loading i{width:54px;height:72px;border-radius:3px 6px 6px 3px;background:linear-gradient(90deg,#5b4321,#c49a52);box-shadow:0 8px 24px rgba(0,0,0,.6);animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{50%{transform:rotateY(25deg) translateY(-4px)}}
+
+/* ---------- पढ़ने वाली परत ---------- */
+#reader{position:fixed;inset:0;z-index:50;background:#0a0908;display:flex;flex-direction:column;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0}}
+.rbar{display:flex;align-items:center;gap:2px;padding:calc(4px + var(--safe-t)) 6px 4px;background:rgba(18,15,12,.95);border-bottom:1px solid rgba(214,174,98,.2);z-index:3}
+#rPno{flex:1;text-align:center;font-size:14px;color:var(--gold2)}
+#rView{position:relative;flex:1;overflow:hidden;touch-action:none}
+#rInner{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;box-shadow:0 10px 40px rgba(0,0,0,.6);background:var(--paper)}
+#rImg{display:block;width:100%;height:100%}
+#reader.night #rInner{filter:invert(.92) hue-rotate(180deg) sepia(.25) brightness(.92)}
+#rLines{position:absolute;inset:0}
+#rLines i{position:absolute;display:block;border-radius:3px}
+#rLines i.on{background:rgba(214,174,98,.20);box-shadow:0 0 0 2px rgba(214,174,98,.9),0 0 0 100vmax rgba(10,9,8,.55);z-index:2;transition:all .2s}
+#strip{display:flex;align-items:center;gap:4px;padding:10px 6px calc(10px + var(--safe-b));background:rgba(18,15,12,.97);border-top:1px solid rgba(214,174,98,.3);animation:up .25s ease}
+@keyframes up{from{transform:translateY(100%)}}
+#lineBox{flex:1;overflow:hidden;border-radius:6px;background:#fff;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+#lineBox{padding:8px}
+#lineImg{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+#lineImg>div{background-repeat:no-repeat;max-width:100%}
+#reader.night #lineBox{filter:invert(.92) hue-rotate(180deg) sepia(.25) brightness(.92)}
+#rHint{position:absolute;left:50%;bottom:calc(22px + var(--safe-b));transform:translateX(-50%);background:rgba(0,0,0,.78);color:var(--ink);padding:9px 16px;border-radius:20px;font-size:13.5px;white-space:nowrap;pointer-events:none;transition:opacity .6s;z-index:4}
+#rHint.gone{opacity:0}
+.rnav{position:absolute;top:50%;margin-top:-30px;width:36px;height:60px;display:grid;place-items:center;background:rgba(0,0,0,.45);color:var(--gold2);border-radius:8px;z-index:3}
+.rnav.prev{left:4px}.rnav.next{right:4px}
+#reader.zoomed .rnav{opacity:.35}
+
+/* ---------- विषय-सूची ---------- */
+#toc{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.55);animation:fadeIn .2s}
+#toc>*{max-width:460px}
+.tocHead{position:absolute;left:0;top:0;width:min(88vw,460px);display:flex;align-items:center;justify-content:space-between;padding:calc(8px + var(--safe-t)) 8px 8px 18px;background:#14100c;border-bottom:1px solid rgba(214,174,98,.25);font-size:17px;color:var(--gold2)}
+#tocList{position:absolute;left:0;top:calc(58px + var(--safe-t));bottom:0;width:min(88vw,460px);margin:0;padding:6px 0 calc(20px + var(--safe-b));list-style:none;overflow:auto;background:#14100c;-webkit-overflow-scrolling:touch;user-select:none}
+#tocList li{display:flex;gap:10px;align-items:baseline;padding:11px 18px;border-bottom:1px solid rgba(255,255,255,.05);font-size:15.5px;line-height:1.35;cursor:pointer}
+#tocList li.l2{padding-left:34px;font-size:14px;color:var(--mute)}
+#tocList li span{flex:1}
+#tocList li em{font-style:normal;font-size:12.5px;color:var(--gold);font-variant-numeric:tabular-nums}
+#tocList li:active,#tocList li.cur{background:rgba(214,174,98,.12)}
+
+/* ---------- पहली बार की मदद ---------- */
+#hint{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:grid;place-items:center;animation:fadeIn .3s}
+.hcard{width:min(86vw,340px);background:#17120d;border:1px solid rgba(214,174,98,.4);border-radius:16px;padding:22px 20px 18px;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.hcard p{margin:0 0 10px;font-size:15.5px;line-height:1.45}
+.hand{width:64px;height:64px;margin:0 auto 12px;border-radius:50%;background:radial-gradient(circle,rgba(214,174,98,.45),rgba(214,174,98,0) 70%);position:relative;animation:swipe 1.8s ease-in-out infinite}
+.hand::after{content:"👆";position:absolute;inset:0;display:grid;place-items:center;font-size:34px}
+@keyframes swipe{0%,100%{transform:translateX(26px)}50%{transform:translateX(-26px)}}
+#toast{position:fixed;left:50%;bottom:calc(76px + var(--safe-b));transform:translateX(-50%);z-index:30;background:rgba(20,16,12,.95);border:1px solid rgba(214,174,98,.4);color:var(--ink);padding:10px 12px 10px 16px;border-radius:24px;font-size:14px;display:flex;gap:10px;align-items:center;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.5);animation:fadeIn .3s}
+#toast button{color:var(--gold2);font-weight:600}
+
+@media (min-width:900px){.bar.top{height:56px}.ttl b{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* फ़ोन आड़ा: बार पतले, किताब बड़ी */
+@media (max-height:500px){
+  .bar.top{height:calc(40px + var(--safe-t))} .bar.bottom{height:calc(46px + var(--safe-b))}
+  #stage{top:calc(40px + var(--safe-t));bottom:calc(46px + var(--safe-b))}
+  .ttl small{display:none} .ic{width:38px;height:38px} .pill{height:32px}
+  #bookWrap{inset:6px 44px}
+}

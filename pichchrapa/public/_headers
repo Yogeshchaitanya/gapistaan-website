@@ -18,3 +18,16 @@
 
 /js/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# किताबें (flipbook): Google पर न दिखें
+/book/*
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/book/*/pages/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/book/*/zoom/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/book/assets/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400

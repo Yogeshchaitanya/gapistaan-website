@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>{{TITLE}} · {{AUTHOR}}</title>
+<meta name="description" content="{{DESC}}">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="theme-color" content="#0d0b09">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:type" content="book">
+<meta property="og:title" content="{{TITLE}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:image" content="{{SITE}}/book/{{SLUG}}/og.jpg?v={{VER}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="{{SITE}}/book/{{SLUG}}/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="./cover.webp">
+<link rel="preload" href="./book.json?v={{VER}}" as="fetch" crossorigin>
+<link rel="preload" href="./pages/p0001.webp" as="image">
+<link rel="stylesheet" href="../assets/book.css?v={{AV}}">
+</head>
+<body class="desk" data-ui="{{UI}}" data-slug="{{SLUG}}" data-ver="{{VER}}" style="--aspect: {{ASPECT}}">
+
+<header class="bar top">
+  <a class="ic" href="../" data-t="shelf" aria-label="shelf"><svg viewBox="0 0 24 24"><path d="M4 5h3v14H4zM9 5h3v14H9zM14.2 5.6l2.9-.8 3.6 13.5-2.9.8z"/></svg></a>
+  <div class="ttl"><b>{{TITLE}}</b><small>{{SUBTITLE}}</small></div>
+  <button class="ic" id="bToc" data-t="toc" aria-label="contents"><svg viewBox="0 0 24 24"><path d="M4 6h2v2H4zm4 0h12v2H8zm-4 5h2v2H4zm4 0h12v2H8zm-4 5h2v2H4zm4 0h12v2H8z"/></svg></button>
+  <button class="ic" id="bSound" data-t="sound" aria-label="sound"><svg viewBox="0 0 24 24" class="on"><path d="M4 9v6h4l5 4V5L8 9zm11.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM13 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg><svg viewBox="0 0 24 24" class="off"><path d="M4 9v6h4l5 4V5L8 9zm12.6 3 2.7-2.7-1.4-1.4-2.7 2.7-2.7-2.7-1.4 1.4 2.7 2.7-2.7 2.7 1.4 1.4 2.7-2.7 2.7 2.7 1.4-1.4z"/></svg></button>
+  <button class="ic" id="bFull" data-t="full" aria-label="fullscreen"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg></button>
+</header>
+
+<main id="stage" aria-label="book">
+  <div id="spot"></div>
+  <div id="bookWrap"><div id="book"></div></div>
+  <button class="side prev" id="bPrev" aria-label="previous"><svg viewBox="0 0 24 24"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+  <button class="side next" id="bNext" aria-label="next"><svg viewBox="0 0 24 24"><path d="m8.6 5.4 1.4-1.4 8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+  <div id="loading"><i></i><span data-t="loading"></span></div>
+</main>
+
+<footer class="bar bottom">
+  <input type="range" id="slider" min="0" max="1" value="0" aria-label="page">
+  <span id="pno"></span>
+  <button class="pill" id="bRead"><svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 0 1 4.8 9.6l5 5-1.4 1.4-5-5A6 6 0 1 1 10 4zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/></svg><span data-t="read"></span></button>
+</footer>
+
+<!-- ज़ूम करके पढ़ने वाली परत -->
+<section id="reader" hidden aria-label="reader">
+  <div class="rbar">
+    <button class="ic" id="rClose" aria-label="close"><svg viewBox="0 0 24 24"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6 10.6 12 5 6.4z"/></svg></button>
+    <span id="rPno"></span>
+    <button class="ic" id="rOut" aria-label="zoom out"><svg viewBox="0 0 24 24"><path d="M5 11h14v2H5z"/></svg></button>
+    <button class="ic" id="rIn" aria-label="zoom in"><svg viewBox="0 0 24 24"><path d="M11 5h2v6h6v2h-6v6h-2v-6H5v-2h6z"/></svg></button>
+    <button class="ic" id="rNight" aria-label="night"><svg viewBox="0 0 24 24"><path d="M12.3 3a9 9 0 1 0 8.7 11.3A7 7 0 0 1 12.3 3z"/></svg></button>
+  </div>
+  <div id="rView"><div id="rInner"><img id="rImg" alt=""><div id="rLines"></div></div></div>
+  <div id="strip" hidden>
+    <button class="ic" id="lPrev" aria-label="previous line"><svg viewBox="0 0 24 24"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+    <div id="lineBox"><div id="lineImg"></div></div>
+    <button class="ic" id="lNext" aria-label="next line"><svg viewBox="0 0 24 24"><path d="m8.6 5.4 1.4-1.4 8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+  </div>
+  <div id="rHint" data-t="rhint"></div>
+  <button class="rnav prev" id="rPrevP" aria-label="previous page"><svg viewBox="0 0 24 24"><path d="M15.4 5.4 14 4l-8 8 8 8 1.4-1.4L8.8 12z"/></svg></button>
+  <button class="rnav next" id="rNextP" aria-label="next page"><svg viewBox="0 0 24 24"><path d="m8.6 5.4 1.4-1.4 8 8-8 8-1.4-1.4 6.6-6.6z"/></svg></button>
+</section>
+
+<aside id="toc" hidden aria-label="contents">
+  <div class="tocHead"><b data-t="toc"></b><button class="ic" id="tocClose" aria-label="close"><svg viewBox="0 0 24 24"><path d="m6.4 5 5.6 5.6L17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6 10.6 12 5 6.4z"/></svg></button></div>
+  <ol id="tocList"></ol>
+</aside>
+
+<div id="hint" hidden><div class="hcard"><div class="hand"></div><p data-t="hint1"></p><p data-t="hint2"></p><button class="pill" id="hintOk" data-t="ok"></button></div></div>
+<div id="toast" hidden></div>
+
+<script src="../assets/page-flip.browser.js?v=2.0.7"></script>
+<script src="../assets/book.js?v={{AV}}"></script>
+</body>
+</html>
